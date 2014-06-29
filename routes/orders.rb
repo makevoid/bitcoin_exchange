@@ -6,7 +6,7 @@ class BitcoinExchange < Sinatra::Base
   end
   
   post "/order" do
-    # create a buy / sell order
+    # place a buy / sell order
   end
   
   destroy "/order" do

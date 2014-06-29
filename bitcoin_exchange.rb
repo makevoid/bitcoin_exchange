@@ -5,9 +5,6 @@ require "#{path}/config/env.rb"
 class BitcoinExchange < Sinatra::Base
   include Voidtools::Sinatra::ViewHelpers
 
-  get "/" do
-    haml :index
-  end
 end
 
 require_all "#{path}/routes"
