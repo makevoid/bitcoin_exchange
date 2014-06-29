@@ -8,13 +8,17 @@ class BitcoinExchange < Sinatra::Base
   helpers do
     include ViewHelpers
   end
+  
+  # TODO: implement login
+  #
+  # project status atm: in development
 
   def logged_in?
-    # TODO: implement login
-    #
-    # project status atm: in development
-
-    true
+    @current_user
+  end
+  
+  def current_user
+    @current_user = CURRENT_USER
   end
 end
 

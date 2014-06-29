@@ -6,6 +6,10 @@ module ViewHelpers
   def submit(label)
     haml_tag :input, value: label, type: "submit"
   end
+  
+  def hidden(name, value)
+    haml_tag :input, name: name, value: value, type: "hidden"
+  end
 
   def nav_link(url, label)
     css_class = "current" if body_class == url[1..-1]

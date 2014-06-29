@@ -29,3 +29,5 @@ require_all "models"
 # view code
 
 TITLE = "BitcoinExchange"
+
+CURR_USER = User.test_user

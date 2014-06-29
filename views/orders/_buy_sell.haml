@@ -11,19 +11,21 @@ Buy / Sell
     Blizz.load Order, hash
   end
 
-  buy = order_h( available: "available", amount: "amount", price: "price", total: "total" )
+  buy = order_h( available: "available", amount: 0.1, price: 600, total: "total" )
   sell = order_h( available: "available", amount: "amount", price: "price", total: "total" )
 
 .graph
 .clear
 
 %section
-  %h1 BUY
-  %p Available USD: $#{buy.available}
-  %input{ placeholder: "amount (#{buy.amount})" } BTC
-  %input{ placeholder: "price  ($#{buy.price})" } $
-  %p Total: #{buy.total}
-  - submit "Buy BTC"
+  %form{ action: "/orders", method: :post }
+    - hidden :type, :buy
+    %h1 BUY
+    %p Available USD: $#{buy.available}
+    %input{ placeholder: "amount (#{buy.amount})" , value: buy.amount } BTC
+    %input{ placeholder: "price  ($#{buy.price})" , value: buy.price } $
+    %p Total: #{buy.total}
+    - submit "Buy BTC"
 
 %section
   %h1 SELL
