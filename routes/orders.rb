@@ -4,6 +4,12 @@ class BitcoinExchange < Sinatra::Base
     # open, closed
     haml :"orders/index"
   end
+  
+  get "/orders/new" do
+    # place an order
+    haml :"orders/new"
+  end
+  
 
   post "/order" do
     # place a buy / sell order
