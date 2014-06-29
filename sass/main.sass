@@ -28,6 +28,7 @@ p, h1
 
 body
   padding: 0
+  font-family: sans-serif, Arial, Verdana, Helvetica
 
 // utils
 
@@ -41,8 +42,17 @@ body
 .aright
   text-align: right
 
+.hidden
+  display: none
+
+
 // layout
 
+.content > section
+  margin-bottom: $u*2
+
+.content > section > section
+  margin-bottom: $u
 
 // TODO: layout
 
@@ -52,10 +62,18 @@ nav a
   display: inline-block
   @extend .button
 
+// Phorm (and colors)
+
+#main > header > h1 a
+  color: darken($color_main, 10)
+
+
+
 // buttons
 
 .btn, .button
-  padding: 1%
+  padding: $u/5 $pu/2
+  line-height: $lh*1.5
 
 .btn, .button
   border-radius: 7px
@@ -71,9 +89,21 @@ nav a
 // forms
 
 input
+  display: block
   margin-bottom: $u
 input[type=submit]
   @extend .button
 
-label
-  display: block
+
+// temporary quick styles
+
+#main > header > nav
+  margin-bottom: 20px
+
+section > h1
+  margin-bottom: $u/2
+
+
+.block
+  display: inline-block
+  margin-bottom: 10px

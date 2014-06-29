@@ -1,0 +1,35 @@
+Buy / Sell
+
+
+
+:ruby
+  class Order
+    include Blizz::Resource
+  end
+
+  def order_h(hash)
+    Blizz.load Order, hash
+  end
+
+  buy = order_h( available: "available", amount: "amount", price: "price", total: "total" )
+  sell = order_h( available: "available", amount: "amount", price: "price", total: "total" )
+
+.graph
+.clear
+
+%section
+  %h1 BUY
+  %p Available USD: $#{buy.available}
+  %input{ placeholder: "amount (#{buy.amount})" } BTC
+  %input{ placeholder: "price  ($#{buy.price})" } $
+  %p Total: #{buy.total}
+  - submit "Buy BTC"
+
+%section
+  %h1 SELL
+  %p Available BTC: #{sell.available} BTC
+  %input{ placeholder: "amount (#{sell.amount})" } BTC
+  %input{ placeholder: "price  (#{sell.price})" } $
+  %p Total: #{sell.total}
+  - submit "Sell BTC"
+

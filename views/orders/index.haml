@@ -1,1 +1,9 @@
-index.haml
+%section.orders_open
+  %h1 Open orders
+
+  = haml :"orders/_open"
+
+%section.orders_closed
+  %h1 Closed orders
+
+  = haml :"orders/_closed"

@@ -6,10 +6,11 @@
     %link{ rel: "stylesheet", href: "/css/main.css" }
     = haml :"_metas" # todo require/implement partial :metas
 
-  %body
-    #container
+  %body{ class: body_class }
+    #main
       %header
-        %h1= TITLE
+        %h1
+          %a{ href: "/" }= TITLE
         %nav
           %a{ href: "/orders"     } Orders
           %a{ href: "/orders/new" } Buy / Sell

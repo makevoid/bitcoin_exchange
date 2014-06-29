@@ -1,1 +1,18 @@
-index.haml
+%section
+  %h1 Deposits
+
+  [deposits]
+
+
+%nav
+  %a{ href: js_void, data: { toggle: "new_deposit" } } New deposit
+
+%section.new_deposit.hidden
+  .tab
+    %h1 EUR
+
+  .tab
+    %h1 BTC
+
+    %input{ type: "text", value: "0 btc" }
+    - submit "Generate address"

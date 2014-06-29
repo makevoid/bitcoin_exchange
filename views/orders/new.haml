@@ -1,3 +1,21 @@
-%h1 Place an order
+%h1 Simple: Buy / Sell
 
-= haml :"orders/_buy_sell" 
+%section.tab
+  Buy / Sell
+
+%section.tab.hidden
+  %label
+    Buy/Sell Amount
+    %input{ type: "text" }
+
+  equivalent to x BTC
+
+%a.btn.block{ :"data-toggle" => "advanced", href: js_void } Advanced
+
+.clear
+
+
+%section.advanced.hidden
+  %h1 Advanced: Place a limit order
+
+  = haml :"orders/_buy_sell"

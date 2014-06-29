@@ -3,6 +3,8 @@ source 'http://rubygems.org'
 gem "sinatra"
 gem "json"
 
+gem "blizz"
+
 gem "voidtools"
 
 gem "haml"
