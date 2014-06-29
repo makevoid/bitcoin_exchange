@@ -1,5 +1,8 @@
-# bitcoin_exchange
+# Bitcoin Exchange
 
-Generated with Sinatrize
+### powered by Ruby, Redis and Sinatra
 
-tip: find and replace for [...] for meta tags and other useful needed for publication
+proof of concept
+
+status: under development
+
