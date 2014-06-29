@@ -1,12 +1,12 @@
 class BitcoinExchange < Sinatra::Base
-  
-  get "/user" do
-    haml :user
+
+  get "/users/current" do
+    haml :"users/current"
   end
-  
-  post "/user/generate_address" do
+
+  post "/users/generate_address" do
     # generate a btc address
   end
-  
-  
+
+
 end

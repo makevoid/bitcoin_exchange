@@ -1,1 +1,33 @@
-Hello world!
+- unless logged_in?
+
+  :plain
+    ### What is bitcoin?
+
+    Bitcoin video.
+
+
+    ### What is an exchange?
+
+    An exchange is a place where you can buy/sell bitcoins.
+
+
+    ### You can Buy / Sell bitcoins
+
+    BitcoinExchange is exchange made easy, this project is open source.
+
+
+  %a{ "/login" } Login
+  or
+  %a{ "/register" } Register
+
+
+- else
+
+  %h1 Dashboard
+
+  :markedup
+    Total account value: #{Balance.btc_eur}
+
+  %section
+    %h1 Balance
+    = haml :"_balance"

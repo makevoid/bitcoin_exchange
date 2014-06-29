@@ -4,12 +4,27 @@
   %head
     %title= TITLE
     %link{ rel: "stylesheet", href: "/css/main.css" }
-    =# partial :metas
+    = haml :"_metas" # todo require/implement partial :metas
 
   %body
     #container
       %header
         %h1= TITLE
-      %nav
+        %nav
+          %a{ href: "/orders"     } Orders
+          %a{ href: "/orders/new" } Buy / Sell
+          %a{ href: "/deposits"   } Deposit
+        %section.right.aright
+          %section
+            Logged as user123
+            \|
+            %a{ href: "/logout" } logout
+          %section
+            %b Balance:
+            = haml :"_balance"
+            :markedup
+              Total value: €#{Balance.btc_eur}
+
       %section.content= yield
+
     %script{ type: "text/javascript", src: "/js/app.js" }

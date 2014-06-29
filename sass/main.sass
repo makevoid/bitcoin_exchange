@@ -1,2 +1,79 @@
+// metrics
+
+$lh: 120%
+$lh2: 160%
+
+$u:  12px
+$pu: 1.2%
+
+// colors
+
+$color_main:    green
+$color_action:  lightGreen
+$color_white:   white
+
+// reset
+
+*
+  box-sizing: border-box
+
+a
+  text-decoration: none
+  color: $color_main
+
+p, h1
+  line-height: $lh
+  margin: 0
+
+
 body
-  background: #EEE
+  padding: 0
+
+// utils
+
+.right
+  float: right
+
+.clear
+  clear: both
+  // todo get a proper clearfix
+
+.aright
+  text-align: right
+
+// layout
+
+
+// TODO: layout
+
+
+nav a
+  font-weight: bold
+  display: inline-block
+  @extend .button
+
+// buttons
+
+.btn, .button
+  padding: 1%
+
+.btn, .button
+  border-radius: 7px
+  background: $color_action
+  border: 1px solid $color_action
+  &:hover
+    border: 1px solid $color_main
+
+.current
+  background: $color_main
+  color: $color_white
+
+// forms
+
+input
+  margin-bottom: $u
+input[type=submit]
+  @extend .button
+
+label
+  display: block

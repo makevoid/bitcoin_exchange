@@ -5,6 +5,14 @@ require "#{path}/config/env.rb"
 class BitcoinExchange < Sinatra::Base
   include Voidtools::Sinatra::ViewHelpers
 
+
+  def logged_in?
+    # TODO: implement login
+    #
+    # project status atm: in development
+
+    true
+  end
 end
 
-require_all "#{path}/routes"
+require_all "routes"
