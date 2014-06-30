@@ -1,16 +1,16 @@
 :ruby
+  # TODO: move in helpers
+
   def time_f(time)
     Time.at(time.to_i).strftime "%d/%m/%Y - %H:%M"
   end
 
   def order_partial(order)
     haml_tag :span do
-      haml_concat "#{order.price}$"
+      haml_concat "#{order.type.upcase} #{order.price}$"
     end
     haml_concat "[#{order.amount}] @ #{time_f order.time}"
   end
-
-
 
 
 / [open orders]
@@ -22,10 +22,10 @@
 
 - orders.map{ |o| order_h o }.each do |order|
   - order_partial order
-  \(debug: order)
+  -# \(debug: order)
   %form{ action: "/orders/#{order.id}", method: :post }
     -# form_method :delete
-    - hidden ""
+    - hidden "_method", "delete"
     %input{ type: "submit", value: "Cancel" }
 
 

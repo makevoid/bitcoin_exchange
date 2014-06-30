@@ -9,12 +9,22 @@
 
 %section.new_withdrawal.hidden
   .tab
-    %h1 EUR
+    %h1
+      %a{ href: js_void } EUR
+
+    .inside.hidden
+      %form{ action: "/withdrawals", method: "post" }
+        - hidden "type", "eur"
+        %input{ type: "text", name: "amount", value: "0.0005" } €
+        - submit "send"
+
 
   .tab
-    %h1 BTC
+    %h1
+      %a{ href: js_void } BTC
 
-    %form{ action: "/withdrawals", method: "post" }
-      - hidden "type", "btc"
-      %input{ type: "text", name: "amount", value: "0.0005" } BTC
-      - submit "send"
+    .inside.hidden
+      %form{ action: "/withdrawals", method: "post" }
+        - hidden "type", "btc"
+        %input{ type: "text", name: "amount", value: "0.0005" } BTC
+        - submit "send"

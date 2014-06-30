@@ -1,4 +1,4 @@
-var all, bind_togglables, boot, evt_on, http, main, q, toggle;
+var all, bind_tabs, bind_togglables, boot, evt_on, http, main, q, toggle;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -46,7 +46,27 @@ http = function(settings) {
 };
 
 main = function() {
-  return bind_togglables();
+  bind_togglables();
+  return bind_tabs();
+};
+
+bind_tabs = function() {
+  var elements, inside, tab, tabs, _i, _len, _results;
+  tabs = all(".tab > h1 a");
+  elements = [];
+  inside = [];
+  _results = [];
+  for (_i = 0, _len = tabs.length; _i < _len; _i++) {
+    tab = tabs[_i];
+    tab.addEventListener("click", function(evt) {
+      var parent;
+      parent = evt.target.parentNode.parentNode;
+      inside = parent.querySelector(".inside");
+      return toggle(inside, "hidden");
+    });
+    _results.push(true);
+  }
+  return _results;
 };
 
 bind_togglables = function() {
@@ -56,9 +76,11 @@ bind_togglables = function() {
   for (_i = 0, _len = togs.length; _i < _len; _i++) {
     tog = togs[_i];
     toggled = q("." + tog.dataset.toggle);
-    _results.push(evt_on(tog, "click", function() {
-      return toggle(toggled, "hidden");
-    }));
+    evt_on(tog, "click", function() {
+      toggle(toggled, "hidden");
+      return true;
+    });
+    _results.push(true);
   }
   return _results;
 };

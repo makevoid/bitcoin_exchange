@@ -9,17 +9,31 @@
 
 %section.new_deposit.hidden
   .tab
-    %h1 EUR
+    %h1
+      %a{ href: js_void } EUR
+
+    .inside.hidden
+      :markedup
+        To deposit EUR you have to make a SEPA wire tansfer, these are the details:
+
+        Bank of XXXX - City, Country
+        IBAN:
+        ABI/CAB/SWIFT?
+        etc...
+
+
 
   .tab
-    %h1 BTC
+    %h1
+      %a{ href: js_void } BTC
 
     -# %input{ type: "text", value: "0 btc" }
 
-    - if CURRENT_ADDRESS
-      :markedup
-        Deposit to this address:
-      %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
-    - else
-      %form{ action: "/users/generate_address", method: :post }
-        - submit "Generate address"
+    .inside.hidden
+      - if CURRENT_ADDRESS
+        :markedup
+          Deposit to this address:
+        %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
+      - else
+        %form{ action: "/users/generate_address", method: :post }
+          - submit "Generate address"

@@ -20,6 +20,8 @@ class BitcoinExchange < Sinatra::Base
 
   delete "/orders/:id" do |id|
     # cancel an order (don't delete it, mark it as canceled?)
+    Order.cancel id.to_i
+    redirect "/orders"
   end
 
 

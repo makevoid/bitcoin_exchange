@@ -29,7 +29,7 @@ class Order
   end
 
   def self.cancel(id)
-    R.hdel "orders:#{id}"
+    R.del "orders:#{id}"
   end
 
 

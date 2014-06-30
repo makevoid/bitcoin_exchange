@@ -51,6 +51,22 @@ http = (settings) ->
 
 main = ->
   bind_togglables()
+  bind_tabs()
+
+bind_tabs = ->
+  tabs = all ".tab > h1 a"
+  elements = []
+  inside = []
+  for tab in tabs
+    # evt_on tab, "click", (evt) ->
+    tab.addEventListener "click", (evt) ->
+      parent = evt.target.parentNode.parentNode
+      inside = parent.querySelector ".inside"
+      toggle inside, "hidden"
+
+    true
+
+  # for tab in tabs
 
 
 bind_togglables = ->
@@ -59,5 +75,7 @@ bind_togglables = ->
     toggled = q ".#{tog.dataset.toggle}"
     evt_on tog, "click", ->
       toggle toggled, "hidden"
+      true
+    true
 
 boot main

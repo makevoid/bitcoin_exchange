@@ -23,14 +23,16 @@ Buy / Sell
     - submit "Buy BTC"
 
 %section
-  %h1 SELL
-  %p Available BTC: #{sell.available} BTC
-  .relative
-    %input{ placeholder: "amount (#{sell.amount} BTC)" }
-    %span.abso BTC
-  .relative
-    %input{ placeholder: "price  (€#{sell.price})" } $
-    %span.abso EUR
-  %p Total: #{sell.total}
-  - submit "Sell BTC"
+  %form{ action: "/orders", method: :post }
+    - hidden :type, :sell
+    %h1 SELL
+    %p Available BTC: #{sell.available} BTC
+    .relative
+      %input{  name: "order[amount]", placeholder: "amount (#{sell.amount} BTC)" }
+      %span.abso BTC
+    .relative
+      %input{  name: "order[price]", placeholder: "price  (€#{sell.price})" } $
+      %span.abso EUR
+    %p Total: #{sell.total}
+    - submit "Sell BTC"
 

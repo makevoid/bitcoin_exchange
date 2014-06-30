@@ -3,6 +3,8 @@ path = File.expand_path '../', __FILE__
 require "#{path}/config/env.rb"
 
 class BitcoinExchange < Sinatra::Base
+  use Rack::MethodOverride
+
   include Voidtools::Sinatra::ViewHelpers
   require "#{PATH}/lib/mixins/helpers"
   helpers do
