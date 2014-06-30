@@ -1,24 +1,24 @@
 - unless logged_in?
+  %section
 
-  :plain
-    ### What is bitcoin?
+    %h1 What is bitcoin?
 
     Bitcoin video.
 
 
-    ### What is an exchange?
+    %h1 What is an exchange?
 
     An exchange is a place where you can buy/sell bitcoins.
 
 
-    ### You can Buy / Sell bitcoins
+    %h1 You can Buy / Sell bitcoins
 
     BitcoinExchange is exchange made easy, this project is open source.
 
 
-  %a{ "/login" } Login
+  %a{ href: "/login" } Login
   or
-  %a{ "/register" } Register
+  %a{ href: "/register" } Register
 
 
 - else

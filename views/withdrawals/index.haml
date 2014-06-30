@@ -1,0 +1,20 @@
+%section
+  %h1 Withdrawals
+
+  [withdrawals list]
+
+
+%nav
+  %a{ href: js_void, data: { toggle: "new_withdrawal" } } New withdrawal
+
+%section.new_withdrawal.hidden
+  .tab
+    %h1 EUR
+
+  .tab
+    %h1 BTC
+
+    %form{ action: "/withdrawals", method: "post" }
+      - hidden "type", "btc"
+      %input{ type: "text", name: "amount", value: "0.0005" } BTC
+      - submit "send"

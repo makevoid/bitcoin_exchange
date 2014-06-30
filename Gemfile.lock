@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:makevoid/bitcoin-client
+  revision: 33a5ac809d8b1535065dc4037bae639e6c24da1b
+  specs:
+    bitcoin-client (0.0.3)
+      rest-client
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -42,6 +49,7 @@ GEM
       rb-inotify (>= 0.9)
     lumberjack (1.0.9)
     method_source (0.8.2)
+    mime-types (2.3)
     multi_json (1.10.1)
     pry (0.10.0)
       coderay (~> 1.1.0)
@@ -54,6 +62,8 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     redis (3.1.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     sass (3.3.9)
     sinatra (1.4.5)
       rack (~> 1.4)
@@ -69,6 +79,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bitcoin-client!
   blizz
   guard
   guard-coffeescript

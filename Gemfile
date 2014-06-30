@@ -12,6 +12,8 @@ gem "sass"
 
 gem "redis"
 
+gem "bitcoin-client", git: "git@github.com:makevoid/bitcoin-client"
+
 group :development do
   gem "guard"
   gem "guard-sass",         require: false

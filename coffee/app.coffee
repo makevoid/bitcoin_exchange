@@ -58,7 +58,6 @@ bind_togglables = ->
   for tog in togs
     toggled = q ".#{tog.dataset.toggle}"
     evt_on tog, "click", ->
-      console.log "toggle"
       toggle toggled, "hidden"
 
 boot main

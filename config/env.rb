@@ -16,9 +16,25 @@ def app_env
   ENV["RACK_ENV"] || "development"
 end
 
+
+
+require "#{path}/sandbox/account"
+
+# wallet connections
+
+require "#{path}/sandbox/wallet"
+puts "WALLET:"
+puts Wallet.getinfo
+puts
+
+
 # data store
 
 R = Redis.new
+
+# reset
+# R.keys.map{ |key| R.del key }
+# R.flushdb
 
 
 # models and libs
@@ -30,4 +46,3 @@ require_all "models"
 
 TITLE = "BitcoinExchange"
 
-CURR_USER = User.test_user

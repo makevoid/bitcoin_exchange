@@ -57,7 +57,6 @@ bind_togglables = function() {
     tog = togs[_i];
     toggled = q("." + tog.dataset.toggle);
     _results.push(evt_on(tog, "click", function() {
-      console.log("toggle");
       return toggle(toggled, "hidden");
     }));
   }

@@ -14,5 +14,12 @@
   .tab
     %h1 BTC
 
-    %input{ type: "text", value: "0 btc" }
-    - submit "Generate address"
+    -# %input{ type: "text", value: "0 btc" }
+
+    - if CURRENT_ADDRESS
+      :markedup
+        Deposit to this address:
+      %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
+    - else
+      %form{ action: "/users/generate_address", method: :post }
+        - submit "Generate address"

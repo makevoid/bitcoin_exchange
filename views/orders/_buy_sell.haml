@@ -1,7 +1,6 @@
 Buy / Sell
 
 
-
 :ruby
   class Order
     include Blizz::Resource
@@ -12,7 +11,7 @@ Buy / Sell
   end
 
   buy = order_h( available: "available", amount: 0.1, price: 600, total: "total" )
-  sell = order_h( available: "available", amount: "amount", price: "price", total: "total" )
+  sell = order_h( available: Account.available_btc, amount: "amount", price: "price", total: "total" )
 
 .graph
 .clear

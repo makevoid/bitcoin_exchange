@@ -12,9 +12,11 @@
         %h1
           %a{ href: "/" }= TITLE
         %nav
-          %a{ href: "/orders"     } Orders
-          %a{ href: "/orders/new" } Buy / Sell
-          %a{ href: "/deposits"   } Deposit
+          %a{ href: "/orders"      } Orders
+          %a{ href: "/orders/new"  } Buy / Sell
+          %a{ href: "/deposits"    } Deposit
+          %a{ href: "/withdrawals" } Withdraw
+          %a{ href: "/contact_us"  } Contact us
         %section.right.aright
           %section
             Logged as user123
@@ -24,7 +26,7 @@
             %b Balance:
             = haml :"_balance"
             :markedup
-              Total value: €#{Balance.btc_eur}
+              Total value: €#{"%.2f" % Balance.btc_eur}
 
       %section.content= yield
 

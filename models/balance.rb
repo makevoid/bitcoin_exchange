@@ -4,7 +4,7 @@ class Balance
   attr_reader :btc, :eur, :btc_eur
 
   def initialize
-    @btc = 0.1  # TODO: get value from redis
+    @btc = Wallet.balance # TODO: get value from redis
     @eur = 50   # TODO: get value from redis
     @btc_eur = @btc * Ticker.last
   end

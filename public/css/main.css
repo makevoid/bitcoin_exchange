@@ -57,11 +57,22 @@ input {
   display: block;
   margin-bottom: 12px; }
 
+.advanced > section {
+  border: 1px solid darkgray;
+  padding: 1%;
+  display: inline-block; }
+
 #main > header > nav {
   margin-bottom: 20px; }
 
 section > h1 {
   margin-bottom: 6px; }
+
+input.btc_address {
+  width: 340px;
+  padding: 3px 5px;
+  font-size: 100%;
+  text-align: center; }
 
 .block {
   display: inline-block;
