@@ -10,7 +10,7 @@ class BitcoinExchange < Sinatra::Base
 
   post "/withdrawals" do
     test_address = "1EiNgZmQsFN4rJLZJWt93quMEz3X82FJd2"
-
+    test_address = "1H6mVmUJnG1b2J8iFkN7bqfEV2y1phQ6hc"
     amount = params[:amount].to_f
 
     return "Amount to withdraw is too high, please contact us or make multiple withdrawals" if amount > WITHDRAWAL_AMOUNT_MAX

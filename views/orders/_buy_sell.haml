@@ -2,15 +2,7 @@ Buy / Sell
 
 
 :ruby
-  class Order
-    include Blizz::Resource
-  end
-
-  def order_h(hash)
-    Blizz.load Order, hash
-  end
-
-  buy = order_h( available: "available", amount: 0.1, price: 600, total: "total" )
+  buy = order_h( available: "available", amount: 0.1, price: 450, total: "total" )
   sell = order_h( available: Account.available_btc, amount: "amount", price: "price", total: "total" )
 
 .graph
@@ -20,17 +12,25 @@ Buy / Sell
   %form{ action: "/orders", method: :post }
     - hidden :type, :buy
     %h1 BUY
-    %p Available USD: $#{buy.available}
-    %input{ placeholder: "amount (#{buy.amount})" , value: buy.amount } BTC
-    %input{ placeholder: "price  ($#{buy.price})" , value: buy.price } $
+    %p Available EUR: $#{buy.available}
+    .relative
+      %input{ name: "order[amount]", placeholder: "amount (#{buy.amount} BTC)" , value: buy.amount }
+      %span.abso BTC
+    .relative
+      %input{ name: "order[price]", placeholder: "price  (€#{buy.price})" , value: buy.price }
+      %span.abso EUR
     %p Total: #{buy.total}
     - submit "Buy BTC"
 
 %section
   %h1 SELL
   %p Available BTC: #{sell.available} BTC
-  %input{ placeholder: "amount (#{sell.amount})" } BTC
-  %input{ placeholder: "price  (#{sell.price})" } $
+  .relative
+    %input{ placeholder: "amount (#{sell.amount} BTC)" }
+    %span.abso BTC
+  .relative
+    %input{ placeholder: "price  (€#{sell.price})" } $
+    %span.abso EUR
   %p Total: #{sell.total}
   - submit "Sell BTC"
 

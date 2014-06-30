@@ -25,6 +25,9 @@ body {
 .hidden {
   display: none; }
 
+.relative {
+  position: relative; }
+
 .content > section {
   margin-bottom: 24px; }
 
@@ -77,3 +80,8 @@ input.btc_address {
 .block {
   display: inline-block;
   margin-bottom: 10px; }
+
+.abso {
+  position: absolute;
+  right: 6%;
+  top: 2px; }

@@ -4,17 +4,17 @@ class BitcoinExchange < Sinatra::Base
     # open, closed
     haml :"orders/index"
   end
-  
+
   get "/orders/new" do
     # place an order
     haml :"orders/new"
   end
-  
+
 
   post "/orders" do
     # place a buy / sell order
     order = params[:order] || {}
-    Order.create user: @current_user, type: order[:type], amount: order[:amount], price: order[:price]
+    Order.create user: current_user, type: order[:type], amount: order[:amount], price: order[:price]
     redirect "/orders"
   end
 

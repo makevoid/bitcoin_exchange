@@ -3,7 +3,7 @@ class Ticker
 
   def initialize
     # retrieve value from redis: R.get("ticker.last") (from list)
-    @last = 600
+    @last = 450
   end
 
   def last
