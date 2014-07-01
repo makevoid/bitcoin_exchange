@@ -12,7 +12,7 @@ Buy / Sell
   %form{ action: "/orders", method: :post }
     - hidden :type, :buy
     %h1 BUY
-    %p Available EUR: $#{buy.available}
+    %p Available: $#{buy.available}
     .relative
       %input{ name: "order[amount]", placeholder: "amount (#{buy.amount} BTC)" , value: buy.amount }
       %span.abso BTC
@@ -26,7 +26,7 @@ Buy / Sell
   %form{ action: "/orders", method: :post }
     - hidden :type, :sell
     %h1 SELL
-    %p Available BTC: #{sell.available} BTC
+    %p Available: #{sell.available} BTC
     .relative
       %input{  name: "order[amount]", placeholder: "amount (#{sell.amount} BTC)" }
       %span.abso BTC
