@@ -86,9 +86,13 @@ bind_tabbed = ->
   for tab, idx in tabs
     tab.dataset.idx = idx
     tab.addEventListener "click", (evt) ->
+      for tabb in tabs
+        tabb.classList.remove "current"
+      target = evt.target
+      target.classList.add "current"
       for section in sections
         section.classList.add "hidden"
-      idx = evt.target.dataset.idx
+      idx = target.dataset.idx
       toggle sections[idx], "hidden"
 
 

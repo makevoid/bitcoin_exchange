@@ -20,12 +20,14 @@
         %section.right.aright
           %nav.debug
             / FIXME: implement login and remove this
-            Switch to user:
-            %a.btn{ href: "/force_login/a" } ALI
-            %a.btn{ href: "/force_login/b" } BOB
+            %p Switch to user:
+            %form.inline{ action: "/force_login/0", method: :post }
+              %input.inline{ type: "submit", value: "ALI" }
+            %form.inline{ action: "/force_login/1", method: :post }
+              %input.inline{ type: "submit", value: "BOB" }
 
           %section
-            Logged as user123
+            Logged as #{current_user.username}
             \|
             %a{ href: "/logout" } logout
           %section

@@ -48,6 +48,9 @@ body
 .relative
   position: relative
 
+.inline
+  display: inline-block
+
 // layout
 
 .content > section
@@ -149,6 +152,18 @@ section.tabbed
     margin-top: 10px
   nav a
     border: 1px solid $color_main
-    padding: 6px 10px
+    padding: 6px $pu
     background: white
     border-radius: 0
+    position: relative
+    bottom: -1px
+
+  & > section
+    border: 1px solid $color_main
+    padding: $pu
+  nav a.current
+    background: $color_main
+
+  // layout
+  & > section
+    width: 70%

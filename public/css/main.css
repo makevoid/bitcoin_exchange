@@ -28,6 +28,9 @@ body {
 .relative {
   position: relative; }
 
+.inline {
+  display: inline-block; }
+
 .content > section {
   margin-bottom: 24px; }
 
@@ -104,6 +107,15 @@ section.tabbed nav {
   margin-top: 10px; }
 section.tabbed nav a {
   border: 1px solid green;
-  padding: 6px 10px;
+  padding: 6px 1.2%;
   background: white;
-  border-radius: 0; }
+  border-radius: 0;
+  position: relative;
+  bottom: -1px; }
+section.tabbed > section {
+  border: 1px solid green;
+  padding: 1.2%; }
+section.tabbed nav a.current {
+  background: green; }
+section.tabbed > section {
+  width: 70%; }

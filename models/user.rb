@@ -1,13 +1,17 @@
 class User
 
-  attr_reader :id
+  attr_reader :id, :username, :btc_address
+  # :phone, :
 
-  def initialize(id: id)
-    @id = id
+  def initialize(id: id, username: username, btc_address: btc_address)
+    @id           = id
+    @username     = username
+    @btc_address  = btc_address
   end
 
-  # store: sql
-  def self.test_user
-    @@test_user = new(id: 1)
-  end
+  # def balance
+
+  # end
+
+  # store: sql / json?
 end

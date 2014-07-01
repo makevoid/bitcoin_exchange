@@ -19,9 +19,32 @@ class BitcoinExchange < Sinatra::Base
     current_user
   end
 
+  @@current_user = nil
+
   def current_user
-    @current_user = User.test_user
+    @@current_user || USERS[0]  # FIXME: you can start to code login from here
   end
 end
 
 require_all "routes"
+
+
+# TEST routes
+#
+# remove them in production!!
+#
+#
+
+USERS = [
+  User.new(id: 0, username: "Ali"),
+  User.new(id: 1, username: "Bob"),
+]
+
+class BitcoinExchange < Sinatra::Base
+
+  post "/force_login/:id" do |id|
+    @@current_user = USERS[id.to_i]
+    redirect "/"
+  end
+
+end

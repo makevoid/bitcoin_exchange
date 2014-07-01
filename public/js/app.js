@@ -91,12 +91,18 @@ bind_tabbed = function() {
     tab = tabs[idx];
     tab.dataset.idx = idx;
     _results.push(tab.addEventListener("click", function(evt) {
-      var section, _j, _len1;
-      for (_j = 0, _len1 = sections.length; _j < _len1; _j++) {
-        section = sections[_j];
+      var section, tabb, target, _j, _k, _len1, _len2;
+      for (_j = 0, _len1 = tabs.length; _j < _len1; _j++) {
+        tabb = tabs[_j];
+        tabb.classList.remove("current");
+      }
+      target = evt.target;
+      target.classList.add("current");
+      for (_k = 0, _len2 = sections.length; _k < _len2; _k++) {
+        section = sections[_k];
         section.classList.add("hidden");
       }
-      idx = evt.target.dataset.idx;
+      idx = target.dataset.idx;
       return toggle(sections[idx], "hidden");
     }));
   }
