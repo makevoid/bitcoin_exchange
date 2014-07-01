@@ -1,4 +1,4 @@
-var all, bind_tabs, bind_togglables, boot, evt_on, http, main, q, toggle;
+var all, bind_tabbed, bind_tabs, bind_togglables, boot, evt_on, http, main, q, toggle;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -47,7 +47,7 @@ http = function(settings) {
 
 main = function() {
   bind_togglables();
-  return bind_tabs();
+  return bind_tabbed();
 };
 
 bind_tabs = function() {
@@ -59,10 +59,7 @@ bind_tabs = function() {
   for (_i = 0, _len = tabs.length; _i < _len; _i++) {
     tab = tabs[_i];
     tab.addEventListener("click", function(evt) {
-      var parent;
-      parent = evt.target.parentNode.parentNode;
-      inside = parent.querySelector(".inside");
-      return toggle(inside, "hidden");
+      return console.log(evt.target.dataset);
     });
     _results.push(true);
   }
@@ -81,6 +78,27 @@ bind_togglables = function() {
       return true;
     });
     _results.push(true);
+  }
+  return _results;
+};
+
+bind_tabbed = function() {
+  var idx, sections, tab, tabs, _i, _len, _results;
+  tabs = all(".tabbed > nav a");
+  sections = all(".tabbed section");
+  _results = [];
+  for (idx = _i = 0, _len = tabs.length; _i < _len; idx = ++_i) {
+    tab = tabs[idx];
+    tab.dataset.idx = idx;
+    _results.push(tab.addEventListener("click", function(evt) {
+      var section, _j, _len1;
+      for (_j = 0, _len1 = sections.length; _j < _len1; _j++) {
+        section = sections[_j];
+        section.classList.add("hidden");
+      }
+      idx = evt.target.dataset.idx;
+      return toggle(sections[idx], "hidden");
+    }));
   }
   return _results;
 };

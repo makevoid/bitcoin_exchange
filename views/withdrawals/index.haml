@@ -7,24 +7,20 @@
 %nav
   %a{ href: js_void, data: { toggle: "new_withdrawal" } } New withdrawal
 
-%section.new_withdrawal.hidden
-  .tab
-    %h1
-      %a{ href: js_void } EUR
+%section.tabbed.new_withdrawal.hidden
+  %nav
+    %a{ href: js_void } EUR
+    %a{ href: js_void } BTC
 
-    .inside.hidden
-      %form{ action: "/withdrawals", method: "post" }
-        - hidden "type", "eur"
-        %input{ type: "text", name: "amount", value: "0.0005" } €
-        - submit "send"
+  %section.hidden
+    %form{ action: "/withdrawals", method: "post" }
+      - hidden "type", "eur"
+      SEPA wire transfer
+      %input{ type: "text", name: "amount" } €
+      - submit "send"
 
-
-  .tab
-    %h1
-      %a{ href: js_void } BTC
-
-    .inside.hidden
-      %form{ action: "/withdrawals", method: "post" }
-        - hidden "type", "btc"
-        %input{ type: "text", name: "amount", value: "0.0005" } BTC
-        - submit "send"
+  %section.hidden
+    %form{ action: "/withdrawals", method: "post" }
+      - hidden "type", "btc"
+      %input{ type: "text", name: "amount", value: "0.0005" } BTC
+      - submit "send"

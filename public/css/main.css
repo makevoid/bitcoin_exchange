@@ -92,3 +92,18 @@ input.btc_address {
   .deposits .tab h1 a, .withdrawals .tab h1 a {
     border: 1px solid green;
     padding: 6px 10px; }
+
+.deposits .tab, .withdrawals .tab {
+  margin-top: 20px;
+  display: inline-block; }
+  .deposits .tab h1 a, .withdrawals .tab h1 a {
+    border: 1px solid green;
+    padding: 6px 10px; }
+
+section.tabbed nav {
+  margin-top: 10px; }
+section.tabbed nav a {
+  border: 1px solid green;
+  padding: 6px 10px;
+  background: white;
+  border-radius: 0; }

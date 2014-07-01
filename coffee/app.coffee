@@ -51,7 +51,8 @@ http = (settings) ->
 
 main = ->
   bind_togglables()
-  bind_tabs()
+  #bind_tabs()
+  bind_tabbed()
 
 bind_tabs = ->
   tabs = all ".tab > h1 a"
@@ -60,9 +61,10 @@ bind_tabs = ->
   for tab in tabs
     # evt_on tab, "click", (evt) ->
     tab.addEventListener "click", (evt) ->
-      parent = evt.target.parentNode.parentNode
-      inside = parent.querySelector ".inside"
-      toggle inside, "hidden"
+      # parent = evt.target.parentNode.parentNode
+      # inside = parent.querySelector ".inside"
+      console.log evt.target.dataset
+      #toggle inside, "hidden"
 
     true
 
@@ -77,5 +79,17 @@ bind_togglables = ->
       toggle toggled, "hidden"
       true
     true
+
+bind_tabbed = ->
+  tabs = all ".tabbed > nav a"
+  sections = all ".tabbed section"
+  for tab, idx in tabs
+    tab.dataset.idx = idx
+    tab.addEventListener "click", (evt) ->
+      for section in sections
+        section.classList.add "hidden"
+      idx = evt.target.dataset.idx
+      toggle sections[idx], "hidden"
+
 
 boot main
