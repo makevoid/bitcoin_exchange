@@ -41,6 +41,8 @@ class Order
     R.hset "orders:#{id}", "price",   price
     R.hset "orders:#{id}", "time",    Time.now.to_i
     
+    R.sadd "user_orders:#{user_id}", id
+    
     # async { Orderbook.resolve self }
     
     true
@@ -50,8 +52,12 @@ class Order
     orders = R.keys "orders:*"
     orders.map do |order|
       ord = R.hgetall order
-      Order.new id: ord["id"], user_id: ord["user_id"], type: ord["type"], amount: ord["amount"], price: ord["price"], time: ord["time"]
+      init ord
     end
+  end
+  
+  def self.init(ord)
+    new id: ord["id"], user_id: ord["user_id"], type: ord["type"], amount: ord["amount"], price: ord["price"], time: ord["time"]
   end
 
   def self.cancel(id)

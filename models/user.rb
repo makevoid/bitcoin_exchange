@@ -10,7 +10,11 @@ class User
   end
 
   def orders_open
-    
+    order_ids = R.smembers "user_orders:#{id}"
+    order_ids.map do |order_id|
+      ord = R.hgetall "orders:#{order_id}"
+      Order.init ord
+    end
   end
   
   # transactions
@@ -21,6 +25,7 @@ class User
   def balance
     @balance ||= Balance.new self
   end
+  
 
   # store: sql / json?
 end

@@ -1,5 +1,5 @@
 # require "spec_helper"
-require_relative "../spec_helper"
+require "spec_helper"
 
 USER  = User.new id: 0
 USER2 = User.new id: 1
