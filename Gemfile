@@ -20,3 +20,11 @@ group :development do
   gem "guard-coffeescript", require: false
   gem "guard-livereload",   require: false
 end
+
+group :test do
+  gem "rspec-core"
+  gem "rspec-mocks"
+  gem "rspec-expectations"
+
+  gem "rack-test"
+end
