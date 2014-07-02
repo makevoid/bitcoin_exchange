@@ -62,6 +62,8 @@ class Order
 
   def self.cancel(id)
     order_key = "orders:#{id}"
+    user_id = R.hget "orders:#{id}", "user_id"
+    R.srem "user_orders:#{user_id}", id
     R.del order_key
     # TODO: copy in the logs
   end
