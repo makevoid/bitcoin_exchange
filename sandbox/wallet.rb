@@ -59,13 +59,23 @@ class Wallet
     client.getinfo
   end
 
-  def self.balance
-    client.balance
+  # returns the balance of one account 
+  def self.balance_user(user_id)
+    client.getbalance user_id.to_s
   end
 
-  def self.address_create
+  # returns the balance of all accounts 
+  def self.balance
+    client.listaccounts
+  end
+
+  def self.balance_admin
+    client.balance # returns the balance of all address contained in the wallet, just for admin purposes
+  end
+
+  def self.address_create(user_id)
     # TODO: increase security, use different private keys or different deamons maybe?
-    client.getnewaddress
+    client.getnewaddress user_id
   end
 
 

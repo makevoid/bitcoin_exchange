@@ -2,15 +2,21 @@ Buy / Sell
 
 
 :ruby
-  buy = order_h( available: "available", amount: 0.1, price: 450, total: "total" )
-  sell = order_h( available: Account.available_btc, amount: "amount", price: "price", total: "total" )
+  class BalancePresenter
+    include Blizz::Resource
+  end
+  
+  buy = { available: "available", amount: 0.1, price: 450, total: "total" }
+  sell = { available: cur_user_balance.btc_available, amount: "amount", price: 0, total: "total" }
+  buy   = Blizz.load BalancePresenter, buy
+  sell  = Blizz.load BalancePresenter, sell
 
 .graph
 .clear
 
 %section
   %form{ action: "/orders", method: :post }
-    - hidden :type, :buy
+    - hidden "order[type]", :buy
     %h1 BUY
     %p Available: $#{buy.available}
     .relative
@@ -24,7 +30,7 @@ Buy / Sell
 
 %section
   %form{ action: "/orders", method: :post }
-    - hidden :type, :sell
+    - hidden "order[type]", :sell
     %h1 SELL
     %p Available: #{sell.available} BTC
     .relative

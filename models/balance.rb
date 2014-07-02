@@ -3,28 +3,21 @@ class Balance
 
   attr_reader :btc, :eur, :btc_eur
 
-  def initialize
-    @btc = Wallet.balance # TODO: get value from redis
+  def initialize(user)
+    @user = user
+    @btc = Wallet.balance_user user.id # TODO: get value from redis?
     @eur = 50   # TODO: get value from redis
     @btc_eur = @btc * Ticker.last
   end
-
-  # singleton methods (simple singleton implementation)
-
-  @@balance = Balance.new
-
-  # TODO: proxy methods
-
-  def self.btc
-    @@balance.btc
+  
+  # available = total owned - value in open orders
+  
+  def btc_available
+    btc - Order.balance_btc
   end
-
-  def self.eur
-    @@balance.eur
-  end
-
-  def self.btc_eur
-    @@balance.btc_eur
+  
+  def eur_available
+    
   end
 
 end

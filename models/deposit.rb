@@ -3,14 +3,14 @@
 # scraping home banking website will be used to notify of new deposits
 
 
-
-
 class Deposit
   # store: sql
   
 end
 
 class BtcDeposit < Deposit
+  # errors: address not created yet
+  
 end
 
 class FiatDeposit < Deposit

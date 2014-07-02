@@ -6,9 +6,13 @@ class BitcoinExchange < Sinatra::Base
   use Rack::MethodOverride
 
   include Voidtools::Sinatra::ViewHelpers
-  require "#{PATH}/lib/mixins/helpers"
+  require "#{PATH}/lib/mixins/html_helpers"
+  require "#{PATH}/lib/mixins/formats_helpers"
+  require "#{PATH}/lib/mixins/resources_helpers"
   helpers do
     include ViewHelpers
+    include FormatsHelpers
+    include ResourcesHelpers
   end
 
   # TODO: implement login
@@ -23,6 +27,10 @@ class BitcoinExchange < Sinatra::Base
 
   def current_user
     @@current_user || USERS[0]  # FIXME: you can start to code login from here
+  end
+  
+  def cur_user_balance
+    current_user.balance
   end
 end
 
@@ -39,6 +47,10 @@ USERS = [
   User.new(id: 0, username: "Ali"),
   User.new(id: 1, username: "Bob"),
 ]
+
+# Wallet.address_create 0
+# Wallet.address_create 1
+
 
 class BitcoinExchange < Sinatra::Base
 

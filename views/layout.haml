@@ -34,7 +34,7 @@
             %b Balance:
             = haml :"_balance"
             :markedup
-              Total value: €#{"%.2f" % Balance.btc_eur}
+              Total value: €#{"%.2f" % cur_user_balance.btc_eur}
 
       %section.content= yield
 

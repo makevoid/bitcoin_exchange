@@ -1,1 +1,7 @@
-[closed orders list / table]
+- orders = ClosedOrder.all
+
+- if orders.empty?
+  There are no closed orders
+
+- orders.each do |order|
+  - order_closed_partial order

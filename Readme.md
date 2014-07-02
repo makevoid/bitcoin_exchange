@@ -17,3 +17,15 @@ dev mode:
   
     rerun -p "**/*.{rb}" -- rackup -p 3000 
 
+
+
+### install notes
+
+osx bitcoin.conf locaiton:
+
+    /Users/makevoid/Library/Application Support/Bitcoin/bitcoin.conf
+    
+symlink:
+
+    mkdir -p ~/.bitcoin
+    ln -s "/Users/makevoid/Library/Application Support/Bitcoin/bitcoin.conf" ~/.bitcoin/

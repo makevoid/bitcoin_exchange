@@ -9,9 +9,18 @@ class User
     @btc_address  = btc_address
   end
 
-  # def balance
+  def orders_open
+    
+  end
+  
+  # transactions
+  def orders_closed
 
-  # end
+  end
+
+  def balance
+    @balance ||= Balance.new self
+  end
 
   # store: sql / json?
 end

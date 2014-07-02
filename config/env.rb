@@ -17,8 +17,10 @@ def app_env
 end
 
 
+# balance
 
-require "#{path}/sandbox/account"
+# TODO: remember that other than wallet, even Balance (user balance, models/balance) have to be safeguarded
+
 
 # wallet connections
 
@@ -48,7 +50,4 @@ TITLE = "BitcoinExchange"
 
 
 
-# very experimental monkeypatches, remove them in production
-
-
-require "#{path}/lib/monkeypatches/order"
+require "#{path}/lib/monkeypatches/numeric"
