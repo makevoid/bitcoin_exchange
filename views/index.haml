@@ -22,12 +22,16 @@
 
 
 - else
-
-  %h1 Dashboard
-
-  :markedup
-    Total account value: #{cur_user_balance.btc_eur}
-
-  %section
-    %h1 Balance
-    = haml :"_balance"
+  .col8.offset-left1
+    .line-compress.bg-green.color-white
+      .separator5
+      .col3x3
+        %h1 Dashboard
+      .col3x3.center-content
+        .separator5
+        %h2 Total account #{cur_user_balance.btc_eur}
+      .col3x3.center-content
+        .separator5
+        %h2
+          Balance = haml :"_balance"
+      .separator5

@@ -3,40 +3,53 @@
   - TITLE = "BitcoinExchange"
   %head
     %title= TITLE
-    %link{ rel: "stylesheet", href: "/css/main.css" }
     %link{ rel:"stylesheet", href:"//cdn.rawgit.com/720kb/csshelper/92f29f964cbb63487f4c14ee40b8172d63c64849/src/helper.css"}
+    %link{ rel:"stylesheet", href:"http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subset=latin,cyrillic,cyrillic-ext,latin-ext' rel='stylesheet"}
+    %link{ rel:"stylesheet", href:"//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.css"}
+    %link{ rel: "stylesheet", href: "/css/main.css" }
     = haml :"_metas" # todo require/implement partial :metas
 
-  %body{ class: body_class }
+  %body
     #main
-      %header
-        %h1
-          %a{ href: "/" }= TITLE
-        %nav
-          %a{ href: "/orders"      } Orders
-          %a{ href: "/orders/new"  } Buy / Sell
-          %a{ href: "/deposits"    } Deposit
-          %a{ href: "/withdrawals" } Withdraw
-          %a{ href: "/contact_us"  } Contact us
-        %section.right.aright
-          %nav.debug
-            / FIXME: implement login and remove this
-            %p Switch to user:
-            %form.inline{ action: "/force_login/0", method: :post }
-              %input.inline{ type: "submit", value: "ALI" }
-            %form.inline{ action: "/force_login/1", method: :post }
-              %input.inline{ type: "submit", value: "BOB" }
+      %header.navbar.bg-white.line.fixed.top.left.layer1.bordered-bottom
+        %h1.col3.logo.color-green
+          .line-compress
+            .line-compress
+              %a{ href: "/" }
+                %i.fa.fa-bitcoin
+                = TITLE
+        %nav.col7.center-content
+          .line
+            .col8
+              %a.active.col2{ href: "/orders"      } Orders
+              %a.col2{ href: "/orders/new"  } Buy / Sell
+              %a.col2{ href: "/deposits"    } Deposit
+              %a.col2{ href: "/withdrawals" } Withdraw
+              %a.col2{ href: "/contact_us"  } Contact us
+            .col2
+              %a.line{}
+                %i.fa.fa-user.color-green
+                Me
+              %section.right.aright
+                -#%nav.debug
+                  / FIXME: implement login and remove this
+                  -#%p Switch to user:
+                  -#%form.inline{ action: "/force_login/0", method: :post }
+                    -#%input.inline{ type: "submit", value: "ALI" }
+                  -#%form.inline{ action: "/force_login/1", method: :post }
+                    -#%input.inline{ type: "submit", value: "BOB" }
 
-          %section
-            Logged as #{current_user.username}
-            \|
-            %a{ href: "/logout" } logout
-          %section
-            %b Balance:
-            = haml :"_balance"
-            :markedup
-              Total value: €#{"%.2f" % cur_user_balance.btc_eur}
-
+                -#%section
+                  -#Logged as #{current_user.username}
+                  -#\|
+                  -#%a{ href: "/logout" } logout
+                -#%section
+                  -#%b Balance:
+                  -#= haml :"_balance"
+                  -#:markedup
+                    -#Total value: €#{"%.2f" % cur_user_balance.btc_eur}
+      .separator50
+      .separator30
       %section.content= yield
 
     %script{ type: "text/javascript", src: "/js/app.js" }
