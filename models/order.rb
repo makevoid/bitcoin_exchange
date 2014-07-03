@@ -4,10 +4,10 @@ class Order
   attr_reader :id, :user_id, :type, :amount, :price, :time
   
   def initialize(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
-    @id       = id
-    @time     = time
+    @id       = id.to_i
+    @time     = time.to_i
     
-    @user_id  = user_id
+    @user_id  = user_id.to_i
     @type     = type.to_sym
     @amount   = amount.to_f
     @price    = price.to_f
@@ -34,18 +34,23 @@ class Order
     # validate_attributes # ?
 
     # order_keys = %i(id user type amount price time) # sorted the right way
+    time = Time.now.to_i
+    
     R.hset "orders:#{id}", "id",      id
     R.hset "orders:#{id}", "user_id", user_id
     R.hset "orders:#{id}", "type",    type
     R.hset "orders:#{id}", "amount",  amount
     R.hset "orders:#{id}", "price",   price
-    R.hset "orders:#{id}", "time",    Time.now.to_i
+    R.hset "orders:#{id}", "time",    time
     
     R.sadd "user_orders:#{user_id}", id
     
-    # async { Orderbook.resolve self }
+    order = new(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
     
-    true
+    # async { Orderbook.resolve self }
+    Orderbook.resolve order
+    
+    order
   end
 
   def self.all
@@ -76,6 +81,10 @@ class Order
   def self.balance_eur
     # balance in open orders, need user
     0
+  end
+
+  def resolved
+    # todo: mark as resolved
   end
   
   protected

@@ -32,7 +32,10 @@ puts
 
 # data store
 
-R = Redis.new
+options = {}
+options[:db] = 1 if app_env == "test"
+
+R = Redis.new options
 
 # reset
 # R.keys.map{ |key| R.del key }

@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box; }
+
+a {
+  text-decoration: none;
+  color: green; }
+
+p, h1 {
+  line-height: 120%;
+  margin: 0; }
+
+body {
+  padding: 0;
+  font-family: sans-serif, Arial, Verdana, Helvetica; }
+
+.right {
+  float: right; }
+
+.clear {
+  clear: both; }
+
+.aright {
+  text-align: right; }
+
+.hidden {
+  display: none; }
+
+.relative {
+  position: relative; }
+
+.inline {
+  display: inline-block; }
+
+.content > section {
+  margin-bottom: 24px; }
+
+.content > section > section {
+  margin-bottom: 12px; }
+
+nav a {
+  font-weight: bold;
+  display: inline-block; }
+
+#main > header > h1 a {
+  color: #004d00; }
+
+.btn, .button, nav a, input[type=submit] {
+  padding: 2.4px 7.05882px;
+  line-height: 180%; }
+
+.btn, .button, nav a, input[type=submit] {
+  border-radius: 7px;
+  background: lightgreen;
+  border: 1px solid lightgreen; }
+  .btn:hover, .button:hover, nav a:hover, input[type=submit]:hover {
+    border: 1px solid green; }
+
+.current {
+  background: green;
+  color: white; }
+
+input {
+  display: block;
+  margin-bottom: 12px; }
+
+.advanced > section {
+  border: 1px solid darkgray;
+  padding: 1%;
+  display: inline-block; }
+
+#main > header > nav {
+  margin-bottom: 20px; }
+
+section > h1 {
+  margin-bottom: 6px; }
+
+input.btc_address {
+  width: 340px;
+  padding: 3px 5px;
+  font-size: 100%;
+  text-align: center; }
+
+.block {
+  display: inline-block;
+  margin-bottom: 10px; }
+
+.abso {
+  position: absolute;
+  right: 6%;
+  top: 2px; }
+
+.deposits .tab, .withdrawals .tab {
+  margin-top: 20px;
+  display: inline-block; }
+  .deposits .tab h1 a, .withdrawals .tab h1 a {
+    border: 1px solid green;
+    padding: 6px 10px; }
+
+.deposits .tab, .withdrawals .tab {
+  margin-top: 20px;
+  display: inline-block; }
+  .deposits .tab h1 a, .withdrawals .tab h1 a {
+    border: 1px solid green;
+    padding: 6px 10px; }
+
+section.tabbed nav {
+  margin-top: 10px; }
+section.tabbed nav a {
+  border: 1px solid green;
+  padding: 6px 1.2%;
+  background: white;
+  border-radius: 0;
+  position: relative;
+  bottom: -1px; }
+section.tabbed > section {
+  border: 1px solid green;
+  padding: 1.2%; }
+section.tabbed nav a.current {
+  background: green; }
+section.tabbed > section {
+  width: 70%; }
