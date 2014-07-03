@@ -16,6 +16,7 @@
               %i.fa.fa-plus
               Deposit funds
               .separator15
+              
 .line
   .col8.offset-left1.bg-white.line-tablet
     .separator10
@@ -36,35 +37,36 @@
               .fa.fa-bitcoin 
               %br
               Deposit Bitcoin
+      .separator10
 
-        %section.hidden
+      %section.hidden
+        :markedup
+          To deposit EUR you have to make a SEPA wire tansfer, these are the details:
+          ---
+          Bank of XXXX - City, Country
+          IBAN:
+          ABI/CAB/SWIFT?
+          etc...
+          ---
+          ---
+          debug:
+          ---
+        %a{ href: "/deposits/add" } fake new deposit
+        (the deposit has to be accepted by admin / banking assistant)
+        / TODO: start admin app
+
+      %section.hidden
+        - if CURRENT_ADDRESS
           :markedup
-            To deposit EUR you have to make a SEPA wire tansfer, these are the details:
-            ---
-            Bank of XXXX - City, Country
-            IBAN:
-            ABI/CAB/SWIFT?
-            etc...
-            ---
-            ---
-            debug:
-            ---
-          %a{ href: "/deposits/add" } fake new deposit
-          (the deposit has to be accepted by admin / banking assistant)
-          / TODO: start admin app
-
-
-
-        %section.hidden
-          - if CURRENT_ADDRESS
-            :markedup
-              Deposit to this address:
-            %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
-          - else
-            %form{ action: "/users/generate_address", method: :post }
-              - submit "Generate address"
-            todo: add ajax
-        .separator30
+            Deposit to this address:
+          %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
+        - else
+          %form{ action: "/users/generate_address", method: :post }
+            - submit "Generate address"
+          todo: add ajax
+      .separator30
+      
     .line-compress
-      %h1 DEPOSIT list
+      %h1 Deposits
+      There are no deposits.
     .separator10

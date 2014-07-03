@@ -1,26 +1,60 @@
-%section
-  %h1 Withdrawals
+.line
+  .col8.offset-left1.line-tablet
+    .line.bg-green.color-white.bg-pattern1
+      .col7
+        .separator10
+        .line-compress
+          %h1 Withdrawals
+        .separator10
 
-  [withdrawals list]
+      .col3
+        .right-content
+          %a{ href: js_void, data: { toggle: "new_withdrawal" } }
+            %button.btn.bg-lightgreen.font-medium.color-muted.no-padding
+              .separator15
+              .separator2
+              %i.fa.fa-plus
+              Withdraw funds
+              .separator15
+
+.line
+  .col8.offset-left1.bg-white.line-tablet
+    .separator10
+    .line-compress.new_withdrawal.hidden.tabbed
+      %h1 
+      .hr
+      .separator10
+      %nav.line
+        .col5
+          .line-compress
+            %button.btn.btn-medium{ href: js_void }  
+              €
+              %br 
+              Withdraw EURO
+        .col5
+          .line-compress
+            %button.btn.btn-medium{ href: js_void }
+              .fa.fa-bitcoin 
+              %br
+              Withdraw Bitcoin
+        .separator10
+            
+      %section.hidden
+        %form{ action: "/withdrawals", method: "post" }
+          - hidden "type", "eur"
+          SEPA wire transfer
+          %input{ type: "text", name: "amount" } €
+          - submit "Send withdraw request"
+          
+      %section.hidden
+        %form{ action: "/withdrawals", method: "post" }
+          - hidden "type", "btc"
+          %input{ type: "text", name: "amount", value: "0.0005" } BTC
+          - submit "Withdraw BTC"
+      
+    .line-compress
+      %h1 Withdrawals
+      There are no withdrawals.
+    .separator10
 
 
-%nav
-  %a{ href: js_void, data: { toggle: "new_withdrawal" } } New withdrawal
-
-%section.tabbed.new_withdrawal.hidden
-  %nav
-    %a{ href: js_void } EUR
-    %a{ href: js_void } BTC
-
-  %section.hidden
-    %form{ action: "/withdrawals", method: "post" }
-      - hidden "type", "eur"
-      SEPA wire transfer
-      %input{ type: "text", name: "amount" } €
-      - submit "send"
-
-  %section.hidden
-    %form{ action: "/withdrawals", method: "post" }
-      - hidden "type", "btc"
-      %input{ type: "text", name: "amount", value: "0.0005" } BTC
-      - submit "send"

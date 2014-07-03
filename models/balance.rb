@@ -17,7 +17,11 @@ class Balance
   end
   
   def eur_available
-    
+    0
+  end
+  
+  def account_value
+    0
   end
 
 end

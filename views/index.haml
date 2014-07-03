@@ -30,16 +30,16 @@
           %h1 Dashboard
         .col3x3.right-content
           .separator3
-          .separator1
+          .separator2
           %h2
-            %i.fa.fa-bitcoin.color-darkgreen
-            %span Total account #{cur_user_balance.btc_eur}
+            %i.fa.fa-money.color-darkgreen
+            %span Account value: €#{cur_user_balance.account_value}
         .col3x3.right-content
           .separator3
           .separator1
           %h2
             %i.fa.fa-bar-chart-o.color-darkgreen
-            Balance
+            Balance:
             = haml :"_balance"
         .separator10
   .line
