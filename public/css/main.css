@@ -180,7 +180,7 @@ background-repeat:repeat;
   background-color:#1FD65C;
 }
 .bg-lightgreen{
-  background-color: greenyellow;
+  background-color: #5BFA90;
 }
 /*Layout*/
 .col3x3{
@@ -193,5 +193,9 @@ background-repeat:repeat;
 /*Utils*/
 .font-x-large{
   font-size:30px;
+}
+/*Buttons*/
+.btn{
+  font-size:15px;
 }
 
