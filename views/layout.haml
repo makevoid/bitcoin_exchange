@@ -16,10 +16,9 @@
           .line-compress
             .line-compress
               %a{ href: "/" }
-                %i.fa.fa-bitcoin
                 = TITLE
         %nav.col7.center-content
-          .line
+          .line.desktop
             .col8
               %a.active.col2{ href: "/orders" } Orders
               %a.col2{ href: "/orders/new"  } Buy / Sell
@@ -49,6 +48,8 @@
                   -#:markedup
                     -#Total value: €#{"%.2f" % cur_user_balance.btc_eur}
       .separator50
-      .separator30
-      %section.content= yield
+      .separator30.desktop
+      .separator10.tablet.mobile
+      .separator3.tablet.mobile
+      %section= yield
     %script{ type: "text/javascript", src: "/js/app.js" }

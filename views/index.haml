@@ -22,21 +22,29 @@
 
 
 - else
-  .col8.offset-left1
-    .line-compress.bg-green.color-white
-      .separator5
-      .col3x3
-        %h1 Dashboard
-      .col3x3.center-content
-        .separator3
-        .separator1
-        %h2
-          %i.fa.fa-bitcoin
-          Total account #{cur_user_balance.btc_eur}
-      .col3x3.center-content
-        .separator3
-        .separator1
-        %h2
-          %i.fa.fa-bar-chart-o
-          Balance = haml :"_balance"
-      .separator5
+  .line
+    .col8.offset-left1.line-tablet
+      .line-compress.bg-green.color-white.bg-pattern1
+        .separator5
+        .col3x3
+          %h1 Dashboard
+        .col3x3.center-content
+          .separator3
+          .separator1
+          %h2
+            %i.fa.fa-bitcoin.color-darkgreen
+            %span Total account #{cur_user_balance.btc_eur}
+        .col3x3.center-content
+          .separator3
+          .separator1
+          %h2
+            %i.fa.fa-bar-chart-o.color-darkgreen
+            Balance
+            = haml :"_balance"
+        .separator5
+  .line
+    .col8.offset-left1.bg-white.line-tablet
+      .separator10
+      .line-compress
+        DASHBOARD CONTENT
+      .separator10
