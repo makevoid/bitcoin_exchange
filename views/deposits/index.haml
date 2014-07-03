@@ -4,7 +4,7 @@
       .col7
         .separator10
         .line-compress
-          %h1 Deposit
+          %h1 Deposits
         .separator10
 
       .col3
@@ -14,23 +14,28 @@
               .separator15
               .separator2
               %i.fa.fa-plus
-              New
+              Deposit funds
               .separator15
 .line
   .col8.offset-left1.bg-white.line-tablet
     .separator10
-    .line-compress.new_deposit.hidden
-      %h1 Choose currency
+    .line-compress.new_deposit.hidden.tabbed
+      %h1 
       .hr
       .separator10
-      .line
+      %nav.line
         .col5
           .line-compress
-            %button.btn.btn-medium{ href: js_void } € EUR
+            %button.btn.btn-medium{ href: js_void }  
+              €
+              %br 
+              Deposit EURO
         .col5
           .line-compress
             %button.btn.btn-medium{ href: js_void }
-              %i.fa.fa-bitcoin &nbsp;BTC
+              .fa.fa-bitcoin 
+              %br
+              Deposit Bitcoin
 
         %section.hidden
           :markedup

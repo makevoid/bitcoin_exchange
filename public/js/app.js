@@ -84,7 +84,7 @@ bind_togglables = function() {
 
 bind_tabbed = function() {
   var idx, sections, tab, tabs, _i, _len, _results;
-  tabs = all(".tabbed > nav a");
+  tabs = all(".tabbed > nav a, .tabbed > nav button");
   sections = all(".tabbed section");
   _results = [];
   for (idx = _i = 0, _len = tabs.length; _i < _len; idx = ++_i) {
