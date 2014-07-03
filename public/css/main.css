@@ -150,6 +150,7 @@ section.tabbed > section {
   -webkit-box-shadow:0px -100px 200px #fff inset, 0px 0px 1px 1px rgba(0,0,0,0.05);
   -moz-box-shadow:0px -100px 200px #fff inset, 0px 0px 1px 1px rgba(0,0,0,0.05);
   box-shadow:0px -100px 200px #fff inset, 0px 0px 1px 1px rgba(0,0,0,0.05);
+  max-height: 63px;
 }
 .navbar nav a{
   padding:20px 0;
@@ -172,6 +173,9 @@ section.tabbed > section {
   color:green;
 }
 /*Backgrounds*/
+.bg-bitcoin{
+  background-color: #F7931A;
+}
 .bg-pattern1{
 background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAFUlEQVQYlWNgwANEjqf/HwmSDAwMAEQrEgmpQ8hgAAAAAElFTkSuQmCC');
 background-repeat:repeat;
@@ -180,7 +184,7 @@ background-repeat:repeat;
   background-color:#1FD65C;
 }
 .bg-lightgreen{
-  background-color: #5BFA90;
+  background-color: #27EE63;
 }
 /*Layout*/
 .col3x3{
@@ -191,11 +195,34 @@ background-repeat:repeat;
   width:33.32222222%;
 }
 /*Utils*/
+.separator1 {
+    min-height:1px;
+    clear:both;
+    float:none;
+    width:100%;
+}.separator2 {
+    min-height:2px;
+    clear:both;
+    float:none;
+    width:100%;
+}
+.bordered-right {
+  box-shadow:1px 0 0 0 #E5E5E5;
+}
 .font-x-large{
   font-size:30px;
 }
 /*Buttons*/
 .btn{
   font-size:15px;
+}
+.btn:focus{
+  box-shadow:none;
+}
+.btn-navbar,.btn-navbar:hover,.btn-navbar:focus{
+  background: #222;
+  color:white;
+  font-size: 17px;
+  line-height: 63px;
 }
 
