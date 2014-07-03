@@ -23,9 +23,9 @@ dev mode:
 
 osx bitcoin.conf locaiton:
 
-    /Users/makevoid/Library/Application Support/Bitcoin/bitcoin.conf
+    /Users/USER/Library/Application Support/Bitcoin/bitcoin.conf
     
 symlink:
 
     mkdir -p ~/.bitcoin
-    ln -s "/Users/makevoid/Library/Application Support/Bitcoin/bitcoin.conf" ~/.bitcoin/
+    ln -s "/Users/USER/Library/Application Support/Bitcoin/bitcoin.conf" ~/.bitcoin/

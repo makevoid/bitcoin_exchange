@@ -42,6 +42,8 @@ class Orderbook
   # TODO: naive approach, use everytime partial resolve
   def self.resolve_full(order1, order2)
     
+    order1.resolved
+    order2.resolved
   end
   
   def self.volume_not_enough
