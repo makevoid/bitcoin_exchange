@@ -1,5 +1,17 @@
+/* fonts */
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/open_sans_light.woff) format('woff');
+}
+
+
+/* main */
+
 *{
-  font-family:"Gill Sans", Arial;
+  font-family:"Gill Sans", 'Open Sans', Arial;
   font-weight:300;
 }
 body,html {
