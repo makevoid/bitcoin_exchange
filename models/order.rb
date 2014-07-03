@@ -82,6 +82,10 @@ class Order
     # balance in open orders, need user
     0
   end
+
+  def resolved
+    # todo: mark as resolved
+  end
   
   protected
   
