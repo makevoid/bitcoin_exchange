@@ -12,7 +12,8 @@ module ViewHelpers
   end
 
   def nav_link(url, label)
-    css_class = "current" if body_class == url[1..-1]
+    css_class = "col2"
+    css_class = "active col2" if body_class == url[1..-1]
     haml_tag :a, href: url, class: css_class do
       haml_concat label
     end

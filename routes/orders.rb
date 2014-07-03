@@ -5,11 +5,12 @@ class BitcoinExchange < Sinatra::Base
     haml :"orders/index"
   end
 
-  get "/orders/new" do
-    # place an order
-    haml :"orders/new"
+  %w(/orders/new /orders_new).each do |route|
+    get route do
+      # place an order
+      haml :"orders/new"
+    end
   end
-
 
   post "/orders" do
     # place a buy / sell order
