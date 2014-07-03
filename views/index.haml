@@ -28,10 +28,15 @@
       .col3x3
         %h1 Dashboard
       .col3x3.center-content
-        .separator5
-        %h2 Total account #{cur_user_balance.btc_eur}
-      .col3x3.center-content
-        .separator5
+        .separator3
+        .separator1
         %h2
+          %i.fa.fa-bitcoin
+          Total account #{cur_user_balance.btc_eur}
+      .col3x3.center-content
+        .separator3
+        .separator1
+        %h2
+          %i.fa.fa-bar-chart-o
           Balance = haml :"_balance"
       .separator5

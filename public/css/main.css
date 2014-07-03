@@ -5,6 +5,9 @@
 body,html {
   background:#F4F6F6;
 }
+i{
+  font-size: inherit;
+}
 a{
   color:green;
 }a:hover{
@@ -141,7 +144,7 @@ section.tabbed > section {
   background:#f4f6f6;
 }
 .navbar nav a.active,.navbar nav a.active:hover{
-  color:#1FD65C;
+  color:#0DD048;
   background:none;
   -webkit-box-shadow:0 0 0 1px rgba(0,0,0,0.1);
   -moz-box-shadow:0 0 0 1px rgba(0,0,0,0.1);
@@ -149,7 +152,7 @@ section.tabbed > section {
 }
 /*Colors*/
 .color-green{
-  color:#1FD65C;
+  color:#0DD048;
 }
 /*Backgrounds*/
 .bg-green{
