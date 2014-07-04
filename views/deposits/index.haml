@@ -1,72 +1,67 @@
-.line
-  .col8.offset-left1.line-tablet
-    .line.bg-green.color-white.bg-pattern1
-      .col7
+.overlay.overlay-dark
+  .line-compress
+    .separator50
+    .separator30
+    .col4.offset-left3.line-tablet.bg-white.bordered
+      .line-compress.new_deposit.hidden.tabbed
+        %h1
+        .hr
         .separator10
-        .line-compress
-          %h1 Deposits
+          %nav.line
+            .col5
+              .line-compress
+                %button.btn.btn-medium{ href: js_void }
+                  €
+                  %br
+                  Deposit EURO
+            .col5
+              .line-compress
+                %button.btn.btn-medium{ href: js_void }
+                  .fa.fa-bitcoin
+                  %br
+                  Deposit Bitcoin
         .separator10
 
-      .col3
-        .right-content
-          %a{ href: js_void, data: { toggle: "new_deposit" } }
-            %button.btn.bg-lightgreen.font-medium.color-muted.no-padding
-              .separator15
-              .separator2
-              %i.fa.fa-plus
-              Deposit funds
-              .separator15
-              
-.line
-  .col8.offset-left1.bg-white.line-tablet
-    .separator10
-    .line-compress.new_deposit.hidden.tabbed
-      %h1 
-      .hr
-      .separator10
-      %nav.line
-        .col5
-          .line-compress
-            %button.btn.btn-medium{ href: js_void }  
-              €
-              %br 
-              Deposit EURO
-        .col5
-          .line-compress
-            %button.btn.btn-medium{ href: js_void }
-              .fa.fa-bitcoin 
-              %br
-              Deposit Bitcoin
-      .separator10
-
-      %section.hidden
-        :markedup
-          To deposit EUR you have to make a SEPA wire tansfer, these are the details:
-          ---
-          Bank of XXXX - City, Country
-          IBAN:
-          ABI/CAB/SWIFT?
-          etc...
-          ---
-          ---
-          debug:
-          ---
-        %a{ href: "/deposits/add" } fake new deposit
-        (the deposit has to be accepted by admin / banking assistant)
-        / TODO: start admin app
-
-      %section.hidden
-        - if CURRENT_ADDRESS
+        %section.hidden
           :markedup
-            Deposit to this address:
-          %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
-        - else
-          %form{ action: "/users/generate_address", method: :post }
-            - submit "Generate address"
-          todo: add ajax
-      .separator30
-      
-    .line-compress
-      %h1 Deposits
-      There are no deposits.
-    .separator10
+            To deposit EUR you have to make a SEPA wire tansfer, these are the details:
+            ---
+            Bank of XXXX - City, Country
+            IBAN:
+            ABI/CAB/SWIFT?
+            etc...
+            ---
+            ---
+            debug:
+            ---
+          %a{ href: "/deposits/add" } fake new deposit
+          (the deposit has to be accepted by admin / banking assistant)
+          / TODO: start admin app
+
+
+.line-max-medium
+  .line.bg-green.color-white.bg-pattern1
+    .col7
+      .separator10
+      .line-compress
+        %h1 Deposits
+      .separator10
+
+    .col3
+      .right-content
+        %a{ href: js_void, data: { toggle: "new_deposit" } }
+          %button.btn.bg-lightgreen.font-medium.color-muted.no-padding
+            .separator15
+            .separator2
+            %i.fa.fa-plus
+            Deposit
+            .separator15
+
+.line-max-medium.bg-white
+  .separator10
+
+
+  .line-compress
+    %h1 Deposits
+    There are no deposits.
+  .separator10

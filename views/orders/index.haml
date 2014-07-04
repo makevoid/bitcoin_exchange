@@ -1,9 +1,36 @@
-%section.orders_open
-  %h1 Open orders
 
-  = haml :"orders/_open"
+.line-max-medium
+  .line.bg-green.color-white.bg-pattern1
+    .col3x3
+      .line-compress
+        %h1.line-compress
+          .separator10
+          Orders
+    .col3x3.center-content.bg-muted
+      %h2
+        .separator10
+        .separator2
+        Open
+        .separator10
+        .separator2
+    %a.col3x3.center-content.bg-muted.color-white.toggle-opacity-hover
+      %h2
+        .separator10
+        .separator2
+        Closed
+        .separator10
+        .separator2
 
-%section.orders_closed
-  %h1 Closed orders
+  .line-compress.bg-white
+    .separator15
+    %section.orders_open
+      %h1 Open orders
 
-  = haml :"orders/_closed"
+      = haml :"orders/_open"
+
+    %section.orders_closed
+      %h1 Closed orders
+
+      = haml :"orders/_closed"
+
+    .separator15

@@ -6,8 +6,6 @@
   font-weight: 300;
   src: local('Open Sans Light'), local('OpenSans-Light'), url(/fonts/open_sans_light.woff) format('woff');
 }
-
-
 /* main */
 
 *{
@@ -22,8 +20,6 @@ i{
 }
 a{
   color:green;
-}a:hover{
-  color:lightgreen;
 }
 .right {
   float: right; }
@@ -147,15 +143,15 @@ section.tabbed > section {
    overflow:hidden;
      background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWPYv3//fwaiAE6VAB9vBnkbWtZwAAAAAElFTkSuQmCC');
   background-repeat: repeat;
-  -webkit-box-shadow:0px -100px 200px #fff inset, 0px 0px 1px 1px rgba(0,0,0,0.05);
-  -moz-box-shadow:0px -100px 200px #fff inset, 0px 0px 1px 1px rgba(0,0,0,0.05);
-  box-shadow:0px -100px 200px #fff inset, 0px 0px 1px 1px rgba(0,0,0,0.05);
+  -webkit-box-shadow:0px -100px 200px #fff inset, 0px 0px 0px 1px rgba(0,0,0,0.08);
+  -moz-box-shadow:0px -100px 200px #fff inset, 0px 0px 0px 1px rgba(0,0,0,0.08);
+  box-shadow:0px -100px 200px #fff inset, 0px 0px 0px 1px rgba(0,0,0,0.08);
   max-height: 63px;
 }
 .navbar nav a{
   padding:20px 0;
   min-width: 50px;
-  font-size:18px;
+  font-size:17px;
   color:inherit;
 }
 .navbar nav a:hover{
@@ -172,6 +168,9 @@ section.tabbed > section {
 .color-darkgreen{
   color:green;
 }
+.color-skype{
+  color:#09B1EF;
+}
 /*Backgrounds*/
 .bg-bitcoin{
   background-color: #F7931A;
@@ -187,6 +186,14 @@ background-repeat:repeat;
   background-color: #27EE63;
 }
 /*Layout*/
+.line-max{
+  max-width: 980px;
+  float:none;
+}
+.line-max-medium{
+  max-width: 950px;
+  float:none;
+}
 .col3x3{
   float: left;
   vertical-align: top;

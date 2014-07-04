@@ -11,26 +11,27 @@
   %body
     #main
       %header.navbar.bg-white.line.fixed.top.left.layer1.bordered-bottom.over-hidden
-        %h1.col3.logo.color-green
-          .line-compress
+        .line-max
+          %h1.col3.logo.color-green
             .line-compress
-              %a{ href: "/" }
-                = TITLE
-        %nav.col7.center-content
-          .line
-            .col8
-              %a.desktop.col2{ href: "/orders" } Orders
-              %a.desktop.col2{ href: "/orders/new"  } Buy / Sell
-              %a.desktop.col2{ href: "/deposits"    } Deposits
-              %a.desktop.col2{ href: "/withdrawals" } Withdrawals
-              %a.desktop.col2{ href: "/contact_us"  } Contact us
-            .col2
-              %a.line.desktop
-                %i.fa.fa-user.color-green
-                Me
-              %button.line.tablet.mobile.btn-navbar
-                %i.fa.fa-bars
-              %section.right.aright
+              .line-compress
+                %a{ href: "/" }
+                  = TITLE
+          %nav.col7.center-content
+            .line
+              .col8
+                %a.desktop.col2{ href: "/orders" } Orders
+                %a.desktop.col2{ href: "/orders/new"  } Buy / Sell
+                %a.desktop.col2{ href: "/deposits"    } Deposits
+                %a.desktop.col2{ href: "/withdrawals" } Withdrawals
+                %a.desktop.col2{ href: "/contact_us"  } Contact us
+              .col2
+                %a.line.desktop
+                  %i.fa.fa-user.color-green
+                  Me
+                %button.line.tablet.mobile.btn-navbar
+                  %i.fa.fa-bars
+                %section.right.aright
                 -#%nav.debug
                   / FIXME: implement login and remove this
                   -#%p Switch to user:
