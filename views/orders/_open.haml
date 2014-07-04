@@ -9,6 +9,6 @@
   %form{ action: "/orders/#{order.id}", method: :post }
     -# form_method :delete
     - hidden "_method", "delete"
-    %input{ type: "submit", value: "Cancel" }
+    - submit "Cancel"
 
 

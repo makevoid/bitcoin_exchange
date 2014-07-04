@@ -12,8 +12,8 @@ all = (name, in_children) ->
 toggle = (node, className) ->
   node.classList.toggle className
 
-evt_on = (node, eventName, eventHandler) ->
-  node.addEventListener eventName, eventHandler
+# evt_on = (node, eventName, eventHandler) ->
+#   node.addEventListener eventName, eventHandler
 
 http = (settings) ->
   req = new XMLHttpRequest()
@@ -75,8 +75,12 @@ bind_tabs = ->
 bind_togglables = ->
   togs = all "[data-toggle]"
   for tog in togs
-    toggled = q ".#{tog.dataset.toggle}"
-    evt_on tog, "click", ->
+    tog.addEventListener "click", (evt) ->
+      # console.log evt.target
+      toggled = q ".#{evt.target.dataset.toggle}"
+      # setTimeout ->
+      #         toggle toggled, "hidden"
+      #       , 0
       toggle toggled, "hidden"
       true
     true
@@ -97,7 +101,7 @@ bind_tabbed = ->
       toggle sections[idx], "hidden"
 
 bind_overlay_dismiss = ->
-  over = q ".overlay"
+  over = q ".overlay_section"
   over_cont = q ".overlay-content"
   over_click = false
   return unless over_cont
@@ -105,7 +109,7 @@ bind_overlay_dismiss = ->
     over_click = true
   over.addEventListener "click", (evt) ->
     unless over_click
-      hide = toggle over, "hidden"
+      toggle over, "hidden"
     over_click = false
 
 

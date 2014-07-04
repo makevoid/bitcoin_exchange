@@ -1,4 +1,4 @@
-var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, boot, evt_on, http, main, q, toggle;
+var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, boot, http, main, q, toggle;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -22,10 +22,6 @@ all = function(name, in_children) {
 
 toggle = function(node, className) {
   return node.classList.toggle(className);
-};
-
-evt_on = function(node, eventName, eventHandler) {
-  return node.addEventListener(eventName, eventHandler);
 };
 
 http = function(settings) {
@@ -68,13 +64,14 @@ bind_tabs = function() {
 };
 
 bind_togglables = function() {
-  var tog, toggled, togs, _i, _len, _results;
+  var tog, togs, _i, _len, _results;
   togs = all("[data-toggle]");
   _results = [];
   for (_i = 0, _len = togs.length; _i < _len; _i++) {
     tog = togs[_i];
-    toggled = q("." + tog.dataset.toggle);
-    evt_on(tog, "click", function() {
+    tog.addEventListener("click", function(evt) {
+      var toggled;
+      toggled = q("." + evt.target.dataset.toggle);
       toggle(toggled, "hidden");
       return true;
     });
@@ -112,7 +109,7 @@ bind_tabbed = function() {
 
 bind_overlay_dismiss = function() {
   var over, over_click, over_cont;
-  over = q(".overlay");
+  over = q(".overlay_section");
   over_cont = q(".overlay-content");
   over_click = false;
   if (!over_cont) {
@@ -122,9 +119,8 @@ bind_overlay_dismiss = function() {
     return over_click = true;
   });
   return over.addEventListener("click", function(evt) {
-    var hide;
     if (!over_click) {
-      hide = toggle(over, "hidden");
+      toggle(over, "hidden");
     }
     return over_click = false;
   });

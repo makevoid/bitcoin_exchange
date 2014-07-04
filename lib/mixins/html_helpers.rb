@@ -4,7 +4,9 @@ module ViewHelpers
   end
 
   def submit(label)
-    haml_tag :input, value: label, type: "submit"
+    haml_tag :button, type: "submit" do
+      haml_concat label
+    end
   end
   
   def hidden(name, value)

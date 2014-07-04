@@ -9,7 +9,7 @@
     = haml :"_metas" # todo require/implement partial :metas
 
   %body
-    .overlay.overlay-dark.mobile.tablet
+    .overlay.overlay-dark.overlay_main.mobile.tablet
       .line-compress.navbar-mobile-menu
         .separator100
         %a.line.bg-muted.color-white.radius3.active
@@ -59,10 +59,10 @@
               .separator5
               %form.col5{ action: "/force_login/0", method: :post }
                 .line-compress
-                  %input.btn.btn-small.btn-primary.no-border.color-white{ type: "submit", value: "ALI" }
+                  %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } ALI
               %form.col5{ action: "/force_login/1", method: :post }
                 .line-compress
-                  %input.btn.btn-small.btn-primary.no-border.color-white{ type: "submit", value: "BOB" }
+                  %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } BOB
             .separator15
             %section.line-compress.left-content
               %h3 Logged as
