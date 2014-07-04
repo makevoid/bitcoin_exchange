@@ -1,4 +1,4 @@
-.overlay.overlay-dark.hidden.layer2
+.overlay.overlay-dark.layer2.overlay_section.hidden
   .line-compress
     .separator50
     .separator30
@@ -10,44 +10,32 @@
         %nav.line
           .col5
             .line-compress
-              %button.btn.btn-medium.btn-primary.color-white.radius3{ href: js_void }
+              %button.btn.btn-medium.radius3{ href: js_void }
                 €
                 %br
-                Deposit EURO
+                Withdraw Euro
           .col5
             .line-compress
               %button.btn.btn-medium.radius3{ href: js_void }
                 .fa.fa-bitcoin
                 %br
-                Deposit Bitcoin
-        .separator10
+                Withdraw Bitcoin
+          .separator10
 
         %section.line-compress
-          :markedup
-            To deposit EUR you have to make a SEPA wire tansfer, these are the details:
-            ---
-            Bank of XXXX - City, Country
-            IBAN:
-            ABI/CAB/SWIFT?
-            etc...
-            ---
-            ---
-            debug:
-            ---
-          %a{ href: "/deposits/add" } fake new deposit
-          (the deposit has to be accepted by admin / banking assistant)
-          / TODO: start admin app
+          %form{ action: "/withdrawals", method: "post" }
+            - hidden "type", "eur"
+            SEPA wire transfer
+            %input{ type: "text", name: "amount" } €
+            - submit "Send withdraw request"
 
         %section.line-compress.hidden
-          - if CURRENT_ADDRESS
-            :markedup
-              Deposit to this address:
-            %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
-          - else
-            %form{ action: "/users/generate_address", method: :post }
-              - submit "Generate address"
-            todo: add ajax
-        .separator30
+          %form{ action: "/withdrawals", method: "post" }
+            - hidden "type", "btc"
+            %input{ type: "text", name: "amount", value: "0.0005" } BTC
+            - submit "Withdraw BTC"
+            
+
 .line-max-medium
   .line.bg-green.color-white.bg-pattern1
     .col7
@@ -58,52 +46,21 @@
 
     .col3
       .right-content
-        %a{ href: js_void, data: { toggle: "overlay" } }
-          %button.btn.bg-lightgreen.font-medium.color-muted.no-padding
-            .separator15
-            .separator2
-            %i.fa.fa-plus
-            Withdraw
-            .separator15
+        %button.btn.bg-lightgreen.font-medium.color-muted.no-padding{ data: { toggle: "overlay_section" } }
+          .separator15
+          .separator2
+          %i.fa.fa-plus
+          Withdraw funds
+          .separator15
+
+.line-max-medium.bg-white
+  .separator10
 
 
-  .line.bg-white
-    .separator10
-    .line-compress.new_withdrawal.hidden.tabbed
-      %h1 Choose currency
-      .hr
-      .separator10
-      %nav.line
-        .col5
-          .line-compress
-            %button.btn.btn-medium{ href: js_void }
-              €
-              %br
-              Withdraw Euro
-        .col5
-          .line-compress
-            %button.btn.btn-medium{ href: js_void }
-              .fa.fa-bitcoin
-              %br
-              Withdraw Bitcoin
-        .separator10
+  .line-compress
+    %h1 Withdrawals
+    There are no withdrawals.
+  .separator10
 
-      %section.hidden
-        %form{ action: "/withdrawals", method: "post" }
-          - hidden "type", "eur"
-          SEPA wire transfer
-          %input{ type: "text", name: "amount" } €
-          - submit "Send withdraw request"
-
-      %section.hidden
-        %form{ action: "/withdrawals", method: "post" }
-          - hidden "type", "btc"
-          %input{ type: "text", name: "amount", value: "0.0005" } BTC
-          - submit "Withdraw BTC"
-
-    .line-compress
-      %h1 Withdrawals
-      There are no withdrawals.
-    .separator10
-
+        
 
