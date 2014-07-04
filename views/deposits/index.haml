@@ -1,25 +1,25 @@
-.overlay.overlay-dark
+.overlay.overlay-dark.hidden
   .line-compress
     .separator50
     .separator30
     .col4.offset-left3.line-tablet.bg-white.bordered
-      .line-compress.new_deposit.hidden.tabbed
+      .line-compress.new_deposit.tabbed
         %h1
         .hr
         .separator10
-          %nav.line
-            .col5
-              .line-compress
-                %button.btn.btn-medium{ href: js_void }
-                  €
-                  %br
-                  Deposit EURO
-            .col5
-              .line-compress
-                %button.btn.btn-medium{ href: js_void }
-                  .fa.fa-bitcoin
-                  %br
-                  Deposit Bitcoin
+        %nav.line
+          .col5
+            .line-compress
+              %button.btn.btn-medium{ href: js_void }
+                €
+                %br
+                Deposit EURO
+          .col5
+            .line-compress
+              %button.btn.btn-medium{ href: js_void }
+                .fa.fa-bitcoin
+                %br
+                Deposit Bitcoin
         .separator10
 
         %section.hidden
@@ -60,12 +60,12 @@
 
     .col3
       .right-content
-        %a{ href: js_void, data: { toggle: "new_deposit" } }
+        %a{ href: js_void, data: { toggle: "overlay" } }
           %button.btn.bg-lightgreen.font-medium.color-muted.no-padding
             .separator15
             .separator2
             %i.fa.fa-plus
-            Deposit
+            Deposit funds
             .separator15
 
 .line-max-medium.bg-white
