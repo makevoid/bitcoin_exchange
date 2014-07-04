@@ -9,6 +9,23 @@
     = haml :"_metas" # todo require/implement partial :metas
 
   %body
+    .overlay.overlay-dark
+      .line-compress.navbar-mobile-menu
+        .separator100
+        %a.line.bg-muted.color-white.radius3.active
+          Orders
+        .separator10
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+          Buy/Sell
+        .separator10
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+          Deposit
+        .separator10
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+          Withdrawals
+        .separator10
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+          Contact us
     #main
       %header.navbar.bg-white.line.fixed.top.left.layer1.bordered-bottom.over-hidden
         .line-max

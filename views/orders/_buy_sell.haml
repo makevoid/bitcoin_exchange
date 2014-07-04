@@ -2,7 +2,7 @@
   class BalancePresenter
     include Blizz::Resource
   end
-  
+
   buy = { available: "available", amount: 0.1, price: 450, total: "total" }
   sell = { available: cur_user_balance.btc_available, amount: "amount", price: 0, total: "total" }
   buy   = Blizz.load BalancePresenter, buy
@@ -18,10 +18,10 @@
     %h1 BUY
     %p Available: $#{buy.available}
     .relative
-      %input{ name: "order[amount]", placeholder: "amount (#{buy.amount} BTC)" , value: buy.amount }
+      %input{ type: "text" , name: "order[amount]", placeholder: "amount (#{buy.amount} BTC)" , value: buy.amount }
       %span.abso BTC
     .relative
-      %input{ name: "order[price]", placeholder: "price  (€#{buy.price})" , value: buy.price }
+      %input{ type: "text", name: "order[price]", placeholder: "price  (€#{buy.price})" , value: buy.price }
       %span.abso EUR
     %p Total: #{buy.total}
     - submit "Buy BTC"

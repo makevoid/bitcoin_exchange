@@ -1,35 +1,39 @@
-.line-compress
-  .col8.offset-left1.line-tablet
-    %h1.font-x-large.center-content
-      Buy/Sell
-
-%section.tab
-  %h1 Buy / Sell
-  
-  %section
-    %h1 Buy
-    %form{ action: "/orders", method: "post" }
-      - hidden "order[simple]", true
-      %label
-        Amount to buy    
-        %input{ name: "order[amount]", placeholder: "amount (BTC)" }
-        - submit "Buy BTC"
-
-  %section
-    %h1 Sell
-    %form{ action: "/orders", method: "post" }
-      - hidden "order[simple]", true
-      %label
-        Amount to sell    
-        %input{ name: "order[amount]", placeholder: "amount (BTC)" }
-        - submit "Buy BTC"
-
-
-%a.btn.block{ :"data-toggle" => "advanced", href: js_void } Advanced
-
-.clear
-
-%section.advanced.hidden
-  %h1 Advanced: Place a limit order
-
-  = haml :"orders/_buy_sell"
+.line-max-medium
+  .col8.offset-left1.line-tablet.bg-white
+    .line.bg-white
+      .col5.line-tablet.bordered-right
+        .separator15
+        %section.col8.offset-left1
+          %h1.font-x-large Sell
+          %form{ action: "/orders", method: "post" }
+            - hidden "order[simple]", true
+            %label
+              Amount to sell
+              %input{ name: "order[amount]", placeholder: "amount (BTC)" }
+              - submit "Sell BTC"
+        .separator50
+      .hr.tablet.mobile
+      .col5.line-tablet
+        .separator15
+        %section.tab
+          %section.col8.offset-left1
+            %h1.font-x-large Buy
+            %form{ action: "/orders", method: "post" }
+              - hidden "order[simple]", true
+              %label
+                Amount to buy
+                %input{ name: "order[amount]", placeholder: "amount (BTC)" }
+                - submit "Buy BTC"
+        .separator50.desktop
+        %section.advanced.hidden
+          = haml :"orders/_buy_sell"
+      .separator10
+      .separator30.tablet.mobile
+      .col4.offset-left3
+        %h3.center-content.color-muted Advanced: Place a limit order
+        .separator5
+        %button.btn.btn-medium.radius3.color-white.btn-primary{ :"data-toggle" => "advanced", href: js_void } Advanced
+      .separator10
+      .col5.bordered-right
+        .separator100
+      .col5
