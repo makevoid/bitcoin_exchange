@@ -20,11 +20,12 @@
           %nav.col7.center-content
             .line
               .col8
-                - nav_link "/orders", "Orders"
-                - nav_link "/orders_new", "Buy / Sell"
-                - nav_link "/deposits", "Deposit"
-                - nav_link "/withdrawals", "Withdraw"
-                - nav_link "/contact_us", "Contact us"
+                .desktop
+                  - nav_link "/orders", "Orders"
+                  - nav_link "/orders_new", "Buy / Sell"
+                  - nav_link "/deposits", "Deposit"
+                  - nav_link "/withdrawals", "Withdraw"
+                  - nav_link "/contact_us", "Contact us"
               .col2
                 %a.line.desktop
                   %i.fa.fa-user.color-green

@@ -1,8 +1,8 @@
-.overlay.overlay-dark.hidden
+.overlay.overlay-dark.hidden.layer2
   .line-compress
     .separator50
     .separator30
-    .col4.offset-left3.line-tablet.bg-white.bordered.overlay-content
+    .col4.offset-left3.line-tablet.bg-white.bordered.overlay-content.radius3
       .line-compress.new_deposit.tabbed
         %h1
         .hr
@@ -10,19 +10,19 @@
         %nav.line
           .col5
             .line-compress
-              %button.btn.btn-medium{ href: js_void }
+              %button.btn.btn-medium.btn-primary.color-white.radius3{ href: js_void }
                 €
                 %br
                 Deposit EURO
           .col5
             .line-compress
-              %button.btn.btn-medium{ href: js_void }
+              %button.btn.btn-medium.radius3{ href: js_void }
                 .fa.fa-bitcoin
                 %br
                 Deposit Bitcoin
         .separator10
 
-        %section.hidden
+        %section.line-compress
           :markedup
             To deposit EUR you have to make a SEPA wire tansfer, these are the details:
             ---
@@ -37,8 +37,8 @@
           %a{ href: "/deposits/add" } fake new deposit
           (the deposit has to be accepted by admin / banking assistant)
           / TODO: start admin app
-          
-        %section.hidden
+
+        %section.line-compress.hidden
           - if CURRENT_ADDRESS
             :markedup
               Deposit to this address:
