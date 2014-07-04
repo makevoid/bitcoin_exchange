@@ -108,7 +108,5 @@ bind_overlay_dismiss = ->
       hide = toggle over, "hidden"
     over_click = false
 
-  
-  
 
 boot main
