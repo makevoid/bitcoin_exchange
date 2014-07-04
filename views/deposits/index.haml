@@ -37,6 +37,17 @@
           %a{ href: "/deposits/add" } fake new deposit
           (the deposit has to be accepted by admin / banking assistant)
           / TODO: start admin app
+          
+        %section.hidden
+          - if CURRENT_ADDRESS
+            :markedup
+              Deposit to this address:
+            %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
+          - else
+            %form{ action: "/users/generate_address", method: :post }
+              - submit "Generate address"
+            todo: add ajax
+        .separator30
 
 
 .line-max-medium

@@ -3,12 +3,27 @@
     %h1.font-x-large.center-content
       Buy/Sell
 
-%section.tab.hidden
-  %label
-    Buy/Sell Amount
-    %input{ type: "text" }
+%section.tab
+  %h1 Buy / Sell
+  
+  %section
+    %h1 Buy
+    %form{ action: "/orders", method: "post" }
+      - hidden "order[simple]", true
+      %label
+        Amount to buy    
+        %input{ name: "order[amount]", placeholder: "amount (BTC)" }
+        - submit "Buy BTC"
 
-  equivalent to x BTC
+  %section
+    %h1 Sell
+    %form{ action: "/orders", method: "post" }
+      - hidden "order[simple]", true
+      %label
+        Amount to sell    
+        %input{ name: "order[amount]", placeholder: "amount (BTC)" }
+        - submit "Buy BTC"
+
 
 %a.btn.block{ :"data-toggle" => "advanced", href: js_void } Advanced
 
