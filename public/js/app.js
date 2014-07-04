@@ -1,4 +1,4 @@
-var all, bind_tabbed, bind_tabs, bind_togglables, boot, evt_on, http, main, q, toggle;
+var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, boot, evt_on, http, main, q, toggle;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -47,7 +47,8 @@ http = function(settings) {
 
 main = function() {
   bind_togglables();
-  return bind_tabbed();
+  bind_tabbed();
+  return bind_overlay_dismiss();
 };
 
 bind_tabs = function() {
@@ -107,6 +108,23 @@ bind_tabbed = function() {
     }));
   }
   return _results;
+};
+
+bind_overlay_dismiss = function() {
+  var over, over_click, over_cont;
+  over = q(".overlay");
+  over_cont = q(".overlay-content");
+  over_click = false;
+  over_cont.addEventListener("click", function(evt) {
+    return over_click = true;
+  });
+  return over.addEventListener("click", function(evt) {
+    var hide;
+    if (!over_click) {
+      hide = toggle(over, "hidden");
+    }
+    return over_click = false;
+  });
 };
 
 boot(main);

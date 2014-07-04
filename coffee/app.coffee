@@ -53,6 +53,7 @@ main = ->
   bind_togglables()
   #bind_tabs()
   bind_tabbed()
+  bind_overlay_dismiss()
 
 bind_tabs = ->
   tabs = all ".tab > h1 a"
@@ -95,6 +96,18 @@ bind_tabbed = ->
       idx = target.dataset.idx
       toggle sections[idx], "hidden"
 
+bind_overlay_dismiss = ->
+  over = q ".overlay"
+  over_cont = q ".overlay-content"
+  over_click = false
+  over_cont.addEventListener "click", (evt) ->
+    over_click = true
+  over.addEventListener "click", (evt) ->
+    unless over_click
+      hide = toggle over, "hidden"
+    over_click = false
 
+  
+  
 
 boot main
