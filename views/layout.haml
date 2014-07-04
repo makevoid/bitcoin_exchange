@@ -9,6 +9,23 @@
     = haml :"_metas" # todo require/implement partial :metas
 
   %body
+    .overlay.overlay-dark.mobile.tablet
+      .line-compress.navbar-mobile-menu
+        .separator100
+        %a.line.bg-muted.color-white.radius3.active
+          Orders
+        .separator10
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+          Buy/Sell
+        .separator10
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+          Deposit
+        .separator10
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+          Withdrawals
+        .separator10
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+          Contact us
     #main
       %header.navbar.bg-white.line.fixed.top.left.layer1.bordered-bottom.over-hidden
         .line-max
@@ -32,24 +49,39 @@
                   Me
                 %button.line.tablet.mobile.btn-navbar
                   %i.fa.fa-bars
-                %section.right.aright
-                -#%nav.debug
-                  / FIXME: implement login and remove this
-                  -#%p Switch to user:
-                  -#%form.inline{ action: "/force_login/0", method: :post }
-                    -#%input.inline{ type: "submit", value: "ALI" }
-                  -#%form.inline{ action: "/force_login/1", method: :post }
-                    -#%input.inline{ type: "submit", value: "BOB" }
-
-                -#%section
-                  -#Logged as #{current_user.username}
-                  -#\|
-                  -#%a{ href: "/logout" } logout
-                -#%section
-                  -#%b Balance:
-                  -#= haml :"_balance"
-                  -#:markedup
-                    -#Total value: €#{"%.2f" % cur_user_balance.btc_eur}
+      %section.navbar-dropdown.color-white.fixed.right.top.push-right.bg-muted.layer2.aright
+        .line-compress
+          .line-compress
+            .line-compress.left-content.debug
+              / FIXME: implement login and remove this
+              .separator10
+              %h3 Switch to user:
+              .separator5
+              %form.col5{ action: "/force_login/0", method: :post }
+                .line-compress
+                  %input.btn.btn-small.btn-primary.no-border.color-white{ type: "submit", value: "ALI" }
+              %form.col5{ action: "/force_login/1", method: :post }
+                .line-compress
+                  %input.btn.btn-small.btn-primary.no-border.color-white{ type: "submit", value: "BOB" }
+            .separator15
+            %section.line-compress.left-content
+              %h3 Logged as
+              %h2.color-lightgreen #{current_user.username}
+        .separator10
+        .line.center-content
+          %h1
+            %a.line.btn.bg-muted.color-white{ href: "/logout" }
+              .separator5
+              %i.fa.fa-sign-out &nbsp;logout
+              .separator5
+        %section.line-compress.bg-black.left-content
+          .line-compress
+            .separator5
+            Balance:
+            = haml :"_balance"
+            :markedup
+              Total value: €#{"%.2f" % cur_user_balance.btc_eur}
+            .separator5
       .separator50
       .separator30.desktop
       .separator10.tablet.mobile

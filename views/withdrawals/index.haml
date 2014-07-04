@@ -1,3 +1,53 @@
+.overlay.overlay-dark.hidden.layer2
+  .line-compress
+    .separator50
+    .separator30
+    .col4.offset-left3.line-tablet.bg-white.bordered.overlay-content.radius3
+      .line-compress.new_deposit.tabbed
+        %h1
+        .hr
+        .separator10
+        %nav.line
+          .col5
+            .line-compress
+              %button.btn.btn-medium.btn-primary.color-white.radius3{ href: js_void }
+                €
+                %br
+                Deposit EURO
+          .col5
+            .line-compress
+              %button.btn.btn-medium.radius3{ href: js_void }
+                .fa.fa-bitcoin
+                %br
+                Deposit Bitcoin
+        .separator10
+
+        %section.line-compress
+          :markedup
+            To deposit EUR you have to make a SEPA wire tansfer, these are the details:
+            ---
+            Bank of XXXX - City, Country
+            IBAN:
+            ABI/CAB/SWIFT?
+            etc...
+            ---
+            ---
+            debug:
+            ---
+          %a{ href: "/deposits/add" } fake new deposit
+          (the deposit has to be accepted by admin / banking assistant)
+          / TODO: start admin app
+
+        %section.line-compress.hidden
+          - if CURRENT_ADDRESS
+            :markedup
+              Deposit to this address:
+            %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
+          - else
+            %form{ action: "/users/generate_address", method: :post }
+              - submit "Generate address"
+            todo: add ajax
+        .separator30
 .line-max-medium
   .line.bg-green.color-white.bg-pattern1
     .col7
@@ -8,7 +58,7 @@
 
     .col3
       .right-content
-        %a{ href: js_void, data: { toggle: "new_withdrawal" } }
+        %a{ href: js_void, data: { toggle: "overlay" } }
           %button.btn.bg-lightgreen.font-medium.color-muted.no-padding
             .separator15
             .separator2
@@ -28,7 +78,7 @@
           .line-compress
             %button.btn.btn-medium{ href: js_void }
               €
-              %br 
+              %br
               Withdraw Euro
         .col5
           .line-compress
