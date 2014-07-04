@@ -22,11 +22,11 @@ class BitcoinExchange < Sinatra::Base
   end
   
   def withdrawal_eur
-    FiatWithdrawal.create @withdrawal
+    WithdrawalFiat.create @withdrawal
   end
   
   def withdrawal_btc    
-    withdrawal = BtcWithdrawal.new @withdrawal
+    withdrawal = WithdrawalBtc.new @withdrawal
     begin
       withdrawal.execute
     rescue WithdrawalError => e

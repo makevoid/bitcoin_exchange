@@ -3,33 +3,35 @@ class WithdrawalError < StandardError
 end
 
 
-class Withdrawal
+class WithdrawalBtc
   # store: sql
   
-  # property :id, Serial
-  # property :amount, 
-  # property :type, Enum[:btc, :eur]
+  attr_reader :id, :user_id, :amount, :type
   
-  # property :user_id, Integer
-  # belongs_to :user
-  
-  def initialize(user_id: user_id, amount: amount)
-    @user_id = user_id
-    @amount  = amount
+  def initialize(id: id, user_id: user_id, amount: amount)
+    @id       = id
+    @user_id  = user_id
+    @amount   = amount
   end
   
   def self.create(user_id: user_id, amount: amount)
-    withdrawal = new(user_id: user_id, amount: amount)
-    withdrawal.save
-  end
-end
-
-class BtcWithdrawal < Withdrawal
-  def initialize
-    @type = :btc
-    super
+    # withdrawal = new(user_id: user_id, amount: amount)
+    # withdrawal.save
+    withdrawal = nil
+    DB.session do |db|
+      withdrawal = db[:withdrawals_btc].new(user_id: user_id, amount: amount, id: new_id(db[:withdrawals_btc]))
+      db[:withdrawals_btc].save withdrawal
+      db.flush
+    end
+    withdrawal
   end
   
+  def self.all
+    DB[:withdrawals_btc]
+  end
+
+  #### old specific
+
   def execute
     check_withdrawal_number
     
@@ -59,16 +61,22 @@ class BtcWithdrawal < Withdrawal
   end
 end
 
-class FiatWithdrawal < Withdrawal
-  
-  # state_machine
-  # property :state, Enum[:pending, :executed]
-  
-  # fiat withdrawals need manual confirmation from admin in the first phase
-  def confirm
-    self.state = :executed
-    save
-  end
-  
-end
+
+# rom notes
+
+# DB.session{ |session| w = session[:withdrawals].new(id: 1, user_id: 2); session[:withdrawals].save(w); session.flush }
+
+# DB.session do |db|
+#   w = db[:withdrawals].new(id: 2, user_id: 3)
+#   db[:withdrawals].save w
+#   db.flush
+# end
+
+
+
+# DB.session{ |session| session[:withdrawals].restrict(id: 1).one }
+
+# DB.session{ |session| session[:withdrawals].restrict(id: 1).one }
+
+# DB[:withdrawals].new(user_id: 1).save
 

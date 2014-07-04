@@ -115,6 +115,9 @@ bind_overlay_dismiss = function() {
   over = q(".overlay");
   over_cont = q(".overlay-content");
   over_click = false;
+  if (!over_cont) {
+    return;
+  }
   over_cont.addEventListener("click", function(evt) {
     return over_click = true;
   });

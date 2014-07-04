@@ -30,7 +30,7 @@ puts Wallet.getinfo
 puts
 
 
-# data store
+# data store [redis]
 
 options = {}
 options[:db] = 1 if app_env == "test"
@@ -46,6 +46,13 @@ R = Redis.new options
 
 require "#{path}/lib/ticker"
 require_all "models"
+
+# data store [rom] mysql 
+
+require "#{path}/lib/monkeypatches/rom_utils"
+include RomUtils
+
+require "#{path}/lib/rom_db"
 
 # view code
 

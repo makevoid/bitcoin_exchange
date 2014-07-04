@@ -100,6 +100,7 @@ bind_overlay_dismiss = ->
   over = q ".overlay"
   over_cont = q ".overlay-content"
   over_click = false
+  return unless over_cont
   over_cont.addEventListener "click", (evt) ->
     over_click = true
   over.addEventListener "click", (evt) ->
