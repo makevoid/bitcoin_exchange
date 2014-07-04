@@ -13,11 +13,11 @@
 body, html {
   background:#F4F6F6;
 }
-i {
+a{
   font-size: inherit;
 }
-a {
-  color:green;
+i {
+  font-size: inherit;
 }
 .right {
   float: right;
@@ -34,9 +34,7 @@ a {
 .relative {
   position: relative;
 }
-.inline {
-  display: inline-block;
-}
+
 /*
 .content > section {
 margin-bottom: 24px; }
@@ -183,9 +181,18 @@ input[type="text"] {
 .navbar-mobile-menu a.active {
   color:#3EDE73;
 }
+.navbar-dropdown{
+  width: 200px;
+  margin-right:5%;
+  background: rgba(0,0,0,0.5);
+  margin-top:62px;
+}
 /*Colors*/
 .color-green {
   color:#0DD048;
+}
+.color-lightgreen{
+  color:#3EDE73;
 }
 .color-darkgreen {
   color:green;
@@ -224,6 +231,11 @@ input[type="text"] {
   width:33.32222222%;
 }
 /*Utils*/
+.link{
+  color:#3EDE73;
+}.link:hover,.link:focus{
+  color:green;
+}
 .separator1 {
   min-height:1px;
   clear:both;
