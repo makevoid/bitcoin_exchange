@@ -9,8 +9,10 @@
             - hidden "order[simple]", true
             %label
               Amount to sell
-              %input{ name: "order[amount]", placeholder: "amount (BTC)" }
-              - submit "Sell BTC"
+              .separator5
+              %input{ type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
+              .separator15
+              - submit "Sell BTC", "btn color-white radius3 "
         .separator50
       .hr.tablet.mobile
       .col5.line-tablet
@@ -22,8 +24,10 @@
               - hidden "order[simple]", true
               %label
                 Amount to buy
-                %input{ name: "order[amount]", placeholder: "amount (BTC)" }
-                - submit "Buy BTC"
+                .separator5
+                %input{type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
+                .separator15
+                - submit "Buy BTC", "btn color-white radius3 "
         .separator50.desktop
         %section.advanced.hidden
           = haml :"orders/_buy_sell"

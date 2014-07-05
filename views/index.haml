@@ -24,23 +24,28 @@
 - else
   .line
     .line-max-medium
-      .line-compress.bg-green.color-white.bg-pattern1
+      .line.bg-green.color-white.bg-pattern1
         .separator10
-        .col3x3
-          %h1 Dashboard
-        .col3x3.right-content
-          .separator3
-          .separator2
-          %h2
-            %i.fa.fa-money.color-darkgreen
-            %span Account value: €#{cur_user_balance.account_value}
-        .col3x3.right-content
-          .separator3
-          .separator1
-          %h2
-            %i.fa.fa-bar-chart-o.color-darkgreen
-            Balance:
-            = haml :"_balance"
+        .col4
+          .line-compress
+            %h1.line-compress Dashboard
+        .separator10.tablet.mobile
+        .hr.tablet.mobile
+        .separator10.tablet.mobile
+        .col6.line-tablet
+          .col5.center-content
+            .separator3
+            .separator1
+            %h2
+              %i.fa.fa-money.color-darkgreen
+              %span Account value: €#{cur_user_balance.account_value}
+          .col5.center-content
+            .separator3
+            .separator1
+            %h2
+              %i.fa.fa-bar-chart-o.color-darkgreen
+              Balance:
+              = haml :"_balance"
         .separator10
   .line
     .line-max-medium.bg-white

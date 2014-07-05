@@ -33,26 +33,6 @@ i {
   background: #3EDE73;
   color: white;
 }
-.advanced > section {
-  border: 1px solid darkgray;
-  padding: 1%;
-  display: inline-block;
-}
-input.btc_address {
-  width: 340px;
-  padding: 3px 5px;
-  font-size: 100%;
-  text-align: center;
-}
-.block {
-  display: inline-block;
-  margin-bottom: 10px;
-}
-.abso {
-  position: absolute;
-  right: 6%;
-  top: 2px;
-}
 .deposits .tab, .withdrawals .tab {
   margin-top: 20px;
   display: inline-block;
@@ -191,6 +171,9 @@ input[type="text"] {
   font-size:30px;
 }
 /*Buttons*/
+form .btn{
+  background: #cfcfcf;
+}
 .btn {
   font-size:15px;
 }
@@ -201,11 +184,8 @@ input[type="text"] {
   background: #222;
   color:white;
   font-size: 17px;
-  height:40px;
-  width:40px;
+  line-height: 63px;
   float:right;
-  margin-right:10px;
-  margin-top:12px;
 }
 .btn-primary {
   background-color: #3EDE73;

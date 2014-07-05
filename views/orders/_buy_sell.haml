@@ -8,7 +8,7 @@
   buy   = Blizz.load BalancePresenter, buy
   sell  = Blizz.load BalancePresenter, sell
 
-%h1 Buy / Sell
+%h1 Advanced
 
 .clear
 
@@ -16,27 +16,35 @@
   %form{ action: "/orders", method: :post }
     - hidden "order[type]", :buy
     %h1 BUY
-    %p Available: $#{buy.available}
-    .relative
-      %input{ type: "text" , name: "order[amount]", placeholder: "amount (#{buy.amount} BTC)" , value: buy.amount }
-      %span.abso BTC
-    .relative
-      %input{ type: "text", name: "order[price]", placeholder: "price  (€#{buy.price})" , value: buy.price }
-      %span.abso EUR
-    %p Total: #{buy.total}
-    - submit "Buy BTC"
+    %h3 Available: $#{buy.available}
+    .separator5
+    BTC
+    .separator5
+    %input{ type: "text" , name: "order[amount]", placeholder: "amount (#{buy.amount} BTC)" , value: buy.amount }
+    .separator5
+    EUR
+    .separator5
+    %input{ type: "text", name: "order[price]", placeholder: "price  (€#{buy.price})" , value: buy.price }
+    .separator5
+    %h3 Total: #{buy.total}
+    .separator5
+    - submit "Buy BTC" , "btn color-white radius3"
 
 %section
   %form{ action: "/orders", method: :post }
     - hidden "order[type]", :sell
     %h1 SELL
-    %p Available: #{sell.available} BTC
-    .relative
-      %input{  name: "order[amount]", placeholder: "amount (#{sell.amount} BTC)" }
-      %span.abso BTC
-    .relative
-      %input{  name: "order[price]", placeholder: "price  (€#{sell.price})" } $
-      %span.abso EUR
-    %p Total: #{sell.total}
-    - submit "Sell BTC"
+    %h3 Available: #{sell.available} BTC
+    .separator5
+    BTC
+    .separator5
+    %input{type: "text",  name: "order[amount]", placeholder: "amount (#{sell.amount} BTC)" }
+    .separator5
+    EUR
+    .separator5
+    %input{ type: "text", name: "order[price]", placeholder: "price  (€#{sell.price})" }
+    .separator5
+    %h3 Total: #{sell.total}
+    .separator5
+    - submit "Sell BTC" , "btn color-white radius3"
 
