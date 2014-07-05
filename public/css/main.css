@@ -182,9 +182,9 @@ input[type="text"] {
   color:#3EDE73;
 }
 .navbar-dropdown{
-  width: 200px;
-  margin-right:5%;
-  background: rgba(0,0,0,0.5);
+  min-width: 200px;
+  float: none;
+  background: rgba(0,0,0,0.7);
   margin-top:62px;
 }
 /*Colors*/

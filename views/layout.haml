@@ -9,22 +9,22 @@
     = haml :"_metas" # todo require/implement partial :metas
 
   %body
-    .overlay.overlay-dark.overlay_main.mobile.tablet
+    .overlay.overlay-dark.navbar-overlay-mobile-menu.overlay_main.mobile.tablet.hidden
       .line-compress.navbar-mobile-menu
         .separator100
-        %a.line.bg-muted.color-white.radius3.active
+        %a.line.bg-muted.color-white.radius3.active{ href: "/orders"}
           Orders
         .separator10
-        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover{ href: "/orders_new"}
           Buy/Sell
         .separator10
-        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover{ href: "/deposits"}
           Deposit
         .separator10
-        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover{ href: "/withdrawals"}
           Withdrawals
         .separator10
-        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover
+        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover{ href: "/contact_us"}
           Contact us
     #main
       %header.navbar.bg-white.line.fixed.top.left.layer1.bordered-bottom.over-hidden
@@ -36,20 +36,25 @@
                   = TITLE
           %nav.col7.center-content
             .line
-              .col8
-                .desktop
-                  - nav_link "/orders", "Orders"
-                  - nav_link "/orders_new", "Buy / Sell"
-                  - nav_link "/deposits", "Deposit"
-                  - nav_link "/withdrawals", "Withdraw"
-                  - nav_link "/contact_us", "Contact us"
+              .col8.desktop
+                - nav_link "/orders", "Orders"
+                - nav_link "/orders_new", "Buy / Sell"
+                - nav_link "/deposits", "Deposit"
+                - nav_link "/withdrawals", "Withdraw"
+                - nav_link "/contact_us", "Contact us"
+
+              .col6.tablet.mobile
               .col2
                 %a.line.desktop{ data: { toggle: "user_details" } }
                   %i.fa.fa-user.color-green
                   Account
-                %button.line.tablet.mobile.btn-navbar
+                %a.line.mobile.tablet{ data: { toggle: "user_details" } }
+                  %i.fa.fa-user.color-green
+
+              .col2.tablet.mobile
+                %button.line.tablet.mobile.btn-navbar{ data: { toggle: "navbar-overlay-mobile-menu" } }
                   %i.fa.fa-bars
-      %section.user_details.navbar-dropdown.color-white.fixed.right.top.push-right.bg-muted.layer2.hidden
+      %section.user_details.navbar-dropdown.line-tablet.color-white.fixed.right.top.push-right.bg-muted.layer2.hidden
         .line-compress
           .line-compress
             .line-compress.left-content.debug
@@ -68,7 +73,7 @@
               %h3 Logged as
               %h2.color-lightgreen #{current_user.username}
         .separator10
-        
+
         %section.line-compress.bg-black.left-content
           .line-compress
             .separator5
@@ -83,7 +88,7 @@
               .separator5
               %i.fa.fa-sign-out &nbsp;logout
               .separator5
-            
+
       .separator50
       .separator30.desktop
       .separator10.tablet.mobile
