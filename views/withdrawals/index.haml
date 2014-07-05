@@ -10,13 +10,13 @@
         %nav.line
           .col5
             .line-compress
-              %button.btn.btn-medium.current.radius3{ href: js_void }
+              %button.btn.btn-medium.current.radius3.color-white{ href: js_void }
                 €
                 %br
                 Withdraw Euro
           .col5
             .line-compress
-              %button.btn.btn-medium.radius3{ href: js_void }
+              %button.btn.btn-medium.radius3.color-white{ href: js_void }
                 .fa.fa-bitcoin
                 %br
                 Withdraw Bitcoin
@@ -34,7 +34,7 @@
             - hidden "type", "btc"
             %input{ type: "text", name: "amount", value: "0.0005" } BTC
             - submit "Withdraw BTC"
-            
+        .separator30
 
 .line-max-medium
   .line.bg-green.color-white.bg-pattern1
@@ -44,14 +44,13 @@
         %h1 Withdrawals
       .separator10
 
-    .col3
-      .right-content
-        %button.btn.bg-lightgreen.font-medium.color-muted.no-padding{ data: { toggle: "overlay_section" } }
-          .separator15
-          .separator2
-          %i.fa.fa-plus
-          Withdraw funds
-          .separator15
+    .col3.right-content
+      %button.btn.bg-lightgreen.font-medium.color-muted.no-padding{ data: { toggle: "overlay_section" } }
+        .separator15
+        .separator2
+        %i.fa.fa-plus
+        Withdraw funds
+        .separator15
 
 .line-max-medium.bg-white
   .separator10
@@ -62,5 +61,5 @@
     There are no withdrawals.
   .separator10
 
-        
+
 
