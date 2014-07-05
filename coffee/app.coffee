@@ -86,7 +86,7 @@ bind_togglables = ->
     true
 
 bind_tabbed = ->
-  tabs = all ".tabbed > nav a, .tabbed > nav button"
+  tabs = all ".tabbed > nav button"
   sections = all ".tabbed section"
   for tab, idx in tabs
     tab.dataset.idx = idx

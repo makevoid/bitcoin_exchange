@@ -1,23 +1,23 @@
 
-.line-max-medium
-  .line.bg-green.color-white.bg-pattern1
+.line-max-medium.tabbed
+  %nav.line.bg-green.color-white.bg-pattern1
     .col6
       .line-compress
         %h1.line-compress
           .separator10
           Orders
-    .col2.center-content.bg-muted
+    %button.col2.center-content.bg-muted
       %h3
         .separator10
         .separator2
         %i.fa.fa-check &nbsp;Open
         .separator10
         .separator2
-    %a.col2.center-content.bg-muted.color-white.toggle-opacity-hover
+    %button.col2.center-content.bg-muted.color-white.toggle-opacity-hover
       %h3
         .separator10
         .separator2
-        %i.fa.fa-lock &nbsp;Closed
+        %i.fa.fa-suitcase &nbsp;Closed
         .separator10
         .separator2
 
@@ -28,7 +28,7 @@
 
       = haml :"orders/_open"
 
-    %section.orders_closed
+    %section.orders_closed.hidden
       %h1 Closed orders
 
       = haml :"orders/_closed"
