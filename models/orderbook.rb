@@ -23,6 +23,7 @@ class Orderbook
     # pseudo code
     while orders
       order_sel = orders.pop
+      break unless order_sel
       
       if volume_not_enough
         resolve_partial(order, order_sel)

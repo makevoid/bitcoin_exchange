@@ -3,8 +3,8 @@ module ViewHelpers
     request.path.split("/")[1] || ""
   end
 
-  def submit(label)
-    haml_tag :button, type: "submit" do
+  def submit(label, classes=nil)
+    haml_tag :button, type: "submit", class: classes do
       haml_concat label
     end
   end
