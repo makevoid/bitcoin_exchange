@@ -19,9 +19,6 @@ a{
 i {
   font-size: inherit;
 }
-.right {
-  float: right;
-}
 .clear {
   clear: both;
 }
@@ -31,59 +28,16 @@ i {
 .hidden {
   display: none;
 }
-.relative {
-  position: relative;
-}
 
-/*
-.content > section {
-margin-bottom: 24px; }
-
-.content > section > section {
-margin-bottom: 12px; }*/
-
-/*
-nav a {
-font-weight: bold;
-display: inline-block; }*/
-
-/*
-#main > header > h1 a {
-color: #004d00; }
-*/
-
-/*
-.btn, .button, input[type=submit] {
-padding: 2.4px 7.05882px;
-line-height: 180%; }
-
-.btn, .button, nav a, input[type=submit] {
-border-radius: 7px;
-background: lightgreen;
-border: 1px solid lightgreen; }
-.btn:hover, .button:hover, nav a:hover, input[type=submit]:hover {
-border: 1px solid green; }
-*/
 .current {
   background: #3EDE73;
   color: white;
 }
-/*
-input {
-display: block;
-margin-bottom: 12px; }*/
 .advanced > section {
   border: 1px solid darkgray;
   padding: 1%;
   display: inline-block;
 }
-/*
-#main > header > nav {
-margin-bottom: 20px; }*/
-
-/*
-section > h1 {
-margin-bottom: 6px; }*/
 input.btc_address {
   width: 340px;
   padding: 3px 5px;
@@ -115,24 +69,6 @@ input.btc_address {
   border: 1px solid green;
   padding: 6px 10px;
 }
-/*
-section.tabbed nav {
-margin-top: 10px; }
-section.tabbed nav a {
-border: 1px solid green;
-padding: 6px 1.2%;
-background: white;
-border-radius: 0;
-position: relative;
-bottom: -1px; }
-section.tabbed > section {
-border: 1px solid green;
-padding: 1.2%; }
-section.tabbed nav a.current {
-background: green; }
-section.tabbed > section {
-width: 70%; }
-*/
 
 /*Extras*/
 input[type="text"] {
