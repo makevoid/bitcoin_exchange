@@ -3,17 +3,17 @@ class WithdrawalFiat
   
   attr_reader :id, :user_id, :amount, :type
   
-  def initialize(id: id, user_id: user_id, amount: amount, state: state)
+  def initialize(id: id, user_id: user_idexecuted, amount: amount, executed: executed)
     @id       = id
     @user_id  = user_id
     @amount   = amount
-    @state    = state    # :pending, :executed
+    @executed    = executed    # :pending, :executed
   end
   
-  def self.create(user_id: user_id, amount: amount)
+  def self.create(user_id: user_id, amount: amount, executed: executed)
     withdrawal = nil
     DB.session do |db|
-      withdrawal = db[:withdrawals_fiat].new(user_id: user_id, amount: amount, id: new_id(db[:withdrawals_fiat]))
+      withdrawal = db[:withdrawals_fiat].new(user_id: user_id, amount: amount, id: new_id(db[:withdrawals_fiat]), executed: executed)
       db[:withdrawals_fiat].save withdrawal
       db.flush
     end
@@ -25,13 +25,15 @@ class WithdrawalFiat
   end
 
   
-  # state_machine
-  # property :state, Enum[:pending, :executed]
+  # executed_machine
+  # property :executed, Enum[:pending, :executed]
   
   # fiat withdrawals need manual confirmation from admin in the first phase
   def confirm
-    self.state = :executed
-    save
+    DB.session do |db|
+      self.executed = true
+      save
+    end
   end
   
 end

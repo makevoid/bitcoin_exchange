@@ -1,9 +1,42 @@
 GIT
+  remote: git@github.com:dkubb/axiom
+  revision: 1a6f6829e671eba5a5393b3ac3f6227772d644df
+  specs:
+    axiom (0.2.0)
+      abstract_type (~> 0.0.7)
+      adamantium (~> 0.2.0)
+      axiom-types (~> 0.1.0)
+      descendants_tracker (~> 0.0.3)
+      equalizer (~> 0.0.9)
+
+GIT
+  remote: git@github.com:dkubb/axiom-do-adapter
+  revision: 3718934e0d67d76d315820bf84a17916793459c6
+  specs:
+    axiom-do-adapter (0.2.0)
+      axiom (~> 0.2.0)
+      axiom-sql-generator (~> 0.2.0)
+      data_objects (~> 0.10.13)
+
+GIT
   remote: git@github.com:makevoid/bitcoin-client
   revision: 33a5ac809d8b1535065dc4037bae639e6c24da1b
   specs:
     bitcoin-client (0.0.3)
       rest-client
+
+GIT
+  remote: git@github.com:rom-rb/rom
+  revision: 5702854dc26084ee54f64ef962a3a3c4d0babf93
+  specs:
+    rom (0.2.0)
+      adamantium (~> 0.2.0)
+      addressable (~> 2.3, >= 2.3.3)
+      axiom (~> 0.2.0)
+      axiom-optimizer (~> 0.2.0)
+      charlatan (~> 0.1)
+      concord (~> 0.1.4)
+      morpher (~> 0.2.1)
 
 GEM
   remote: http://rubygems.org/
@@ -18,16 +51,9 @@ GEM
       adamantium (~> 0.1)
       equalizer (~> 0.0.8)
     ast (2.0.0)
-    axiom (0.2.0)
-      abstract_type (~> 0.0.7)
-      adamantium (~> 0.2.0)
-      axiom-types (~> 0.1.0)
-      descendants_tracker (~> 0.0.3)
-      equalizer (~> 0.0.9)
-    axiom-memory-adapter (0.2.1)
-      axiom (~> 0.2.0)
-      thread_safe (~> 0.3, >= 0.3.1)
     axiom-optimizer (0.2.0)
+      axiom (~> 0.2.0)
+    axiom-sql-generator (0.2.0)
       axiom (~> 0.2.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -45,9 +71,13 @@ GEM
     concord (0.1.5)
       adamantium (~> 0.2.0)
       equalizer (~> 0.0.9)
+    data_objects (0.10.14)
+      addressable (~> 2.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
+    do_sqlite3 (0.10.14)
+      data_objects (= 0.10.14)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -112,14 +142,6 @@ GEM
     redis (3.1.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rom (0.2.0)
-      adamantium (~> 0.2)
-      addressable (~> 2.3, >= 2.3.3)
-      axiom (~> 0.2)
-      axiom-optimizer (~> 0.2)
-      charlatan (~> 0.1)
-      concord (~> 0.1)
-      morpher (~> 0.2)
     rspec-core (3.0.2)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.2)
@@ -144,9 +166,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  axiom-memory-adapter
+  axiom!
+  axiom-do-adapter!
   bitcoin-client!
   blizz
+  do_sqlite3
   guard
   guard-coffeescript
   guard-livereload
@@ -155,7 +179,7 @@ DEPENDENCIES
   json
   rack-test
   redis
-  rom
+  rom!
   rspec-core
   rspec-expectations
   rspec-mocks

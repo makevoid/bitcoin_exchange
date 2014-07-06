@@ -58,7 +58,21 @@
 
   .line-compress
     %h1 Withdrawals
-    There are no withdrawals.
+    %section
+      %h1 Euro
+      - withdrawals = WithdrawalFiat.all.restrict(user_id: current_user.id).to_a
+      - if withdrawals == []
+        There are no withdrawals.
+      - for withdrawal in withdrawals
+        .row #{withdrawal.id}
+    %section
+      %h1 Bitcoin
+      - withdrawals = WithdrawalBtc.all.restrict(user_id: current_user.id).to_a
+      - if withdrawals == []
+        There are no withdrawals.
+      - for withdrawal in withdrawals
+        .row #{withdrawal.id}
+        
   .separator10
 
 

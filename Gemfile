@@ -12,10 +12,12 @@ gem "sass"
 
 gem "redis"
 
-gem "rom"
-gem "axiom-memory-adapter"
-# gem "axiom-do-adapter"
+gem "rom", git: 'git@github.com:rom-rb/rom'
+# gem "axiom-memory-adapter"
+gem "axiom", git: 'git@github.com:dkubb/axiom'
+gem "axiom-do-adapter", git: 'git@github.com:dkubb/axiom-do-adapter'
 # gem "do_mysql"
+gem 'do_sqlite3'
 
 gem "bitcoin-client", git: "git@github.com:makevoid/bitcoin-client"
 

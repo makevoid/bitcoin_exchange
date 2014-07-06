@@ -1,7 +1,10 @@
-DB = ROM::Environment.setup(memory: 'memory://test') do
+# (memory: 'memory://test')
+
+
+DB = ROM::Environment.setup(sqlite: 'sqlite3://config/dev.sqlite') do
   schema do
     base_relation :withdrawals_btc do
-      repository :memory
+      repository :sqlite
 
       attribute :id,      Integer
       attribute :amount,  Float
@@ -13,7 +16,7 @@ DB = ROM::Environment.setup(memory: 'memory://test') do
     end
     
     base_relation :withdrawals_fiat do
-      repository :memory
+      repository :sqlite
 
       attribute :id,        Integer
       attribute :amount,    Float

@@ -10,6 +10,7 @@ class BitcoinExchange < Sinatra::Base
 
   post "/withdrawals" do
     
+    
     @withdrawal = { user_id: current_user.id, amount: params[:amount].to_f }
       
     if params[:type] == "btc"
