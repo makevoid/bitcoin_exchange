@@ -3,20 +3,6 @@
     .line.bg-white
       .col5.line-tablet.bordered-right
         .separator15
-        %section.col8.offset-left1
-          %h1.font-x-large Sell
-          %form{ action: "/orders", method: "post" }
-            - hidden "order[simple]", true
-            %label
-              Amount to sell
-              .separator5
-              %input{ type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
-              .separator15
-              - submit "Sell BTC", "btn color-white radius3 "
-        .separator50
-      .hr.tablet.mobile
-      .col5.line-tablet
-        .separator15
         %section.tab
           %section.col8.offset-left1
             %h1.font-x-large Buy
@@ -28,6 +14,20 @@
                 %input{type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
                 .separator15
                 - submit "Buy BTC", "btn color-white radius3 "
+        .separator50
+      .hr.tablet.mobile
+      .col5.line-tablet
+        .separator15
+        %section.col8.offset-left1
+          %h1.font-x-large Sell
+          %form{ action: "/orders", method: "post" }
+            - hidden "order[simple]", true
+            %label
+              Amount to sell
+              .separator5
+              %input{ type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
+              .separator15
+              - submit "Sell BTC", "btn color-white radius3 "
         .separator50.desktop
         %section.advanced.hidden
           = haml :"orders/_buy_sell"
