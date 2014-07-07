@@ -20,6 +20,33 @@ dev mode:
 
 ### install notes
 
+you need to install ruby (better 2.1, from source possibly, or via rvm), then
+
+    gem install bundler
+
+into the project directory
+
+    bundle install
+
+
+then follow the instructions to install bitcoind (bitcoin core - github.com/bitcoin/bitcoin)
+copy config/bitcoin.conf.sample to ~/.bitcoin/bitcoin.conf (if in osx, look at the default location mentioned above)
+
+run bitcoind
+
+
+then run (to create mysql tables)
+
+    ruby lib/tasks/migrate.rb
+
+to start the app
+
+    rackup
+    
+and connect to http://localhost:9292
+
+### bitcoin - osx
+
 osx bitcoin.conf locaiton:
 
     /Users/USER/Library/Application Support/Bitcoin/bitcoin.conf

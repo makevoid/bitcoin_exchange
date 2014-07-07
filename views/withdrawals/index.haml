@@ -60,18 +60,19 @@
     %h1 Withdrawals
     %section
       %h1 Euro
-      - withdrawals = WithdrawalFiat.all.restrict(user_id: current_user.id).to_a
+      - withdrawals = WithdrawalFiat.all(user_id: current_user.id)
       - if withdrawals == []
         There are no withdrawals.
       - for withdrawal in withdrawals
-        .row #{withdrawal.id}
+        / #{withdrawal.id} 
+        .row #{withdrawal.status_label} €#{withdrawal.amount.f_eur} #{withdrawal.created_at.time_f}
     %section
       %h1 Bitcoin
-      - withdrawals = WithdrawalBtc.all.restrict(user_id: current_user.id).to_a
+      - withdrawals = WithdrawalBtc.all(user_id: current_user.id)
       - if withdrawals == []
         There are no withdrawals.
       - for withdrawal in withdrawals
-        .row #{withdrawal.id}
+        .row #{withdrawal.status_label} €#{withdrawal.amount.f_eur} #{withdrawal.created_at.time_f}
         
   .separator10
 

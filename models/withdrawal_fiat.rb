@@ -1,29 +1,23 @@
 class WithdrawalFiat
   # store: sql
+  include DataMapper::Resource
   
-  attr_reader :id, :user_id, :amount, :type
+  property    :id,          Serial
+  property    :amount,      Float
+  property    :executed,    Boolean, default: false
+  property    :created_at,  DateTime
   
-  def initialize(id: id, user_id: user_idexecuted, amount: amount, executed: executed)
-    @id       = id
-    @user_id  = user_id
-    @amount   = amount
-    @executed    = executed    # :pending, :executed
+  belongs_to  :user
+  # property :user_id,  Integer
+  
+  
+  before :create do
+    self.created_at = Time.now
   end
   
-  def self.create(user_id: user_id, amount: amount, executed: executed)
-    withdrawal = nil
-    DB.session do |db|
-      withdrawal = db[:withdrawals_fiat].new(user_id: user_id, amount: amount, id: new_id(db[:withdrawals_fiat]), executed: executed)
-      db[:withdrawals_fiat].save withdrawal
-      db.flush
-    end
-    withdrawal
+  def status_label
+    executed? ? "Executed" : "Waiting to be processed"
   end
-  
-  def self.all
-    DB[:withdrawals_fiat]
-  end
-
   
   # executed_machine
   # property :executed, Enum[:pending, :executed]

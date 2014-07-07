@@ -5,13 +5,23 @@
 
 class Deposit
   # store: sql
+  include DataMapper::Resource
   
+  property :id,         Serial
+  property :amount,     Float, required: true
+  property :created_at, DateTime
+  
+  belongs_to :user
+  
+  before :create do
+    self.created_at = Time.now
+  end
 end
 
-class BtcDeposit < Deposit
+class DepositBtc < Deposit
   # errors: address not created yet
   
 end
 
-class FiatDeposit < Deposit
+class DepositFiat < Deposit
 end

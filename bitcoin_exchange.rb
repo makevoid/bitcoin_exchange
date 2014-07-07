@@ -44,12 +44,12 @@ require_all "routes"
 #
 
 USERS = [
-  User.new(id: 0, username: "Ali"),
-  User.new(id: 1, username: "Bob"),
+  User.new(id: 1, username: "Ali"),
+  User.new(id: 2, username: "Bob"),
 ]
 
-# Wallet.address_create 0
 # Wallet.address_create 1
+# Wallet.address_create 2
 
 
 class BitcoinExchange < Sinatra::Base

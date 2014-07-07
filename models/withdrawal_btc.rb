@@ -5,29 +5,18 @@ end
 
 class WithdrawalBtc
   # store: sql
+  include DataMapper::Resource
   
-  attr_reader :id, :user_id, :amount, :type
+  property    :id,        Serial
+  property    :amount,    Float
+  property    :created_at,  DateTime
   
-  def initialize(id: id, user_id: user_id, amount: amount)
-    @id       = id
-    @user_id  = user_id
-    @amount   = amount
-  end
+  belongs_to  :user
+  # property :user_id,  Integer1
+
   
-  def self.create(user_id: user_id, amount: amount)
-    # withdrawal = new(user_id: user_id, amount: amount)
-    # withdrawal.save
-    withdrawal = nil
-    DB.session do |db|
-      withdrawal = db[:withdrawals_btc].new(user_id: user_id, amount: amount, id: new_id(db[:withdrawals_btc]))
-      db[:withdrawals_btc].save withdrawal
-      db.flush
-    end
-    withdrawal
-  end
-  
-  def self.all
-    DB[:withdrawals_btc]
+  before :create do
+    self.created_at = Time.now
   end
 
   #### old specific

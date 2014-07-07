@@ -75,7 +75,7 @@ class Wallet
 
   def self.address_create(user_id)
     # TODO: increase security, use different private keys or different deamons maybe?
-    client.getnewaddress user_id
+    client.getnewaddress user_id.to_s
   end
 
 

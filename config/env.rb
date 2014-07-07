@@ -12,6 +12,7 @@ include Utils
 require "#{path}/lib/monkeypatches/markedup"
 
 
+
 def app_env
   ENV["RACK_ENV"] || "development"
 end
@@ -41,18 +42,18 @@ R = Redis.new options
 # R.keys.map{ |key| R.del key }
 # R.flushdb
 
+# data store [datamapper] mysql
+
+DataMapper.setup :default, "mysql://localhost/bitcoin_exchange"
 
 # models and libs
 
 require "#{path}/lib/ticker"
 require_all "models"
 
-# data store [rom] mysql 
 
-require "#{path}/lib/monkeypatches/rom_utils"
-include RomUtils
+DataMapper.finalize
 
-require "#{path}/lib/rom_db"
 
 # view code
 
@@ -61,3 +62,4 @@ TITLE = "BitcoinExchange"
 
 
 require "#{path}/lib/monkeypatches/numeric"
+require "#{path}/lib/monkeypatches/dates"
