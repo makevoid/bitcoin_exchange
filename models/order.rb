@@ -13,6 +13,28 @@ class Order
     @price    = price.to_f
   end
   
+  def self.simple_price_buy
+    # TODO:
+    # current price + 2%
+    # 450 + 2%
+    459
+  end
+  
+  def self.simple_price_sell
+    # TODO: -2 %
+    441
+  end
+  
+  def self.create_simple(user_id: user_id, type: type, amount: amount)
+    price = if type == :buy
+      simple_price_buy
+    else
+      simple_price_sell
+    end
+    
+    create(user_id: user_id, type: type, amount: amount, price: price)
+  end
+  
   def self.create(user_id: user_id, type: type, amount: amount, price: price)
     # TODO: put the order in a queue?
     
@@ -21,7 +43,7 @@ class Order
     id = R.incr "ids:orders"
     type = type.to_sym
     # type = type == :bid ? :bid : :ask
-
+    
     price = price.to_f
     amount = amount.to_f
 

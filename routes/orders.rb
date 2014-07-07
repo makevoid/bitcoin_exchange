@@ -15,7 +15,12 @@ class BitcoinExchange < Sinatra::Base
   post "/orders" do
     # place a buy / sell order
     order = params[:order] || {}
-    Order.create user_id: current_user.id, type: order[:type], amount: order[:amount], price: order[:price]
+    attributes = { user_id: current_user.id, type: order[:type], amount: order[:amount] }
+    if order[:simple]
+      Order.create attributes
+    else
+      Order.create attributes.merge( price: order[:price] )
+    end
     redirect "/orders"
   end
 
