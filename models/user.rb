@@ -8,12 +8,14 @@ class User
   
 
   def orders_open
-    Orders.open self.id
+    Order.open self.id
   end
+  alias :orders :orders_open
   
   # transactions
   def orders_closed
-
+    # TODO: implement!!!!
+    []
   end
 
   def balance

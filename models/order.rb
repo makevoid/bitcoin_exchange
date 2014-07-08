@@ -61,7 +61,6 @@ class Order
     # TODO: FIXME check if amount is available
     raise "AmountError" if amount > 0.5 || amount < 0.0001
     raise "TypeError" unless [:buy, :sell].include?(type)
-    raise balance.eur_available.inspect
     raise "NotEnoughFundsEur" if type == :buy && amount_total > balance.eur_available
     raise "NotEnoughFundsBtc" if type == :sell && amount_total > balance.btc_available
     
@@ -118,6 +117,13 @@ class Order
     hashes order_ids
   end
   
+  def self.type_amount_sum(user_id, type)
+    order_ids = R.smembers "users:#{user_id}:orders_#{type}"
+    order_ids.map do |order_id|
+      R.hget "orders:#{order_id}", "amount"
+    end.inject(:+) || 0
+  end
+  
   def self.init(ord)
     new id: ord["id"], user_id: ord["user_id"], type: ord["type"], amount: ord["amount"], price: ord["price"], time: ord["time"]
   end
@@ -138,12 +144,12 @@ class Order
   
   def self.balance_btc(user)
     # balance in open orders, need user
-    Order.all(user: user, type: :btc)
+    type_amount_sum user, :btc
   end
 
   def self.balance_eur(user)
     # balance in open orders, need user
-    Order.all(user: user, type: :eur)
+    type_amount_sum user, :eur
   end
   
   

@@ -3,7 +3,7 @@
 # it should be implemented in an evented fashion, consider using celluloid or eventmachine
 
 class Orderbook
-  # manages Orders, Order
+  # manages orders (Order)
   
   TX_FEE = 0.15 # %
   
@@ -73,9 +73,7 @@ class Orderbook
   # TODO: move in order.rb ?
   
   def self.matching_orders(order)
-    type = order.type == :buy ? :sell : :buy
-    user_id = order.user_id
-    orders = Order.all.select{ |o| o.user_id != user_id && o.type == type }
+    orders = Order.type(order.user_id, order.type)
     order.type == :buy ? orders : orders.reverse 
   end
   
