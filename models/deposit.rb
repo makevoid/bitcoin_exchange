@@ -16,6 +16,12 @@ class Deposit
   before :create do
     self.created_at = Time.now
   end
+  
+  after :create do
+    val = R["users:#{self.user_id}:balance_eur"].to_f || 0
+    R["users:#{self.user_id}:balance_eur"] = val + amount
+  end
+  
 end
 
 class DepositBtc < Deposit

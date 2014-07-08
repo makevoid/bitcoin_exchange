@@ -18,7 +18,7 @@ class ClosedOrder < Order
   # TODO: change datastore to sql?
 
   def self.all
-    orders = R.keys "closed_orders:*"
+    orders = R.keys "orders_closed:*"
     orders.map do |order|
       ord = R.hgetall order
       ClosedOrder.new id: ord["id"], user_id: ord["user_id"], type: ord["type"], amount: ord["amount"], price: ord["price"], time: ord["time"]
@@ -26,14 +26,14 @@ class ClosedOrder < Order
   end
 
   def save
-    id = R.incr "ids:closed_orders"
-    R.hset "closed_orders:#{id}", "id",       id
-    R.hset "closed_orders:#{id}", "user_id",  user_id
-    R.hset "closed_orders:#{id}", "type",     type
-    R.hset "closed_orders:#{id}", "amount",   amount
-    R.hset "closed_orders:#{id}", "price",    price
-    R.hset "closed_orders:#{id}", "time",     time
-    R.hset "closed_orders:#{id}", "time_close", time_close
+    id = R.incr "ids:orders_closed"
+    R.hset "orders_closed:#{id}", "id",       id
+    R.hset "orders_closed:#{id}", "user_id",  user_id
+    R.hset "orders_closed:#{id}", "type",     type
+    R.hset "orders_closed:#{id}", "amount",   amount
+    R.hset "orders_closed:#{id}", "price",    price
+    R.hset "orders_closed:#{id}", "time",     time
+    R.hset "orders_closed:#{id}", "time_close", time_close
     
     true
   end

@@ -1,27 +1,39 @@
 class Balance
   # store: redis
 
-  attr_reader :btc, :eur, :btc_eur
+  # attr_reader :btc, :eur, :btc_eur
+  attr_reader :user
 
   def initialize(user)
-    @user = user
-    @btc = Wallet.balance_user user.id # TODO: get value from redis?
-    @eur = 50   # TODO: get value from redis
-    @btc_eur = @btc * Ticker.last
+    @user    = user
   end
   
   # available = total owned - value in open orders
   
+  def btc
+    Wallet.balance_user user.id # TODO: cache value in redis - users:id:balance_btc
+  end
+  
+  def eur
+    R["users:#{user.id}:balance_eur"].to_f || 0
+  end
+
+  def btc_eur
+    btc * Ticker.last
+  end
+  
+  ###
+  
   def btc_available
-    btc - Order.balance_btc
+    btc - Order.balance_btc(user)
   end
   
   def eur_available
-    0
+    eur - Order.balance_eur(user)
   end
   
   def account_value
-    0
+    eur + btc * Orderbook.price_last
   end
 
 end

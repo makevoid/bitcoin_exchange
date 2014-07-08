@@ -11,6 +11,18 @@ class Orderbook
     
   end 
   
+  def self.price_last
+    450
+  end
+  
+  def self.price_bid
+    450
+  end
+  
+  def self.price_ask
+    450
+  end
+  
   def self.resolve(order)
     # called every time an order gets in
     # reads orders queue

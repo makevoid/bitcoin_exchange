@@ -8,12 +8,7 @@ class User
   
 
   def orders_open
-    # TODO: move this code to Order class
-    order_ids = R.smembers "user_orders:#{id}"
-    order_ids.map do |order_id|
-      ord = R.hgetall "orders:#{order_id}"
-      Order.init ord
-    end
+    Orders.open self.id
   end
   
   # transactions

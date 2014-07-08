@@ -15,9 +15,9 @@ class BitcoinExchange < Sinatra::Base
   post "/orders" do
     # place a buy / sell order
     order = params[:order] || {}
-    attributes = { user_id: current_user.id, type: order[:type], amount: order[:amount] }
+    attributes = { user_id: current_user.id, type: order[:type].to_sym, amount: order[:amount].to_f }
     if order[:simple]
-      Order.create attributes
+      Order.create_simple attributes
     else
       Order.create attributes.merge( price: order[:price] )
     end

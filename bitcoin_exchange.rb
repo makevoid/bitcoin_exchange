@@ -26,7 +26,7 @@ class BitcoinExchange < Sinatra::Base
   @@current_user = nil
 
   def current_user
-    @@current_user || USERS[0]  # FIXME: you can start to code login from here
+    @@current_user || User.get(1)  # FIXME: you can start to code login from here
   end
   
   def cur_user_balance
@@ -43,19 +43,13 @@ require_all "routes"
 #
 #
 
-USERS = [
-  User.new(id: 1, username: "Ali"),
-  User.new(id: 2, username: "Bob"),
-]
 
-# Wallet.address_create 1
-# Wallet.address_create 2
 
 
 class BitcoinExchange < Sinatra::Base
 
   post "/force_login/:id" do |id|
-    @@current_user = USERS[id.to_i]
+    @@current_user = User.get id.to_i
     redirect "/"
   end
 

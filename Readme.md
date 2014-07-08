@@ -34,6 +34,8 @@ copy config/bitcoin.conf.sample to ~/.bitcoin/bitcoin.conf (if in osx, look at t
 
 run bitcoind
 
+create a mysql database (named bitcoin_exchange), you may edit db configs in config/env.rb
+
 
 then run (to create mysql tables)
 

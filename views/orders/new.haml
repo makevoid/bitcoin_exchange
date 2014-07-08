@@ -7,7 +7,7 @@
           %section.col8.offset-left1
             %h1.font-x-large Buy
             %form{ action: "/orders", method: "post" }
-              - hidden "order[simple]", true
+              - hidden "order[simple]", "true"
               - hidden "order[type]",   :buy
               %label
                 Amount to buy
@@ -22,7 +22,7 @@
         %section.col8.offset-left1
           %h1.font-x-large Sell
           %form{ action: "/orders", method: "post" }
-            - hidden "order[simple]", true
+            - hidden "order[simple]", "true"
             - hidden "order[type]",   :sell
             %label
               Amount to sell
