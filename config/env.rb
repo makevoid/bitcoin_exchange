@@ -44,7 +44,8 @@ R = Redis.new options
 
 # data store [datamapper] mysql
 
-DataMapper.setup :default, "mysql://localhost/bitcoin_exchange"
+test_db = "_test" if app_env == "test"
+DataMapper.setup :default, "mysql://localhost/bitcoin_exchange#{test_db}"
 
 # models and libs
 

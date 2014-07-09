@@ -12,4 +12,5 @@ end
 
 # prepare test db
 
+DataMapper.auto_migrate!
 R.flushdb
