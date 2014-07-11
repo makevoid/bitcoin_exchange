@@ -61,8 +61,8 @@ class Order
     # TODO: FIXME check if amount is available
     raise "AmountError" if amount > 0.5 || amount < 0.0001
     raise "TypeError" unless [:buy, :sell].include?(type)
-    raise "NotEnoughFundsEur" if type == :buy && amount_total > balance.eur_available
-    raise "NotEnoughFundsBtc" if type == :sell && amount_total > balance.btc_available
+    raise "NotEnoughFundsEur - amount: #{amount_total}, balance: #{balance.eur_available}" if type == :buy && amount_total > balance.eur_available
+    raise "NotEnoughFundsBtc - amount: #{amount_total}, balance: #{balance.btc_available}" if type == :sell && amount_total > balance.btc_available
     
     # validate_attributes # ?
 

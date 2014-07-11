@@ -1,7 +1,7 @@
-rackup
-redis-server
-guard
-~/Sites/bitcoin/src/bitcoind
+web: 			rackup
+guard:  	guard
 
-optional
-console: ruby -e ./config/env
+console: 	irb -r ./config/env
+# bitcoind: ~/Sites/bitcoin/src/bitcoind
+#redis: 		redis-server
+

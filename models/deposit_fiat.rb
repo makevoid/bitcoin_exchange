@@ -3,7 +3,7 @@
 # scraping home banking website will be used to notify of new deposits
 
 
-class Deposit
+class DepositFiat
   # store: sql
   include DataMapper::Resource
   
@@ -18,21 +18,12 @@ class Deposit
   end
   
   after :create do
-    # TODO: implement btc type
     type = :eur
     key = "users:#{self.user_id}:balance_#{type}"
     value = R[key] || 0
-    R[key] = value.to_f
+    R[key] = value.to_f + self.amount
     # incrby is faster but doesn't support float
     # R.incrby key, self.amount
   end
   
-end
-
-class DepositBtc < Deposit
-  # errors: address not created yet
-  
-end
-
-class DepositFiat < Deposit
 end
