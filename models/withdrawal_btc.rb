@@ -42,6 +42,8 @@ class WithdrawalBtc
     else
       transaction
     end
+    
+    
   end
   
   def check_withdrawal_number

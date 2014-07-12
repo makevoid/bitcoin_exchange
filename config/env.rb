@@ -26,7 +26,6 @@ end
 # wallet connections
 
 require "#{path}/sandbox/wallet"
-puts "WALLET:"
 puts Wallet.getinfo
 puts
 
@@ -64,3 +63,4 @@ TITLE = "BitcoinExchange"
 
 require "#{path}/lib/monkeypatches/numeric"
 require "#{path}/lib/monkeypatches/dates"
+require "#{path}/lib/monkeypatches/hash"

@@ -46,3 +46,10 @@ seed_hex = "8d7f6b6692a98f06b0122edab78baa66019aa5ac37e1ae9e9cc8a513cc4875d9"
 
 implement manual mode: every deposit / withdrawal over X parameter must pass manual human verification
 
+
+### more names and domain proposals
+
+CitronTree - citrontree.com
+
+
+

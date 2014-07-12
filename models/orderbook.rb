@@ -5,11 +5,9 @@
 class Orderbook
   # manages orders (Order)
   
-  TX_FEE = 0.15 # %
+  # TX_FEE = 0.015 #  1.5 %
+  TX_FEE = 0.01    #  1   %
   
-  def orders
-    
-  end 
   
   def self.price_last
     450
@@ -23,12 +21,15 @@ class Orderbook
     450
   end
   
+  # called every time after a new order is inserted
   def self.resolve(order)
-    # called every time an order gets in
+    # TODO: make operation synchronous, add a lock in redis
+    # for full asynchronicity consider an implementation using reactor pattern (Celluloid)
+    
     # reads orders queue
     # if an order matches another, resolve it
     
-    # consider the volume
+    # TODO: consider the volume
     
     orders = matching_orders order
     
@@ -42,9 +43,10 @@ class Orderbook
       else
         resolve_full(order, order_sel)
       end
+    
       
       # TODO: important
-      # use transactional style
+      # use transactional style or lock (with a lock there is no need to use transactions)
       # log operation
       
       break if orders == []
@@ -54,6 +56,11 @@ class Orderbook
   
   # TODO: naive approach, use everytime partial resolve
   def self.resolve_full(order1, order2)
+    # puts "log: full resolve"
+    
+    # update balance1
+    # update balance2
+    # update exchange balance
     
     order1.resolved
     order2.resolved
@@ -64,6 +71,7 @@ class Orderbook
   end
   
   def self.resolve_partial(order1, order2)
+    # puts "log: partial resolve"
     # re-create new order with less volume
     true
   end
@@ -73,8 +81,9 @@ class Orderbook
   # TODO: move in order.rb ?
   
   def self.matching_orders(order)
-    orders = Order.type(order.user_id, order.type)
-    order.type == :buy ? orders : orders.reverse 
+    type = order.type == :buy ? :sell : :buy
+    orders = Order.not_user_type order.user_id, type
+    # order.type == :buy ? orders : orders.reverse 
   end
   
 end

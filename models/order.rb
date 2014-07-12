@@ -8,6 +8,7 @@ class Order
     @time     = time.to_i
     
     @user_id  = user_id.to_i
+    # TODO: raise type not defined?
     @type     = type.to_sym
     @amount   = amount.to_f
     @price    = price.to_f
@@ -36,6 +37,7 @@ class Order
   end
   
   def self.create(user_id: user_id, type: type, amount: amount, price: price)
+    
     # TODO: refactor!!! this is getting big!
     
     # TODO: put the order in a queue?
@@ -50,19 +52,16 @@ class Order
     price = price.to_f
     amount = amount.to_f
     
-    fee = Orderbook::TX_FEE
-    amount_total = amount + amount * fee
-    
     user = User.get user_id
     balance = user.balance
 
     # TODO: FIXME sanitize price parameter (can't place order < 0 or > 3000
     raise "PriceError" if price <= 0 || price > 3000
     # TODO: FIXME check if amount is available
-    raise "AmountError" if amount > 0.5 || amount < 0.0001
+    raise "AmountError" if amount > 10 || amount < 0.0001 # limit to 10 BTC
     raise "TypeError" unless [:buy, :sell].include?(type)
-    raise "NotEnoughFundsEur - amount: #{amount_total}, balance: #{balance.eur_available}" if type == :buy && amount_total > balance.eur_available
-    raise "NotEnoughFundsBtc - amount: #{amount_total}, balance: #{balance.btc_available}" if type == :sell && amount_total > balance.btc_available
+    raise "NotEnoughFundsEur - amount: #{amount_total}, balance: #{balance.eur_available}" if type == :buy && amount > balance.eur_available
+    raise "NotEnoughFundsBtc - amount: #{amount_total}, balance: #{balance.btc_available}" if type == :sell && amount > balance.btc_available
     
     # validate_attributes # ?
 
@@ -78,13 +77,23 @@ class Order
     
     R.sadd "users:#{user_id}:orders", id
     R.sadd "users:#{user_id}:orders_#{type}", id
+    R.sadd "orders_#{type}", id
     
     order = new(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
+    
+    
+    
+    # TODO: subtract from total balance
+    
     
     # async { Orderbook.resolve self }
     Orderbook.resolve order
     
     order
+  end
+
+  def self.hash(order_id)
+    R.hgetall "orders:#{order_id}"
   end
 
   def self.hashes(order_ids)
@@ -112,44 +121,102 @@ class Order
     hashes order_ids
   end
   
-  def self.type(user_id, type)
+  def self.type(type)
+    order_ids = R.smembers "orders_#{type}"
+    hashes order_ids
+  end
+  
+  def self.user_type(user_id, type)
     order_ids = R.smembers "users:#{user_id}:orders_#{type}"
     hashes order_ids
   end
   
-  def self.type_amount_sum(user_id, type)
-    order_ids = R.smembers "users:#{user_id}:orders_#{type}"
+  def self.not_user_type(user_id, type)
+    order_ids = R.sdiff "orders_#{type}", "users:#{user_id}:orders_#{type}"
+    hashes order_ids
+  end
+  
+  # type: buy / sell
+  # currency: eur / btc
+  # type: buy  > [eur]
+  # type: sell > [btc]
+  
+  # returns btc value of all open sell orders
+  def self.amount_sum_sell(user_id)
+    order_ids = R.smembers "users:#{user_id}:orders_sell"
     order_ids.map do |order_id|
-      R.hget "orders:#{order_id}", "amount"
+      amount = R.hget "orders:#{order_id}", "amount"
+      amount.to_f
     end.inject(:+) || 0
   end
   
+  def self.amount_sum_buy(user_id)
+    order_ids = R.smembers "users:#{user_id}:orders_buy"
+    orders = order_ids.map do |order_id|
+      amount = R.hget "orders:#{order_id}", "amount"
+      price  = R.hget "orders:#{order_id}", "price"
+      { amount: amount.to_f, price: price.to_f }
+    end 
+    return 0 if order_ids.empty?
+    orders.map do |order|
+      order[:amount] * order[:price]
+    end.inject(:+)
+  end
+    
+    
   def self.init(ord)
-    new id: ord["id"], user_id: ord["user_id"], type: ord["type"], amount: ord["amount"], price: ord["price"], time: ord["time"]
+    new sym_keys ord
   end
 
   def self.cancel(id)
+    # TODO: log order cancellation by the user
+    remove id
+  end
+  
+  def self.remove(id)
     order_key = "orders:#{id}"
     user_id = R.hget "orders:#{id}", "user_id"
+    type    = R.hget "orders:#{id}", "type"
     R.srem "users:#{user_id}:orders", id
     R.srem "users:#{user_id}:orders_#{type}", id
+    R.srem "orders_#{type}", id
     R.del order_key
-    # TODO: copy in the logs
   end
 
   def resolved
-    # todo: mark as resolved
+    puts "resolved"
+    order_closed_add
+    update_balance
+    Order.remove id
   end
   
+  def update_balance
+    # order = self
+    
+    fee = Orderbook::TX_FEE
+    # give fee to exchange account
+    
+    # TODO: add to total balance
+  end
+  
+  def order_closed_add
+    order = Order.hash id
+
+    puts R.keys "orders:*"
+    puts order
+    order.delete "id"
+    order.merge! time_close: Time.now.to_i
+    OrderClosed.create sym_keys order
+  end
   
   def self.balance_btc(user)
-    # balance in open orders, need user
-    type_amount_sum user, :btc
+    # balance (btc) in open orders
+    amount_sum_sell user.id
   end
 
   def self.balance_eur(user)
-    # balance in open orders, need user
-    type_amount_sum user, :eur
+    # balance in open orders, needs user
+    amount_sum_buy user.id
   end
   
   

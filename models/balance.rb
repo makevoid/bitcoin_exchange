@@ -11,8 +11,9 @@ class Balance
   # available = total owned - value in open orders
   
   def btc
-    Wallet.balance_user user.id # TODO: cache value in redis - users:id:balance_btc ?
-    # R["users:#{user.id}:balance_btc"].to_f || 0
+    # Wallet.balance_user user.id # TODO: cache value in redis - users:id:balance_btc ?
+    R["users:#{user.id}:balance_btc"].to_f || 0
+    # TODO: build a checker that ensures the two values are the same
   end
   
   def eur

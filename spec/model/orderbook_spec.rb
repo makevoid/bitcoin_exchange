@@ -44,7 +44,6 @@ describe "OrderBook" do
     @order2 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 450
   end
   
-
   
   it "matches orders" do
     orders = Orderbook.matching_orders( @order1 )
@@ -58,6 +57,13 @@ describe "OrderBook" do
   it "resolves two matching orders" do
     @user.orders_open.count.should  == 0
     @user2.orders_open.count.should == 0    
+  end
+  
+  it "updates balances" do
+    @user.balance.eur.should  == 0
+    @user.balance.btc.should  == 0
+    @user2.balance.eur.should == 0
+    @user2.balance.btc.should == 0  
   end
   
 end
