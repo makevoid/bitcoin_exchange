@@ -70,6 +70,11 @@ describe Order do
   
     end
     
+    after :all do
+      DataMapper.auto_migrate!
+      R.flushdb
+    end
+    
   end
   
   

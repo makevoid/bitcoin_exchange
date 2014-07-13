@@ -17,7 +17,7 @@ class Order
   def self.simple_price_buy
     # TODO:
     # current price + 2%
-    # 450 + 2%
+    # 500 + 2%
     459
   end
   

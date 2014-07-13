@@ -3,7 +3,7 @@
     include Blizz::Resource
   end
 
-  buy = { available: "available", amount: 0.1, price: 450, total: "total" }
+  buy = { available: "available", amount: 1.0, price: 500.0, total: "total" }
   sell = { available: cur_user_balance.btc_available, amount: "amount", price: 0, total: "total" }
   buy   = Blizz.load BalancePresenter, buy
   sell  = Blizz.load BalancePresenter, sell

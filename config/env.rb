@@ -14,7 +14,7 @@ require "#{path}/lib/monkeypatches/markedup"
 
 
 def app_env
-  ENV["RACK_ENV"] || "development"
+  (ENV["RACK_ENV"] && ENV["RACK_ENV"].to_sym) || :development
 end
 
 
@@ -33,7 +33,7 @@ puts
 # data store [redis]
 
 options = {}
-options[:db] = 1 if app_env == "test"
+options[:db] = 1 if app_env == :test
 
 R = Redis.new options
 
@@ -43,7 +43,7 @@ R = Redis.new options
 
 # data store [datamapper] mysql
 
-test_db = "_test" if app_env == "test"
+test_db = "_test" if app_env == :test
 DataMapper.setup :default, "mysql://localhost/bitcoin_exchange#{test_db}"
 
 # models and libs

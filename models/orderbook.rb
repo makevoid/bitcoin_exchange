@@ -5,20 +5,24 @@
 class Orderbook
   # manages orders (Order)
   
-  # TX_FEE = 0.015 #  1.5 %
-  TX_FEE = 0.01    #  1   %
+  TX_FEE_ENV = {
+    development:  0.01, #  1 %
+    test:         0.01, # leave it at 1% otherwise tests will not pass
+    production:   0.015 #  1.5 %
+  }
+  TX_FEE = TX_FEE_ENV[app_env]
   
   
   def self.price_last
-    450
+    500.0
   end
   
   def self.price_bid
-    450
+    500.0
   end
   
   def self.price_ask
-    450
+    500.0
   end
   
   # called every time after a new order is inserted
@@ -57,10 +61,47 @@ class Orderbook
   # TODO: naive approach, use everytime partial resolve
   def self.resolve_full(order1, order2)
     # puts "log: full resolve"
+    if order1.type == :buy
+      order_buy, order_sell = order1, order2
+    else
+      order_buy, order_sell = order2, order1
+    end
     
-    # update balance1
-    # update balance2
+    fee = Orderbook::TX_FEE
+  
+    
+    # update buy
+    user_id = order_buy.user_id
+    buy_eur = order_buy.amount * order_buy.price
+    buy_fee_eur = buy_eur * fee
+    buy_fee_btc = order_buy.amount * fee
+    buy_btc = order_buy.amount - buy_fee_btc
+    bal_key = "users:#{user_id}:balance_eur"
+    buyer_balance_eur = R[bal_key].to_f
+    R[bal_key]  = buyer_balance_eur - buy_eur
+    bal_key = "users:#{user_id}:balance_btc"
+    buyer_balance_btc = R[bal_key].to_f
+    R[bal_key]  = buyer_balance_btc + buy_btc
+    
+    # update sell
+    user_id  = order_sell.user_id
+    sell_btc = order_sell.amount
+    sell_fee_btc = sell_btc * fee
+    sell_eur = order_sell.amount * order_sell.price
+    sell_fee_eur = sell_eur * fee
+    sell_eur = sell_eur - sell_fee_eur
+    bal_key  = "users:#{user_id}:balance_btc"
+    seller_balance_btc = R[bal_key].to_f
+    R[bal_key] = seller_balance_btc - sell_btc 
+    bal_key = "users:#{user_id}:balance_eur"
+    seller_balance_eur = R[bal_key].to_f
+    R[bal_key]  = seller_balance_eur + sell_eur
+    
     # update exchange balance
+    exch_eur = R["exchange:eur"].to_f || 0
+    exch_btc = R["exchange:btc"].to_f || 0
+    R["exchange:eur"] = exch_eur + buy_fee_eur
+    R["exchange:btc"] = exch_btc + sell_fee_btc
     
     order1.resolved
     order2.resolved
