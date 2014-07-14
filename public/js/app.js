@@ -1,4 +1,4 @@
-var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, boot, http, main, q, toggle;
+var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, boot, hash_change_return_url, http, main, q, show_hash_section, toggle;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -44,7 +44,40 @@ http = function(settings) {
 main = function() {
   bind_togglables();
   bind_tabbed();
-  return bind_overlay_dismiss();
+  bind_overlay_dismiss();
+  show_hash_section();
+  return hash_change_return_url();
+};
+
+hash_change_return_url = function() {
+  return window.addEventListener("hashchange", function() {
+    var hash, url_field;
+    hash = location.hash.slice(1);
+    url_field = q(".return_url");
+    return url_field.value = location;
+  });
+};
+
+show_hash_section = function() {
+  var found, hash, section, sections, _i, _j, _len, _len1;
+  if (location.hash !== "") {
+    hash = location.hash.slice(1);
+    sections = all(".tabbed section");
+    for (_i = 0, _len = sections.length; _i < _len; _i++) {
+      section = sections[_i];
+      if (section.classList[0] === hash) {
+        found = section;
+      }
+    }
+    if (!found) {
+      return;
+    }
+    for (_j = 0, _len1 = sections.length; _j < _len1; _j++) {
+      section = sections[_j];
+      section.classList.add("hidden");
+    }
+    return found.classList.remove("hidden");
+  }
 };
 
 bind_tabs = function() {
@@ -89,18 +122,20 @@ bind_tabbed = function() {
     tab = tabs[idx];
     tab.dataset.idx = idx;
     _results.push(tab.addEventListener("click", function(evt) {
-      var section, tabb, target, _j, _k, _len1, _len2;
+      var section, section_name, tabb, target, _j, _k, _len1, _len2;
       for (_j = 0, _len1 = tabs.length; _j < _len1; _j++) {
         tabb = tabs[_j];
         tabb.classList.remove("current");
       }
       target = evt.target;
+      idx = target.dataset.idx;
+      section_name = sections[idx].classList[0];
+      location.hash = section_name;
       target.classList.add("current");
       for (_k = 0, _len2 = sections.length; _k < _len2; _k++) {
         section = sections[_k];
         section.classList.add("hidden");
       }
-      idx = target.dataset.idx;
       return toggle(sections[idx], "hidden");
     }));
   }

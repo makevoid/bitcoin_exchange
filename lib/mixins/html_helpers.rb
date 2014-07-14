@@ -9,8 +9,8 @@ module ViewHelpers
     end
   end
   
-  def hidden(name, value)
-    haml_tag :input, name: name, value: value, type: "hidden"
+  def hidden(name, value, classes=nil)
+    haml_tag :input, name: name, value: value, type: "hidden", class: classes
   end
 
   def nav_link(url, label)

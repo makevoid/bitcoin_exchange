@@ -49,8 +49,9 @@ require_all "routes"
 class BitcoinExchange < Sinatra::Base
 
   post "/force_login/:id" do |id|
+    return_url = params[:return_url] unless params[:return_url].blank?
     @@current_user = User.get id.to_i
-    redirect "/"
+    redirect return_url || "/"
   end
 
 end

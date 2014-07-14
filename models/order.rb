@@ -15,15 +15,14 @@ class Order
   end
   
   def self.simple_price_buy
-    # TODO:
-    # current price + 2%
-    # 500 + 2%
-    459
+    # TODO: implement the real way
+    # 500 - 1%
+    455
   end
   
   def self.simple_price_sell
-    # TODO: -2 %
-    441
+    # TODO: +1 %
+    465
   end
   
   def self.create_simple(user_id: user_id, type: type, amount: amount)
@@ -128,6 +127,12 @@ class Order
     hashes order_ids
   end
   
+  def self.type_limit(type, limit=20)
+    # TODO: need sorted set
+    order_ids = R.zmembers "orders_#{type}"
+    hashes order_ids
+  end
+  
   def self.user_type(user_id, type)
     order_ids = R.smembers "users:#{user_id}:orders_#{type}"
     hashes order_ids
@@ -187,6 +192,8 @@ class Order
 
   def resolved
     puts "resolved"
+    type    = R.hget "orders:#{id}", "type"
+    raise "CannotResolveDeletedOrder" unless type
     order_closed_add
     Order.remove id
   end

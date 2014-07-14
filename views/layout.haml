@@ -63,9 +63,11 @@
               %h3 [test] Switch to user:
               .separator5
               %form.col5{ action: "/force_login/1", method: :post }
+                - hidden "return_url", request.url, "return_url"
                 .line-compress
                   %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } ALI
               %form.col5{ action: "/force_login/2", method: :post }
+                - hidden "return_url", request.url, "return_url"
                 .line-compress
                   %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } BOB
             .separator15

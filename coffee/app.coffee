@@ -54,6 +54,27 @@ main = ->
   #bind_tabs()
   bind_tabbed()
   bind_overlay_dismiss()
+  show_hash_section()
+  hash_change_return_url()
+
+
+hash_change_return_url = ->
+  window.addEventListener "hashchange", ->
+    hash = location.hash[1..-1]
+    url_field = q ".return_url"
+    url_field.value = location
+
+show_hash_section = ->  
+  if location.hash != ""
+    hash = location.hash[1..-1]
+    sections = all ".tabbed section"
+    for section in sections
+      found = section if section.classList[0] == hash
+    return unless found
+    for section in sections
+      section.classList.add "hidden"
+    found.classList.remove "hidden"
+  
 
 bind_tabs = ->
   tabs = all ".tab > h1 a"
@@ -94,10 +115,12 @@ bind_tabbed = ->
       for tabb in tabs
         tabb.classList.remove "current"
       target = evt.target
+      idx = target.dataset.idx
+      section_name = sections[idx].classList[0]
+      location.hash = section_name
       target.classList.add "current"
       for section in sections
         section.classList.add "hidden"
-      idx = target.dataset.idx
       toggle sections[idx], "hidden"
 
 bind_overlay_dismiss = ->

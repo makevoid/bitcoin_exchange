@@ -1,4 +1,13 @@
 module ResourcesHelpers
+  def book_order_partial(order)
+    haml_tag :div, class: "row" do
+      haml_tag :span do
+        haml_concat "#{order.amount} BTC"
+      end
+      haml_concat "@ €#{order.price.f_eur}"
+    end
+  end
+  
   def order_partial(order)
     haml_tag :div, class: "row" do
       haml_tag :span do

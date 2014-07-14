@@ -1,0 +1,12 @@
+- orders = Order.type type
+-# TODO: use sorted set (limit)
+-# orders = Order.type_limit type
+
+- if orders.empty?
+  There are no open orders
+
+- orders.each do |order|
+  .order_row
+    - book_order_partial order
+
+
