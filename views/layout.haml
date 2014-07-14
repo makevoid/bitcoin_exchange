@@ -62,10 +62,10 @@
               .separator10
               %h3 [test] Switch to user:
               .separator5
-              %form.col5{ action: "/force_login/0", method: :post }
+              %form.col5{ action: "/force_login/1", method: :post }
                 .line-compress
                   %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } ALI
-              %form.col5{ action: "/force_login/1", method: :post }
+              %form.col5{ action: "/force_login/2", method: :post }
                 .line-compress
                   %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } BOB
             .separator15
@@ -77,10 +77,11 @@
         %section.line-compress.bg-black.left-content
           .line-compress
             .separator5
-            Balance:
-            = haml :"_balance"
-            :markedup
-              Total value: €#{"%.2f" % cur_user_balance.btc_eur}
+            %p Current price: €#{Ticker.last.f_eur}
+            %p
+              Balance:
+              = haml :"_balance"
+            %p Total value: €#{cur_user_balance.total_value.f_eur}
             .separator5
         .line.center-content
           %h1

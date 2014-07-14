@@ -24,6 +24,10 @@ class Balance
     btc * Ticker.last
   end
   
+  def total_value
+    eur + btc_eur
+  end
+  
   ###
   
   def btc_available
