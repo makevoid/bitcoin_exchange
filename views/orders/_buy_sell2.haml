@@ -1,0 +1,50 @@
+:ruby
+  class BalancePresenter
+    include Blizz::Resource
+  end
+
+  buy = { available: "available", amount: 1.0, price: 500.0, total: "total" }
+  sell = { available: cur_user_balance.btc_available, amount: "amount", price: 0, total: "total" }
+  buy   = Blizz.load BalancePresenter, buy
+  sell  = Blizz.load BalancePresenter, sell
+
+%h1 Advanced
+
+.clear
+
+%section
+  %form{ action: "/orders", method: :post }
+    - hidden "order[type]", :buy
+    %h1 BUY
+    %h3 Available: $#{buy.available}
+    .separator5
+    BTC
+    .separator5
+    %input{ type: "text" , name: "order[amount]", placeholder: "amount (#{buy.amount} BTC)" , value: buy.amount }
+    .separator5
+    EUR
+    .separator5
+    %input{ type: "text", name: "order[price]", placeholder: "price  (€#{buy.price})" , value: buy.price }
+    .separator5
+    %h3 Total: #{buy.total}
+    .separator5
+    - submit "Buy BTC" , "btn color-white radius3"
+
+%section
+  %form{ action: "/orders", method: :post }
+    - hidden "order[type]", :sell
+    %h1 SELL
+    %h3 Available: #{sell.available} BTC
+    .separator5
+    BTC
+    .separator5
+    %input{type: "text",  name: "order[amount]", placeholder: "amount (#{sell.amount} BTC)" }
+    .separator5
+    EUR
+    .separator5
+    %input{ type: "text", name: "order[price]", placeholder: "price  (€#{sell.price})" }
+    .separator5
+    %h3 Total: #{sell.total}
+    .separator5
+    - submit "Sell BTC" , "btn color-white radius3"
+

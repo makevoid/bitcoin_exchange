@@ -54,10 +54,8 @@
 
 .line-max-medium.bg-white
   .separator10
-
-
   .line-compress
-    %h1 Withdrawals
+
     %section
       %h1 Euro
       - withdrawals = WithdrawalFiat.all(user_id: current_user.id)
@@ -66,14 +64,16 @@
       - for withdrawal in withdrawals
         / #{withdrawal.id} 
         .row #{withdrawal.status_label} €#{withdrawal.amount.f_eur} #{withdrawal.created_at.time_f}
+    .separator10
+    
     %section
       %h1 Bitcoin
       - withdrawals = WithdrawalBtc.all(user_id: current_user.id)
       - if withdrawals == []
         There are no withdrawals.
       - for withdrawal in withdrawals
-        .row #{withdrawal.status_label} €#{withdrawal.amount.f_eur} #{withdrawal.created_at.time_f}
-        
+        .row #{withdrawal.status_label} €#{withdrawal.amount.f_eur} #{withdrawal.created_at.time_f}    
+    .separator10
   .separator10
 
 

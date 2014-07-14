@@ -1,44 +1,45 @@
 .line-max-medium
   .col8.offset-left1.line-tablet.bg-white
     .line.bg-white
-      .col5.line-tablet.bordered-right
-        .separator15
-        %section.tab
+      %section.simple
+        .col5.line-tablet.bordered-right
+          .separator15
+          %section.tab
+            %section.col8.offset-left1
+              %h1.font-x-large Buy
+              %form{ action: "/orders", method: "post" }
+                - hidden "order[simple]", "true"
+                - hidden "order[type]",   :buy
+                %label
+                  Amount to buy
+                  .separator5
+                  %input{type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
+                  .separator15
+                  - submit "Buy BTC", "btn color-white radius3 "
+          .separator50
+        .hr.tablet.mobile
+        .col5.line-tablet
+          .separator15
           %section.col8.offset-left1
-            %h1.font-x-large Buy
+            %h1.font-x-large Sell
             %form{ action: "/orders", method: "post" }
               - hidden "order[simple]", "true"
-              - hidden "order[type]",   :buy
+              - hidden "order[type]",   :sell
               %label
-                Amount to buy
+                Amount to sell
                 .separator5
-                %input{type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
+                %input{ type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
                 .separator15
-                - submit "Buy BTC", "btn color-white radius3 "
-        .separator50
-      .hr.tablet.mobile
-      .col5.line-tablet
-        .separator15
-        %section.col8.offset-left1
-          %h1.font-x-large Sell
-          %form{ action: "/orders", method: "post" }
-            - hidden "order[simple]", "true"
-            - hidden "order[type]",   :sell
-            %label
-              Amount to sell
-              .separator5
-              %input{ type:"text", name: "order[amount]", placeholder: "amount (BTC)" }
-              .separator15
-              - submit "Sell BTC", "btn color-white radius3 "
-        .separator50.desktop
-        %section.advanced.hidden
-          = haml :"orders/_buy_sell"
+                - submit "Sell BTC", "btn color-white radius3 "
+          .separator50.desktop
+      %section.advanced.hidden
+        = haml :"orders/_buy_sell"
       .separator10
       .separator30.tablet.mobile
       .col4.offset-left3
-        %h3.center-content.color-muted Advanced: Place a limit order
+        %h3.center-content.color-muted Advanced: 
         .separator5
-        %button.btn.btn-medium.radius3.color-white.btn-primary{ :"data-toggle" => "advanced", href: js_void } Advanced
+        %button.btn.btn-medium.radius3.color-white.btn-primary{ :"data-toggle" => "advanced", href: js_void } Place a limit order
       .separator10
       .col5.bordered-right
         .separator100

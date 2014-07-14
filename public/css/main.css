@@ -190,3 +190,6 @@ form .btn{
 .btn-primary {
   background-color: #3EDE73;
 }
+.order_row .row, .order_row form, .order_row form button {
+  display: inline-block;
+}

@@ -60,22 +60,18 @@
         %h1 Deposits
       .separator10
 
-    .col3
-      .right-content
-        %button.btn.bg-lightgreen.font-medium.color-muted.no-padding{ data: { toggle: "overlay_section" } }
-          .separator15
-          .separator2
-          %i.fa.fa-plus
-          Deposit funds
-          .separator15
+    .col3.right-content
+      %button.btn.bg-lightgreen.font-medium.color-muted.no-padding{ data: { toggle: "overlay_section" } }
+        .separator15
+        .separator2
+        %i.fa.fa-plus
+        Deposit funds
+        .separator15
 
 .line-max-medium.bg-white
   .separator10
-
-
   .line-compress
-    %h1 Deposits
-    
+
     %section
       %h1 Euro
       - deposits = DepositFiat.all(user_id: current_user.id)
@@ -95,3 +91,4 @@
         / #{deposit.id} 
         .row #{deposit.amount} BTC #{deposit.created_at.time_f}
     .separator10
+  .separator10

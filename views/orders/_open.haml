@@ -4,11 +4,12 @@
   There are no open orders
 
 - orders.each do |order|
-  - order_partial order
-  -# \(debug: order)
-  %form{ action: "/orders/#{order.id}", method: :post }
-    -# form_method :delete
-    - hidden "_method", "delete"
-    - submit "Cancel"
+  .order_row
+    - order_partial order
+    -# \(debug: order)
+    %form{ action: "/orders/#{order.id}", method: :post }
+      -# form_method :delete
+      - hidden "_method", "delete"
+      - submit "Cancel"
 
 
