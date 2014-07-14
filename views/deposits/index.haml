@@ -76,10 +76,22 @@
   .line-compress
     %h1 Deposits
     
-    - deposits = Deposit.all(user_id: current_user.id)
-    - if deposits == []
-      There are no deposits.
-    - for deposit in deposits
-      / #{deposit.id} 
-      .row €#{deposit.amount.f_eur} #{deposit.created_at.time_f}
-  .separator10
+    %section
+      %h1 Euro
+      - deposits = DepositFiat.all(user_id: current_user.id)
+      - if deposits == []
+        There are no Euro deposits.
+      - for deposit in deposits
+        / #{deposit.id} 
+        .row €#{deposit.amount.f_eur} #{deposit.created_at.time_f}
+    .separator10
+    
+    %section
+      %h1 Bitcoin
+      - deposits = DepositBtc.all(user_id: current_user.id)
+      - if deposits == []
+        There are no BTC deposits.
+      - for deposit in deposits
+        / #{deposit.id} 
+        .row #{deposit.amount} BTC #{deposit.created_at.time_f}
+    .separator10

@@ -60,8 +60,8 @@ class Order
     # TODO: FIXME check if amount is available
     raise "AmountError" if amount > 10 || amount < 0.0001 # limit to 10 BTC
     raise "TypeError" unless [:buy, :sell].include?(type)
-    raise "NotEnoughFundsEur - amount: #{amount_total}, balance: #{balance.eur_available}" if type == :buy && amount > balance.eur_available
-    raise "NotEnoughFundsBtc - amount: #{amount_total}, balance: #{balance.btc_available}" if type == :sell && amount > balance.btc_available
+    raise "NotEnoughFundsEur - amount: #{amount}, balance: #{balance.eur_available}" if type == :buy && amount > balance.eur_available
+    raise "NotEnoughFundsBtc - amount: #{amount}, balance: #{balance.btc_available}" if type == :sell && amount > balance.btc_available
     
     # validate_attributes # ?
 
@@ -81,15 +81,17 @@ class Order
     
     order = new(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
     
-    
-    
     # TODO: subtract from total balance
-    
     
     # async { Orderbook.resolve self }
     Orderbook.resolve order
     
     order
+  end
+  
+  def update_amount(sell_amount)
+    @amount = amount - sell_amount
+    R.hset "orders:#{id}", "amount",  @amount
   end
 
   def self.hash(order_id)
@@ -186,17 +188,7 @@ class Order
   def resolved
     puts "resolved"
     order_closed_add
-    update_balance
     Order.remove id
-  end
-  
-  def update_balance
-    # order = self
-    
-    fee = Orderbook::TX_FEE
-    # give fee to exchange account
-    
-    # TODO: add to total balance
   end
   
   def order_closed_add

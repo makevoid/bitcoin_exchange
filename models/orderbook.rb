@@ -42,12 +42,8 @@ class Orderbook
       order_sel = orders.pop
       break unless order_sel
       
-      if volume_not_enough
-        resolve_partial(order, order_sel)
-      else
-        resolve_full(order, order_sel)
-      end
-    
+      
+      resolve_full(order, order_sel)
       
       # TODO: important
       # use transactional style or lock (with a lock there is no need to use transactions)
@@ -68,14 +64,21 @@ class Orderbook
     end
     
     fee = Orderbook::TX_FEE
-  
+    
+    if order_buy.amount < order_sell.amount 
+      amount_max = order_buy.amount
+      type_max = :buy
+    else
+      amount_max = order_sell.amount
+      type_max = :sell      
+    end
     
     # update buy
     user_id = order_buy.user_id
-    buy_eur = order_buy.amount * order_buy.price
+    buy_eur = amount_max * order_buy.price
     buy_fee_eur = buy_eur * fee
-    buy_fee_btc = order_buy.amount * fee
-    buy_btc = order_buy.amount - buy_fee_btc
+    buy_fee_btc = amount_max * fee
+    buy_btc = amount_max - buy_fee_btc
     bal_key = "users:#{user_id}:balance_eur"
     buyer_balance_eur = R[bal_key].to_f
     R[bal_key]  = buyer_balance_eur - buy_eur
@@ -85,17 +88,17 @@ class Orderbook
     
     # update sell
     user_id  = order_sell.user_id
-    sell_btc = order_sell.amount
+    sell_btc = amount_max
     sell_fee_btc = sell_btc * fee
-    sell_eur = order_sell.amount * order_sell.price
+    sell_eur = amount_max * order_sell.price
     sell_fee_eur = sell_eur * fee
-    sell_eur = sell_eur - sell_fee_eur
+    sell_eur_wfee = sell_eur - sell_fee_eur
     bal_key  = "users:#{user_id}:balance_btc"
     seller_balance_btc = R[bal_key].to_f
     R[bal_key] = seller_balance_btc - sell_btc 
     bal_key = "users:#{user_id}:balance_eur"
     seller_balance_eur = R[bal_key].to_f
-    R[bal_key]  = seller_balance_eur + sell_eur
+    R[bal_key]  = seller_balance_eur + sell_eur_wfee
     
     # update exchange balance
     exch_eur = R["exchange:eur"].to_f || 0
@@ -103,12 +106,20 @@ class Orderbook
     R["exchange:eur"] = exch_eur + buy_fee_eur
     R["exchange:btc"] = exch_btc + sell_fee_btc
     
-    order1.resolved
-    order2.resolved
-  end
-  
-  def self.volume_not_enough
-    false
+    
+
+    if order_buy.amount == order_sell.amount 
+      order_buy.resolved   
+      order_sell.resolved
+    else
+      if order_buy.amount > order_sell.amount 
+        order_sell.resolved
+        order_buy.update_amount order_sell.amount
+      else
+        order_buy.resolved
+        order_sell.update_amount order_buy.amount
+      end
+    end  
   end
   
   def self.resolve_partial(order1, order2)
