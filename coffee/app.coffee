@@ -64,7 +64,7 @@ hash_change_return_url = ->
     url_field = q ".return_url"
     url_field.value = location
 
-show_hash_section = ->  
+show_hash_section = ->
   if location.hash != ""
     hash = location.hash[1..-1]
     sections = all ".tabbed section"
@@ -74,7 +74,7 @@ show_hash_section = ->
     for section in sections
       section.classList.add "hidden"
     found.classList.remove "hidden"
-  
+
 
 bind_tabs = ->
   tabs = all ".tab > h1 a"
@@ -115,6 +115,9 @@ bind_tabbed = ->
       for tabb in tabs
         tabb.classList.remove "current"
       target = evt.target
+      # TODO: use jsh
+      target = evt.target.parentNode unless target.tagName == "BUTTON"
+      target = evt.target.parentNode.parentNode unless target.tagName == "BUTTON"
       idx = target.dataset.idx
       section_name = sections[idx].classList[0]
       location.hash = section_name
@@ -122,6 +125,7 @@ bind_tabbed = ->
       for section in sections
         section.classList.add "hidden"
       toggle sections[idx], "hidden"
+    , false
 
 bind_overlay_dismiss = ->
   over = q ".overlay_section"

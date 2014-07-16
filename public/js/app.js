@@ -128,6 +128,12 @@ bind_tabbed = function() {
         tabb.classList.remove("current");
       }
       target = evt.target;
+      if (target.tagName !== "BUTTON") {
+        target = evt.target.parentNode;
+      }
+      if (target.tagName !== "BUTTON") {
+        target = evt.target.parentNode.parentNode;
+      }
       idx = target.dataset.idx;
       section_name = sections[idx].classList[0];
       location.hash = section_name;
@@ -137,7 +143,7 @@ bind_tabbed = function() {
         section.classList.add("hidden");
       }
       return toggle(sections[idx], "hidden");
-    }));
+    }, false));
   }
   return _results;
 };
