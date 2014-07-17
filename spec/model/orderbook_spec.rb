@@ -153,5 +153,13 @@ describe "OrderBook" do
 
     #after(:all){ cleanup! }
   end
+  
+  # TODO: spec create partial closed order for not completely drained order!
+  
+  # speed test - orderbook
+  # 10k BUY orders in a second
+  # 1 sell order with matching volume
+  # multiple users
+  # check all balances
 
 end

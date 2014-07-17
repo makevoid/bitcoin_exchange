@@ -14,8 +14,9 @@ class User
 
   # transactions
   def orders_closed
-    # TODO: implement!!!!
-    []
+    # TODO: speedup!
+    orders = OrderClosed.all
+    orders.select{ |o| o.user_id ==  self.id }
   end
 
   def balance
