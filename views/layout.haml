@@ -6,6 +6,7 @@
     %link{ rel:"stylesheet", href: "/css/helper.css" }
     %link{ rel:"stylesheet", href:"/css/fontawesome.css"}
     %link{ rel: "stylesheet", href: "/css/main.css" }
+    %link{ rel:"stylesheet", href: "/css/helpers.css" }
     = haml :"_metas" # todo require/implement partial :metas
 
   %body
@@ -96,5 +97,5 @@
       .separator30.desktop
       .separator10.tablet.mobile
       .separator3.tablet.mobile
-      %section= yield
+      %section.main= yield
     %script{ type: "text/javascript", src: "/js/app.js" }

@@ -10,7 +10,11 @@ RSpec.configure do |config|
 end
 
 
+def cleanup!
+  DataMapper.auto_migrate!
+  R.flushdb
+end
+
 # prepare test db
 
-DataMapper.auto_migrate!
-R.flushdb
+cleanup!

@@ -18,6 +18,14 @@ def app_env
   (ENV["RACK_ENV"] && ENV["RACK_ENV"].to_sym) || :development
 end
 
+APP_ENV = app_env
+
+class App
+  def self.env
+    APP_ENV
+  end
+end
+
 
 # balance
 

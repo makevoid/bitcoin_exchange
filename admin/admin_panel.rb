@@ -24,4 +24,8 @@ class AdminPanel < Sinatra::Base
 
   end
 
+  get "/redis" do
+    # TODO: already implemented, get it from bitcoin_exchange.rb -> get "/redis"
+  end
+
 end

@@ -8,7 +8,7 @@ module ViewHelpers
       haml_concat label
     end
   end
-  
+
   def hidden(name, value, classes=nil)
     haml_tag :input, name: name, value: value, type: "hidden", class: classes
   end
@@ -24,4 +24,22 @@ module ViewHelpers
   def js_void
     "javascript:void(0)"
   end
+
+  ### partial
+
+  def partial(name, value={})
+    haml name.to_sym, locals: extract_locals(name, value)
+  end
+
+  private
+
+  def extract_locals(name, value)
+    if value.is_a? Hash
+      value
+    else
+      hash = {}; hash[name] = value
+      hash
+    end
+  end
+
 end

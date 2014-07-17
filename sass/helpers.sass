@@ -1,0 +1,80 @@
+// some helpers
+
+
+
+
+
+// redefine css
+
+.line
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  -ms-box-sizing: border-box
+  box-sizing: border-box
+  width: 100%
+  float: left
+  clear:right
+
+.color-white
+  color: #fff
+
+.bg-white
+  background-color: #fff
+
+.line-compress
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  -ms-box-sizing: border-box
+  box-sizing: border-box
+  width: 100%
+  float: left
+  clear: right
+  padding: 0 2% 0 2%
+
+
+.bg-green
+  background-color: #1FD65C
+
+.bg-pattern1
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAFUlEQVQYlWNgwANEjqf/HwmSDAwMAEQrEgmpQ8hgAAAAAElFTkSuQmCC')
+    background-repeat: repeat
+
+
+.vpadding_5
+  padding-top: 5px
+  padding-bottom: 5px
+
+// extend helpers
+
+section.paged
+  @extend .line-compress
+  @extend .bg-white
+  @extend .vpadding_5
+
+
+section.main > h1
+  @extend .line-compress
+  @extend .line
+  @extend .bg-green
+  @extend .color-white
+  @extend .bg-pattern1
+  @extend .vpadding_5
+
+
+// new style
+
+// tables
+
+table
+  margin-top: 5px
+  float: left
+  border-collapse: collapse
+  th
+    background: #EEE
+  td, th
+    border: 1px solid #CCC
+    padding: 10px
+  td.buy
+    border-bottom: 2px solid rgb(142, 201, 25)
+  td.sell
+    border-bottom: 2px solid rgb(236, 38, 143)

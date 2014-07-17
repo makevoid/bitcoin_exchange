@@ -28,13 +28,16 @@ class BitcoinExchange < Sinatra::Base
   def current_user
     @@current_user || User.get(1)  # FIXME: you can start to code login from here
   end
-  
+
   def cur_user_balance
     current_user.balance
   end
 end
 
 require_all "routes"
+
+
+
 
 
 # TEST routes
@@ -44,14 +47,27 @@ require_all "routes"
 #
 
 
+if App.env != "production"
+
+  class BitcoinExchange < Sinatra::Base
+
+    get "/reset" do
+      DataMapper.auto_migrate!
+      "DB RESET!<br><br>(remove this route from production!)"
+    end
 
 
-class BitcoinExchange < Sinatra::Base
+    post "/force_login/:id" do |id|
+      return_url = params[:return_url] unless params[:return_url].blank?
+      @@current_user = User.get id.to_i
+      redirect return_url || "/"
+    end
 
-  post "/force_login/:id" do |id|
-    return_url = params[:return_url] unless params[:return_url].blank?
-    @@current_user = User.get id.to_i
-    redirect return_url || "/"
+    # TODO: move all the admin_move dir in admin app
+
+    get "/redis" do
+      haml :"../admin/views/redis"
+    end
   end
 
 end

@@ -27,6 +27,7 @@ end
 class BigDecimal
   # TODO: recheck, is %g ok?
 
+  # NOTE: use in the models, before all redis assignments: R[] =
   def to_ds
     "%.8f" % self
   end
@@ -34,8 +35,14 @@ class BigDecimal
   alias :to_ss :to_ds
   alias :to_8s :to_ds
 
+  # NOTE: use it in only the views (sub is cpu time consuming, not suited for a fast backend)!
   def to_dz
-    "%.8g" % ("%.8f" % self)
+    ("%.8f" % self).sub(/0+$/, '')
+  end
+
+  # NOTE: use this to convert price to redis sorted set's index
+  def to_zid
+    to_dz
   end
 
   def to_2s

@@ -1,0 +1,6 @@
+%tr
+  %td{ class: order.type }= order.type.capitalize
+  %td #{order.amount.to_dz} BTC
+  %td.aright €#{order.price.f_eur}
+  %td.aright € #{order.price_eur.f_eur}
+  %td= time_f order.time_close

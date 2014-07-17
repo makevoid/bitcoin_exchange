@@ -8,13 +8,17 @@ module ResourcesHelpers
     end
   end
 
+  # def order_partial(order)
+  #   haml_tag :div, class: "row" do
+  #     haml_tag :span do
+  #       haml_concat "#{order.type.upcase} #{order.amount.to_dz} BTC"
+  #     end
+  #     haml_concat "@ €#{order.price.f_eur}"
+  #   end
+  # end
+
   def order_partial(order)
-    haml_tag :div, class: "row" do
-      haml_tag :span do
-        haml_concat "#{order.type.upcase} #{order.amount.to_dz} BTC"
-      end
-      haml_concat "@ €#{order.price.f_eur}"
-    end
+    raise haml( :"orders/_order").inspect#, order: order
   end
 
   def order_closed_partial(order)

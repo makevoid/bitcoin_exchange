@@ -1,0 +1,23 @@
+:ruby
+  # entries = R.zcard ""
+
+  orders_count = R.zcount "orders", 400_00, 600_00
+
+/ todo: think about and validate 100k euro max price
+/ R.zcount "orders", 0, 100_000_00
+
+
+/ returns the score of member
+/ returns the price score of order_id
+/
+/ R.zscore "orders", 1
+
+%h1 Redis
+
+%section.paged
+  %h1 Orders
+
+  :markedup
+    count: #{orders_count}
+
+

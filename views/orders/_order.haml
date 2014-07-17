@@ -1,0 +1,10 @@
+%tr
+  %td{ class: order.type }= order.type.capitalize
+  %td #{order.amount.to_dz} BTC
+  %td.aright €#{order.price.f_eur}
+  %td.aright € #{order.price_eur.f_eur}
+  %td
+    %form{ action: "/orders/#{order.id}", method: :post }
+      -# form_method :delete
+      - hidden "_method", "delete"
+      - submit "Cancel"

@@ -40,3 +40,8 @@ group :test do
 
   gem "rack-test"
 end
+
+
+# nice gems to consider
+#
+# satoshi-unit: https://github.com/snitko/satoshi-unit
