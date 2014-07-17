@@ -1,17 +1,17 @@
 class BalanceExchange
-  
+
   def instance
     @@balance ||= new
   end
 
   def eur
-    R["exchange:eur"].to_f || 0
+    R["exchange:eur"].to_d || 0
   end
-  
+
   def btc
-    R["exchange:btc"].to_f || 0
+    R["exchange:btc"].to_d || 0
   end
-  
+
   def btc_addresses
     # ....
     []

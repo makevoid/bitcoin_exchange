@@ -12,10 +12,10 @@ status: under development
 launch the app:
 
     rackup -p 3000
-  
-dev mode:  
-  
-    rerun -p "**/*.{rb}" -- rackup -p 3000 
+
+dev mode:
+
+    rerun -p "**/*.{rb}" -- rackup -p 3000
 
 
 ### install notes
@@ -44,7 +44,7 @@ then run (to create mysql tables)
 to start the app
 
     rackup
-    
+
 and connect to http://localhost:9292
 
 ### bitcoin - osx
@@ -52,14 +52,25 @@ and connect to http://localhost:9292
 osx bitcoin.conf locaiton:
 
     /Users/USER/Library/Application Support/Bitcoin/bitcoin.conf
-    
+
 symlink:
 
     mkdir -p ~/.bitcoin
     ln -s "/Users/USER/Library/Application Support/Bitcoin/bitcoin.conf" ~/.bitcoin/
-    
-# development notes    
-    
+
+# development notes
+
+"When a user is logged in to their account, you show the bitcoin address they can send to to add funds.  Before showing it, you check if it's been used, if it has then you replace it with a new one (getnewaddress <username>).  You only need to keep the latest bitcoin address for the account in your database.  (I posted a sample code fragment for this in an earlier thread somewhere, search on getnewaddress)
+" > Satoshi
+
+https://bitcointalk.org/index.php?topic=417.msg3579#msg3579
+
+
+### security notes
+
+https://bitcointalk.org/index.php?topic=434.msg3770#msg3770
+
+
 ### useful fontawesome icons
 
 fa-bank

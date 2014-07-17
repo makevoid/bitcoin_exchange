@@ -59,12 +59,12 @@ class Wallet
     client.getinfo
   end
 
-  # returns the balance of one account 
+  # returns the balance of one account
   def self.balance_user(user_id)
     client.getbalance user_id.to_s
   end
 
-  # returns the balance of all accounts 
+  # returns the balance of all accounts
   def self.balance
     client.listaccounts
   end
@@ -87,7 +87,7 @@ class Wallet
     addresses.map{ |addr| addr["address"] }
   end
 
-  def self.send(bitcoinaddress, amount, comment = nil, comment_to = nil)
+  def self.send_btc(bitcoinaddress, amount, comment = nil, comment_to = nil)
     client.sendtoaddress(bitcoinaddress, amount, comment, comment_to)
   end
 
@@ -98,7 +98,7 @@ test_address_1 = "1EiNgZmQsFN4rJLZJWt93quMEz3X82FJd2" # kryptokit
 
 # p Wallet.getinfo
 
-# p transaction = Wallet.send test_address_1, 0.001
+# p transaction = Wallet.send_btc test_address_1, 0.001
 
 # p address = Wallet.address_create
 

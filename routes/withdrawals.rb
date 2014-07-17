@@ -9,24 +9,24 @@ class BitcoinExchange < Sinatra::Base
   # WITHDRAWAL_BTC_AMOUNT_MAX = 0.01
 
   post "/withdrawals" do
-    
-    
-    @withdrawal = { user_id: current_user.id, amount: params[:amount].to_f }
-      
+
+
+    @withdrawal = { user_id: current_user.id, amount: params[:amount].to_d }
+
     if params[:type] == "btc"
-      withdrawal_btc 
+      withdrawal_btc
     else
       withdrawal_eur
     end
-    
+
     redirect "/withdrawals"
   end
-  
+
   def withdrawal_eur
     WithdrawalFiat.create @withdrawal
   end
-  
-  def withdrawal_btc    
+
+  def withdrawal_btc
     withdrawal = WithdrawalBtc.new @withdrawal
     begin
       withdrawal.execute

@@ -5,6 +5,7 @@ APP = "bitcoin_exchange"
 require "bundler/setup"
 Bundler.require :default
 
+
 require "#{path}/lib/mixins/utils"
 include Utils
 
@@ -46,6 +47,14 @@ R = Redis.new options
 test_db = "_test" if app_env == :test
 DataMapper.setup :default, "mysql://localhost/bitcoin_exchange#{test_db}"
 
+
+require 'bigdecimal'
+require "#{path}/lib/monkeypatches/numeric"
+require "#{path}/lib/monkeypatches/dates"
+require "#{path}/lib/monkeypatches/hash"
+require "#{path}/lib/monkeypatches/string"
+
+
 # models and libs
 
 require "#{path}/lib/ticker"
@@ -59,9 +68,3 @@ DataMapper.finalize
 
 TITLE = "BitcoinExchange"
 
-
-
-require "#{path}/lib/monkeypatches/numeric"
-require "#{path}/lib/monkeypatches/dates"
-require "#{path}/lib/monkeypatches/hash"
-require "#{path}/lib/monkeypatches/string"

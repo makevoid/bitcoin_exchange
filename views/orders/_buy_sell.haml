@@ -17,7 +17,7 @@
         - hidden "order[type]",   :buy
         %label
           .separator5
-          Available: 
+          Available:
           %span €#{buy.available.f_eur}
           .separator10
           Amount
@@ -26,13 +26,13 @@
           .separator10
         %label
           Price
-          .separator5        
+          .separator5
           %input{ type: "text", name: "order[price]", placeholder: "€" }
           .separator15
-          %p 
-            Total: 
+          %p
+            Total:
             %span €xxx
-          .separator15 
+          .separator15
           - submit "Buy BTC", "btn color-white radius3 "
   .separator50
 .hr.tablet.mobile
@@ -44,8 +44,8 @@
       - hidden "order[type]",   :sell
       %label
         .separator5
-        Available: 
-        %span #{sell.available} BTC
+        Available:
+        %span #{sell.available.to_dz} BTC
         .separator10
         Amount
         .separator5
@@ -53,10 +53,10 @@
         .separator10
       %label
         Price
-        .separator5        
+        .separator5
         %input{ type: "text", name: "order[price]", placeholder: "€" }
         .separator15
-        Total: 
+        Total:
         %span €xxx
         .separator15
         - submit "Sell BTC", "btn color-white radius3 "
