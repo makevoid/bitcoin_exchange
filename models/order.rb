@@ -1,7 +1,15 @@
 class Order
   # store: redis
 
+  # notes:
+  #
+  # orders_[type] is the sorted set
+  # orders|[type] is the set
+
   attr_reader :id, :user_id, :type, :amount, :price, :time
+
+  # TODO: consider in removing this, that is used only for orderbook in Order.type_sum atm
+  attr_writer :amount
 
   def initialize(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
     @id       = id.to_i
@@ -91,6 +99,7 @@ class Order
     R.hset "orders:#{id}", "time",    time
 
     R.zadd "orders_#{type}", (price*100).to_i, id
+    R.sadd "orders|#{type}", id # FIXME: probably we don't need a set equal to sorted set
     R.sadd "users:#{user_id}:orders", id
     R.sadd "users:#{user_id}:orders_#{type}", id
 
@@ -144,8 +153,22 @@ class Order
   end
 
   def self.type(type)
-    order_ids = R.smembers "orders_#{type}"
+    order_ids = R.smembers "orders|#{type}"
     hashes order_ids
+  end
+
+  def self.type_sum(type)
+    orders = type type
+
+    summed = []
+    orders.each do |order|
+      unless order_found = summed.find{ |o| o.price == order.price  }
+        summed << order
+      else
+        order_found.amount += order.amount
+      end
+    end
+    summed
   end
 
   def self.type_limit(type, limit=20)
@@ -160,7 +183,7 @@ class Order
   end
 
   def self.not_user_type(user_id, type)
-    order_ids = R.sdiff "orders_#{type}", "users:#{user_id}:orders_#{type}"
+    order_ids = R.sdiff "orders|#{type}", "users:#{user_id}:orders_#{type}"
     hashes order_ids
   end
 
@@ -206,6 +229,7 @@ class Order
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
     R.zrem "orders_#{type}", id
+    R.srem "orders|#{type}", id
     R.srem "users:#{user_id}:orders", id
     R.srem "users:#{user_id}:orders_#{type}", id
     R.del order_key
@@ -214,7 +238,7 @@ class Order
   # TODO: rename to resolve!
   def resolved
     puts "resolved"
-    type    = R.hget "orders_#{id}", "type"
+    type    = R.hget "orders:#{id}", "type"
     raise "CannotResolveDeletedOrder" unless type
     order_closed_add
     Order.remove id
