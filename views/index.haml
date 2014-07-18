@@ -50,7 +50,7 @@
   .line
     .line-max-medium.bg-white
       .separator10
-      
+
       %section.orderbook.line-compress
         %h2 Balance in open orders
         €#{Order.balance_eur(current_user).f_eur} --
@@ -58,39 +58,44 @@
         %h2 Balance available to trade
         €#{current_user.balance.eur_available.f_eur} --
         #{current_user.balance.btc_available} BTC
-      .separator10  
-        
+      .separator10
+
       %section.orderbook.line-compress
         %h1 Orderbook
-        BUY ---- SELL [graph]
+        [BUY - SELL graph]
+
         .separator5
-        %h2 Orders
-        %h3 BUY
-        = haml :"orders/_book_open", {}, { type: :buy }
-        .separator5
-        %h3 SELL
-        = haml :"orders/_book_open", {}, { type: :sell }        
-        .separator5
-      .separator10     
-      
+        /%h2 Orders
+        .col5.line-tablet
+          %h2 BUY
+          %table
+            %th Amount
+            %th Price
+            = haml :"orders/_book_orders", {}, { type: :buy }
+          .separator5
+        .col5.line-tablet
+          %h2 SELL
+          = haml :"orders/_book_orders", {}, { type: :sell }
+          .separator5
+      .separator10
+
       %section.price_chart.line-compress
         %h1 Price chart
         Chart
       .separator10
-      
+
       %section.infos.line-compress
         %h2 Infos
         %p Current time: #{Time.now.strftime "%H:%M:%S"}
         %p Last login: 127.0.0.1 @ #{Time.now.time_f}
-        
-        .row 
+
+        .row
           %button Logins logs list
           .separator5
-        .row 
+        .row
           %button Canceled orders
           .separator5
-        .row 
+        .row
           %button Operations log
           .separator5
       .separator10
-        

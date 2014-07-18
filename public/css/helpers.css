@@ -38,10 +38,14 @@ table {
   float: left;
   border-collapse: collapse; }
   table th {
-    background: #eeeeee; }
+    background: #eeeeee;
+    padding: 4px;
+    font-size: 85%; }
   table td, table th {
     border: 1px solid #cccccc;
-    padding: 10px; }
+    padding: 6px; }
+  table td {
+    font-size: 93%; }
   table td.buy {
     border-bottom: 2px solid #8ec919; }
   table td.sell {

@@ -50,7 +50,11 @@
               .col2
                 %a.line.desktop{ data: { toggle: "user_details" } }
                   %i.fa.fa-user.color-green
-                  Account
+                  - unless cur_user
+                    Log In
+                  - else
+                    = cur_user.username
+
                 %a.line.mobile.tablet{ data: { toggle: "user_details" } }
                   %i.fa.fa-user.color-green
 

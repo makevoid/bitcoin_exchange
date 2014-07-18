@@ -21,12 +21,12 @@ class Order
   def self.buy
     # TODO: implement
     # order_ids = R.smembers "users:#{user_id}:orders"
-    order_ids  = R.zrange "orders:buy", 0, -1
+    order_ids  = R.zrange "orders_buy", 0, -1
     hashes order_ids
   end
 
   def self.sell
-    order_ids  = R.zrange "orders:sell", 0, -1
+    order_ids  = R.zrange "orders_sell", 0, -1
     hashes order_ids
   end
 
@@ -90,10 +90,9 @@ class Order
     R.hset "orders:#{id}", "price",   price.to_2s
     R.hset "orders:#{id}", "time",    time
 
-    R.zadd "orders:#{type}", (price*100).to_i, id
+    R.zadd "orders_#{type}", (price*100).to_i, id
     R.sadd "users:#{user_id}:orders", id
     R.sadd "users:#{user_id}:orders_#{type}", id
-    R.sadd "orders_#{type}", id
 
     order = new(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
 
@@ -206,17 +205,16 @@ class Order
     order_key = "orders:#{id}"
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
-    R.zrem "orders:#{type}", id
+    R.zrem "orders_#{type}", id
     R.srem "users:#{user_id}:orders", id
     R.srem "users:#{user_id}:orders_#{type}", id
-    R.srem "orders_#{type}", id
     R.del order_key
   end
 
   # TODO: rename to resolve!
   def resolved
     puts "resolved"
-    type    = R.hget "orders:#{id}", "type"
+    type    = R.hget "orders_#{id}", "type"
     raise "CannotResolveDeletedOrder" unless type
     order_closed_add
     Order.remove id
