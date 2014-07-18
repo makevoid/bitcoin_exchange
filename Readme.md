@@ -7,6 +7,15 @@ proof of concept
 status: under development
 
 
+### current implementation idea
+
+use client polling to try to submit order, otherwise raise exception: { error: "polling", message: "please resubmit in previous request in 1s" }
+
+this semplifies the concept of exchange and
+
+in the future consider implementing a redis based queue system with minimal overhead, but right now let the client do the dirty job ;)
+
+
 ### development
 
 launch the app:

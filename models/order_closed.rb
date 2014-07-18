@@ -1,15 +1,15 @@
 require_relative "order"
 
 class OrderClosed < Order
-  # store: sql
-  
+  # store: sql... right?
+
   attr_reader :time_close
 
   def initialize(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time, time_close: time_close)
     @time_close = time_close
     super(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
   end
-  
+
   def self.create(user_id: user_id, type: type, amount: amount, price: price, time: time, time_close: time_close)
     order = new(user_id: user_id, type: type, amount: amount, price: price, time: time, time_close: time_close)
     order.save
@@ -34,7 +34,7 @@ class OrderClosed < Order
     R.hset "orders_closed:#{id}", "price",    price
     R.hset "orders_closed:#{id}", "time",     time
     R.hset "orders_closed:#{id}", "time_close", time_close
-    
+
     true
   end
 

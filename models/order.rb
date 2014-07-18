@@ -18,6 +18,18 @@ class Order
     (@price * @amount).to_f
   end
 
+  def self.buy
+    # TODO: implement
+    # order_ids = R.smembers "users:#{user_id}:orders"
+    order_ids  = R.zrange "orders:buy", 0, -1
+    hashes order_ids
+  end
+
+  def self.sell
+    order_ids  = R.zrange "orders:sell", 0, -1
+    hashes order_ids
+  end
+
   def self.simple_price_buy
     # TODO: implement the real way
     # 500 - 1%
@@ -78,7 +90,7 @@ class Order
     R.hset "orders:#{id}", "price",   price.to_2s
     R.hset "orders:#{id}", "time",    time
 
-    R.zadd "orders", (price*100).to_i, id
+    R.zadd "orders:#{type}", (price*100).to_i, id
     R.sadd "users:#{user_id}:orders", id
     R.sadd "users:#{user_id}:orders_#{type}", id
     R.sadd "orders_#{type}", id
@@ -122,10 +134,14 @@ class Order
     hashes_full orders
   end
 
-  def self.open(user_id)
-    order_ids = R.smembers "users:#{user_id}:orders"
-    R.zrange "users:1:zorders", 0, -1
-    hashes order_ids
+  def self.open
+    buy + sell
+  end
+
+  def self.user(user_id)
+    # NOTE: slow implementation, use only in test env or slow page
+    orders_id = R.smembers "users:#{user_id}:orders"
+    hashes orders_id
   end
 
   def self.type(type)
@@ -190,13 +206,14 @@ class Order
     order_key = "orders:#{id}"
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
-    R.zrem "orders", id
+    R.zrem "orders:#{type}", id
     R.srem "users:#{user_id}:orders", id
     R.srem "users:#{user_id}:orders_#{type}", id
     R.srem "orders_#{type}", id
     R.del order_key
   end
 
+  # TODO: rename to resolve!
   def resolved
     puts "resolved"
     type    = R.hget "orders:#{id}", "type"
@@ -204,6 +221,7 @@ class Order
     order_closed_add
     Order.remove id
   end
+  alias :resolve! :resolved
 
   def order_closed_add
     order = Order.hash id

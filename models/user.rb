@@ -8,7 +8,7 @@ class User
 
 
   def orders_open
-    Order.open self.id
+    Order.user self.id
   end
   alias :orders :orders_open
 
