@@ -1,3 +1,13 @@
+:ruby
+  open    = current_user.orders_open
+  closed  = current_user.orders_closed
+  # TODO: optimize with redis magic
+  # closed_count = R[optimized with redis you know!]
+  # TODO: follows cool idea... but no!
+  #closed_count_month  = current_user.orders_closed_count_month
+  closed_count  = closed.count
+
+
 .line-max-medium.tabbed
   %nav.line.bg-green.color-white.bg-pattern1
     .col4
@@ -11,7 +21,7 @@
         .separator10
         .separator5
         %i.fa.fa-check
-        &nbsp;Open
+        &nbsp;Open (#{open.count})
         .separator10
         .separator5
     %button.col2.center-content.bg-muted.color-white
@@ -19,7 +29,8 @@
         .separator10
         .separator5
         %i.fa.fa-suitcase
-        &nbsp;Closed
+        &nbsp;Closed (#{closed_count})
+        <br>
         .separator10
         .separator5
 
@@ -28,11 +39,11 @@
     %section.orders_open
       %h1 Open orders
 
-      = haml :"orders/_open"
+      = partial :"orders/_open", orders: open
 
     %section.orders_closed.hidden
       %h1 Closed orders
 
-      = haml :"orders/_closed"
+      = partial :"orders/_closed", orders: closed
 
     .separator15

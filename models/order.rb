@@ -1,7 +1,15 @@
 class Order
   # store: redis
 
+  # notes:
+  #
+  # orders_[type] is the sorted set
+  # orders|[type] is the set
+
   attr_reader :id, :user_id, :type, :amount, :price, :time
+
+  # TODO: consider in removing this, that is used only for orderbook in Order.type_sum atm
+  attr_writer :amount
 
   def initialize(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
     @id       = id.to_i
@@ -16,6 +24,18 @@ class Order
 
   def price_eur
     (@price * @amount).to_f
+  end
+
+  def self.buy
+    # TODO: implement
+    # order_ids = R.smembers "users:#{user_id}:orders"
+    order_ids  = R.zrange "orders_buy", 0, -1
+    hashes order_ids
+  end
+
+  def self.sell
+    order_ids  = R.zrange "orders_sell", 0, -1
+    hashes order_ids
   end
 
   def self.simple_price_buy
@@ -78,10 +98,10 @@ class Order
     R.hset "orders:#{id}", "price",   price.to_2s
     R.hset "orders:#{id}", "time",    time
 
-    R.zadd "orders", (price*100).to_i, id
+    R.zadd "orders_#{type}", (price*100).to_i, id
+    R.sadd "orders|#{type}", id # FIXME: probably we don't need a set equal to sorted set
     R.sadd "users:#{user_id}:orders", id
     R.sadd "users:#{user_id}:orders_#{type}", id
-    R.sadd "orders_#{type}", id
 
     order = new(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
 
@@ -122,15 +142,33 @@ class Order
     hashes_full orders
   end
 
-  def self.open(user_id)
-    order_ids = R.smembers "users:#{user_id}:orders"
-    R.zrange "users:1:zorders", 0, -1
-    hashes order_ids
+  def self.open
+    buy + sell
+  end
+
+  def self.user(user_id)
+    # NOTE: slow implementation, use only in test env or slow page
+    orders_id = R.smembers "users:#{user_id}:orders"
+    hashes orders_id
   end
 
   def self.type(type)
-    order_ids = R.smembers "orders_#{type}"
+    order_ids = R.smembers "orders|#{type}"
     hashes order_ids
+  end
+
+  def self.type_sum(type)
+    orders = type type
+
+    summed = []
+    orders.each do |order|
+      unless order_found = summed.find{ |o| o.price == order.price  }
+        summed << order
+      else
+        order_found.amount += order.amount
+      end
+    end
+    summed
   end
 
   def self.type_limit(type, limit=20)
@@ -145,7 +183,7 @@ class Order
   end
 
   def self.not_user_type(user_id, type)
-    order_ids = R.sdiff "orders_#{type}", "users:#{user_id}:orders_#{type}"
+    order_ids = R.sdiff "orders|#{type}", "users:#{user_id}:orders_#{type}"
     hashes order_ids
   end
 
@@ -190,13 +228,14 @@ class Order
     order_key = "orders:#{id}"
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
-    R.zrem "orders", id
+    R.zrem "orders_#{type}", id
+    R.srem "orders|#{type}", id
     R.srem "users:#{user_id}:orders", id
     R.srem "users:#{user_id}:orders_#{type}", id
-    R.srem "orders_#{type}", id
     R.del order_key
   end
 
+  # TODO: rename to resolve!
   def resolved
     puts "resolved"
     type    = R.hget "orders:#{id}", "type"
@@ -204,6 +243,7 @@ class Order
     order_closed_add
     Order.remove id
   end
+  alias :resolve! :resolved
 
   def order_closed_add
     order = Order.hash id

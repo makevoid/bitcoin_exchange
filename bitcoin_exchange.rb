@@ -58,7 +58,8 @@ if App.env != "production"
 
 
     post "/force_login/:id" do |id|
-      return_url = params[:return_url] unless params[:return_url].blank?
+      return_url = params[:return_url]
+      return_url = params[:return_url] if return_url && !return_url.blank?
       @@current_user = User.get id.to_i
       redirect return_url || "/"
     end

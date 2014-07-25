@@ -1,3 +1,5 @@
+:ruby
+  cur_user = current_user
 !!! 5
 %html
   - TITLE = "BitcoinExchange"
@@ -48,7 +50,11 @@
               .col2
                 %a.line.desktop{ data: { toggle: "user_details" } }
                   %i.fa.fa-user.color-green
-                  Account
+                  - unless cur_user
+                    Log In
+                  - else
+                    = cur_user.username
+
                 %a.line.mobile.tablet{ data: { toggle: "user_details" } }
                   %i.fa.fa-user.color-green
 
@@ -73,25 +79,29 @@
                   %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } BOB
             .separator15
             %section.line-compress.left-content
-              %h3 Logged as
-              %h2.color-lightgreen #{current_user.username}
+              - if cur_user
+                %h3 Logged as
+                %h2.color-lightgreen #{cur_user.username}
+              - else
+                %a.btn.bg-muted.color-white{ href: "#"} Login
         .separator10
 
-        %section.line-compress.bg-black.left-content
-          .line-compress
-            .separator5
-            %p Current price: €#{Ticker.last.f_eur}
-            %p
-              Balance:
-              = haml :"_balance"
-            %p Total value: €#{cur_user_balance.total_value.f_eur}
-            .separator5
-        .line.center-content
-          %h1
-            %a.line.btn.bg-muted.color-white{ href: "/logout" }
+        - if cur_user
+          %section.line-compress.bg-black.left-content
+            .line-compress
               .separator5
-              %i.fa.fa-sign-out &nbsp;logout
+              %p Current price: €#{Ticker.last.f_eur}
+              %p
+                Balance:
+                = haml :"_balance"
+              %p Total value: €#{cur_user_balance.total_value.f_eur}
               .separator5
+          .line.center-content
+            %h1
+              %a.line.btn.bg-muted.color-white{ href: "/logout" }
+                .separator5
+                %i.fa.fa-sign-out &nbsp;logout
+                .separator5
 
       .separator50
       .separator30.desktop

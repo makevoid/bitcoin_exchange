@@ -140,6 +140,12 @@ describe "OrderBook" do
       # @user2.orders_open.first.should eql? @order4
     end
 
+    it "doesn't match orders" do
+      @order4.should be_an Order
+      orders = Orderbook.matching_orders( @order4 )
+      orders.should be_empty
+    end
+
     it "update the amount of the big order" do
       @order3.amount.should == 0.8
     end
@@ -151,11 +157,11 @@ describe "OrderBook" do
       @user2.balance.btc.should == 0.91
     end
 
-    #after(:all){ cleanup! }
+    after(:all){ cleanup! }
   end
-  
+
   # TODO: spec create partial closed order for not completely drained order!
-  
+
   # speed test - orderbook
   # 10k BUY orders in a second
   # 1 sell order with matching volume

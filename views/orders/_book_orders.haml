@@ -1,0 +1,10 @@
+- orders = Order.type_sum type
+
+- if orders.empty?
+  There are no open orders
+
+- orders.each do |order|
+  .order_row
+    = partial :"orders/_book_order", order: order
+
+

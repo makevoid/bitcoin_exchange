@@ -54,7 +54,7 @@ class Orderbook
 
   end
 
-  # TODO: naive approach, use everytime partial resolve
+  # TODO: naive approach, needs partial resolve into it, see next method's comment
   def self.resolve_full(order1, order2)
     # puts "log: full resolve"
     if order1.type == :buy
