@@ -11,6 +11,7 @@ gem "haml"
 gem "sass"
 
 gem "redis"
+gem "hiredis" # pipelining
 
 gem "dm-core"
 gem "dm-mysql-adapter"

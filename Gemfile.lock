@@ -59,6 +59,7 @@ GEM
       sass (>= 3.1)
     haml (4.0.5)
       tilt
+    hiredis (0.5.2)
     http_parser.rb (0.6.0)
     json (1.8.1)
     listen (2.7.9)
@@ -118,6 +119,7 @@ DEPENDENCIES
   guard-livereload
   guard-sass
   haml
+  hiredis
   json
   rack-test
   redis

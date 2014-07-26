@@ -42,7 +42,7 @@ describe "Orders" do
   end
 
   it "places an order [sell]" do
-    @order_sell = { type: :sell, amount: 0.05, price: 510.0 }
+    @order_sell = { type: :sell, amount: 0.05, price: 495.0 }
     post "/orders", { order: @order_sell }
   end
 

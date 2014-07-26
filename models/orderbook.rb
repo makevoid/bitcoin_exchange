@@ -104,7 +104,7 @@ class Orderbook
     R["exchange:eur"] = (exch_eur + buy_fee_eur).to_ds
     R["exchange:btc"] = (exch_btc + sell_fee_btc).to_ds
 
-
+    
     if order_buy.amount == order_sell.amount
       order_buy.resolved
       order_sell.resolved
@@ -117,6 +117,7 @@ class Orderbook
         order_sell.update_amount order_buy.amount
       end
     end
+    true
   end
 
   def self.resolve_partial(order1, order2)
