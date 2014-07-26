@@ -91,6 +91,7 @@ class Order
     # order_keys = %i(id user type amount price time) # sorted the right way
     time = Time.now.to_i
 
+    # TODO: use hmset
     R.hset "orders:#{id}", "id",      id
     R.hset "orders:#{id}", "user_id", user_id
     R.hset "orders:#{id}", "type",    type
@@ -116,6 +117,11 @@ class Order
   def update_amount(sell_amount)
     @amount = amount - sell_amount
     R.hset "orders:#{id}", "amount",  @amount
+  end
+
+  def self.first(order_id)
+    ord = R.hgetall "orders:#{order_id}"
+    init ord
   end
 
   def self.hash(order_id)
@@ -177,13 +183,27 @@ class Order
     hashes order_ids
   end
 
-  def self.user_type(user_id, type)
-    order_ids = R.smembers "users:#{user_id}:orders_#{type}"
+  # unused
+  #
+  # def self.user_type(user_id, type)
+  #   order_ids = R.smembers "users:#{user_id}:orders_#{type}"
+  #   hashes order_ids
+  # end
+  # 
+  # def self.not_user_type(user_id, type)
+  #   order_ids = R.sdiff "orders|#{type}", "users:#{user_id}:orders_#{type}"
+  #   hashes order_ids
+  # end
+
+  ORDER_MAX = 100_000_00
+
+  def self.buy_amount_match(price)
+    order_ids = R.zrangebyscore "orders_buy",  price, ORDER_MAX
     hashes order_ids
   end
-
-  def self.not_user_type(user_id, type)
-    order_ids = R.sdiff "orders|#{type}", "users:#{user_id}:orders_#{type}"
+  
+  def self.sell_amount_match(price)
+    order_ids = R.zrangebyscore "orders_sell",  0, price
     hashes order_ids
   end
 
@@ -204,6 +224,7 @@ class Order
   def self.amount_sum_buy(user_id)
     order_ids = R.smembers "users:#{user_id}:orders_buy"
     orders = order_ids.map do |order_id|
+      # TODO: use hmget
       amount = R.hget "orders:#{order_id}", "amount"
       price  = R.hget "orders:#{order_id}", "price"
       { amount: amount.to_d, price: price.to_d }
@@ -226,6 +247,7 @@ class Order
 
   def self.remove(id)
     order_key = "orders:#{id}"
+    # TODO: use hmget
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
     R.zrem "orders_#{type}", id

@@ -37,11 +37,9 @@ class Orderbook
 
     orders = matching_orders order
 
-    # pseudo code
     while orders
       order_sel = orders.pop
       break unless order_sel
-
 
       resolve_full(order, order_sel)
 
@@ -75,10 +73,10 @@ class Orderbook
 
     # update buy
     user_id     = order_buy.user_id
-    buy_eur     = amount_max * order_buy.price
-    buy_fee_eur = buy_eur * fee
-    buy_fee_btc = amount_max * fee
-    buy_btc     = amount_max - buy_fee_btc
+    buy_eur     = amount_max  * order_buy.price
+    buy_fee_eur = buy_eur     * fee
+    buy_fee_btc = amount_max  * fee
+    buy_btc     = amount_max  - buy_fee_btc
     bal_key     = "users:#{user_id}:balance_eur"
     buyer_balance_eur = (R[bal_key] || 0).to_d
     R[bal_key]  = (buyer_balance_eur - buy_eur).to_ds
@@ -89,10 +87,10 @@ class Orderbook
     # update sell
     user_id       = order_sell.user_id
     sell_btc      = amount_max
-    sell_fee_btc  = sell_btc * fee
-    sell_eur      = amount_max * order_sell.price
-    sell_fee_eur  = sell_eur * fee
-    sell_eur_wfee = sell_eur - sell_fee_eur
+    sell_fee_btc  = sell_btc    * fee
+    sell_eur      = amount_max  * order_sell.price
+    sell_fee_eur  = sell_eur    * fee
+    sell_eur_wfee = sell_eur    - sell_fee_eur
     bal_key       = "users:#{user_id}:balance_btc"
     seller_balance_btc = (R[bal_key] || 0).to_d
     R[bal_key]    = (seller_balance_btc - sell_btc).to_ds
@@ -105,7 +103,6 @@ class Orderbook
     exch_btc = (R["exchange:btc"] || 0).to_d
     R["exchange:eur"] = (exch_eur + buy_fee_eur).to_ds
     R["exchange:btc"] = (exch_btc + sell_fee_btc).to_ds
-
 
 
     if order_buy.amount == order_sell.amount
@@ -134,8 +131,13 @@ class Orderbook
 
   def self.matching_orders(order)
     type = order.type == :buy ? :sell : :buy
-    orders = Order.not_user_type order.user_id, type
-    # order.type == :buy ? orders : orders.reverse
+    price = order.price * 100
+
+    if type == :buy
+      Order.buy_amount_match  price
+    else # sell
+      Order.sell_amount_match price
+    end
   end
 
 end

@@ -12,6 +12,28 @@ orders:id [HASH]- (orders infos - fields: user_id, type, amount, price, time, ti
 
 orders_closed:id [HASH]- (closed orders infos - fields: user_id, type, amount, price, time, time_close)
 
+
+### redis notes
+
+ORDER_MAX = 1000_000_00
+
+order_buy = [450, 500, 550]_
+
+order_sell = [600]
+R.zrangebyscore "orders_buy",  600_00, ORDER_MAX
+
+###
+
+order_buy = [600, 550, 500]_
+
+order_sell = [450]
+R.zrangebyscore "orders_buy",  0, 450_00
+
+
+
+
+R.zrangebyscore "orders_sell", 400_00, 500_00
+
 ---
 
 users:id:balance_eur 

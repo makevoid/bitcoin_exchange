@@ -128,11 +128,12 @@ describe "OrderBook" do
 
       @order1 = Order.create user_id: @user.id, type: :buy,  amount: 0.1, price: 500.0
       @order2 = Order.create user_id: @user.id, type: :buy, amount: 0.1, price: 495.0
-      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1, price: 500.0
-      @order4 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 490.0 # should not match
+      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1, price: 495.0
+      @order4 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 505.0 # should not match
     end
 
     it "resolves the matching orders" do
+      @order3.should_not receive(:resolved)
       @user.orders_open.count.should  == 0
       @user2.orders_open.count.should == 2
       @user2.orders_open.last.should eql? @order4
@@ -153,7 +154,7 @@ describe "OrderBook" do
     it "updates balances" do
       @user.balance.eur.should  == 0.5 # TODO: TORNA?
       @user.balance.btc.should  == 0.198
-      @user2.balance.eur.should == 99.0
+      @user2.balance.eur.to_f.should == 98.01
       @user2.balance.btc.should == 0.91
     end
 

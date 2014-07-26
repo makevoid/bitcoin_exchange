@@ -16,6 +16,11 @@ this semplifies the concept of exchange and
 in the future consider implementing a redis based queue system with minimal overhead, but right now let the client do the dirty job ;)
 
 
+### prerequisites
+
+- redis (launched on default port)
+- bitcoind
+
 ### development
 
 launch the app:
@@ -73,6 +78,10 @@ symlink:
 " > Satoshi
 
 https://bitcointalk.org/index.php?topic=417.msg3579#msg3579
+
+### running specs
+
+    rspec
 
 
 ### security notes

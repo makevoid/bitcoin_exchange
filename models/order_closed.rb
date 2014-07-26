@@ -15,7 +15,7 @@ class OrderClosed < Order
     order.save
   end
 
-  # TODO: change datastore to sql?
+  # TODO: change datastore to sql and use async?
 
   def self.all
     orders = R.keys "orders_closed:*"
@@ -27,6 +27,8 @@ class OrderClosed < Order
 
   def save
     id = R.incr "ids:orders_closed"
+    
+    # todo: use hmset 
     R.hset "orders_closed:#{id}", "id",       id
     R.hset "orders_closed:#{id}", "user_id",  user_id
     R.hset "orders_closed:#{id}", "type",     type
