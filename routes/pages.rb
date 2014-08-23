@@ -4,4 +4,8 @@ class BitcoinExchange < Sinatra::Base
     haml :"pages/contact_us"
   end
 
+  get "/home" do
+    haml :"pages/home"
+  end
+
 end

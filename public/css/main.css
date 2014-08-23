@@ -11,7 +11,7 @@
   font-weight:300;
 }
 body, html {
-  background:#F4F6F6;
+  background:#EFF0F1;
 }
 a{
   font-size: inherit;
@@ -80,7 +80,7 @@ input[type="text"] {
   color:inherit;
 }
 .navbar nav a:hover {
-  background:#f4f6f6;
+  background:rgba(0,0,0,0.03);
 }
 .navbar nav a.active, .navbar nav a.active:hover {
   color:#3EDE73;
