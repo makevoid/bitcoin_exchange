@@ -53,7 +53,7 @@ R = Redis.new options
 # data store [datamapper] mysql
 
 test_db = "_test" if app_env == :test
-pippo = "bitexchange:asd@" if app_env == :development && `whoami`.strip == "USERNAME_PIPPO"
+pippo = "bitexchange:asd@" if app_env == :development && `whoami`.strip == "ispuk"
 DataMapper.setup :default, "mysql://#{pippo}localhost/bitcoin_exchange#{test_db}"
 
 
