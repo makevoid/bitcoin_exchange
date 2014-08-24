@@ -120,16 +120,25 @@ input[type="text"] {
 .color-darkgreen {
   color:green;
 }
+.color-bitcoin{
+  color: #F7931A;
+}
 .color-skype {
   color:#09B1EF;
 }
 /*Backgrounds*/
+.bg-highlight{
+  background-color: #E7E9EB;
+}
 .bg-bitcoin {
   background-color: #F7931A;
 }
 .bg-pattern1 {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAFUlEQVQYlWNgwANEjqf/HwmSDAwMAEQrEgmpQ8hgAAAAAElFTkSuQmCC');
   background-repeat:repeat;
+}
+.bg-darkgreen{
+  background-color:#12A176;
 }
 .bg-green {
   background-color:#1FD65C;
@@ -176,6 +185,12 @@ input[type="text"] {
 }
 .font-x-large {
   font-size:26px;
+}
+.font-small{
+  font-size: 11px;
+}
+.font-xx-large {
+  font-size:32px;
 }
 /*Buttons*/
 form .btn{
