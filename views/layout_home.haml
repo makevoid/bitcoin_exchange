@@ -1,0 +1,16 @@
+:ruby
+  cur_user = current_user
+!!! 5
+%html
+  - TITLE = "BitcoinExchange"
+  %head
+    %title= TITLE
+    %link{ rel:"stylesheet", href: "/css/helper.css" }
+    %link{ rel:"stylesheet", href:"/css/fontawesome.css"}
+    %link{ rel: "stylesheet", href: "/css/main.css" }
+    %link{ rel:"stylesheet", href: "/css/helpers.css" }
+    = haml :"_metas" # todo require/implement partial :metas
+
+  %body
+    %section.main= yield
+    %script{ type: "text/javascript", src: "/js/app.js" }
