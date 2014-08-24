@@ -28,7 +28,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="99.346353"
+     inkscape:cx="2.3717093"
      inkscape:cy="91.923882"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -57,17 +57,20 @@
      transform="translate(0,-993.36218)">
     <text
        xml:space="preserve"
-       style="font-size:33.7507782px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3ede73;fill-opacity:1;stroke:none;font-family:Sans"
-       x="4.8854413"
-       y="1031.6625"
+       style="font-size:28.75832939px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#3ede73;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Apple LiGothic Bold Italic"
+       x="0.37196538"
+       y="1008.0638"
        id="text3067"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       transform="scale(0.97456949,1.0260941)"><tspan
          sodipodi:role="line"
          id="tspan3069"
-         x="4.8854413"
-         y="1031.6625"
-         style="font-style:italic;font-variant:normal;font-weight:500;font-stretch:normal;fill:#3ede73;fill-opacity:1;font-family:Apple LiGothic;-inkscape-font-specification:Apple LiGothic Italic"><tspan
-   style="fill:#4d4d4d;fill-opacity:1"
-   id="tspan3048">Lemon</tspan>tree</tspan></text>
+         x="0.37196538"
+         y="1008.0638"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#3ede73;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold Italic"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#333333;fill-opacity:1;font-family:Roboto;-inkscape-font-specification:Roboto Bold Italic"
+   id="tspan3048"><tspan
+   style="letter-spacing:-2.03000008px"
+   id="tspan2993">L</tspan>emon</tspan>tree</tspan></text>
   </g>
 </svg>
