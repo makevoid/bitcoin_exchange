@@ -53,7 +53,8 @@ R = Redis.new options
 # data store [datamapper] mysql
 
 test_db = "_test" if app_env == :test
-DataMapper.setup :default, "mysql://bitexchange:asd@localhost/bitcoin_exchange#{test_db}"
+pippo = "bitexchange:asd@" if app_env == :development && `whoami`.strip == "USERNAME_PIPPO"
+DataMapper.setup :default, "mysql://#{pippo}localhost/bitcoin_exchange#{test_db}"
 
 
 require 'bigdecimal'

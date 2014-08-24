@@ -45,4 +45,6 @@ end
 
 # nice gems to consider
 #
+# orderbook & API: https://github.com/kenichi/angelo
+#
 # satoshi-unit: https://github.com/snitko/satoshi-unit
