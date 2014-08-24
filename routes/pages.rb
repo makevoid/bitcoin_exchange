@@ -5,7 +5,7 @@ class BitcoinExchange < Sinatra::Base
   end
 
   get "/home" do
-    haml :"pages/home"
+    haml :"pages/home" , layout: :layout_home
   end
 
 end
