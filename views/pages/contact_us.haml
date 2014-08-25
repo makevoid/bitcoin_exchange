@@ -1,18 +1,25 @@
 .line-max-medium
-  %h1.font-x-large.center-content Contact us
-  .separator10
-  .line-max-medium.col6
-    %textarea{ style: "height: 120px", placeholder: "Ask us a question or write a comment, we will be glad to help your requests." }
-    .separator15
-    %button.btn.btn-medium.btn-primary.color-white.no-border{ type: "submit" } Send
+  .col8.offset-left1.bg-white.radius3
+    .line-max-medium.col8.offset-left1
+      .separator15
+      %h1.font-x-large Contact us
+      %h4.color-muted
+        Feel free to contact us whenever you need.
+      .separator10
+      %input{type: "email", placeholder:"Your email ..."}
+      .separator10
+      %textarea{ style: "height: 120px", placeholder: "Ask us a question or write a comment, we will be glad to help your requests." }
+      .separator15
+      %button.btn.btn-medium.btn-primary.color-white.no-border{ type: "submit" } Send
 
-  // TODO: insert here a list of messages
+    // TODO: insert here a list of messages
 
-  .separator50
-  %h5.center-content
-    %i.fa.fa-envelope.color-info
-    &nbsp; #{TITLE}@example.com
-  .separator5
-  %h5.center-content
-    %i.fa.fa-skype.color-skype
-    &nbsp; #{TITLE}
+    .separator30
+    .center-content
+      %i.fa.fa-envelope.color-info
+      &nbsp; #{TITLE}@example.com
+    .separator5
+    .center-content
+      %i.fa.fa-skype.color-skype
+      &nbsp; #{TITLE}
+    .separator30
