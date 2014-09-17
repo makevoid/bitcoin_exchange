@@ -90,7 +90,7 @@
               %td.aright €#{deposit.amount.f_eur}
               %td Fulfilled
               %td #{deposit.created_at.time_f}
-              %td #{deposit.created_at.time_f}
+              %td #{deposit.created_at.time_f} x
           / #{deposit.id}
           / old: .row €#{deposit.amount.f_eur} #{deposit.created_at.time_f}
     .separator10
@@ -100,8 +100,15 @@
       - deposits = DepositBtc.all(user_id: current_user.id)
       - if deposits == []
         There are no BTC deposits.
-      - for deposit in deposits
-        / #{deposit.id}
-        .row #{deposit.amount} BTC #{deposit.created_at.time_f}
+      %table
+        %tr
+          %th Amount
+          %th Status
+          %th Request Date
+        - for deposit in deposits
+          %tr
+            %td.aright #{deposit.amount} BTC
+            %td Confirmed
+            %td #{deposit.created_at.time_f}
     .separator10
   .separator10

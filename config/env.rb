@@ -42,7 +42,8 @@ puts
 # data store [redis]
 
 options = { driver: :hiredis }
-options[:db] = 1 if app_env == :test
+options[:db] = 1 
+options[:db] = 2 if app_env == :test
 
 R = Redis.new options
 
