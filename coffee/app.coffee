@@ -56,6 +56,7 @@ main = ->
   bind_overlay_dismiss()
   show_hash_section()
   hash_change_return_url()
+  bind_user_details_pos()
 
 
 hash_change_return_url = ->
@@ -97,11 +98,9 @@ bind_togglables = ->
   togs = all "[data-toggle]"
   for tog in togs
     tog.addEventListener "click", (evt) ->
-      # console.log evt.target
-      toggled = q ".#{evt.target.dataset.toggle}"
-      # setTimeout ->
-      #         toggle toggled, "hidden"
-      #       , 0
+      target = evt.target
+      target = target.parentNode unless target.nodeName == "BUTTON" || target.nodeName == "A"
+      toggled = q ".#{target.dataset.toggle}"
       toggle toggled, "hidden"
       true
     true
@@ -138,6 +137,21 @@ bind_overlay_dismiss = ->
     unless over_click
       toggle over, "hidden"
     over_click = false
+    
+bind_user_details_pos = ->
+  return
+  
+  usr_det_btn = q "[data-toggle=user_details]"
+  user_details = q "section.user_details"
+  
+  max = 980
+  
+  usr_det_btn.addEventListener "click", (evt) ->
+    ud = q(".user_details").offsetWidth
+    width = window.screen.availWidth
+    width = (width - max)/2 - ud
+    console.log ud, width
+    user_details.style.right = "#{width}px"
 
 
 boot main

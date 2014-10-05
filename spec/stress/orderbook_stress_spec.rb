@@ -40,6 +40,8 @@ describe "OrderBook" do
 
   describe "creates many matching orders" do
     before :all do
+      @num = 2
+      
       @user  = User.create username: "Ali"
       @user2 = User.create username: "Bob"
 
@@ -48,7 +50,6 @@ describe "OrderBook" do
       
       @num.times do |i|
         price = 500.0 + (i.to_f+1)/100
-        # puts price
         Order.create user_id: @user.id, type: :buy,  amount: 0.0001, price: price
       end
       @num.times do |i|

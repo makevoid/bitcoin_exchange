@@ -1,4 +1,4 @@
-var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, boot, hash_change_return_url, http, main, q, show_hash_section, toggle;
+var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, bind_user_details_pos, boot, hash_change_return_url, http, main, q, show_hash_section, toggle;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -46,7 +46,8 @@ main = function() {
   bind_tabbed();
   bind_overlay_dismiss();
   show_hash_section();
-  return hash_change_return_url();
+  hash_change_return_url();
+  return bind_user_details_pos();
 };
 
 hash_change_return_url = function() {
@@ -103,8 +104,12 @@ bind_togglables = function() {
   for (_i = 0, _len = togs.length; _i < _len; _i++) {
     tog = togs[_i];
     tog.addEventListener("click", function(evt) {
-      var toggled;
-      toggled = q("." + evt.target.dataset.toggle);
+      var target, toggled;
+      target = evt.target;
+      if (!(target.nodeName === "BUTTON" || target.nodeName === "A")) {
+        target = target.parentNode;
+      }
+      toggled = q("." + target.dataset.toggle);
       toggle(toggled, "hidden");
       return true;
     });
@@ -164,6 +169,22 @@ bind_overlay_dismiss = function() {
       toggle(over, "hidden");
     }
     return over_click = false;
+  });
+};
+
+bind_user_details_pos = function() {
+  var max, user_details, usr_det_btn;
+  return;
+  usr_det_btn = q("[data-toggle=user_details]");
+  user_details = q("section.user_details");
+  max = 980;
+  return usr_det_btn.addEventListener("click", function(evt) {
+    var ud, width;
+    ud = q(".user_details").offsetWidth;
+    width = window.screen.availWidth;
+    width = (width - max) / 2 - ud;
+    console.log(ud, width);
+    return user_details.style.right = "" + width + "px";
   });
 };
 

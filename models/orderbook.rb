@@ -41,7 +41,7 @@ class Orderbook
       order_sel = orders.pop
       break unless order_sel
 
-      resolve_full(order, order_sel)
+      resolve_full order, order_sel 
 
       # TODO: important
       # use transactional style or lock (with a lock there is no need to use transactions)
@@ -104,15 +104,18 @@ class Orderbook
     R["exchange:eur"] = (exch_eur + buy_fee_eur).to_ds
     R["exchange:btc"] = (exch_btc + sell_fee_btc).to_ds
 
-    
+    puts
     if order_buy.amount == order_sell.amount
+      puts "order equals - resolving both"
       order_buy.resolved
       order_sell.resolved
     else
       if order_buy.amount > order_sell.amount
+        puts "buy is higher - resolving sell"
         order_sell.resolved
         order_buy.update_amount order_sell.amount
       else
+        puts "sell is higher - resolving buy"        
         order_buy.resolved
         order_sell.update_amount order_buy.amount
       end

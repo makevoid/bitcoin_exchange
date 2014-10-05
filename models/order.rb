@@ -91,6 +91,8 @@ class Order
     # order_keys = %i(id user type amount price time) # sorted the right way
     time = Time.now.to_i
 
+    puts "create order: #{id}, type: #{type}"
+    
     # TODO: use hmset
     R.hset "orders:#{id}", "id",      id
     R.hset "orders:#{id}", "user_id", user_id
@@ -246,21 +248,23 @@ class Order
   end
 
   def self.remove(id)
-    order_key = "orders:#{id}"
     # TODO: use hmget
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
+    
+    puts "removing: #{id} #{type}"
     R.zrem "orders_#{type}", id
     R.srem "orders|#{type}", id
     R.srem "users:#{user_id}:orders", id
     R.srem "users:#{user_id}:orders_#{type}", id
-    R.del order_key
+    R.del "orders:#{id}"
   end
 
   # TODO: rename to resolve!
   def resolved
-    puts "resolved"
-    type    = R.hget "orders:#{id}", "type"
+    puts "resolved: #{self.id}"
+    puts "orders: #{(R.keys "orders:*").inspect}"
+    type = R.hget "orders:#{id}", "type"
     raise "CannotResolveDeletedOrder" unless type
     order_closed_add
     Order.remove id
@@ -270,7 +274,7 @@ class Order
   def order_closed_add
     order = Order.hash id
 
-    puts R.keys "orders:*"
+    # print R.keys "orders:*"
     puts order
     order.delete "id"
     order.merge! time_close: Time.now.to_i

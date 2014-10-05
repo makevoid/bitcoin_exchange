@@ -35,7 +35,8 @@
             debug:
             ---
           %form{ action: "/deposits/fake_add", method: "post"}
-            %button{ type: "submit" } fake new deposit
+
+            - submit "fake new deposit", "btn color-white radius3"
 
           (the deposit has to be accepted by admin / banking assistant)
           / TODO: start admin app
@@ -47,7 +48,7 @@
             %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
           - else
             %form{ action: "/users/generate_address", method: :post }
-              - submit "Generate address"
+              - submit "Generate address", "btn color-white radius3"
             todo: add ajax
         .separator30
 
