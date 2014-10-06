@@ -57,7 +57,7 @@ password = File.read( File.expand_path "~/.password" ).strip
 
 test_db = "_test" if app_env == :test
 pippo = "bitexchange:asd@" if app_env == :development && `whoami`.strip == "ispuk"
-prod = "root:#{password}"  if app_env == :production
+prod = "root:#{password}@"  if app_env == :production
 DataMapper.setup :default, "mysql://#{pippo}#{prod}localhost/bitcoin_exchange#{test_db}"
 
 
