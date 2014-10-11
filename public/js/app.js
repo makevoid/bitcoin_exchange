@@ -1,4 +1,4 @@
-var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, bind_user_details_pos, boot, hash_change_return_url, http, main, q, show_hash_section, toggle;
+var all, bind_overlay_dismiss, bind_tabbed, bind_togglables, bind_user_details_pos, boot, hash_change_return_url, http, main, q, show_hash_section, toggle, toggle_all;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -18,6 +18,16 @@ all = function(name, in_children) {
   } else {
     return document.querySelectorAll(name);
   }
+};
+
+toggle_all = function(nodes, className) {
+  var node, _i, _len, _results;
+  _results = [];
+  for (_i = 0, _len = nodes.length; _i < _len; _i++) {
+    node = nodes[_i];
+    _results.push(toggle(node, className));
+  }
+  return _results;
 };
 
 toggle = function(node, className) {
@@ -81,22 +91,6 @@ show_hash_section = function() {
   }
 };
 
-bind_tabs = function() {
-  var elements, inside, tab, tabs, _i, _len, _results;
-  tabs = all(".tab > h1 a");
-  elements = [];
-  inside = [];
-  _results = [];
-  for (_i = 0, _len = tabs.length; _i < _len; _i++) {
-    tab = tabs[_i];
-    tab.addEventListener("click", function(evt) {
-      return console.log(evt.target.dataset);
-    });
-    _results.push(true);
-  }
-  return _results;
-};
-
 bind_togglables = function() {
   var tog, togs, _i, _len, _results;
   togs = all("[data-toggle]");
@@ -109,8 +103,8 @@ bind_togglables = function() {
       if (!(target.nodeName === "BUTTON" || target.nodeName === "A")) {
         target = target.parentNode;
       }
-      toggled = q("." + target.dataset.toggle);
-      toggle(toggled, "hidden");
+      toggled = all("." + target.dataset.toggle);
+      toggle_all(toggled, "hidden");
       return true;
     });
     _results.push(true);

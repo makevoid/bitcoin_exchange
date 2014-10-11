@@ -81,19 +81,20 @@
         %h1 Price chart
         Chart
       .separator10
+      
+      .hidden
+        %section.infos.line-compress
+          %h2 Infos
+          %p Current time: #{Time.now.strftime "%H:%M:%S"}
+          %p Last login: 127.0.0.1 @ #{Time.now.time_f}
 
-      %section.infos.line-compress
-        %h2 Infos
-        %p Current time: #{Time.now.strftime "%H:%M:%S"}
-        %p Last login: 127.0.0.1 @ #{Time.now.time_f}
-
-        .row
-          %button Logins logs list
-          .separator5
-        .row
-          %button Canceled orders
-          .separator5
-        .row
-          %button Operations log
-          .separator5
-      .separator10
+          .row
+            %button Logins logs list
+            .separator5
+          .row
+            %button Canceled orders
+            .separator5
+          .row
+            %button Operations log
+            .separator5
+        .separator10

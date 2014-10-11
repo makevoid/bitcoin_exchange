@@ -6,7 +6,7 @@ class Order
   # orders_[type] is the sorted set
   # orders|[type] is the set
 
-  attr_reader :id, :user_id, :type, :amount, :price, :time
+  attr_reader :id, :user_id, :type, :amount, :price, :time, :resolved
 
   # TODO: consider in removing this, that is used only for orderbook in Order.type_sum atm
   attr_writer :amount
@@ -20,6 +20,8 @@ class Order
     @type     = type.to_sym
     @amount   = amount.to_d
     @price    = price.to_d
+    
+    @resolved = false
   end
 
   def price_eur
@@ -91,15 +93,16 @@ class Order
     # order_keys = %i(id user type amount price time) # sorted the right way
     time = Time.now.to_i
 
-    puts "create order: #{id}, type: #{type}"
+    # puts "create order: #{id}, type: #{type},\t price: #{price.to_2s}, amount: #{amount.to_ds}"
     
-    # TODO: use hmset
-    R.hset "orders:#{id}", "id",      id
-    R.hset "orders:#{id}", "user_id", user_id
-    R.hset "orders:#{id}", "type",    type
-    R.hset "orders:#{id}", "amount",  amount.to_ds
-    R.hset "orders:#{id}", "price",   price.to_2s
-    R.hset "orders:#{id}", "time",    time
+    R.hmset "orders:#{id}", {
+      id:       id, 
+      user_id:  user_id,
+      type:     type,
+      amount:   amount.to_ds,
+      price:    price.to_2s, 
+      time:     time,
+    }.to_a.flatten
 
     R.zadd "orders_#{type}", (price*100).to_i, id
     R.sadd "orders|#{type}", id # FIXME: probably we don't need a set equal to sorted set
@@ -199,13 +202,17 @@ class Order
 
   ORDER_MAX = 100_000_00
 
+  # returns buy orders sorted in reverse (descending order)
+  #
   def self.buy_amount_match(price)
-    order_ids = R.zrangebyscore "orders_buy",  price, ORDER_MAX
+    order_ids = R.zrevrangebyscore "orders_buy", ORDER_MAX, price#, limit: [0,10]  
     hashes order_ids
   end
   
+  # returns sell orders sorted  
+  #
   def self.sell_amount_match(price)
-    order_ids = R.zrangebyscore "orders_sell",  0, price
+    order_ids = R.zrangebyscore "orders_sell",  0, price#, limit: [0,10]  
     hashes order_ids
   end
 
@@ -252,7 +259,7 @@ class Order
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
     
-    puts "removing: #{id} #{type}"
+    # puts "removing: #{id} #{type}"
     R.zrem "orders_#{type}", id
     R.srem "orders|#{type}", id
     R.srem "users:#{user_id}:orders", id
@@ -260,24 +267,23 @@ class Order
     R.del "orders:#{id}"
   end
 
-  # TODO: rename to resolve!
-  def resolved
-    puts "resolved: #{self.id}"
-    puts "orders: #{(R.keys "orders:*").inspect}"
+  def resolve!
+    # puts "resolved: #{self.id}"
+    # puts "orders: #{(R.keys "orders:*").inspect}"
     type = R.hget "orders:#{id}", "type"
     raise "CannotResolveDeletedOrder" unless type
     order_closed_add
     Order.remove id
+    @resolved = true    
   end
-  alias :resolve! :resolved
 
   def order_closed_add
     order = Order.hash id
 
-    # print R.keys "orders:*"
-    puts order
+    # puts order
     order.delete "id"
     order.merge! time_close: Time.now.to_i
+    
     OrderClosed.create sym_keys order
   end
 
@@ -291,6 +297,10 @@ class Order
     amount_sum_buy user.id
   end
 
+  def resolved?
+    resolved
+  end
+
 
   protected
 
@@ -299,7 +309,6 @@ class Order
   #   raise TypeError, "Price must be positive" unless @price > 0
   #   raise TypeError, "Amount must be positive" unless @amount > 0
   # end
-
 
   def balance_eur
     user.balance.eur_available

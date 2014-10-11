@@ -32,7 +32,7 @@ describe "OrderBook" do
   describe "with orders" do
 
     before :all do
-      @order1 = Order.create user_id: @user.id, type: :buy,  amount: 1.0, price: 500.0
+      @order1 = Order.create user_id: @user.id,  type: :buy,  amount: 1.0, price: 500.0
       @order2 = Order.create user_id: @user2.id, type: :sell, amount: 1.0, price: 500.0
     end
 
@@ -70,7 +70,7 @@ describe "OrderBook" do
 
       @order2 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 500.0
       @order3 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 500.0
-      @order1 = Order.create user_id: @user.id, type: :buy,  amount: 1.0, price: 500.0
+      @order1 = Order.create user_id: @user.id,  type: :buy,  amount: 1.0, price: 500.0
     end
 
     it "resolves the matching orders" do
@@ -90,12 +90,12 @@ describe "OrderBook" do
       @user  = User.create username: "Ali"
       @user2 = User.create username: "Bob"
 
-      DepositFiat.create user: @user, amount: 100.0
+      DepositFiat.create user: @user,  amount: 100.0
       DepositBtc.create  user: @user2, amount: 1.0
 
-      @order1 = Order.create user_id: @user.id, type: :buy,  amount: 0.1, price: 500.0
-      @order2 = Order.create user_id: @user.id, type: :buy, amount: 0.1, price: 500.0
-      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1, price: 500.0
+      @order1 = Order.create user_id: @user.id,  type: :buy,  amount: 0.1, price: 500.0
+      @order2 = Order.create user_id: @user.id,  type: :buy,  amount: 0.1, price: 500.0
+      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1,   price: 500.0
     end
 
     it "resolves the matching orders" do
@@ -126,14 +126,14 @@ describe "OrderBook" do
       DepositFiat.create user: @user, amount: 100.0
       DepositBtc.create  user: @user2, amount: 1.11
 
-      @order1 = Order.create user_id: @user.id, type: :buy,  amount: 0.1, price: 500.0
-      @order2 = Order.create user_id: @user.id, type: :buy, amount: 0.1, price: 495.0
-      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1, price: 495.0
+      @order1 = Order.create user_id: @user.id,  type: :buy,  amount: 0.1, price: 500.0
+      @order2 = Order.create user_id: @user.id,  type: :buy,  amount: 0.1, price: 495.0
+      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1,   price: 495.0
       @order4 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 505.0 # should not match
     end
 
     it "resolves the matching orders" do
-      @order3.should_not receive(:resolved)
+      @order3.should_not receive(:resolve!)
       @user.orders_open.count.should  == 0
       @user2.orders_open.count.should == 2
       @user2.orders_open.last.should eql? @order4

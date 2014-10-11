@@ -1,10 +1,13 @@
-%tr
-  %td{ class: order.type }= order.type.capitalize
-  %td #{order.amount.to_dz} BTC
-  %td.aright €#{order.price.f_eur}
-  %td.aright € #{order.price_eur.f_eur}
-  %td
+.line-compress.table-row
+  .separator10
+  .col2{ class: order.type }= order.type.capitalize  
+  .col2 #{order.amount.to_dz} BTC
+  .col3.tright €#{order.price.f_eur}
+  .col2.tright € #{order.price_eur.f_eur}
+  .col1
     %form{ action: "/orders/#{order.id}", method: :post }
       -# form_method :delete
       - hidden "_method", "delete"
       - submit "Cancel", "btn color-white radius3"
+  .separator5
+.hr

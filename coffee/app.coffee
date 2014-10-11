@@ -9,6 +9,11 @@ q = (name, in_children) ->
 all = (name, in_children) ->
   if in_children then in_children.querySelectorAll name else document.querySelectorAll name
 
+toggle_all = (nodes, className) ->
+  for node in nodes
+    toggle node, className
+
+
 toggle = (node, className) ->
   node.classList.toggle className
 
@@ -77,21 +82,21 @@ show_hash_section = ->
     found.classList.remove "hidden"
 
 
-bind_tabs = ->
-  tabs = all ".tab > h1 a"
-  elements = []
-  inside = []
-  for tab in tabs
-    # evt_on tab, "click", (evt) ->
-    tab.addEventListener "click", (evt) ->
-      # parent = evt.target.parentNode.parentNode
-      # inside = parent.querySelector ".inside"
-      console.log evt.target.dataset
-      #toggle inside, "hidden"
-
-    true
-
-  # for tab in tabs
+# bind_tabs = ->
+#   tabs = all ".tab > h1 a"
+#   elements = []
+#   inside = []
+#   for tab in tabs
+#     # evt_on tab, "click", (evt) ->
+#     tab.addEventListener "click", (evt) ->
+#       # parent = evt.target.parentNode.parentNode
+#       # inside = parent.querySelector ".inside"
+#       console.log evt.target.dataset
+#       #toggle inside, "hidden"
+# 
+#     true
+# 
+#   # for tab in tabs
 
 
 bind_togglables = ->
@@ -100,8 +105,8 @@ bind_togglables = ->
     tog.addEventListener "click", (evt) ->
       target = evt.target
       target = target.parentNode unless target.nodeName == "BUTTON" || target.nodeName == "A"
-      toggled = q ".#{target.dataset.toggle}"
-      toggle toggled, "hidden"
+      toggled = all ".#{target.dataset.toggle}"
+      toggle_all toggled, "hidden"
       true
     true
 

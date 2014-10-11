@@ -41,7 +41,8 @@ puts
 
 # data store [redis]
 
-options = { driver: :hiredis }
+options = {}
+options[:driver] = :hiredis 
 options[:db] = 1 
 options[:db] = 2 if app_env == :test
 
