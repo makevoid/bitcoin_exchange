@@ -54,7 +54,7 @@ R = Redis.new options
 
 # data store [datamapper] mysql
 
-password = File.read( File.expand_path "~/.password" ).strip
+password = File.read( File.expand_path "~/.password" ).strip if app_env == :production
 
 test_db = "_test" if app_env == :test
 pippo = "bitexchange:asd@" if app_env == :development && `whoami`.strip == "ispuk"
