@@ -109,6 +109,30 @@ class Orderbook
     R["exchange:eur"] = (exch_eur + buy_fee_eur).to_ds
     R["exchange:btc"] = (exch_btc + sell_fee_btc).to_ds
 
+
+    #### order sorting
+    
+    # def <=> order
+    #   if order.price == price
+    #     @sent_at <=> order.sent_at
+    #   else
+    #     price <=> order.price
+    #   end
+    # end
+
+
+    #### RESOLVE
+    
+    # def submit_order(order)
+    #   if order.type == "buy"
+    #     order = @sell_ledger.transact(order) if matches?(order)
+    #     @buy_ledger.submit_order(order) if order != nil
+    #   else
+    #     order = @buy_ledger.transact(order) if matches?(order)
+    #     @sell_ledger.submit_order(order) if order != nil
+    #   end
+    # end
+
     # puts
     if order_buy.amount == order_sell.amount
       # puts "order equals - resolving both"
