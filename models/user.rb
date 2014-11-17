@@ -1,9 +1,7 @@
 class User
+  # basic definition in ext/auth/models/user.rb
+  # is a DataMapper::Resource
 
-  include DataMapper::Resource
-
-  property    :id,            Serial
-  property    :username,      String, required: true
   property    :btc_address,   String # TODO: validate this
 
 
@@ -24,5 +22,4 @@ class User
   end
 
 
-  # store: sql / json?
 end

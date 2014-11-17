@@ -160,7 +160,8 @@ class Order
   def self.user(user_id)
     # NOTE: slow implementation, use only in test env or slow page
     orders_id = R.smembers "users:#{user_id}:orders"
-    hashes orders_id
+    orders = hashes orders_id
+    orders.sort_by{ |a,b| [a.price] <=> [a.price] }
   end
 
   def self.type(type)

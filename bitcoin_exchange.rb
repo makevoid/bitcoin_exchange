@@ -15,10 +15,6 @@ class BitcoinExchange < Sinatra::Base
     include ResourcesHelpers
   end
 
-  # TODO: implement login
-  #
-  # project status atm: in development
-
   def logged_in?
     current_user
   end
@@ -46,7 +42,6 @@ require_all "routes"
 #
 #
 
-
 if App.env != "production"
 
   class BitcoinExchange < Sinatra::Base
@@ -55,7 +50,6 @@ if App.env != "production"
       DataMapper.auto_migrate!
       "DB RESET!<br><br>(remove this route from production!)"
     end
-
 
     post "/force_login/:id" do |id|
       return_url = params[:return_url]

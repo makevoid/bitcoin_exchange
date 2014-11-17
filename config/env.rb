@@ -42,8 +42,8 @@ puts
 # data store [redis]
 
 options = {}
-options[:driver] = :hiredis 
-options[:db] = 1 
+options[:driver] = :hiredis
+options[:db] = 1
 options[:db] = 2 if app_env == :test
 
 R = Redis.new options
@@ -82,3 +82,8 @@ DataMapper.finalize
 
 TITLE = "BitcoinExchange"
 
+
+
+### users (sinatra ext)
+
+require "#{path}/lib/sinatra_exts.rb"

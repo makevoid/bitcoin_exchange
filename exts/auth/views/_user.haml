@@ -1,0 +1,6 @@
+.user
+  - link_to user.avatar_image,  "/users/#{user.id}"
+  .role
+    = user.role
+  .name
+    - link_to user.username,      "/users/#{user.id}"

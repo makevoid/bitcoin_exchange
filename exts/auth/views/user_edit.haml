@@ -1,0 +1,10 @@
+%h1
+  Edit: #{@user.username}'s profile
+%nav.inpage
+  - link_to "back", "/users/#{@user.id}", class: "btn"
+
+- validations_for @user
+
+%form{ action: "/users/#{@user.id}", method: "post" }
+  = textarea :description
+  - submit "Save"

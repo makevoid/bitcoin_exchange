@@ -1,0 +1,8 @@
+- user = User.new
+
+%h1 Login
+
+%form{ action: "/sessions", method: "post" }
+  - input user, :username
+  - input user, :password, type: "password"
+  - submit "Login"
