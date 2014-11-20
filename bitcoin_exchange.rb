@@ -15,24 +15,27 @@ class BitcoinExchange < Sinatra::Base
     include ResourcesHelpers
   end
 
+end
+
+require_all "routes"
+
+LOAD_MODULES_ROUTES.call
+
+# monkeypatch user
+
+class BitcoinExchange < Sinatra::Base
   def logged_in?
     current_user
   end
 
-  @@current_user = nil
-
   def current_user
-    @@current_user || User.get(1)  # FIXME: you can start to code login from here
+    User.get(1)  # FIXME: you can start to code login from here
   end
 
   def cur_user_balance
     current_user.balance
   end
 end
-
-require_all "routes"
-
-
 
 
 

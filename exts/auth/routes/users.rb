@@ -1,4 +1,4 @@
-class Sinforum < Sinatra::Base
+class BitcoinExchange < Sinatra::Base
 
   get "/users" do
     @users = User.all
@@ -16,7 +16,7 @@ class Sinforum < Sinatra::Base
   end
 
   post "/users" do
-    @user = User.new params[:user]
+    @user = User.new params[:username]
     if @user.save
       session[:user_id] = @user.id
       redirect "/"

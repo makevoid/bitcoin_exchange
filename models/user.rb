@@ -1,8 +1,9 @@
 class User
   # basic definition in ext/auth/models/user.rb
-  # is a DataMapper::Resource
+  include DataMapper::Resource
 
-  property    :btc_address,   String # TODO: validate this
+  property :id,           Serial
+  property :btc_address,  String # TODO: validate this
 
 
   def orders_open

@@ -1,7 +1,8 @@
-class Sinforum < Sinatra::Base
+class BitcoinExchange < Sinatra::Base
 
   enable :sessions
-  use Rack::Session::Cookie
+  set :session_secret, SESSION_SECRET
+  # use Rack::Session::Cookie
 
 
   def login_required
@@ -47,11 +48,11 @@ class Sinforum < Sinatra::Base
   post "/sessions" do
     @user = User.first(username: params[:user][:username]) if params[:user]
     if @user && @user.password?(params[:user][:password])
-      flash[:notice] = "Logged in!"
+      # flash[:notice] = "Logged in!"
       session[:user_id] = @user.id
       redirect "/"
     else
-      flash[:alert] = "Invalid username or password."
+      # flash[:alert] = "Invalid username or password."
       haml_mod :login
     end
   end

@@ -2,9 +2,10 @@ class User
   include DataMapper::Resource
 
   property :id,         Serial
-  property :username,   String, length: 100, required: true, unique: true
-  property :email,      String, length: 100, required: true, unique: true
-  property :role,       Enum[*ROLES], default: :guest
+  property :username,   String, length: 100, required: true, unique: true, index: true
+  property :email,      String, length: 100#, required: true, unique: true, index: true
+  # property :role,       Enum[*ROLES], default: :guest
+  property :role,       String, default: "guest", index: true
   property :password,   String, required: true, length: 5..50
   property :salt,       String
 
@@ -16,7 +17,7 @@ class User
 
   ROLES.each do |role|
     define_method "#{role}?" do
-      self.role == role
+      self.role == role.to_s
     end
   end
 

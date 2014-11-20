@@ -1,9 +1,15 @@
 %h1 Register
 
-- validations_for @user
+= @user.errors.map{ |e| e }.join(", ")
+-# validations_for @user
 
 %form{ action: "/users", method: "post" }
-  - input @user, :username
-  - input @user, :password, type: "password"
-  - input @user, :password_confirmation, type: "password", label: "Confirm password"
-  - submit "Register"
+  %input{ name: "user[username]", placeholder: "username", type: "text" }
+  %input{ name: "user[email]",    placeholder: "email",    type: "text" }
+  %input{ name: "user[password]", placeholder: "password", type: "password" }
+  %input{ name: "user[password_confirmation]", placeholder: "confirm password", type: "password" }
+  %button.btn.btn-primary{ type: "submit" } Register
+  -# input @user, :username
+  -# input @user, :password, type: "password"
+  -# input @user, :password_confirmation, type: "password", label: "Confirm password"
+  -# submit "Register"

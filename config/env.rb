@@ -83,7 +83,8 @@ DataMapper.finalize
 TITLE = "BitcoinExchange"
 
 
+SESSION_SECRET = "CHANGE_ME_IN_PRODUCTION_SECRET"
 
 ### users (sinatra ext)
 
-require "#{path}/lib/sinatra_exts.rb"
+require "#{path}/lib/sinatra_exts"
