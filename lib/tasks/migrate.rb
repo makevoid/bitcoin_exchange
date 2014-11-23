@@ -6,8 +6,8 @@ DataMapper.auto_migrate!
 R.flushdb
 
 
-user  = User.create username: "Ali", password: "asdasd", password_confirmation: "asdasd" # id 1
-user2 = User.create username: "Bob", password: "asdasd", password_confirmation: "asdasd" # id 2
+user  = User.create username: "Ali", email: "ali@example.com", password: "asdasd", password_confirmation: "asdasd" # id 1
+user2 = User.create username: "Bob", email: "bob@example.com", password: "asdasd", password_confirmation: "asdasd" # id 2
 
 puts user.errors.map{ |e| e }
 

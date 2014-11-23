@@ -7,7 +7,7 @@ Bundler.require :default
 
 
 require "#{path}/lib/mixins/utils"
-include Utils
+extend Utils
 
 
 require "#{path}/lib/monkeypatches/markedup"
@@ -34,8 +34,18 @@ end
 
 # wallet connections
 
+def slice(hash, *keys)
+  hash_new = {}
+  hash.each do |key, val|
+    hash_new[key] = val if keys.include?(key)
+  end
+  hash_new
+end
+
+# require 'pp'
 require "#{path}/sandbox/wallet"
-puts Wallet.getinfo
+puts "Wallet initialized:"
+puts slice( Wallet.getinfo, "balance", "version", "blocks", "connection", "testnet", "difficulty" ).to_yaml
 puts
 
 
@@ -68,12 +78,16 @@ require "#{path}/lib/monkeypatches/dates"
 require "#{path}/lib/monkeypatches/hash"
 require "#{path}/lib/monkeypatches/string"
 
+# extension (self-contained models, routes and view - live in ext folder)
+require "#{path}/lib/sinatra_exts"
+
 
 # models and libs
 
 require "#{path}/lib/ticker"
 require_all "models"
 
+LOAD_DATAMAPPER_MODELS.call
 
 DataMapper.finalize
 
@@ -86,5 +100,3 @@ TITLE = "BitcoinExchange"
 SESSION_SECRET = "CHANGE_ME_IN_PRODUCTION_SECRET"
 
 ### users (sinatra ext)
-
-require "#{path}/lib/sinatra_exts"

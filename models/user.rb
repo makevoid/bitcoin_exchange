@@ -2,7 +2,7 @@ class User
   # basic definition in ext/auth/models/user.rb
   include DataMapper::Resource
 
-  property :id,           Serial
+  property :id,         Serial
   property :btc_address,  String # TODO: validate this
 
 

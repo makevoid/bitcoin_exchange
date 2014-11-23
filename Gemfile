@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'yajl-ruby'
+
 gem "sinatra"
 gem "json"
 
@@ -38,6 +40,7 @@ group :test do
   gem "rspec-core"
   gem "rspec-mocks"
   gem "rspec-expectations"
+  # gem "rspec-refinements" # github: amatsuda/rspec-refinements
 
   gem "rack-test"
 end

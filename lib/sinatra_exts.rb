@@ -2,8 +2,10 @@ path = File.expand_path "../../", __FILE__
 
 MODS = ["auth"]
 
-if defined?(DataMapper)
-  require_all "exts/#{MODS.first}/models"
+LOAD_DATAMAPPER_MODELS = lambda do
+  if defined?(DataMapper)
+    require_all "exts/#{MODS.first}/models"
+  end
 end
 
 LOAD_MODULES_ROUTES = lambda do

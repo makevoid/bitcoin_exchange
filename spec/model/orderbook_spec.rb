@@ -4,8 +4,8 @@ require "spec_helper"
 describe "OrderBook" do
 
   before :all do
-    @user  = User.create username: "Ali"
-    @user2 = User.create username: "Bob"
+    @user  = User.create USER1
+    @user2 = User.create USER2
   end
 
   # it "deposits eur (fake deposit)" do
@@ -62,8 +62,8 @@ describe "OrderBook" do
 
   describe "with not totally matching orders" do
     before :all do
-      @user  = User.create username: "Ali"
-      @user2 = User.create username: "Bob"
+      @user  = User.create USER1
+      @user2 = User.create USER2
 
       DepositFiat.create user: @user, amount: 500.0
       DepositBtc.create  user: @user2, amount: 0.2
@@ -87,8 +87,8 @@ describe "OrderBook" do
 
   describe "with not totally matching orders [sell]" do
     before :all do
-      @user  = User.create username: "Ali"
-      @user2 = User.create username: "Bob"
+      @user  = User.create USER1
+      @user2 = User.create USER2
 
       DepositFiat.create user: @user,  amount: 100.0
       DepositBtc.create  user: @user2, amount: 1.0
@@ -120,8 +120,8 @@ describe "OrderBook" do
 
   describe "different prices" do
     before :all do
-      @user  = User.create username: "Ali"
-      @user2 = User.create username: "Bob"
+      @user  = User.create USER1
+      @user2 = User.create USER2
 
       DepositFiat.create user: @user, amount: 100.0
       DepositBtc.create  user: @user2, amount: 1.11

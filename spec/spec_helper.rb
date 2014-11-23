@@ -18,3 +18,9 @@ end
 # prepare test db
 
 cleanup!
+
+
+# factories
+
+USER1 = { username: "Ali", email: "ali@example.com", password: "asdasd", password_confirmation: "asdasd" }
+USER2 = { username: "Bob", email: "bob@example.com", password: "asdasd", password_confirmation: "asdasd" }
