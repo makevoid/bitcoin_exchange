@@ -16,7 +16,7 @@ class BitcoinExchange < Sinatra::Base
   end
 
   post "/users" do
-    @user = User.new params[:username]
+    @user = User.new params[:user]
     if @user.save
       session[:user_id] = @user.id
       redirect "/"

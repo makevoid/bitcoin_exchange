@@ -69,19 +69,20 @@
             .line-compress.left-content.debug
 
               / standard login
-              .separator15
-              %form{ action: "/sessions", method: "post" }
-                %input{ name: "username", placeholder: "username", type: "text" }
-                .separator10
-                %input{ name: "password", placeholder: "password", type: "password" }
-                .separator10
-                %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } Login
-                %p{ style: "text-align: center" }
-                  or
-                  %a.btn.btn-small.btn-primary.no-border.color-white{ href: "/register" } Register
-                -# input user, :username
-                -# input user, :password, type: "password"
-                -# submit "Login"
+              - unless logged_in?
+                .separator15
+                %form{ action: "/sessions", method: "post" }
+                  %input{ name: "username", placeholder: "username", type: "text" }
+                  .separator10
+                  %input{ name: "password", placeholder: "password", type: "password" }
+                  .separator10
+                  %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } Login
+                  %p{ style: "text-align: center" }
+                    or
+                    %a.btn.btn-small.btn-primary.no-border.color-white{ href: "/register" } Register
+                  -# input user, :username
+                  -# input user, :password, type: "password"
+                  -# submit "Login"
 
 
               / quick login - remove afterwards (prod)
@@ -118,14 +119,18 @@
               .separator5
           .line.center-content
             %h1
-              %a.line.btn.bg-muted.color-white{ href: "/logout" }
-                .separator5
-                %i.fa.fa-sign-out &nbsp;logout
-                .separator5
+              %form{ action: "/logout", method: "post" }
+                %button.line.bg-muted.color-white{ type: "submit" }
+                  .separator5
+                  %i.fa.fa-sign-out &nbsp;logout
+                  .separator5
 
       .separator50
       .separator30.desktop
       .separator10.tablet.mobile
       .separator3.tablet.mobile
+      .flashes
+        - flash.each do |type, message|
+          %div{ class: type }= message
       %section.main= yield
     %script{ type: "text/javascript", src: "/js/app.js" }

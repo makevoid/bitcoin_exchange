@@ -2,8 +2,9 @@ class User
 
   property :username,   String, length: 100, required: true, unique: true, index: true
   property :email,      String, length: 100, required: true, unique: true, index: true
-  # property :role,       Enum[*ROLES], default: :guest
-  property :role,       String, default: "guest", index: true
+  # property :role,       Enum[*ROLES], default: :inactive_user
+  # property :role,       String, default: "inactive_user", index: true
+  property :role,       String, default: "active_user", index: true
   property :password,   String, required: true, length: 5..50
   property :salt,       String
 
@@ -11,7 +12,7 @@ class User
 
   # roles
 
-  ROLES = [ :guest, :user, :admin ]
+  ROLES = [ :inactive_user, :active_user, :admin ]
 
   ROLES.each do |role|
     define_method "#{role}?" do

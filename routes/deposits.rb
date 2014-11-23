@@ -11,10 +11,12 @@ class BitcoinExchange < Sinatra::Base
 
   get "/deposits" do
     # list deposits (btc, eur)
+    login_required
     haml :"deposits/index"
   end
 
   get "/deposits/btc" do
+    login_required
     deposit_amount_validate
     # info page for btc deposit
     #
@@ -23,6 +25,7 @@ class BitcoinExchange < Sinatra::Base
   end
 
   get "/deposits/fiat" do
+    login_required
     deposit_amount_validate
     # instructions and bank details of bank transfer to send fiat
     haml :"deposits/fiat"
@@ -31,7 +34,7 @@ class BitcoinExchange < Sinatra::Base
   private
 
   def deposit_amount_validate
-    amount_too_high = 
+    amount_too_high =
     raise  amount_too_high if params[:type] == :btc && params[:amount] > DEPOSIT_BTC_AMOUNT_MAX
     return amount_too_high if params[:type] == :eur && params[:amount] > DEPOSIT_EUR_AMOUNT_MAX
   end

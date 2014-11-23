@@ -1,6 +1,7 @@
 class BitcoinExchange < Sinatra::Base
 
   get "/users/current" do
+    login_required
     haml :"users/current"
   end
 
@@ -8,6 +9,7 @@ class BitcoinExchange < Sinatra::Base
 
   post "/users/generate_address" do
     # generate a btc address
+    active_user_required
 
     # FIXME: TODO: revise this part completely, it's just for fast demoing purposes
     addresses = Wallet.addresses_only
@@ -16,6 +18,5 @@ class BitcoinExchange < Sinatra::Base
 
     redirect "/deposits"
   end
-
 
 end

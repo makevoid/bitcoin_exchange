@@ -7,10 +7,10 @@
   float: left; }
 
 .color-white, section.main > h1 {
-  color: white; }
+  color: #fff; }
 
 .bg-white, section.paged {
-  background-color: white; }
+  background-color: #fff; }
 
 .line-compress, section.paged, section.main > h1 {
   -webkit-box-sizing: border-box;
@@ -23,7 +23,7 @@
   padding: 0 2% 0 2%; }
 
 .bg-green, section.main > h1 {
-  background-color: #1fd65c; }
+  background-color: #1FD65C; }
 
 .bg-pattern1, section.main > h1 {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAFUlEQVQYlWNgwANEjqf/HwmSDAwMAEQrEgmpQ8hgAAAAAElFTkSuQmCC");
@@ -38,11 +38,11 @@ table {
   float: left;
   border-collapse: collapse; }
   table th {
-    background: #eeeeee;
+    background: #EEE;
     padding: 4px;
     font-size: 85%; }
   table td, table th {
-    border: 1px solid #cccccc;
+    border: 1px solid #CCC;
     padding: 6px; }
   table td {
     font-size: 93%; }
@@ -50,3 +50,6 @@ table {
     border-bottom: 2px solid #8ec919; }
   table td.sell {
     border-bottom: 2px solid #ec268f; }
+
+.user_details input {
+  color: #DDD; }

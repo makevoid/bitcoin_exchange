@@ -9,10 +9,15 @@ class BitcoinExchange < Sinatra::Base
   require "#{PATH}/lib/mixins/html_helpers"
   require "#{PATH}/lib/mixins/formats_helpers"
   require "#{PATH}/lib/mixins/resources_helpers"
+  require "#{PATH}/lib/mixins/form_helpers"
+  require "#{PATH}/lib/mixins/flashes"
+
   helpers do
     include ViewHelpers
     include FormatsHelpers
     include ResourcesHelpers
+    include FormHelpers
+    include Flashes
   end
 
 end
@@ -24,14 +29,14 @@ LOAD_MODULES_ROUTES.call
 # monkeypatch user
 
 class BitcoinExchange < Sinatra::Base
-  def logged_in?
-    current_user
-  end
-
-  def current_user
-    User.get(1)  # FIXME: you can start to code login from here
-  end
-
+#   def logged_in?
+#     current_user
+#   end
+#
+#   def current_user
+#     User.get(1)  # FIXME: you can start to code login from here
+#   end
+#
   def cur_user_balance
     current_user.balance
   end
@@ -57,7 +62,7 @@ if App.env != "production"
     post "/force_login/:id" do |id|
       return_url = params[:return_url]
       return_url = params[:return_url] if return_url && !return_url.blank?
-      @@current_user = User.get id.to_i
+      session[:user_id] = id.to_i
       redirect return_url || "/"
     end
 

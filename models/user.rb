@@ -11,6 +11,11 @@ class User
   end
   alias :orders :orders_open
 
+  def orders_include(id)
+    # FIXME: refactor for speed! (called on every DELETE /orders/:id)
+    orders_open.map(:id).include? id
+  end
+
   # transactions
   def orders_closed
     # TODO: speedup!

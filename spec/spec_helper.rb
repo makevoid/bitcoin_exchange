@@ -22,5 +22,5 @@ cleanup!
 
 # factories
 
-USER1 = { username: "Ali", email: "ali@example.com", password: "asdasd", password_confirmation: "asdasd" }
+USER1 = { username: "Ali", email: "ali@example.com", password: "asdasd", password_confirmation: "asdasd", role: "active_user" }
 USER2 = { username: "Bob", email: "bob@example.com", password: "asdasd", password_confirmation: "asdasd" }

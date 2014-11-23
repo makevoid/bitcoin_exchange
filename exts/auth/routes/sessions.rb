@@ -4,19 +4,17 @@ class BitcoinExchange < Sinatra::Base
   set :session_secret, SESSION_SECRET
   # use Rack::Session::Cookie
 
-
   def login_required
     redirect "/login" unless current_user
   end
 
-  def member_required
-    halt 403, haml_mod(:member_required) unless member?
+  def active_user_required
+    halt 403, haml_mod(:active_user_required) unless active_user?
   end
 
   def admin_required
     halt 403, haml_mod(:admin_required) unless admin?
   end
-
 
   def current_user
     return self.class.current_user if defined?(self.class.current_user) # for test sake
@@ -33,8 +31,8 @@ class BitcoinExchange < Sinatra::Base
     current_user && current_user.admin?
   end
 
-  def member?
-    current_user && (admin? || current_user.member?)
+  def active_user?
+    current_user && (admin? || current_user.active_user?)
   end
 
   def me?
@@ -52,7 +50,7 @@ class BitcoinExchange < Sinatra::Base
       session[:user_id] = @user.id
       redirect "/"
     else
-      # flash[:alert] = "Invalid username or password."
+      flash[:alert] = "Invalid username or password."
       haml_mod :login
     end
   end
