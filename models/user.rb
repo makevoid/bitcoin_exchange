@@ -13,7 +13,7 @@ class User
 
   def orders_include(id)
     # FIXME: refactor for speed! (called on every DELETE /orders/:id)
-    orders_open.map(:id).include? id
+    orders_open.map(&:id).include? id
   end
 
   # transactions

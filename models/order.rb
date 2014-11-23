@@ -1,10 +1,26 @@
 class Order
   # store: redis
 
+  OrderAmountLimit  = 10    # BTC
+  OrderNumLimit     = 1000  # an user can't open more than OrderNumLimit orders
+
   # notes:
   #
   # orders_[type] is the sorted set
   # orders|[type] is the set
+
+  class PriceError < ArgumentError
+  end
+  class AmountError < ArgumentError
+  end
+  class TypeError < ArgumentError # not for the user
+  end
+  class NotEnoughFundsError < RuntimeError
+  end
+  class NotEnoughFundsEur < NotEnoughFundsError
+  end
+  class NotEnoughFundsBtc < NotEnoughFundsError
+  end
 
   attr_reader :id, :user_id, :type, :amount, :price, :time, :resolved
 
@@ -20,7 +36,7 @@ class Order
     @type     = type.to_sym
     @amount   = amount.to_d
     @price    = price.to_d
-    
+
     @resolved = false
   end
 
@@ -81,12 +97,12 @@ class Order
     balance = user.balance
 
     # TODO: FIXME sanitize price parameter (can't place order < 0 or > 3000
-    raise "PriceError" if price <= 0 || price > 3000
+    raise PriceError if price <= 0 || price > 3000
     # TODO: FIXME check if amount is available
-    raise "AmountError" if amount > 10 || amount < 0.0001 # limit to 10 BTC
-    raise "TypeError" unless [:buy, :sell].include?(type)
-    raise "NotEnoughFundsEur - amount: #{amount}, balance: #{balance.eur_available}" if type == :buy && amount > balance.eur_available
-    raise "NotEnoughFundsBtc - amount: #{amount}, balance: #{balance.btc_available}" if type == :sell && amount > balance.btc_available
+    raise AmountError if amount > OrderAmountLimit || amount < 0.0001
+    raise TypeError unless [:buy, :sell].include?(type)
+    raise NotEnoughFundsEur, "amount: #{amount}, balance: #{balance.eur_available}" if type == :buy && amount > balance.eur_available
+    raise NotEnoughFundsBtc, "amount: #{amount}, balance: #{balance.btc_available}" if type == :sell && amount > balance.btc_available
 
     # validate_attributes # ?
 
@@ -94,13 +110,13 @@ class Order
     time = Time.now.to_i
 
     # puts "create order: #{id}, type: #{type},\t price: #{price.to_2s}, amount: #{amount.to_ds}"
-    
+
     R.hmset "orders:#{id}", {
-      id:       id, 
+      id:       id,
       user_id:  user_id,
       type:     type,
       amount:   amount.to_ds,
-      price:    price.to_2s, 
+      price:    price.to_2s,
       time:     time,
     }.to_a.flatten
 
@@ -195,7 +211,7 @@ class Order
   #   order_ids = R.smembers "users:#{user_id}:orders_#{type}"
   #   hashes order_ids
   # end
-  # 
+  #
   # def self.not_user_type(user_id, type)
   #   order_ids = R.sdiff "orders|#{type}", "users:#{user_id}:orders_#{type}"
   #   hashes order_ids
@@ -206,14 +222,14 @@ class Order
   # returns buy orders sorted in reverse (descending order)
   #
   def self.buy_amount_match(price)
-    order_ids = R.zrevrangebyscore "orders_buy", ORDER_MAX, price#, limit: [0,10]  
+    order_ids = R.zrevrangebyscore "orders_buy", ORDER_MAX, price#, limit: [0,10]
     hashes order_ids
   end
-  
-  # returns sell orders sorted  
+
+  # returns sell orders sorted
   #
   def self.sell_amount_match(price)
-    order_ids = R.zrangebyscore "orders_sell",  0, price#, limit: [0,10]  
+    order_ids = R.zrangebyscore "orders_sell",  0, price#, limit: [0,10]
     hashes order_ids
   end
 
@@ -259,7 +275,7 @@ class Order
     # TODO: use hmget
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
-    
+
     # puts "removing: #{id} #{type}"
     R.zrem "orders_#{type}", id
     R.srem "orders|#{type}", id
@@ -275,7 +291,7 @@ class Order
     raise "CannotResolveDeletedOrder" unless type
     order_closed_add
     Order.remove id
-    @resolved = true    
+    @resolved = true
   end
 
   def order_closed_add
@@ -284,7 +300,7 @@ class Order
     # puts order
     order.delete "id"
     order.merge! time_close: Time.now.to_i
-    
+
     OrderClosed.create sym_keys order
   end
 

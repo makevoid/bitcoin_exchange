@@ -99,4 +99,6 @@ TITLE = "BitcoinExchange"
 
 SESSION_SECRET = "CHANGE_ME_IN_PRODUCTION_SECRET"
 
+EMAIL_SUPPORT = "soon_support@example.com"
+
 ### users (sinatra ext)
