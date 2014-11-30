@@ -1,4 +1,4 @@
-var all, bind_overlay_dismiss, bind_tabbed, bind_togglables, bind_user_details_pos, boot, hash_change_return_url, http, main, q, show_hash_section, toggle, toggle_all;
+var all, bind_limit_order_calc, bind_overlay_dismiss, bind_tabbed, bind_togglables, bind_user_details_position, boot, filter, hash_change_return_url, http, is_form, limit_order_calc, limit_order_calc_form, main, q, show_hash_section, toggle, toggle_all;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -20,6 +20,10 @@ all = function(name, in_children) {
   }
 };
 
+filter = function(nodes, fn) {
+  return Array.prototype.filter.call(nodes, fn);
+};
+
 toggle_all = function(nodes, className) {
   var node, _i, _len, _results;
   _results = [];
@@ -32,6 +36,10 @@ toggle_all = function(nodes, className) {
 
 toggle = function(node, className) {
   return node.classList.toggle(className);
+};
+
+is_form = function(element) {
+  return element.tagName === "FORM";
 };
 
 http = function(settings) {
@@ -52,12 +60,52 @@ http = function(settings) {
 };
 
 main = function() {
+  var form;
   bind_togglables();
   bind_tabbed();
   bind_overlay_dismiss();
   show_hash_section();
   hash_change_return_url();
-  return bind_user_details_pos();
+  bind_user_details_position();
+  bind_limit_order_calc();
+  form = q("form.buy_form");
+  limit_order_calc_form(form);
+  form = q("form.sell_form");
+  return limit_order_calc_form(form);
+};
+
+limit_order_calc = function(evt) {
+  var form;
+  form = evt.target.parentNode.parentNode;
+  return limit_order_calc_form(form);
+};
+
+limit_order_calc_form = function(form) {
+  var amount, price, total, value;
+  if (form && is_form(form)) {
+    amount = q("input[name='order[amount]']", form);
+    price = q("input[name='order[price]']", form);
+    total = q("span.eur_total", form);
+    amount = amount.value;
+    price = price.value;
+    value = amount * price;
+    if (value === parseFloat(value)) {
+      return total.innerHTML = "€" + (value.toFixed(2));
+    } else {
+      return total.innerHTML = "€";
+    }
+  }
+};
+
+bind_limit_order_calc = function() {
+  var elem, elems, _i, _len, _results;
+  elems = all(".limit_order.limit input[name='order[amount]'], .limit_order.limit input[name='order[price]']");
+  _results = [];
+  for (_i = 0, _len = elems.length; _i < _len; _i++) {
+    elem = elems[_i];
+    _results.push(elem.addEventListener("keyup", limit_order_calc));
+  }
+  return _results;
 };
 
 hash_change_return_url = function() {
@@ -166,7 +214,7 @@ bind_overlay_dismiss = function() {
   });
 };
 
-bind_user_details_pos = function() {
+bind_user_details_position = function() {
   var max, user_details, usr_det_btn;
   return;
   usr_det_btn = q("[data-toggle=user_details]");

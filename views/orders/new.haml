@@ -1,7 +1,7 @@
 .line-max-medium
   .col8.offset-left1.line-tablet.bg-white
     .line.bg-white
-      %section.simple.advanced
+      %section.simple.limit_order
         .col5.line-tablet.bordered-right
           .separator15
           %section.tab
@@ -32,15 +32,13 @@
                 .separator15
                 - submit "Sell BTC", "btn color-white radius3 "
           .separator50.desktop
-          
-      %section.advanced.hidden
+
+      %section.limit_order.limit.hidden
         = haml :"orders/_buy_sell"
       .separator10
       .separator30.tablet.mobile
       .col4.offset-left3
-        %h3.center-content.color-muted Advanced: 
-        .separator5
-        %button.btn.btn-medium.radius3.color-white.btn-primary{ :"data-toggle" => "advanced", href: js_void } Place a limit order
+        %button.btn.btn-medium.radius3.color-white.btn-primary{ :"data-toggle" => "limit_order", href: js_void } Place a limit order
       .separator10
       .col5.bordered-right
         .separator100

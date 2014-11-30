@@ -53,3 +53,14 @@ table {
 
 .user_details input {
   color: #DDD; }
+
+.flashes .flash {
+  text-align: center;
+  padding: 8px;
+  background: #fff; }
+  .flashes .flash.success {
+    background: #3EDE73;
+    color: #fff; }
+  .flashes .flash.notice {
+    background: #F5E77A;
+    color: #915500; }

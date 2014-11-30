@@ -50,8 +50,8 @@ nav a {
 
 .btn, .button, nav a, input[type=submit] {
   border-radius: 7px;
-  background: lightgreen;
-  border: 1px solid lightgreen; }
+  background: lightGreen;
+  border: 1px solid lightGreen; }
   .btn:hover, .button:hover, nav a:hover, input[type=submit]:hover {
     border: 1px solid green; }
 
@@ -63,8 +63,8 @@ input {
   display: block;
   margin-bottom: 12px; }
 
-.advanced > section {
-  border: 1px solid darkgray;
+.limit_order > section {
+  border: 1px solid darkGrey;
   padding: 1%;
   display: inline-block; }
 

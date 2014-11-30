@@ -9,13 +9,23 @@ q = (name, in_children) ->
 all = (name, in_children) ->
   if in_children then in_children.querySelectorAll name else document.querySelectorAll name
 
+# not used but cool
+filter = (nodes, fn) ->
+  Array.prototype.filter.call nodes, fn
+
+
+## jzed end
+
 toggle_all = (nodes, className) ->
   for node in nodes
     toggle node, className
 
-
 toggle = (node, className) ->
   node.classList.toggle className
+
+is_form = (element) ->
+  element.tagName == "FORM"
+
 
 # evt_on = (node, eventName, eventHandler) ->
 #   node.addEventListener eventName, eventHandler
@@ -61,8 +71,39 @@ main = ->
   bind_overlay_dismiss()
   show_hash_section()
   hash_change_return_url()
-  bind_user_details_pos()
+  bind_user_details_position()
+  bind_limit_order_calc()
 
+  form = q "form.buy_form"
+  limit_order_calc_form form
+  form = q "form.sell_form"
+  limit_order_calc_form form
+  # q('.col4.offset-left3 button').click()
+
+
+limit_order_calc = (evt) ->
+  form = evt.target.parentNode.parentNode
+  limit_order_calc_form form
+
+limit_order_calc_form = (form) ->
+  if form && is_form form
+    amount = q "input[name='order[amount]']", form
+    price  = q "input[name='order[price]']", form
+    total  = q "span.eur_total", form
+    amount = amount.value
+    price  = price.value
+    value = amount * price
+    if value == parseFloat(value)
+      total.innerHTML = "€#{value.toFixed 2}"
+    else
+      total.innerHTML = "€"
+
+
+
+bind_limit_order_calc = ->
+  elems = all ".limit_order.limit input[name='order[amount]'], .limit_order.limit input[name='order[price]']"
+  for elem in elems
+    elem.addEventListener "keyup", limit_order_calc
 
 hash_change_return_url = ->
   window.addEventListener "hashchange", ->
@@ -93,9 +134,9 @@ show_hash_section = ->
 #       # inside = parent.querySelector ".inside"
 #       console.log evt.target.dataset
 #       #toggle inside, "hidden"
-# 
+#
 #     true
-# 
+#
 #   # for tab in tabs
 
 
@@ -142,15 +183,15 @@ bind_overlay_dismiss = ->
     unless over_click
       toggle over, "hidden"
     over_click = false
-    
-bind_user_details_pos = ->
+
+bind_user_details_position = ->
   return
-  
+
   usr_det_btn = q "[data-toggle=user_details]"
   user_details = q "section.user_details"
-  
+
   max = 980
-  
+
   usr_det_btn.addEventListener "click", (evt) ->
     ud = q(".user_details").offsetWidth
     width = window.screen.availWidth

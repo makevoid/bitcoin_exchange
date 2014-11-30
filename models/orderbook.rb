@@ -14,15 +14,29 @@ class Orderbook
 
 
   def self.price_last
+    # TODO: use last price
     500.0.to_d
   end
 
   def self.price_bid
+    # TODO: use last bid
     500.0.to_d
   end
 
   def self.price_ask
+    # TODO: use last ask
     500.0.to_d
+  end
+
+
+  def self.resolve(order)
+    if order.type == :buy
+      order = @sell_ledger.transact(order) if matches?(order)
+      @buy_ledger.submit_order(order) if order != nil
+    else
+      order = @buy_ledger.transact(order) if matches?(order)
+      @sell_ledger.submit_order(order) if order != nil
+    end
   end
 
   # called every time after a new order is inserted
@@ -36,17 +50,23 @@ class Orderbook
     # TODO: consider the volume
 
     orders = matching_orders order
-    
+
     if orders.any?
       #puts "matching orders: #{orders.map(&:id).join(", ")}"
       #puts
     end
-    
+
     while orders
       order_sel = orders.pop
       break unless order_sel
 
-      resolved = resolve_full order, order_sel 
+
+      #### >>>>
+
+      ###
+      resolved = resolve_one order, order_sel
+
+
 
       # TODO: important
       # use transactional style or lock (with a lock there is no need to use transactions)
@@ -58,7 +78,7 @@ class Orderbook
   end
 
   # TODO: naive approach, needs partial resolve into it, see next method's comment
-  def self.resolve_full(order1, order2)
+  def self.resolve_one(order1, order2)
     # puts "log: full resolve"
     if order1.type == :buy
       order_buy, order_sell = order1, order2
@@ -111,7 +131,7 @@ class Orderbook
 
 
     #### order sorting
-    
+
     # def <=> order
     #   if order.price == price
     #     @sent_at <=> order.sent_at
@@ -122,7 +142,7 @@ class Orderbook
 
 
     #### RESOLVE
-    
+
     # def submit_order(order)
     #   if order.type == "buy"
     #     order = @sell_ledger.transact(order) if matches?(order)
@@ -134,6 +154,27 @@ class Orderbook
     # end
 
     # puts
+
+  end
+
+  ####
+
+  # TODO: move in order.rb ?
+
+  def self.matching_orders(order)
+    type = order.type == :buy ? :sell : :buy
+    price = order.price * 100
+
+    # note: these methods have to return properly sorted results
+    if type == :buy
+      Order.buy_amount_match  price
+    else # sell
+      Order.sell_amount_match price
+    end
+  end
+
+
+  def nah
     if order_buy.amount == order_sell.amount
       # puts "order equals - resolving both"
       order_buy.resolve!
@@ -144,29 +185,15 @@ class Orderbook
         order_sell.resolve!
         order_buy.update_amount order_sell.amount
       else
-        # puts "sell is higher - resolving buy"        
+        # puts "sell is higher - resolving buy"
         order_buy.resolve!
         order_sell.update_amount order_buy.amount
       end
     end
-    
+
     order1.resolved?
   end
 
-  ####
-
-  # TODO: move in order.rb ?
-
-  def self.matching_orders(order)
-    type = order.type == :buy ? :sell : :buy
-    price = order.price * 100
-    
-    # note: these methods have to return properly sorted results 
-    if type == :buy
-      Order.buy_amount_match  price
-    else # sell
-      Order.sell_amount_match price
-    end
-  end
-
 end
+
+

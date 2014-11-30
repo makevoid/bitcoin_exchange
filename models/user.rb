@@ -27,5 +27,4 @@ class User
     @balance ||= Balance.new self
   end
 
-
 end
