@@ -1,3 +1,6 @@
+class NullOrder
+end
+
 class Order
   # store: redis
 
@@ -140,8 +143,10 @@ class Order
     R.hset "orders:#{id}", "amount",  @amount
   end
 
+
   def self.first(order_id)
-    ord = R.hgetall "orders:#{order_id}"
+    ord = hash order_id
+    return NullOrder.new if ord == {}
     init ord
   end
 
@@ -151,7 +156,7 @@ class Order
 
   def self.hashes(order_ids)
     order_ids.map do |order_id|
-      ord = R.hgetall "orders:#{order_id}"
+      ord = hash order_id
       init ord
     end
   end
@@ -221,16 +226,16 @@ class Order
 
   # returns buy orders sorted in reverse (descending order)
   #
-  def self.buy_amount_match(price)
-    order_ids = R.zrevrangebyscore "orders_buy", ORDER_MAX, price#, limit: [0,10]
-    hashes order_ids
+  def self.buy_ledger_match(price)
+    order_ids = R.zrevrangebyscore "orders_buy", ORDER_MAX, price, limit: [0,1] #, limit: [0,10]
+    first order_ids.first
   end
 
   # returns sell orders sorted
   #
-  def self.sell_amount_match(price)
-    order_ids = R.zrangebyscore "orders_sell",  0, price#, limit: [0,10]
-    hashes order_ids
+  def self.sell_ledger_match(price)
+    order_ids = R.zrangebyscore "orders_sell",  0, price, limit: [0,1] #, limit: [0,10]
+    first order_ids.first
   end
 
   # type: buy / sell

@@ -30,43 +30,23 @@ class Orderbook
 
 
   def self.resolve(order)
-    if order.type == :buy
-      order = @sell_ledger.transact(order) if matches?(order)
-      @buy_ledger.submit_order(order) if order != nil
-    else
-      order = @buy_ledger.transact(order) if matches?(order)
-      @sell_ledger.submit_order(order) if order != nil
-    end
+    matching = matching_order order
+    order_out = resolve_one order, matching unless matching.is_a? NullOrder
+    resolve order_out if order_out
   end
 
   # called every time after a new order is inserted
-  def self.resolve(order)
+  def self.resolve_old(order)
     # TODO: make operation synchronous, add a lock in redis
     # for full asynchronicity consider an implementation using reactor pattern (Celluloid)
 
-    # reads orders queue
-    # if an order matches another, resolve it
-
-    # TODO: consider the volume
-
-    orders = matching_orders order
-
-    if orders.any?
-      #puts "matching orders: #{orders.map(&:id).join(", ")}"
-      #puts
-    end
+    order = matching_order order
 
     while orders
       order_sel = orders.pop
       break unless order_sel
 
-
-      #### >>>>
-
-      ###
       resolved = resolve_one order, order_sel
-
-
 
       # TODO: important
       # use transactional style or lock (with a lock there is no need to use transactions)
@@ -88,12 +68,10 @@ class Orderbook
 
     fee = Orderbook::TX_FEE
 
-    if order_buy.amount < order_sell.amount
-      amount_max = order_buy.amount
-      type_max = :buy
+    amount_max = if order_buy.amount < order_sell.amount
+      order_buy.amount
     else
-      amount_max = order_sell.amount
-      type_max = :sell
+      order_sell.amount
     end
 
     # update buy
@@ -129,47 +107,28 @@ class Orderbook
     R["exchange:eur"] = (exch_eur + buy_fee_eur).to_ds
     R["exchange:btc"] = (exch_btc + sell_fee_btc).to_ds
 
+    order_buy.update_amount  amount_max
+    order_sell.update_amount amount_max
 
-    #### order sorting
+    order1.resolve! if order1.amount == 0
+    order2.resolve! if order2.amount == 0
 
-    # def <=> order
-    #   if order.price == price
-    #     @sent_at <=> order.sent_at
-    #   else
-    #     price <=> order.price
-    #   end
-    # end
-
-
-    #### RESOLVE
-
-    # def submit_order(order)
-    #   if order.type == "buy"
-    #     order = @sell_ledger.transact(order) if matches?(order)
-    #     @buy_ledger.submit_order(order) if order != nil
-    #   else
-    #     order = @buy_ledger.transact(order) if matches?(order)
-    #     @sell_ledger.submit_order(order) if order != nil
-    #   end
-    # end
-
-    # puts
-
+    order1
   end
 
   ####
 
   # TODO: move in order.rb ?
 
-  def self.matching_orders(order)
+  def self.matching_order(order)
     type = order.type == :buy ? :sell : :buy
     price = order.price * 100
 
     # note: these methods have to return properly sorted results
     if type == :buy
-      Order.buy_amount_match  price
+      Order.buy_ledger_match  price
     else # sell
-      Order.sell_amount_match price
+      Order.sell_ledger_match price
     end
   end
 

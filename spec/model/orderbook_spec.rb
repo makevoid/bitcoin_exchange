@@ -37,8 +37,8 @@ describe "OrderBook" do
     end
 
     it "matches orders" do
-      orders = Orderbook.matching_orders( @order1 )
-      orders.should eql? [@order2]
+      orders = Orderbook.matching_order( @order1 )
+      orders.should eql? @order2
     end
 
     # it "matches orders maintaining direction" do
@@ -143,8 +143,8 @@ describe "OrderBook" do
 
     it "doesn't match orders" do
       @order4.should be_an Order
-      orders = Orderbook.matching_orders( @order4 )
-      orders.should be_empty
+      orders = Orderbook.matching_order( @order4 )
+      orders.should be_a(NullOrder)
     end
 
     it "update the amount of the big order" do
