@@ -107,13 +107,16 @@ class Orderbook
     R["exchange:eur"] = (exch_eur + buy_fee_eur).to_ds
     R["exchange:btc"] = (exch_btc + sell_fee_btc).to_ds
 
+    # TODO: refactor ?
     order_buy.update_amount  amount_max
+    order_buy.order_closed_add(amount) # TODO: PASS AMOUNT
     order_sell.update_amount amount_max
+    order_buy.order_closed_add(amount) # TODO: PASS AMOUNT
 
     order1.resolve! if order1.amount == 0
     order2.resolve! if order2.amount == 0
 
-    order1
+    order1 unless order1.resolved?
   end
 
   ####

@@ -294,7 +294,6 @@ class Order
     # puts "orders: #{(R.keys "orders:*").inspect}"
     type = R.hget "orders:#{id}", "type"
     raise "CannotResolveDeletedOrder" unless type
-    order_closed_add
     Order.remove id
     @resolved = true
   end
