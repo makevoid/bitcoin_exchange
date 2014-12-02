@@ -8,7 +8,7 @@
     %link{ rel: "stylesheet", href: "/css/helper.css" }
     %link{ rel: "stylesheet", href: "/css/fontawesome.css"}
     %link{ rel: "stylesheet", href: "/css/main.css" }
-    %link{ rel: "stylesheet", href: "/css/helpers.css" }
+    %link{ rel: "stylesheet", href: "/css/main_sass.css" }
     %link{ rel: "stylesheet", href: "/css/roboto.css" }
     -# %link{ rel: "stylesheet", href: "http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,700italic,500italic,400italic,300italic"}
     = haml :"_metas" # todo require/implement partial :metas
@@ -34,21 +34,22 @@
     #main
       %header.navbar.bg-white.line.fixed.top.left.layer1.bordered-bottom.over-hidden
         .line-max
-          %h1.col3.logo.color-green
+          %h1.col2.logo.color-green
             .line-compress
               .line-compress
                 %a{ href: "/" }
                   %img{class:"v-super", width: "auto", src: "img/logo.png"}
-          %nav.col7.center-content
+          %nav.col8.center-content
             .line
               .col8.desktop
+                - nav_link "/market",      "Market"
                 - nav_link "/orders",      "Orders"
                 - nav_link "/orders_new",  "Buy / Sell"
                 - nav_link "/deposits",    "Deposits"
                 - nav_link "/withdrawals", "Withdrawals"
                 - nav_link "/contact_us",  "Contact us"
 
-              .col6.tablet.mobile
+              .col3.tablet.mobile
               .col2
                 %a.line.desktop{ data: { toggle: "user_details" } }
                   %i.fa.fa-user.color-green

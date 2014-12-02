@@ -1,0 +1,35 @@
+.line-max-medium.tabbed
+  .line.bg-green.color-white.bg-pattern1
+    .separator10
+    .col4
+      .line-compress
+        %h1.line-compress Market
+    .separator10.tablet.mobile
+    .hr.tablet.mobile
+    .separator10.tablet.mobile
+    .col6.line-tablet
+      .col5.center-content
+        .separator3
+        %h2
+          %i.fa.fa-money.color-darkgreen
+          %span Last price: €500
+      .col5.center-content
+        .separator3
+        %h2
+          %i.fa.fa-bar-chart-o.color-darkgreen
+          %span 24hr volume: 100BTC
+    .separator10
+
+  .line-compress.bg-white
+    .separator15
+    %section.orders_open
+      %h1 Chart
+
+    #chart
+    .clear
+    .separator50
+  .separator50
+
+%script{ src: "/js/vendor/d3.js" }
+%script{ src: "/js/vendor/d3-techan.js" }
+%script{ src: "/js/techan_candlestick.js" }
