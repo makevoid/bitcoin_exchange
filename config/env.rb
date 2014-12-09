@@ -85,11 +85,24 @@ require "#{path}/lib/sinatra_exts"
 # models and libs
 
 require "#{path}/lib/ticker"
+require "#{path}/lib/bitstamp_book"
 require_all "models"
 
 LOAD_DATAMAPPER_MODELS.call
 
 DataMapper.finalize
+
+
+# bitstamp (optional?)
+
+# secrets = File.read( File.expand_path "~/.bitstamp" ).strip
+# bs_user, bs_key, bs_secret = secrets.split "|"
+#
+# Bitstamp.setup do |config|
+#   config.client_id  = bs_user
+#   config.key        = bs_key
+#   config.secret     = bs_secret
+# end
 
 
 # view code
