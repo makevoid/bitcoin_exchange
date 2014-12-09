@@ -1,0 +1,75 @@
+%head
+  %title Bitstamp order book
+
+
+%section
+  %div
+    %h1 Price Candlestick
+    #chart_candlestick
+  %div
+    %h1 Price
+    #chart_price
+  %div
+    %h1 Order Book
+    #chart_orderbook
+
+
+
+%script{ src: "/js/vendor/d3.js" }
+%script{ src: "/js/vendor/d3-techan.js" }
+%script{ src: "/js/bitstamp_ext_techan.js" }
+
+
+/ styles
+
+
+:css
+  body {
+    background: #fefefe;
+  }
+
+:sass
+  .axis path, .axis line
+    fill: none
+    stroke: #000
+    shape-rendering: crispEdges
+
+  path.candle
+    stroke: #000000
+
+  path.candle.body
+    stroke-width: 0
+
+  path.candle.wick
+    stroke-width: 1
+
+  path.candle.up
+    fill: #00AA00
+    stroke: #00AA00
+
+  path.candle.down
+    fill: #FF0000
+    stroke: #FF0000
+
+  #chart
+    width: 100%
+    height: 500px
+
+
+:sass
+  #chart_price
+    width: 100%
+    height: 500px
+
+    .axis path, .axis line
+      fill: none
+      stroke: #000
+      shape-rendering: crispEdges
+
+    .x.axis path
+      display: none
+
+    .line
+      fill: none
+      stroke: steelblue
+      stroke-width: 1.5px
