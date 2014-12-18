@@ -163,11 +163,11 @@ end
 
 # GET /orders - returns the list of orders
 #
-#   []
+#   [{}, {}]
 
 # GET /orders/:id - get info of a single order
 #
-#   { id: 1, type: "buy" }
+#   { id: 1, type: "buy", ... }
 
 # POST /orders - places a limit order
 #
