@@ -20,7 +20,9 @@ gem "dm-mysql-adapter"
 gem "dm-migrations"
 gem "dm-validations"
 
-# gem "bitstamp"
+group :bitstamp do
+  gem "bitstamp"
+end
 
 # gem "rom", git: 'git@github.com:rom-rb/rom'
 # # gem "axiom-memory-adapter"

@@ -87,7 +87,7 @@ GEM
     lumberjack (1.0.9)
     method_source (0.8.2)
     mime-types (2.4.3)
-    minitest (5.4.3)
+    minitest (5.5.0)
     multi_json (1.10.1)
     netrc (0.8.0)
     pry (0.10.1)
