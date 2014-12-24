@@ -20,7 +20,7 @@ input,textarea{
 }
 /*placeholders*/
 ::-webkit-input-placeholder {
-   color: rgba(0,0,0,0.45);
+   color: rgba(0,0,0,0.4);
    font-weight:500;
 }
 :-moz-placeholder { /* Firefox 18- */
