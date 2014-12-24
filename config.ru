@@ -5,4 +5,12 @@ require "#{path}/bitcoin_exchange"
 # require "#{path}/api/api"
 # use Admin
 # use Api
+
+require 'sass/plugin/rack'
+
+Sass::Plugin.options[:style] = :compressed
+use Sass::Plugin::Rack
+
+
+
 run BitcoinExchange
