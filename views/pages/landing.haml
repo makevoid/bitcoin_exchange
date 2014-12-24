@@ -1,0 +1,121 @@
+-content_for :header do
+  %link{ rel: "stylesheet", href: "stylesheets/uikits.css" }
+  %link{ rel: "stylesheet", href: "stylesheets/pages.css" }
+  
+- content_for :page do
+  ="landing-wrapper"
+
+%section.headline
+  .jumbotron.kit-cover.kit-cover-xl
+    /= image_tag "landing1.jpg"
+    .container
+      %h2= "t('index.header')"
+      %p= "t('index.subheader')"
+      %br/
+      %p
+        %a.btn.btn-success.btn-lg{:href => "index.html", :role => "button"}
+          %i.fa.fa-play.fa-fw
+          = "t('index.header_button')"
+        %a.scroll.btn.btn-link.text-white{:href => "#about", :role => "button"}
+          = "t('index.header_learnmore')"
+          \   
+          %i.fa.fa-angle-down
+    / /.container
+  / /.kit-cover
+/ /.headline
+%section#about.about-us
+  .container
+    .row
+      .col-md-8.col-md-offset-2
+        %h3= "t('index.aboutus_title')"
+        %p= "t('index.aboutus_text')"
+        .team-lists.row
+          .col-sm-3.col-xs-6
+            %a.kit-avatar.kit-avatar-96{:href => "#"}
+              /= image_tag "uifaces19.jpg"
+          .col-sm-3.col-xs-6
+            %a.kit-avatar.kit-avatar-96{:href => "#"}
+              /= image_tag "uifaces20.jpg"
+          .col-sm-3.col-xs-6
+            %a.kit-avatar.kit-avatar-96{:href => "#"}
+              /= image_tag "uifaces14.jpg"
+          .col-sm-3.col-xs-6
+            %a.kit-avatar.kit-avatar-96{:href => "#"}
+              /= image_tag "uifaces15.jpg"
+        %p.lead= "t('index.aboutus_lead')"
+  / /.container
+/ /.about-us
+%section#services.landing-section.services
+  .container
+    %h3= "t('index.service_title')"
+    %p= "t('index.service_text')"
+    %br/
+    .row
+      .col-sm-4
+        .services-item
+          %p
+            %span.fa-stack.fa-3x
+              %i.fa.fa-circle.fa-stack-2x.text-osun
+              %i.fa.fa-recycle.fa-stack-1x.fa-inverse
+          %h4.text-osun
+            %strong= "t('index.service_lead1')"
+          %p= "t('index.service_lead1_text')"
+        / /.services-item
+      / /.cols
+      .col-sm-4
+        .services-item
+          %p
+            %span.fa-stack.fa-3x
+              %i.fa.fa-circle.fa-stack-2x.text-pomeal
+              %i.fa.fa-code.fa-stack-1x.fa-inverse
+          %h4.text-pomeal
+            %strong= "t('index.service_lead2')"
+          %p= "t('index.service_lead2_text')"
+        / /.services-item
+      / /.cols
+      .col-sm-4
+        .services-item
+          %p
+            %span.fa-stack.fa-3x
+              %i.fa.fa-circle.fa-stack-2x.text-nephem
+              %i.fa.fa-rocket.fa-stack-1x.fa-inverse
+          %h4.text-nephem
+            %strong= "t('index.service_lead2')"
+          %p= "t('index.service_lead3_text')"
+        / /.services-item
+      / /.cols
+    / /.row
+  / /.container
+/ /.services
+%svg#contact.bg-belpet{:preserveaspectratio => "none", :version => "1.1", :viewbox => "0 0 100 100", :xmlns => "http://www.w3.org/2000/svg"}
+  %path.no-stroke{:d => "M50 100 C49 80 47 0 40 0 L47 0 Z", :fill => "#1b557a"}
+  %path.no-stroke{:d => "M50 100 C51 80 53 0 60 0 L53 0 Z", :fill => "#1b557a"}
+  %path.no-stroke{:d => "M47 0 L50 100 L53 0 Z", :fill => "#F6F8FA"}
+%section.landing-section.bg-belpet
+  .container
+    .row
+      .col-md-4.col-md-offset-4.col-sm-6.col-sm-offset-3.col-xs-8.col-xs-offset-2
+        %form{:action => "#"}
+          .form-group
+            .input-group
+              %span.input-group-addon
+                %i.fa.fa-user
+              %input.form-control{:name => "fullname", :placeholder => "Full Name"}/
+          / /.form-group
+          .form-group
+            .input-group
+              %span.input-group-addon
+                %i.fa.fa-envelope
+              %input.form-control{:name => "email", :placeholder => "Email Address", :type => "email"}/
+          / /.form-group
+          .form-group
+            %textarea.form-control.no-resize{:name => "message", :placeholder => "Message...", :rows => "10"}
+          / /.form-group
+          .form-group
+            %button.btn.btn-silc.btn-nofill.btn-lg.btn-block SHOT MESSAGE
+          / /.form-group
+        / /.form
+      / /.cols
+    / /.row
+  / /.container
+/ /.services

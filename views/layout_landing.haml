@@ -1,0 +1,76 @@
+:ruby
+  cur_user = current_user
+!!! 5
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %title Bitdirect
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
+    /= stylesheet_link_tag :application
+    %link{ rel: "stylesheet", href: "stylesheets/application.css.css" }
+    /= javascript_include_tag 'application'
+    %script{ type: "text/javascript", src: "js/application.js" }
+    /= csrf_meta_tags
+    = yield_content(:header) if content_for? :header
+    / fav and touch icons here
+    / Font Awesome
+    %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    / HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    / WARNING: Respond.js doesn't work if you view the page via file://
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  %body{"data-spy" => "scroll", "data-target" => ".navbar"}
+    %div{:class => yield_content(:page)}
+      .navbar-wrapper{"data-offset-top" => "499", "data-spy" => "affix"}
+        .navbar.navbar-default{:role => "navigation"}
+          .container
+            .navbar-header
+              %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+                %span.sr-only Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.navbar-brand{:href => "index.html"}
+                {
+                %i.fa.fa-rocket.fa-fw
+                BitDirect }
+            / /.navbar-header
+            .navbar-collapse.collapse
+              %form.navbar-form.navbar-right
+                %a.scroll.btn.btn-nofill.btn-silc{:href => "#contact", :role => "button"} CONTACT US
+              %ul.nav.navbar-nav.navbar-right
+                %li.active
+                  %a.scroll{:href => "#home"} HOME
+                %li
+                  %a.scroll{:href => "#about"} ABOUT US
+                %li
+                  %a.scroll{:href => "#services"} SERVICES
+              / /.nav
+            / /.navbar-collapse
+          / /.container
+        / /.navbar
+      / /.navbar-wrapper
+      = yield
+      %footer.footer
+        .container
+          .pull-right
+            %a.mail.fa-stack.fa-lg{"data-container" => "body", :href => "#", :rel => "tooltip", :title => "Email"}
+              %i.fa.fa-circle.fa-stack-2x
+              %i.fa.fa-envelope-o.fa-inverse.fa-stack-1x
+            %a.skype.fa-stack.fa-lg{"data-container" => "body", :href => "#", :rel => "tooltip", :title => "Skype"}
+              %i.fa.fa-circle.fa-stack-2x
+              %i.fa.fa-skype.fa-inverse.fa-stack-1x
+            %a.twitter.fa-stack.fa-lg{"data-container" => "body", :href => "#", :rel => "tooltip", :title => "Twitter"}
+              %i.fa.fa-circle.fa-stack-2x
+              %i.fa.fa-twitter.fa-inverse.fa-stack-1x
+          %h4
+            %a{:href => "index.html"}
+              {
+              %i.fa.fa-fw.fa-rocket
+              BitDirect }
+        / /.container
+      / /.footer
