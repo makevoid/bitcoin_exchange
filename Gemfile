@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'yajl-ruby'
 
 gem "sinatra"
+gem "sinatra-contrib"
 gem "json"
 
 gem "blizz"
