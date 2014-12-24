@@ -130,9 +130,6 @@
       .separator30.desktop
       .separator10.tablet.mobile
       .separator3.tablet.mobile
-      .flashes.line-max-medium.col6.offset-left2.line-tablet
-        - flash.each do |type, message|
-          .flash{ class: type }= message
-          .separator10
+      = partial :_flashes
       %section.main= yield
     %script{ type: "text/javascript", src: "/js/app.js" }
