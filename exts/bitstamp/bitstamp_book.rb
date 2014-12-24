@@ -8,27 +8,35 @@ require 'json'
 # unless defined?(BitcoinExchange)
 #   class BitcoinExchange; end
 # end
-->{ class BitcoinExchange; end }[]
 
-class BitcoinExchange::Api
-  HOST = "lemontree.io"
-  BASE_URL = "http://#{HOST}/api"
-
-  def self.order_book
-    {
-      bids: [
-        { price: 500_00, amount: 10_000_000 },
-        { price: 500_00, amount: 10_000_000 },
-      ],
-      asks: [
-        { price: 500_00, amount: 10_000_000 },
-        { price: 500_00, amount: 10_000_000 },
-      ],
-      time: DateTime
-    }
-  end
+def ui?
+  defined? Sinatra
 end
 
+unless ui?
+
+  ->{ class BitcoinExchange; end }[]
+
+  class BitcoinExchange::Api
+    HOST = "lemontree.io"
+    BASE_URL = "http://#{HOST}/api"
+
+    def self.order_book
+      {
+        bids: [
+          { price: 500_00, amount: 10_000_000 },
+          { price: 500_00, amount: 10_000_000 },
+        ],
+        asks: [
+          { price: 500_00, amount: 10_000_000 },
+          { price: 500_00, amount: 10_000_000 },
+        ],
+        time: DateTime
+      }
+    end
+  end
+
+end
 
 class BitstampBook # Bitstamp OrderBook
   URL = "https://www.bitstamp.net/api/order_book/"

@@ -85,8 +85,11 @@ require "#{path}/lib/sinatra_exts"
 # models and libs
 
 require "#{path}/lib/ticker"
-require "#{path}/lib/bitstamp_book"
 require_all "models"
+
+# bitstamp extension
+require "#{path}/exts/bitstamp/bitstamp_book"
+
 
 LOAD_DATAMAPPER_MODELS.call
 
