@@ -18,6 +18,23 @@ h1,h2,h3,h4,h5,h6{
 input,textarea{
   font-family:Arial;
 }
+/*placeholders*/
+::-webkit-input-placeholder {
+   color: rgba(0,0,0,0.45);
+   font-weight:500;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: rgba(0,0,0,0.45);
+   font-weight:500;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: rgba(0,0,0,0.45);
+   font-weight:500;
+}
+:-ms-input-placeholder {
+   color: rgba(0,0,0,0.45);
+   font-weight:500;
+}
 a{
   font-size: inherit;
 }
