@@ -1,4 +1,3 @@
-- validations_for @user
 
 .line-compress.line-mobile.line-tablet
   .separator30
@@ -17,6 +16,9 @@
           .separator15
           %input{ name: "user[password_confirmation]", placeholder: "confirm password", type: "password" }
           .separator30
+          .validation.color-error
+            - validations_for @user
+            .separator30
           %button.btn.btn-medium.btn-primary.color-white{ type: "submit" } Register
           -# input @user, :username
           -# input @user, :password, type: "password"
