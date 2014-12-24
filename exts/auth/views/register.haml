@@ -1,15 +1,26 @@
-%h1 Register
 
 = @user.errors.map{ |e| e }.join(", ")
 -# validations_for @user
-
-%form{ action: "/users", method: "post" }
-  %input{ name: "user[username]", placeholder: "username", type: "text" }
-  %input{ name: "user[email]",    placeholder: "email",    type: "text" }
-  %input{ name: "user[password]", placeholder: "password", type: "password" }
-  %input{ name: "user[password_confirmation]", placeholder: "confirm password", type: "password" }
-  %button.btn.btn-primary{ type: "submit" } Register
-  -# input @user, :username
-  -# input @user, :password, type: "password"
-  -# input @user, :password_confirmation, type: "password", label: "Confirm password"
-  -# submit "Register"
+.line-compress.line-mobile.line-tablet
+  .separator30
+  .col6.offset-left2.bg-white.line-tablet.line-mobile
+    .line-compress
+      .line-compress
+        .separator10
+        %h1.color-black Register
+        .separator15
+        %form{ action: "/users", method: "post" }
+          %input{ name: "user[username]", placeholder: "username", type: "text" }
+          .separator15
+          %input{ name: "user[email]",    placeholder: "email",    type: "text" }
+          .separator15
+          %input{ name: "user[password]", placeholder: "password", type: "password" }
+          .separator15
+          %input{ name: "user[password_confirmation]", placeholder: "confirm password", type: "password" }
+          .separator30
+          %button.btn.btn-medium.btn-primary.color-white{ type: "submit" } Register
+          -# input @user, :username
+          -# input @user, :password, type: "password"
+          -# input @user, :password_confirmation, type: "password", label: "Confirm password"
+          -# submit "Register"
+      .separator30
