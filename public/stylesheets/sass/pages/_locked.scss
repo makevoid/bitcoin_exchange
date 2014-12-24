@@ -1,0 +1,65 @@
+.locked-wrapper{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 420px;
+	@include translate( -50%, -50% );
+
+	.locked-container{
+		padding: 20px;
+		background-color: #fff;
+	}
+	.locked-brand{
+		margin: 15px 0;
+		font-size: 24px;
+		text-align: center;
+	}
+}
+.locked-actions{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	@include opacity(.4);
+
+	&:hover{
+		@include opacity(1);
+	}
+}
+.locked-avatar{
+	margin-bottom: 10px;
+	text-align: center;
+}
+.locked-username,
+.locked-email,
+.locked-status{
+	margin: 0;
+	text-align: center;
+}
+.locked-username{
+	font-size: ($font-size-large * 1.5);
+	line-height: 1;
+}
+.locked-email,
+.locked-status{
+	color: $text-muted;
+}
+.locked-status{
+	margin-bottom: 15px;
+}
+.locked-loader{
+	line-height: $input-height-base;
+	color: $text-muted;
+	text-align: center;
+	font-size: 32px;
+}
+.locked-cr{
+	margin-top: 5px;
+	color: $gray-lighter;
+}
+
+
+@media (max-width: $screen-xs){
+	.locked-wrapper{
+		width: 90%;
+	}
+}

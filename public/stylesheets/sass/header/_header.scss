@@ -1,0 +1,138 @@
+header.header{
+	position: relative;
+	z-index: $zindex-header;
+
+	.navbar{
+		border-width: 0;
+		border-radius: 0;
+		margin-bottom: 0;
+
+		.navbar-toggle-alt{
+			padding: 5px 10px;
+		}
+
+		.navbar-block{
+			display: block;
+			width: 100%;
+		}
+
+		.profile-nav{
+			float: left;
+			width: 24px;
+			margin-right: 5px;
+			border-radius: 24px;
+			margin-top: -2px;
+		}
+	}
+}
+
+body.wrapkit-header-fixed-top{
+	padding-top: $navbar-height;
+
+	.header .navbar{
+		border-width: 0 0 1px 0;
+		@include box-shadow( 0 2px 4px rgba(0, 0, 0, .02) );
+	}
+}
+body.wrapkit-header-fixed-bottom{
+	padding-bottom: $navbar-height;
+
+	.header{
+		top: auto;
+		bottom: 0;
+
+		.navbar{
+			border-width: 1px 0 0;
+			@include box-shadow( 0 -2px 4px rgba(0, 0, 0, .02) );
+		}
+	}
+}
+body.wrapkit-sidebar-hidden:not(.wrapkit-header-fixed-bottom) header.header{
+	.navbar{
+		padding-left: $sidebar-width-lg/4;
+	}
+}
+
+body.wrapkit-sidebar-right{
+	&.wrapkit-sidebar-hidden:not(.wrapkit-header-fixed-bottom) header.header{
+		.navbar{
+			padding-left: 0;
+			padding-right: $sidebar-width-lg/4;
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+
+	body.wrapkit-sidebar-coltonav{
+	
+		header.header,
+		&.wrapkit-sidebar-hidden header.header{
+			.navbar{
+				padding-left: 0;
+			}
+		}
+
+		&.wrapkit-sidebar-right{
+			&.wrapkit-sidebar-hidden header.header{
+				.navbar{
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
+		}
+	}
+
+	.header .container-fluid > .navbar-header > .navbar-nav{
+		padding: 0 $navbar-padding-horizontal;
+	}
+	header.header .navbar .profile-nav{
+		float: none;
+		width: 18px;
+	}
+	.header .navbar-header > .navbar-nav{
+		margin: 0;
+		display: inline-block;
+		
+		& > li{
+			display: inline-block;
+
+			& > a{
+				padding: 15px;
+			}
+
+			.dropdown-menu{
+				position: absolute;
+				min-width: 160px;
+				background-color: $dropdown-bg;
+				border: 1px solid $dropdown-border;
+
+				& > li > a{
+					line-height: initial;
+					padding: 3px 20px;
+				}
+			}
+		}
+	}
+}
+
+// hidden navbar-nav on navbar-header when screen <= 480px
+@media (max-width: $screen-xs) {
+	.header .navbar-header > .navbar-nav{
+		display: none;
+	}
+}
+
+
+// RTL Mode
+body.wrapkit-header-rtl{
+	.header{
+		direction: rtl;
+		
+		// floating mirror
+		.navbar-brand{
+			float: right;
+		}
+	}
+}
+

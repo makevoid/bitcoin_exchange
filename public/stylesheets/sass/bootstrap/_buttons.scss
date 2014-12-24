@@ -1,0 +1,404 @@
+//
+// Buttons
+// --------------------------------------------------
+
+
+// Base styles
+// --------------------------------------------------
+
+// Core styles
+.btn {
+  display: inline-block;
+  margin-bottom: 0; // For input.btn
+  font-weight: $btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: 1px solid transparent;
+  white-space: nowrap;
+  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);
+  @include user-select(none);
+
+  & > .badge{
+    font-size: inherit;
+  }
+
+  &:focus {
+    @include tab-focus();
+  }
+
+  &:hover,
+  &:focus {
+    color: $btn-default-color;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    @include opacity(.65);
+    @include box-shadow(none);
+  }
+
+  &.btn-nofill{
+    background-color: transparent;
+    
+    &.btn-default{
+      color: $gray-dark !important;
+      border-color: $border-color !important;
+
+      .badge{
+        background-color: $border-color;
+        color: #fff;
+      }
+
+      .caret{
+        border-top-color: #fff;
+      }
+
+      &:hover,
+      &:focus,
+      &:active,
+      &.active {
+        background-color: $border-color;
+            border-color: $border-color;
+      }
+      .open & { &.dropdown-toggle {
+        background-color: $border-color;
+            border-color: $border-color;
+      } }
+    }
+  }
+
+  &.btn-icon{
+    position: relative;
+    padding-right: 46px;
+    outline: 0;
+
+    & > i{
+      position: absolute;
+      height: 100%;
+      top: 0;
+      right: 0;
+      border-bottom-right-radius: 4px;
+      border-top-right-radius: 4px;
+      font-size: inherit;
+      line-height: inherit;
+      padding: 6px 12px;
+    }
+
+    &.btn-icon-left{
+      padding-right: 12px;
+      padding-left: 46px;
+
+      & > i {
+        left: 0;
+        right: auto;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+      }
+    }
+
+    &.btn-lg{
+      padding-right: 56px;
+
+      & > i{
+        padding: 10px 16px;
+        border-bottom-right-radius: 6px;
+        border-top-right-radius: 6px;
+      }
+      
+      &.btn-icon-left{
+        padding-left: 56px;
+        padding-right: 16px;
+
+        & > i{
+          padding: 10px 16px;
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 6px;
+          border-top-left-radius: 6px;
+        }
+      }
+    }
+    &.btn-sm{
+      padding-right: 39px;
+
+      & > i{
+        padding: 5px 10px;
+        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px;
+      }
+
+      &.btn-icon-left{
+        padding-left: 39px;
+        padding-right: 10px;
+
+        & > i{
+          padding: 5px 10px;
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 3px;
+          border-top-left-radius: 3px;
+        }
+      }
+    }
+    &.btn-xs{
+      padding-right: 24px;
+
+      & > i{
+        padding: 1px 5px;
+        border-bottom-right-radius: 2px;
+        border-top-right-radius: 2px;
+      }
+      
+      &.btn-icon-left{
+        padding-left: 24px;
+        padding-right: 5px;
+
+        & > i{
+          padding: 1px 5px;
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 2px;
+          border-top-left-radius: 2px;
+        }
+      }
+    }
+  }
+}
+
+.btn{
+  // nice-checkbox
+  > .nice-checkbox,
+  > .nice-radio{
+    margin: 0;
+    left: 3px;
+    min-height: 18px;
+    display: inline-block;
+
+    > label{
+      position: static !important;
+      &:before{
+        top: 0;
+      }
+    }
+  }
+
+  &.btn-lg,
+  &.btn-group-lg{
+    .nice-checkbox,
+    .nice-radio{
+      > label{
+        &:before{
+          top: 2px !important;
+        }
+      }
+    }
+  }
+}
+
+// Alternate buttons
+// --------------------------------------------------
+
+.btn-default {
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+}
+.btn-primary {
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}
+// Warning appears as orange
+.btn-warning {
+  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+}
+// Danger and error appear as red
+.btn-danger {
+  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+}
+// Success appears as green
+.btn-success {
+  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+}
+// Info appears as blue-green
+.btn-info {
+  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+}
+
+// More of Alternate buttons
+// --------------------------------------------------
+
+// Inverse
+.btn-inverse {
+  @include button-variant($btn-inverse-color, $btn-inverse-bg, $btn-inverse-border);
+}
+// Greentur
+.btn-greentur {
+  @include button-variant($btn-greentur-color, $btn-greentur-bg, $btn-greentur-border);
+}
+// Nephem
+.btn-nephem {
+  @include button-variant($btn-nephem-color, $btn-nephem-bg, $btn-nephem-border);
+}
+// Belpet
+.btn-belpet {
+  @include button-variant($btn-belpet-color, $btn-belpet-bg, $btn-belpet-border);
+}
+// Wistam
+.btn-wistam {
+  @include button-variant($btn-wistam-color, $btn-wistam-bg, $btn-wistam-border);
+}
+// Osun
+.btn-osun {
+  @include button-variant($btn-osun-color, $btn-osun-bg, $btn-osun-border);
+}
+// Pumcar
+.btn-pumcar {
+  @include button-variant($btn-pumcar-color, $btn-pumcar-bg, $btn-pumcar-border);
+}
+// Pomeal
+.btn-pomeal {
+  @include button-variant($btn-pomeal-color, $btn-pomeal-bg, $btn-pomeal-border);
+}
+// Silc
+.btn-silc {
+  @include button-variant($btn-silc-color, $btn-silc-bg, $btn-silc-border);
+}
+// Ascon
+.btn-ascon {
+  @include button-variant($btn-ascon-color, $btn-ascon-bg, $btn-ascon-border);
+}
+
+
+// Link buttons
+// -------------------------
+
+// Make a button look and behave like a link
+.btn-link {
+  color: $link-color;
+  font-weight: normal;
+  cursor: pointer;
+  border-radius: 0;
+
+  &,
+  &:active,
+  &[disabled],
+  fieldset[disabled] & {
+    background-color: transparent;
+    @include box-shadow(none);
+  }
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: transparent;
+  }
+  &:hover,
+  &:focus {
+    color: $link-hover-color;
+    text-decoration: underline;
+    background-color: transparent;
+  }
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus {
+      color: $btn-link-disabled-color;
+      text-decoration: none;
+    }
+  }
+}
+
+
+// Button Sizes
+// --------------------------------------------------
+
+.btn-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+}
+.btn-sm,
+.btn-xs {
+  // line-height: ensure proper height of button next to small input
+  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+}
+.btn-xs {
+  padding: 1px 5px;
+  & > .badge{
+    padding: 1px 4px;
+  }
+}
+
+
+// Block button
+// --------------------------------------------------
+
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}
+
+// not required .btn (stand alone)
+.btn-call {
+  position: relative;
+  display: inline-block;
+  height: 60px;
+  min-width: 80px;
+  margin: 5px 5px 0 0;
+  padding: 10px 0;
+  border: 1px solid $border-color;
+  background-color: lighten( $gray-lighter, 5% );
+  text-align: center;
+  color: $gray-darker;
+  font-size: 12px;
+  line-height: 18px;
+  border-radius: $border-radius-small;
+  
+  i {
+    color: $gray;
+    font-size: 18px;
+  }
+
+  .badge{
+    position: absolute;
+    top: -8px;
+    right: -5px;
+
+    &.badge-left{
+      right: auto;
+      left: -5px;      
+    }
+  }
+
+  &:hover{
+    border-color: darken( $border-color, 15% );
+    text-decoration: none;
+  }
+}

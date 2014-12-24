@@ -1,0 +1,463 @@
+// below is sidebar right mode
+body.wrapkit-sidebar-right{
+	.sidebar{
+		left: auto;
+		right: 0;
+		border-right: none;
+		border-left: 1px solid $sidebar-border-color;
+
+		.nicescroll-rails{
+			margin-left: -1px;
+		}
+
+		.sidebar-actions{
+			.sidebar-form-search{
+				border-right: none;
+				border-left: 1px solid $sidebar-border-color;
+			} // end .sidebar-form-search
+
+		} // end .sidebar-actions
+
+		.sidebar-nav{
+
+			.nav{
+
+				li.nav-item{
+					border-right: none;
+				} // end .nav-item
+			} // end .nav
+
+		} // end .sidebar-nav
+
+	} // end .sidebar
+
+	// below is medium version of sidebar on right
+	&.wrapkit-sidebar-md{
+		.sidebar{
+
+			.sidebar-actions{
+				margin-left: -1px;
+				border-right: none;
+				border-left: 1px solid $sidebar-border-color;
+
+				&:hover,
+				&.open{
+
+					right: $sidebar-width-md * 3;
+					@include box-shadow( -3px 3px 6px rgba(0,0,0,.175) );
+				} // end of sidebar actions open/hover state
+
+				.sidebar-form-search{
+					padding-right: ($sidebar-width-md / 2) - 5;
+				} // end .sidebar-form-search				
+
+				.sidebar-actions-bar{
+					margin-left: -1px;
+				}
+
+			} // end .sidebar-actions
+
+			.sidebar-nav{
+
+				.nav-header{
+
+					.nav-header-text{
+						left: auto;
+						right: $sidebar-width-md + $tooltip-arrow-width;
+
+						&:before{
+							margin-left: auto;
+							right: -$tooltip-arrow-width;
+							left: auto;
+							border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+						    border-left-color: $sidebar-nav-item-bg;
+						} // end of nav header text arrow
+
+					} // end of nav header text
+
+				} // end of sidebar nav header
+				
+				li.nav-item{
+
+					& > .nav-item-child{
+						left: auto;
+						right: $sidebar-width-md + $tooltip-arrow-width;
+						@include box-shadow( -3px 3px 6px rgba(0,0,0,.175) );
+
+						&:before{
+							margin-left: auto;
+							margin-right: -$tooltip-arrow-width;
+							left: auto;
+							right: 0;
+							border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+						    border-left-color: $sidebar-nav-item-bg;
+						} // end of arrow item child
+
+						&:after{
+							left: auto;
+							right: -$tooltip-arrow-width - 2; // 2 is border width ( 1px border-right sidebar + 1px border-right nav item  )
+						} // end of helper hover (nav-item-child hover hack)
+
+					} // end .nav-item-child
+
+				} // end .nav-item
+
+			} // end .sidebar-nav
+
+		} // end .sidebar
+
+	} // end of sidebar medium version of sidebar on right
+	
+
+	// below is small version of sidebar on right
+	&.wrapkit-sidebar-sm{
+		
+		.sidebar{
+
+			.sidebar-actions{
+				margin-left: -1px;
+				border-right: none;
+				border-left: 1px solid $sidebar-border-color;
+				
+				&:hover,
+				&.open{
+
+					right: $sidebar-width-sm * 6;
+					@include box-shadow( -3px 3px 6px rgba(0,0,0,.175) );
+
+					.sidebar-actions-bar{
+
+						& > li{
+							width: $sidebar-width-sm;
+
+							&:not(:last-child){
+								display: none;
+								width: $sidebar-width-sm * 2;
+							}
+						} // end of li
+
+					} // end of sidebar actions bar
+
+				} // end of sidebar actions open/hover state
+
+				.sidebar-form-search{
+					padding-right: ($sidebar-width-sm / 2) - 5;
+				}
+				.sidebar-actions-bar{
+					margin-left: -1px;
+				}
+
+			} // end .sidebar-actions
+
+			.sidebar-nav{
+
+				.nav-header{
+
+					.nav-header-text{
+						left: auto;
+						right: $sidebar-width-sm + $tooltip-arrow-width;
+						@include box-shadow( -3px 3px 6px rgba(0,0,0,.175) );
+
+						&:before{
+							margin-left: auto;
+							left: auto;
+							right: -$tooltip-arrow-width;
+							border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+						    border-left-color: $sidebar-nav-item-bg;
+						} // end of nav header text arrow
+
+					} // end of nav header text
+
+				} // end of sidebar nav header
+				
+				li.nav-item{
+
+					& > a{
+
+						.badge{
+							right: auto;
+							left: -( ($sidebar-width-sm/2) - ($sidebar-nav-item-padding-vertical/2) );
+						} // end of nav item badge
+						
+						& > .nav-item-text{
+
+							right: $sidebar-width-sm + $tooltip-arrow-width;
+							left: auto;
+							@include box-shadow( -3px 0 6px rgba(0,0,0,.175) );
+
+							&:before{
+								margin-left: auto;
+								margin-right: -$tooltip-arrow-width;
+								left: auto;
+								right: 0;
+								border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+							    border-left-color: $sidebar-nav-item-bg-hover;
+							} // end of nav header text arrow
+
+						} // end of nav item text
+
+					} // end of nav item a
+
+					& > .nav-item-child{
+						left: auto;
+						right: $sidebar-width-sm + $tooltip-arrow-width;
+						@include box-shadow( -3px 3px 6px rgba(0,0,0,.175) );
+
+						&:before{
+							margin-left: auto;
+							margin-right: -$tooltip-arrow-width;
+							left: auto;
+							right: 0;
+							border-width: $tooltip-arrow-width 0 $tooltip-arrow-width $tooltip-arrow-width;
+						    border-left-color: $sidebar-nav-item-bg;
+						} // end of arrow item child
+
+						&:after{
+							left: auto;
+							right: -$tooltip-arrow-width - 2; // 2 is border width ( 1px border-right sidebar + 1px border-right nav item  )
+						} // end of helper hover (nav-item-child hover hack)
+
+					} // end .nav-item-child
+
+				} // end .nav-item
+
+			} // end .sidebar-nav
+
+		} // end .sidebar
+
+	} // end of sidebar small version of sidebar on right
+
+
+	// below is hidden version of sidebar
+	&.wrapkit-sidebar-hidden{
+
+		.sidebar{
+
+			.sidebar-actions{
+				left: auto;
+				right: 1px;
+				border-right: none;
+				border-left: 1px solid $sidebar-border-color;
+
+				& > .nav-item-loader > i{
+					left: 0;
+					right: auto;
+				}
+			} // end .sidebar-actions
+
+		} // end of .sidebar
+
+	} // end of wrapkit sidebar-hidden mode
+
+} // end of sidebar right mode
+
+
+// below is style for small screen ( <= screen-xs-max )
+@media (max-width: $screen-xs-max) {
+	
+	body.wrapkit-sidebar-coltonav{
+		.sidebar{
+			position: relative;
+			margin: 0;
+			top: auto;
+			padding-bottom: 0;
+			width: 100% !important;
+			height: auto;
+			overflow-x: hidden !important;
+			border-right: none;
+			border-left: none;
+
+			&.navbar-collapse{
+				max-height: none !important;
+				overflow: auto;
+
+				.sidebar-nav{
+					max-height: $sidebar-collapse-height !important;
+					padding-bottom: 0;
+				} // end of .sidebar-nav
+
+			} // end of .sidebar.navbar-collapse
+
+		} // end of .sidebar
+
+		&.wrapkit-sidebar-hidden{
+			
+			.sidebar{
+				position: relative;
+				top: auto;
+				padding-top: 0;
+				width: 100% !important;
+				height: auto;
+
+				.sidebar-actions{
+					position: relative;
+					top: auto;
+					left: auto;		// normalize left position
+					right: auto;	// normalize right position
+					width: 100% !important;
+					height: auto;
+					background-color: $sidebar-nav-item-bg;
+
+					& > .nav-item-loader > i{
+						left: auto !important;
+						right: 0 !important;
+					}
+
+					.sidebar-actions-bar{
+						
+						padding: 0 $sidebar-nav-item-padding-horizontal;
+
+						& > li{
+							width: 25%;
+
+							&:not(:first-child){
+								display: inline-block;
+							}
+
+							& > a{
+								padding: $sidebar-actions-padding-base 0;
+								border-style: solid;
+								border-color: transparent;
+								border-width: 0 0 3px 0;
+								
+								&:hover{
+									background-color: $sidebar-nav-item-bg !important;
+									border-color: $sidebar-context-border;
+								}
+							} // end of a
+							& > .dropdown-menu{
+								position: absolute;
+								display: none;
+								width: 100%;
+								max-width: 100%;
+							}
+							&.open{
+								& > .dropdown-menu{
+									position: relative;
+									display: block;
+								}
+								& > a{
+									color: $sidebar-context-color;
+									border-color: $sidebar-context-border;
+									box-shadow: none;
+								}
+							} // end of open state
+
+						} // end of li
+
+					} // end of .sidebar-actions-bar
+
+				} // end of .sidebar-actions
+
+				.sidebar-form-search{
+					.form-control{
+						padding: $sidebar-actions-padding-base 0;
+						margin-bottom: 1px;
+					}
+				} // end of sidebar-form
+
+				.sidebar-nav{
+					display: none;
+				} // end of .sidebar-nav
+
+			} // end of .sidebar
+
+		} // end of wrapkit sidebar-hidden mode
+
+	}  // end of .wrapkit-sidebar-coltonav
+
+} // end of screen-xs-max
+
+
+// below is sidebar helper ( used if you are using liveResizable feature )
+.sidebar .ui-resizable-handle{
+	cursor: col-resize;
+}
+.sidebar.resizestart .ui-resizable-handle{
+	background-color: $sidebar-ui-resizable-handle;
+}
+
+.sidebar-helper-lg,
+.sidebar-helper-md,
+.sidebar-helper-sm{
+	position: absolute;
+	top: $navbar-height !important;
+}
+
+body.wrapkit-header-fixed-top,
+body.wrapkit-header-fixed-bottom{
+	.sidebar-helper-lg,
+	.sidebar-helper-md,
+	.sidebar-helper-sm{
+		top: 0 !important;
+	}
+}
+
+.sidebar-helper-hidden{
+	position: absolute;
+	top: 0 !important;
+}
+body.wrapkit-header-fixed-top,
+body.wrapkit-header-fixed-bottom{
+	.sidebar-helper-hidden{
+		position: fixed;
+		top: 0 !important;
+	}	
+}
+.sidebar-helper-hidden{
+	width: $sidebar-width-lg !important;
+}
+.sidebar-helper-md{
+	width: $sidebar-width-md !important;
+}
+.sidebar-helper-sm{
+	width: $sidebar-width-sm !important;
+}
+
+body.wrapkit-sidebar-right{
+	.sidebar-helper-lg,
+	.sidebar-helper-md,
+	.sidebar-helper-sm,
+	.sidebar-helper-hidden{
+		left: auto !important;
+	}
+}
+
+@media (max-width: $screen-xs-max) {
+
+	body.wrapkit-sidebar-coltonav{
+		
+		.sidebar-helper-lg,
+		.sidebar-helper-md,
+		.sidebar-helper-sm,
+		.sidebar-helper-hidden{
+			position: relative !important;
+			top: auto !important;
+			bottom: auto !important;
+		}
+
+		// header fixed
+		&.wrapkit-header-fixed-top,
+		&.wrapkit-header-fixed-bottom{
+			.header{
+				z-index: $zindex-header+1;
+			}
+		}
+		&.wrapkit-header-fixed-top{
+			.sidebar{
+				position: fixed !important;
+				top: $navbar-height !important;
+				bottom: auto !important;
+				z-index: $zindex-header;
+			}
+		}
+		&.wrapkit-header-fixed-bottom{
+			.sidebar{
+				position: fixed !important;
+				top: auto !important;
+				bottom: $navbar-height !important;
+				z-index: $zindex-header;
+			}
+		}
+	}
+}

@@ -1,0 +1,96 @@
+// CONTEXTUAL
+// Line variant
+// white context
+@include sidebar-line-context( 'white', $sidebar-context-white-bg, $sidebar-context-white-color, $sidebar-context-white-border );
+// cloud context
+@include sidebar-line-context( 'cloud', $sidebar-context-cloud-bg, $sidebar-context-cloud-color, $sidebar-context-cloud-border );
+// gray context
+@include sidebar-line-context( 'gray', $sidebar-context-gray-bg, $sidebar-context-gray-color, $sidebar-context-gray-border );
+// dark context
+@include sidebar-line-context( 'dark', $sidebar-context-dark-bg, $sidebar-context-dark-color, $sidebar-context-dark-border );
+// teal context
+@include sidebar-line-context( 'teal', $sidebar-context-teal-bg, $sidebar-context-teal-color, $sidebar-context-teal-border );
+// green context
+@include sidebar-line-context( 'green', $sidebar-context-green-bg, $sidebar-context-green-color, $sidebar-context-green-border );
+// sky context
+@include sidebar-line-context( 'sky', $sidebar-context-sky-bg, $sidebar-context-sky-color, $sidebar-context-sky-border );
+// purple context
+@include sidebar-line-context( 'purple', $sidebar-context-purple-bg, $sidebar-context-purple-color, $sidebar-context-purple-border );
+// yellow context
+@include sidebar-line-context( 'yellow', $sidebar-context-yellow-bg, $sidebar-context-yellow-color, $sidebar-context-yellow-border );
+// orange context
+@include sidebar-line-context( 'orange', $sidebar-context-orange-bg, $sidebar-context-orange-color, $sidebar-context-orange-border );
+// red context
+@include sidebar-line-context( 'red', $sidebar-context-red-bg, $sidebar-context-red-color, $sidebar-context-red-border );
+
+// Extend variant
+// white context
+@include sidebar-extend-context( 'white', $sidebar-context-white-bg, $sidebar-context-white-color, $sidebar-context-white-border );
+// cloud context
+@include sidebar-extend-context( 'cloud', $sidebar-context-cloud-bg, $sidebar-context-cloud-color, $sidebar-context-cloud-border );
+// gray context
+@include sidebar-extend-context( 'gray', $sidebar-context-gray-bg, $sidebar-context-gray-color, $sidebar-context-gray-border );
+// dark context
+@include sidebar-extend-context( 'dark', $sidebar-context-dark-bg, $sidebar-context-dark-color, $sidebar-context-dark-border );
+// teal context
+@include sidebar-extend-context( 'teal', $sidebar-context-teal-bg, $sidebar-context-teal-color, $sidebar-context-teal-border );
+// green context
+@include sidebar-extend-context( 'green', $sidebar-context-green-bg, $sidebar-context-green-color, $sidebar-context-green-border );
+// sky context
+@include sidebar-extend-context( 'sky', $sidebar-context-sky-bg, $sidebar-context-sky-color, $sidebar-context-sky-border );
+// purple context
+@include sidebar-extend-context( 'purple', $sidebar-context-purple-bg, $sidebar-context-purple-color, $sidebar-context-purple-border );
+// yellow context
+@include sidebar-extend-context( 'yellow', $sidebar-context-yellow-bg, $sidebar-context-yellow-color, $sidebar-context-yellow-border );
+// orange context
+@include sidebar-extend-context( 'orange', $sidebar-context-orange-bg, $sidebar-context-orange-color, $sidebar-context-orange-border );
+// red context
+@include sidebar-extend-context( 'red', $sidebar-context-red-bg, $sidebar-context-red-color, $sidebar-context-red-border );
+
+// Caretal variant
+// white context
+@include sidebar-caretal-context( 'white', $sidebar-context-white-bg, $sidebar-context-white-color, $sidebar-context-white-border );
+// cloud context
+@include sidebar-caretal-context( 'cloud', $sidebar-context-cloud-bg, $sidebar-context-cloud-color, $sidebar-context-cloud-border );
+// gray context
+@include sidebar-caretal-context( 'gray', $sidebar-context-gray-bg, $sidebar-context-gray-color, $sidebar-context-gray-border );
+// dark context
+@include sidebar-caretal-context( 'dark', $sidebar-context-dark-bg, $sidebar-context-dark-color, $sidebar-context-dark-border );
+// teal context
+@include sidebar-caretal-context( 'teal', $sidebar-context-teal-bg, $sidebar-context-teal-color, $sidebar-context-teal-border );
+// green context
+@include sidebar-caretal-context( 'green', $sidebar-context-green-bg, $sidebar-context-green-color, $sidebar-context-green-border );
+// sky context
+@include sidebar-caretal-context( 'sky', $sidebar-context-sky-bg, $sidebar-context-sky-color, $sidebar-context-sky-border );
+// purple context
+@include sidebar-caretal-context( 'purple', $sidebar-context-purple-bg, $sidebar-context-purple-color, $sidebar-context-purple-border );
+// yellow context
+@include sidebar-caretal-context( 'yellow', $sidebar-context-yellow-bg, $sidebar-context-yellow-color, $sidebar-context-yellow-border );
+// orange context
+@include sidebar-caretal-context( 'orange', $sidebar-context-orange-bg, $sidebar-context-orange-color, $sidebar-context-orange-border );
+// red context
+@include sidebar-caretal-context( 'red', $sidebar-context-red-bg, $sidebar-context-red-color, $sidebar-context-red-border );
+
+// Block variant
+// white context
+@include sidebar-block-context( 'white', $sidebar-context-white-bg, $sidebar-context-white-color, $sidebar-context-white-border );
+// cloud context
+@include sidebar-block-context( 'cloud', $sidebar-context-cloud-bg, $sidebar-context-cloud-color, $sidebar-context-cloud-border );
+// gray context
+@include sidebar-block-context( 'gray', $sidebar-context-gray-bg, $sidebar-context-gray-color, $sidebar-context-gray-border );
+// dark context
+@include sidebar-block-context( 'dark', $sidebar-context-dark-bg, $sidebar-context-dark-color, $sidebar-context-dark-border );
+// teal context
+@include sidebar-block-context( 'teal', $sidebar-context-teal-bg, $sidebar-context-teal-color, $sidebar-context-teal-border );
+// green context
+@include sidebar-block-context( 'green', $sidebar-context-green-bg, $sidebar-context-green-color, $sidebar-context-green-border );
+// sky context
+@include sidebar-block-context( 'sky', $sidebar-context-sky-bg, $sidebar-context-sky-color, $sidebar-context-sky-border );
+// purple context
+@include sidebar-block-context( 'purple', $sidebar-context-purple-bg, $sidebar-context-purple-color, $sidebar-context-purple-border );
+// yellow context
+@include sidebar-block-context( 'yellow', $sidebar-context-yellow-bg, $sidebar-context-yellow-color, $sidebar-context-yellow-border );
+// orange context
+@include sidebar-block-context( 'orange', $sidebar-context-orange-bg, $sidebar-context-orange-color, $sidebar-context-orange-border );
+// red context
+@include sidebar-block-context( 'red', $sidebar-context-red-bg, $sidebar-context-red-color, $sidebar-context-red-border );
