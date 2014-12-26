@@ -1,4 +1,38 @@
+// libs
+
+var each = function(arr, cb) {
+    if(arr == null) {
+        return;
+    } else if (Array.prototype.forEach && arr.forEach === Array.prototype.forEach) {
+        arr.forEach(cb);
+    } else {
+        for(var i = 0; i < arr.length; i++) {
+            (function() {
+                cb(arr[i], i, arr);
+            })();
+        }
+    }
+}
+
+
 // chart candlestick
+
+var candle = {}
+
+var deltas = {
+  // name: seconds
+  //
+  // "3d":  259200,
+  "1d":  86400,
+  "12h": 43200,
+  "6h":  21600,
+  "4h":  14400,
+  "2h":  7200,
+  "1h":  3600,
+  "30m": 1800
+}
+
+
 
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
            width = 900 - margin.left - margin.right,
@@ -34,48 +68,70 @@ var svg = d3.select("#chart_candlestick").append("svg")
        .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json(charts["price_bitstamp"], function(error, data) {
-  var accessor = candlestick.accessor();
+candle.map = function(d) {
+  var date   = d[0]
+  var open   = d[1]
+  var high   = d[2]
+  var low    = d[3]
+  var close  = d[4]
+  var volume = d[5]
 
-  // data = data.slice(0, 200).map(function(d) {
-  data = data.map(function(d) {
-    var date   = d[0]
-    var open   = d[1]
-    var high   = d[2]
-    var low    = d[3]
-    var close  = d[4]
-    var volume = d[5]
+  row = {
+    date:   parseDateUnix(date),
+    open:   +open,
+    high:   +high,
+    low:    +low,
+    close:  +close,
+    volume: +volume
+  }
+  // console.log(row)
 
-    row = {
-      date:   parseDateUnix(date),
-      open:   +open,
-      high:   +high,
-      low:    +low,
-      close:  +close,
-      volume: +volume
+  return row;
+}
+
+var accessor = candlestick.accessor();
+
+candle.sort = function(a, b) {
+  return d3.ascending(accessor.d(a), accessor.d(b))
+}
+
+var render_candlestick = function(step_time) {
+
+
+  var step = "6h"
+  if (step_time)
+    step = step_time
+
+  var file_name = charts["price_bitstamp"]
+  file_name = file_name +"_"+ step + ".json"
+
+  d3.json(file_name, function(error, data) {
+
+    svg.selectAll("*").remove()
+
+    if (!data) {
+      console.error("empty data: "+file_name)
+    } else {
+      console.log("chart: 'candlestick', status: 'loaded', entries: ", data.length)
     }
 
-    console.log(row)
+    // data = data.slice(0, 200).map(function(d) {
+    data = data.map(candle.map).sort(candle.sort)
 
-    return row;
-  }).sort(function(a, b) { return d3.ascending(accessor.d(a), accessor.d(b)); });
+    x.domain(data.map(accessor.d));
+    y.domain(techan.scale.plot.ohlc(data, accessor).domain())
 
-  // TODO: indent
-
-   x.domain(data.map(accessor.d));
-   y.domain(techan.scale.plot.ohlc(data, accessor).domain());
-
-   svg.append("g")
+    svg.append("g")
            .datum(data)
            .attr("class", "candlestick")
-           .call(candlestick);
+           .call(candlestick)
 
-   svg.append("g")
+    svg.append("g")
            .attr("class", "x axis")
            .attr("transform", "translate(0," + height + ")")
-           .call(xAxis);
+           .call(xAxis)
 
-   svg.append("g")
+    svg.append("g")
            .attr("class", "y axis")
            .call(yAxis)
            .append("text")
@@ -83,8 +139,26 @@ d3.json(charts["price_bitstamp"], function(error, data) {
            .attr("y", 6)
            .attr("dy", ".71em")
            .style("text-anchor", "end")
-           .text("Price (€)");
-});
+           .text("Price (€)")
+  });
+}
+
+
+var candlestick_change_step = function(evt) {
+  var step = evt.target.dataset.step
+  render_candlestick(step)
+}
+
+var bind_candlestick_buttons = function() {
+  var steps = document.querySelectorAll("a[data-step]")
+  each(steps, function(step){
+    step.addEventListener("click", candlestick_change_step)
+  })
+}
+
+render_candlestick()
+bind_candlestick_buttons()
+
 
 // chart price
 

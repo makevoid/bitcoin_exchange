@@ -5,6 +5,9 @@
 %section
   %div
     %h1 Price Candlestick
+    - deltas = %w(1d 12h  6h  4h  2h  1h 30m)
+    - deltas.each do |delta|
+      %a{ href: "javascript:void(0)", data: { step: delta } }= delta
     #chart_candlestick
   %div
     %h1 Price
@@ -18,7 +21,7 @@
   var charts = {} // chart paths
   // charts["price_bitstamp"] = "/charts/bitstamp_candle_sample.csv"
   // charts["price_bitstamp"] = "/api/transactions"
-  charts["price_bitstamp"] = "/charts/bitstamp_candle.json"
+  charts["price_bitstamp"] = "/charts/bitstamp_candle"
 %script{ src: "/js/vendor/d3.js" }
 %script{ src: "/js/vendor/d3-techan.js" }
 %script{ src: "/js/bitstamp_ext_techan.js" }
@@ -30,6 +33,15 @@
 :css
   body {
     background: #fefefe;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: blue;
+  }
+  a:hover {
+    color: #003;
   }
 
 :sass
