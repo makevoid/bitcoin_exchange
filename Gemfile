@@ -36,8 +36,10 @@ gem "bitcoin-client", git: "git@github.com:makevoid/bitcoin-client"
 group :development do
   gem "guard"
   gem "guard-sass",         require: false
-  gem "guard-coffeescript", require: false
+  gem "guard-coffeescript", require: false, github: "guard/guard-coffeescript" # TODO: temporary
   gem "guard-livereload",   require: false
+  gem 'guard-concat',       require: false, github: "makevoid/guard-concat"
+  # gem 'guard-concat',       require: false, path: "~/apps/guard_concat_eze"
 end
 
 group :test do

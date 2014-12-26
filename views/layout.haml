@@ -5,11 +5,14 @@
   - TITLE = "BitcoinExchange"
   %head
     %title= TITLE
-    %link{ rel: "stylesheet", href: "/css/helper.css" }
-    %link{ rel: "stylesheet", href: "/css/fontawesome.css"}
-    %link{ rel: "stylesheet", href: "/css/main.css" }
-    %link{ rel: "stylesheet", href: "/css/main_sass.css" }
-    %link{ rel: "stylesheet", href: "/css/roboto.css" }
+    -# %link{ rel: "stylesheet", href: "/css/helper.css" }
+    -# %link{ rel: "stylesheet", href: "/css/fontawesome.css"}
+    -# %link{ rel: "stylesheet", href: "/css/main.css" }
+    -# %link{ rel: "stylesheet", href: "/css/main_sass.css" }
+    -# %link{ rel: "stylesheet", href: "/css/roboto.css" }
+    -# using guard-concat:
+    %link{ rel: "stylesheet", href: "/css/all.css" }
+
     -# %link{ rel: "stylesheet", href: "http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,700italic,500italic,400italic,300italic"}
     = haml :"_metas" # todo require/implement partial :metas
 
