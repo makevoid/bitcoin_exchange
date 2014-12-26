@@ -90,3 +90,7 @@ path.candle.down {
 #chart {
   width: 100%;
   height: 500px; }
+
+.navbar-dropdown input[placeholder], .navbar-dropdown input::-webkit-input-placeholder {
+  color: #CCC;
+}

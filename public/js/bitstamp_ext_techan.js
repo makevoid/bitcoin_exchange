@@ -4,7 +4,10 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
            width = 900 - margin.left - margin.right,
            height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%d-%b-%y").parse;
+// var parseDate = d3.time.format("%d-%b-%y").parse;
+var parseDateUnix = function(unixtime) {
+  return new Date(unixtime * 1000)
+}
 
 var x = techan.scale.financetime()
        .range([0, width]);
@@ -31,19 +34,33 @@ var svg = d3.select("#chart_candlestick").append("svg")
        .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("/bitstamp_csv/bitstamp.csv", function(error, data) {
-   var accessor = candlestick.accessor();
+d3.json(charts["price_bitstamp"], function(error, data) {
+  var accessor = candlestick.accessor();
 
-   data = data.slice(0, 200).map(function(d) {
-       return {
-           date: parseDate(d.Date),
-           open: +d.Open,
-           high: +d.High,
-           low: +d.Low,
-           close: +d.Close,
-           volume: +d.Volume
-       };
-   }).sort(function(a, b) { return d3.ascending(accessor.d(a), accessor.d(b)); });
+  // data = data.slice(0, 200).map(function(d) {
+  data = data.map(function(d) {
+    var date   = d[0]
+    var open   = d[1]
+    var high   = d[2]
+    var low    = d[3]
+    var close  = d[4]
+    var volume = d[5]
+
+    row = {
+      date:   parseDateUnix(date),
+      open:   +open,
+      high:   +high,
+      low:    +low,
+      close:  +close,
+      volume: +volume
+    }
+
+    console.log(row)
+
+    return row;
+  }).sort(function(a, b) { return d3.ascending(accessor.d(a), accessor.d(b)); });
+
+  // TODO: indent
 
    x.domain(data.map(accessor.d));
    y.domain(techan.scale.plot.ohlc(data, accessor).domain());

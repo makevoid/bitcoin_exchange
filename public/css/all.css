@@ -2655,6 +2655,9 @@ path.candle.down {
   width: 100%;
   height: 500px; }
 
+.navbar-dropdown input[placeholder], .navbar-dropdown input::-webkit-input-placeholder {
+  color: #CCC;
+}
 @font-face {
   font-family: 'Roboto';
   font-style: normal;

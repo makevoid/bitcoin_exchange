@@ -5,7 +5,10 @@ class BitcoinExchange < Sinatra::Base
   # use Rack::Session::Cookie
 
   def login_required
-    redirect "/login" unless current_user
+    unless current_user
+      flash[:notice] = "Log in to access this area."
+      halt haml_mod :login
+    end
   end
 
   def active_user_required

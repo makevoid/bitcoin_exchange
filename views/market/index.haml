@@ -30,6 +30,10 @@
     .separator50
   .separator50
 
+:javascript
+  var charts = {} // chart paths
+  // charts["price_bitstamp"] = "/charts/bitstamp_candle_sample.csv"
+  charts["price_bitstamp"] = "/api/transactions"
 %script{ src: "/js/vendor/d3.js" }
 %script{ src: "/js/vendor/d3-techan.js" }
 %script{ src: "/js/techan_candlestick.js" }

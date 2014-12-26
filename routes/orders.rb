@@ -46,7 +46,7 @@ class BitcoinExchange < Sinatra::Base
       flash_error_amount order, err
       halt haml :"orders/new"
     rescue Order::AmountError
-      flash[:notice] = "The price you set is out of bounds.<br>The maximum amount for order is set to #{Order::OrderAmountLimit} BTC."
+      flash[:error] = "The price you set is out of bounds.<br>The maximum amount for order is set to #{Order::OrderAmountLimit} BTC."
       halt haml :"orders/new"
     end
   end
@@ -55,7 +55,7 @@ class BitcoinExchange < Sinatra::Base
     begin
       Order.create attributes.merge( price: order[:price] )
     rescue Order::PriceError
-      flash[:notice] = "The price you set is out of bounds."
+      flash[:error] = "The price you set is out of bounds."
       halt haml :"orders/new"
     end
   end
@@ -63,7 +63,7 @@ class BitcoinExchange < Sinatra::Base
   def flash_error_amount(order, error)
     balance = current_user.balance
     amount = error.class == Order::NotEnoughFundsBtc ? "€#{balance.eur_available.f_eur}" : "#{balance.btc_available.to_dz} BTC"
-    flash[:notice] = "You need more funds to open that order.<br>You have only #{amount} available. Check your account balance for details."
+    flash[:error] = "You need more funds to open that order.<br>You have only #{amount} available. Check your account balance for details."
   end
 
 end

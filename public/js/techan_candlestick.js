@@ -29,7 +29,8 @@ var svg = d3.select("#chart").append("svg")
        .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("/bitstamp_csv/bitstamp.csv", function(error, data) {
+//d3.csv(charts["price_bitstamp"], function(error, data) {
+d3.json(charts["price_bitstamp"], function(error, data) {
    var accessor = candlestick.accessor();
 
    data = data.slice(0, 200).map(function(d) {

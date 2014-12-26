@@ -14,7 +14,11 @@
     #chart_orderbook
 
 
-
+:javascript
+  var charts = {} // chart paths
+  // charts["price_bitstamp"] = "/charts/bitstamp_candle_sample.csv"
+  // charts["price_bitstamp"] = "/api/transactions"
+  charts["price_bitstamp"] = "/charts/bitstamp_candle.json"
 %script{ src: "/js/vendor/d3.js" }
 %script{ src: "/js/vendor/d3-techan.js" }
 %script{ src: "/js/bitstamp_ext_techan.js" }
