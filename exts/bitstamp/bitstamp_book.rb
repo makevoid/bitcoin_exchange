@@ -38,6 +38,50 @@ unless ui?
 
 end
 
+
+
+
+# simple JSON cache
+#
+# usage:
+#
+#   cache(:response) do
+#     open('http://example.com')
+#   end
+
+module Caching
+
+  CACHE_FILE = "../../tmp/cache_%s.json"
+
+  def cache_present?(key)
+    File.exist? CACHE_FILE % key
+  end
+
+  def cache_load(key)
+    file = File.read CACHE_FILE % key
+    JSON.parse file
+  end
+
+  def cache_save(key, contents)
+    File.open( CACHE_FILE % key, "w" ) do |file|
+      file.write contents.to_json
+    end
+    contents
+  end
+
+  def cache(key, &block)
+    unless cache_present? key
+      cache_save key, block.call
+    else
+      cache_load key
+    end
+  end
+
+end
+
+
+# main classes
+
 class BitstampBook # Bitstamp OrderBook
   URL = "https://www.bitstamp.net/api/order_book/"
 

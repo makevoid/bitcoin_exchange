@@ -14,16 +14,21 @@ end
 
 require_relative "bitstamp_book" #  remember to adjust the path, it will be probably "../exts/bitstamp/bitstamp_book"
 
+include Caching
 
 # for orderbook chart
 get "/api/orderbook" do
   content_type :json
-  BitstampBook.orders.to_json
+  cache :orderbook do
+    BitstampBook.orders
+  end.to_json
 end
 
 get "/api/transactions" do
   content_type :json
-  BitstampTrades.transactions.to_json
+  cache :transactions do
+    BitstampTrades.transactions
+  end.to_json
 end
 
 # for price  chart

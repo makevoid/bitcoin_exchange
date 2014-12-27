@@ -1,17 +1,17 @@
 // libs
 
 var each = function(arr, cb) {
-    if(arr == null) {
-        return;
-    } else if (Array.prototype.forEach && arr.forEach === Array.prototype.forEach) {
-        arr.forEach(cb);
-    } else {
-        for(var i = 0; i < arr.length; i++) {
-            (function() {
-                cb(arr[i], i, arr);
-            })();
-        }
+  if(arr == null) {
+    return;
+  } else if (Array.prototype.forEach && arr.forEach === Array.prototype.forEach) {
+    arr.forEach(cb);
+  } else {
+    for(var i = 0; i < arr.length; i++) {
+      (function() {
+        cb(arr[i], i, arr);
+      })();
     }
+  }
 }
 
 
@@ -96,8 +96,6 @@ candle.sort = function(a, b) {
 }
 
 var render_candlestick = function(step_time) {
-
-
   var step = "6h"
   if (step_time)
     step = step_time
@@ -139,7 +137,8 @@ var render_candlestick = function(step_time) {
            .attr("y", 6)
            .attr("dy", ".71em")
            .style("text-anchor", "end")
-           .text("Price (€)")
+           .text("Price (USD)")
+           //.text("Price (€)")
   });
 }
 
@@ -217,7 +216,8 @@ d3.json("/api/transactions", function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Price ($)")
+      .text("Price (USD)")
+      //.text("Price (EUR)")
 
   chart_price.svg.append("path")
       .datum(data)
@@ -226,6 +226,83 @@ d3.json("/api/transactions", function(error, data) {
 });
 
 
+// orderbook chart
+
+
+chart_orderbook = {}
+
+chart_orderbook.x = d3.scale.linear()
+    .range([0, width])
+
+chart_orderbook.y = d3.scale.linear()
+    .range([height, 0])
+
+chart_orderbook.xAxis = d3.svg.axis()
+    .scale(chart_orderbook.x)
+    .orient("bottom")
+
+chart_orderbook.yAxis = d3.svg.axis()
+    .scale(chart_orderbook.y)
+    .orient("left")
+
+chart_orderbook.line = d3.svg.line()
+    // .interpolate("basis")
+    .interpolate("bundle")
+    .x(function(d) { return chart_orderbook.x(d.price); })
+    .y(function(d) { return chart_orderbook.y(d.amount); })
+
+chart_orderbook.svg = d3.select("#chart_orderbook").append("svg")
+    .attr("width",  width  + margin.left  + margin.right )
+    .attr("height", height + margin.top   + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+d3.json("/api/orderbook", function(error, data) {
+  // data = data["bids"]
+  asks = data["asks"]
+  bids = data["bids"]
+
+  asks = asks//.slice(0, 100)
+  bids = bids.reverse().slice(0, 100)
+
+  // data = asks.concat(bids)
+  data = asks
+
+  data.forEach(function(d) {
+    d.price = +d.price
+    d.amount = +d.amount
+  });
+
+  chart_orderbook.x.domain(d3.extent(data, function(d) { return d.price;  }))
+  chart_orderbook.y.domain(d3.extent(data, function(d) { return d.amount; }))
+
+  chart_orderbook.svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(chart_orderbook.xAxis)
+    .append("text")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Price (USD)")
+      //.text("Price (EUR)")
+
+  chart_orderbook.svg.append("g")
+      .attr("class", "y axis")
+      .call(chart_orderbook.yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Price (USD)")
+      //.text("Price (EUR)")
+
+  chart_orderbook.svg.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", chart_orderbook.line)
+});
 
 /////////////////
 
