@@ -35,28 +35,6 @@ class Orderbook
     resolve order_out if order_out
   end
 
-  # called every time after a new order is inserted
-  def self.resolve_old(order)
-    # TODO: make operation synchronous, add a lock in redis
-    # for full asynchronicity consider an implementation using reactor pattern (Celluloid)
-
-    order = matching_order order
-
-    while orders
-      order_sel = orders.pop
-      break unless order_sel
-
-      resolved = resolve_one order, order_sel
-
-      # TODO: important
-      # use transactional style or lock (with a lock there is no need to use transactions)
-      # log operation
-
-      break if orders == [] || resolved
-    end
-
-  end
-
   # TODO: naive approach, needs partial resolve into it, see next method's comment
   def self.resolve_one(order1, order2)
     # puts "log: full resolve"
@@ -108,10 +86,11 @@ class Orderbook
     R["exchange:btc"] = (exch_btc + sell_fee_btc).to_ds
 
     # TODO: refactor ?
+    # amount = amount_max - buy_fee_btc # is this right?
     order_buy.update_amount  amount_max
-    order_buy.order_closed_add(amount) # TODO: PASS AMOUNT
+    order_buy.order_closed_add#  amount
     order_sell.update_amount amount_max
-    order_buy.order_closed_add(amount) # TODO: PASS AMOUNT
+    order_sell.order_closed_add# amount
 
     order1.resolve! if order1.amount == 0
     order2.resolve! if order2.amount == 0
@@ -159,3 +138,24 @@ class Orderbook
 end
 
 
+# # called every time after a new order is inserted
+# def self.resolve_old(order)
+#   # TODO: make operation synchronous, add a lock in redis
+#   # for full asynchronicity consider an implementation using reactor pattern (Celluloid)
+
+#   order = matching_order order
+
+#   while orders
+#     order_sel = orders.pop
+#     break unless order_sel
+
+#     resolved = resolve_one order, order_sel
+
+#     # TODO: important
+#     # use transactional style or lock (with a lock there is no need to use transactions)
+#     # log operation
+
+#     break if orders == [] || resolved
+#   end
+
+# end

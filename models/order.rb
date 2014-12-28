@@ -299,13 +299,11 @@ class Order
   end
 
   def order_closed_add
-    order = Order.hash id
-
-    # puts order
-    order.delete "id"
-    order.merge! time_close: Time.now.to_i
-
-    OrderClosed.create sym_keys order
+    order_hash = Order.hash id
+    order_hash.delete "id"
+    order_hash.merge! time_close: Time.now.to_i
+    # log "OrderClosed.create #{order_hash}"
+    OrderClosed.create sym_keys order_hash
   end
 
   def self.balance_btc(user)
