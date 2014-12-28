@@ -23,3 +23,31 @@ path.candle.down {
 #chart {
   width: 100%;
   height: 500px; }
+
+#chart_price, #chart_price_bitstamp {
+  width: 100%;
+  height: 500px; }
+  #chart_price .axis path, #chart_price .axis line, #chart_price_bitstamp .axis path, #chart_price_bitstamp .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges; }
+  #chart_price .x.axis path, #chart_price_bitstamp .x.axis path {
+    display: none; }
+  #chart_price .line, #chart_price_bitstamp .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px; }
+
+#chart_orderbook {
+  width: 100%;
+  height: 500px; }
+  #chart_orderbook .axis path, #chart_orderbook .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges; }
+  #chart_orderbook .x.axis path {
+    display: none; }
+  #chart_orderbook .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px; }

@@ -100,7 +100,7 @@ var render_candlestick = function(step_time) {
   if (step_time)
     step = step_time
 
-  var file_name = charts["price_bitstamp"]
+  var file_name = charts["candle_bitstamp"]
   file_name = file_name +"_"+ step + ".json"
 
   d3.json(file_name, function(error, data) {
@@ -193,7 +193,7 @@ chart_price.svg = d3.select("#chart_price").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-d3.json("/api/transactions", function(error, data) {
+d3.json(charts["price"], function(error, data) {
 
   data.forEach(function(d) {
     d.date  = new Date(d.time)
@@ -226,6 +226,74 @@ d3.json("/api/transactions", function(error, data) {
 });
 
 
+// chart price bitstamp
+
+var parseDateIso = d3.time.format("%F %T").parse;
+
+chart_price_bs = {}
+
+chart_price_bs.x = d3.time.scale()
+    .range([0, width])
+
+chart_price_bs.y = d3.scale.linear()
+    .range([height, 0])
+
+chart_price_bs.xAxis = d3.svg.axis()
+    .scale(chart_price_bs.x)
+    .orient("bottom")
+
+chart_price_bs.yAxis = d3.svg.axis()
+    .scale(chart_price_bs.y)
+    .orient("left")
+
+chart_price_bs.line = d3.svg.line()
+    // .interpolate("basis")
+    .interpolate("bundle")
+    .x(function(d) { return chart_price_bs.x(d.date); })
+    .y(function(d) { return chart_price_bs.y(d.price); })
+
+
+
+chart_price_bs.svg = d3.select("#chart_price_bitstamp").append("svg")
+    .attr("width",  width  + margin.left  + margin.right )
+    .attr("height", height + margin.top   + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+d3.json(charts["price_bitstamp"], function(error, data) {
+
+  data.forEach(function(d) {
+    d.date  = new Date(d.time)
+    d.price = +d.price
+  });
+
+  chart_price_bs.x.domain(d3.extent(data, function(d) { return d.date;  }))
+  chart_price_bs.y.domain(d3.extent(data, function(d) { return d.price; }))
+
+  chart_price_bs.svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(chart_price_bs.xAxis)
+
+  chart_price_bs.svg.append("g")
+      .attr("class", "y axis")
+      .call(chart_price_bs.yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Price (USD)")
+      //.text("Price (EUR)")
+
+  chart_price_bs.svg.append("path")
+      .datum(data)
+      .attr("class", "line")
+      .attr("d", chart_price_bs.line)
+});
+
+
+
 // orderbook chart
 
 
@@ -247,7 +315,7 @@ chart_orderbook.yAxis = d3.svg.axis()
 
 chart_orderbook.line = d3.svg.line()
     // .interpolate("basis")
-    .interpolate("bundle")
+    //.interpolate("bundle")
     .x(function(d) { return chart_orderbook.x(d.price); })
     .y(function(d) { return chart_orderbook.y(d.amount); })
 
@@ -259,14 +327,16 @@ chart_orderbook.svg = d3.select("#chart_orderbook").append("svg")
 
 d3.json("/api/orderbook", function(error, data) {
   // data = data["bids"]
-  asks = data["asks"]
+  var asks = data["asks"]
   bids = data["bids"]
 
-  asks = asks//.slice(0, 100)
-  bids = bids.reverse().slice(0, 100)
+  // asks = asks.slice(0, 100)
+  asks = asks.slice(0, asks.length/2)
+  bids = bids.slice(0, bids.length/2)//.slice(0, 100)
 
-  // data = asks.concat(bids)
-  data = asks
+  data = asks.concat(bids)
+  // data = bids
+  //data = asks
 
   data.forEach(function(d) {
     d.price = +d.price
@@ -283,7 +353,7 @@ d3.json("/api/orderbook", function(error, data) {
     .append("text")
       .attr("y", 6)
       .attr("dy", ".71em")
-      .style("text-anchor", "end")
+      // .style("text-anchor", "start")
       .text("Price (USD)")
       //.text("Price (EUR)")
 
@@ -295,7 +365,7 @@ d3.json("/api/orderbook", function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Price (USD)")
+      .text("Volume (BTC)")
       //.text("Price (EUR)")
 
   chart_orderbook.svg.append("path")

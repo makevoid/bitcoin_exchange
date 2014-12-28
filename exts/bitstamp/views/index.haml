@@ -2,7 +2,7 @@
   %title Bitstamp order book
 
 
-%section
+%section.charts
   %div
     %h1 Price Candlestick
     - deltas = %w(1d 12h  6h  4h  2h  1h 30m)
@@ -19,9 +19,9 @@
 
 :javascript
   var charts = {} // chart paths
-  // charts["price_bitstamp"] = "/charts/bitstamp_candle_sample.csv"
-  // charts["price_bitstamp"] = "/api/transactions"
-  charts["price_bitstamp"] = "/charts/bitstamp_candle"
+  charts["price"]  = "/api/transactions"
+  charts["price_bitstamp"]  = "/api/transactions"
+  charts["candle_bitstamp"] = "/charts/bitstamp_candle"
 %script{ src: "/js/vendor/d3.js" }
 %script{ src: "/js/vendor/d3-techan.js" }
 %script{ src: "/js/bitstamp_ext_techan.js" }

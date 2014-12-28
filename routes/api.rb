@@ -5,19 +5,21 @@ require_relative "../exts/bitstamp/bitstamp_book"
 
 class BitcoinExchange < Sinatra::Base
 
+  include Caching
+
   # for orderbook chart
   get "/api/orderbook" do
     content_type :json
     cache :orderbook do
-      BitstampBook.orders.to_json
-    end
+      BitstampBook.orders
+    end.to_json
   end
 
   get "/api/transactions" do
     content_type :json
     cache :transactions do
-      BitstampTrades.transactions.to_json
-    end
+      BitstampTrades.transactions
+    end.to_json
   end
 
   # for price  chart
