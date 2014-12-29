@@ -7,7 +7,7 @@
 
 %section.headline
   .jumbotron.kit-cover.kit-cover-xl
-    /= image_tag "landing1.jpg"
+    -image_tag 'assets/landing1.jpg'
     .container
       %h2= t('landing.header')
       %p= t('landing.subheader')
@@ -32,16 +32,16 @@
         .team-lists.row
           .col-sm-3.col-xs-6
             %a.kit-avatar.kit-avatar-96{:href => "#"}
-              /= image_tag "uifaces19.jpg"
+              - image_tag "assets/uifaces19.jpg"
           .col-sm-3.col-xs-6
             %a.kit-avatar.kit-avatar-96{:href => "#"}
-              /= image_tag "uifaces20.jpg"
+              - image_tag "assets/uifaces20.jpg"
           .col-sm-3.col-xs-6
             %a.kit-avatar.kit-avatar-96{:href => "#"}
-              /= image_tag "uifaces14.jpg"
+              - image_tag "assets/uifaces14.jpg"
           .col-sm-3.col-xs-6
             %a.kit-avatar.kit-avatar-96{:href => "#"}
-              /= image_tag "uifaces15.jpg"
+              - image_tag "assets/uifaces15.jpg"
         %p.lead= t('landing.aboutus_lead')
   / /.container
 / /.about-us
