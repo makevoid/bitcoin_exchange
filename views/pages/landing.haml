@@ -1,7 +1,7 @@
 -content_for :header do
-  %link{ rel: "stylesheet", href: "stylesheets/uikits.css" }
-  %link{ rel: "stylesheet", href: "stylesheets/pages.css" }
-  
+  = stylesheet_tag 'uikits'
+  = stylesheet_tag 'pages'
+
 - content_for :page do
   ="landing-wrapper"
 
