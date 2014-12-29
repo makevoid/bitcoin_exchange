@@ -1,8 +1,10 @@
 path = File.expand_path '../', __FILE__
 
 require "#{path}/config/env.rb"
+require_relative './lib/asset_pipeline'
 
 class BitcoinExchange < Sinatra::Base
+  register AssetPipeline
   use Rack::MethodOverride
 
   include Voidtools::Sinatra::ViewHelpers

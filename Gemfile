@@ -1,10 +1,20 @@
 source 'http://rubygems.org'
 
-gem 'yajl-ruby'
+gem "yajl-ruby"
 
 gem "sinatra"
 gem "sinatra-contrib"
 gem "json"
+gem "rack-contrib"
+gem "coffee-script"
+gem "compass"
+
+gem "sprockets"
+gem "sprockets-sass"
+gem "sprockets-helpers"
+gem "closure-compiler"
+gem "yui-compressor"
+
 
 gem "blizz"
 
