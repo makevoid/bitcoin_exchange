@@ -9,15 +9,15 @@
   .jumbotron.kit-cover.kit-cover-xl
     /= image_tag "landing1.jpg"
     .container
-      %h2= "t('index.header')"
-      %p= "t('index.subheader')"
+      %h2= t('index.header')
+      %p= t('index.subheader')
       %br/
       %p
         %a.btn.btn-success.btn-lg{:href => "index.html", :role => "button"}
           %i.fa.fa-play.fa-fw
-          = "t('index.header_button')"
+          = t('index.header_button')
         %a.scroll.btn.btn-link.text-white{:href => "#about", :role => "button"}
-          = "t('index.header_learnmore')"
+          = t('index.header_learnmore')
           \   
           %i.fa.fa-angle-down
     / /.container
@@ -27,8 +27,8 @@
   .container
     .row
       .col-md-8.col-md-offset-2
-        %h3= "t('index.aboutus_title')"
-        %p= "t('index.aboutus_text')"
+        %h3= t('index.aboutus_title')
+        %p= t('index.aboutus_text')
         .team-lists.row
           .col-sm-3.col-xs-6
             %a.kit-avatar.kit-avatar-96{:href => "#"}
@@ -42,13 +42,13 @@
           .col-sm-3.col-xs-6
             %a.kit-avatar.kit-avatar-96{:href => "#"}
               /= image_tag "uifaces15.jpg"
-        %p.lead= "t('index.aboutus_lead')"
+        %p.lead= t('index.aboutus_lead')
   / /.container
 / /.about-us
 %section#services.landing-section.services
   .container
-    %h3= "t('index.service_title')"
-    %p= "t('index.service_text')"
+    %h3= t('index.service_title')
+    %p= t('index.service_text')
     %br/
     .row
       .col-sm-4
@@ -58,8 +58,8 @@
               %i.fa.fa-circle.fa-stack-2x.text-osun
               %i.fa.fa-recycle.fa-stack-1x.fa-inverse
           %h4.text-osun
-            %strong= "t('index.service_lead1')"
-          %p= "t('index.service_lead1_text')"
+            %strong= t('index.service_lead1')
+          %p= t('index.service_lead1_text')
         / /.services-item
       / /.cols
       .col-sm-4
@@ -69,8 +69,8 @@
               %i.fa.fa-circle.fa-stack-2x.text-pomeal
               %i.fa.fa-code.fa-stack-1x.fa-inverse
           %h4.text-pomeal
-            %strong= "t('index.service_lead2')"
-          %p= "t('index.service_lead2_text')"
+            %strong= t('index.service_lead2')
+          %p= t('index.service_lead2_text')
         / /.services-item
       / /.cols
       .col-sm-4
@@ -80,8 +80,8 @@
               %i.fa.fa-circle.fa-stack-2x.text-nephem
               %i.fa.fa-rocket.fa-stack-1x.fa-inverse
           %h4.text-nephem
-            %strong= "t('index.service_lead2')"
-          %p= "t('index.service_lead3_text')"
+            %strong= t('index.service_lead2')
+          %p= t('index.service_lead3_text')
         / /.services-item
       / /.cols
     / /.row

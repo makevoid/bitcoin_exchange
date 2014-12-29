@@ -2,8 +2,15 @@ path = File.expand_path '../', __FILE__
 
 require "#{path}/config/env.rb"
 require_relative './lib/asset_pipeline'
+require 'sinatra/support/i18nsupport'
 
 class BitcoinExchange < Sinatra::Base
+
+
+  register Sinatra::I18nSupport
+  load_locales './config/locales'
+  set :default_locale, 'it'
+
   register AssetPipeline
   use Rack::MethodOverride
 

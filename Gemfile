@@ -15,6 +15,8 @@ gem "sprockets-helpers"
 gem "closure-compiler"
 gem "yui-compressor"
 
+gem "sinatra-support", require: "sinatra/support"
+gem "i18n"
 
 gem "blizz"
 
