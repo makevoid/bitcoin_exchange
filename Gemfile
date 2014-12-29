@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem "yajl-ruby"
 
 gem "sinatra"
-gem "sinatra-contrib"
+gem "sinatra-contrib",require: false
 gem "json"
 gem "rack-contrib"
 gem "coffee-script"
