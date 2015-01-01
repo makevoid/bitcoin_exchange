@@ -35,9 +35,30 @@ end
 # wallet connections
 
 require "#{path}/sandbox/wallet"
-puts Wallet.getinfo
-puts
 
+def open_wallet
+  begin
+    puts Wallet.getinfo
+  rescue Errno::ECONNREFUSED => e
+    puts "Please open Bitcoin-QT or a compatible bitcoind/bitcoin-core client listening to port 3333
+
+  you can use this sample ~/.bitcoin/bitcoin.conf changing auth parameters:
+
+  rpcuser=changeme
+  rpcpassword=CHANGE_ME1111
+  rpcport=3333
+  server=1
+
+  "
+    # raise e
+    exit
+  end
+  puts
+end
+
+unless ENV["RACK_ENV"] == "test"
+  open_wallet
+end
 
 # data store [redis]
 
