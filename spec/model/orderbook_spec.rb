@@ -169,9 +169,7 @@ describe "OrderBook" do
   # multiple users
   # check all balances
 
-
-
-  describe "temp - fully resource" do
+  describe "three orders U1/BUY/0.1/504 U1/BUY/0.1/505 U2/SELL/504 " do
     before :all do
       @user  = User.create username: "Ali"
       @user2 = User.create username: "Bob"
@@ -180,10 +178,10 @@ describe "OrderBook" do
       DepositBtc.create  user: @user2,  amount: 1.0
     end
 
-    it "updates balances" do
-      Order.create user_id: @user.id, type: :buy,  amount: 0.0001, price: 500.04
-      Order.create user_id: @user.id, type: :buy,  amount: 0.0001, price: 500.05
-      Order.create user_id: @user2.id, type: :sell,  amount: 0.0001, price: 500.04
+    it "works" do
+      Order.create user_id: @user.id, type: :buy,  amount: 0.1, price: 504
+      Order.create user_id: @user.id, type: :buy,  amount: 0.1, price: 505
+      Order.create user_id: @user2.id, type: :sell,  amount: 0.1, price: 504
     end
   end
 
