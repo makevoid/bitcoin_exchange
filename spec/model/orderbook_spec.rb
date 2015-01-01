@@ -169,4 +169,22 @@ describe "OrderBook" do
   # multiple users
   # check all balances
 
+
+
+  describe "temp - fully resource" do
+    before :all do
+      @user  = User.create username: "Ali"
+      @user2 = User.create username: "Bob"
+
+      DepositFiat.create user: @user, amount: 100.0
+      DepositBtc.create  user: @user2,  amount: 1.0
+    end
+
+    it "updates balances" do
+      Order.create user_id: @user.id, type: :buy,  amount: 0.0001, price: 500.04
+      Order.create user_id: @user.id, type: :buy,  amount: 0.0001, price: 500.05
+      Order.create user_id: @user2.id, type: :sell,  amount: 0.0001, price: 500.04
+    end
+  end
+
 end

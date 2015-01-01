@@ -55,6 +55,5 @@ describe "Orders" do
     OrderClosed.all.size.should   == 1
   end
 
-
   after(:all){ cleanup! }
 end

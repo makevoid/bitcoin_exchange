@@ -60,6 +60,7 @@ class Order
   end
 
   def self.create(user_id: user_id, type: type, amount: amount, price: price)
+    puts "create: user_id: #{user_id}, type: #{type}, amount: #{amount}, price: #{price}"
 
     # TODO: refactor!!! this is getting big!
 
@@ -189,7 +190,7 @@ class Order
   #   order_ids = R.smembers "users:#{user_id}:orders_#{type}"
   #   hashes order_ids
   # end
-  # 
+  #
   # def self.not_user_type(user_id, type)
   #   order_ids = R.sdiff "orders|#{type}", "users:#{user_id}:orders_#{type}"
   #   hashes order_ids
@@ -201,7 +202,7 @@ class Order
     order_ids = R.zrangebyscore "orders_buy",  price, ORDER_MAX
     hashes order_ids
   end
-  
+
   def self.sell_amount_match(price)
     order_ids = R.zrangebyscore "orders_sell",  0, price
     hashes order_ids
@@ -259,7 +260,7 @@ class Order
 
   # TODO: rename to resolve!
   def resolved
-    puts "resolved"
+    #puts "resolved"
     type    = R.hget "orders:#{id}", "type"
     raise "CannotResolveDeletedOrder" unless type
     order_closed_add
@@ -270,8 +271,8 @@ class Order
   def order_closed_add
     order = Order.hash id
 
-    puts R.keys "orders:*"
-    puts order
+    #puts R.keys "orders:*"
+    #puts order
     order.delete "id"
     order.merge! time_close: Time.now.to_i
     OrderClosed.create sym_keys order
@@ -287,6 +288,9 @@ class Order
     amount_sum_buy user.id
   end
 
+  def self.puts(string)
+    LOGGERS[:orders].info "orders: #{string}"
+  end
 
   protected
 

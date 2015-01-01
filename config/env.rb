@@ -40,15 +40,16 @@ def open_wallet
   begin
     puts Wallet.getinfo
   rescue Errno::ECONNREFUSED => e
-    puts "Please open Bitcoin-QT or a compatible bitcoind/bitcoin-core client listening to port 3333
+    puts "ERROR launching the app"
+    puts
+    puts "Please open Bitcoin-QT or a compatible bitcoind/bitcoin-core client listening on port 3333
 
-  you can use this sample ~/.bitcoin/bitcoin.conf changing auth parameters:
+  you can use this sample ~/.bitcoin/bitcoin.conf and change auth parameters:
 
   rpcuser=changeme
   rpcpassword=CHANGE_ME1111
   rpcport=3333
   server=1
-
   "
     # raise e
     exit
@@ -85,6 +86,13 @@ require "#{path}/lib/monkeypatches/hash"
 require "#{path}/lib/monkeypatches/string"
 
 
+# loggers
+
+require 'logger'
+LOGGERS = {}
+LOGGERS[:orders] = Logger.new STDOUT
+
+
 # models and libs
 
 require "#{path}/lib/ticker"
@@ -97,4 +105,3 @@ DataMapper.finalize
 # view code
 
 TITLE = "BitcoinExchange"
-
