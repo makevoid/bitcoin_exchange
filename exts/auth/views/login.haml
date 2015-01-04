@@ -1,0 +1,25 @@
+- user = User.new(params[:user])
+- @flash_cicc = "asdasdasdasdasdasd"
+.line-compress.line-mobile.line-tablet
+  .separator30
+  .col6.offset-left2.bg-white.line-tablet.line-mobile
+    .line-compress
+      .line-compress
+        .separator10
+        %h1.color-black Login
+        .separator15
+        %form{ action: "/sessions", method: "post" }
+          - input user, :username, placeholder: true
+          .separator10
+          - input user, :password, placeholder: true, type: "password"
+          .separator30
+          - unless flash.find{ |type, msg| type == :notice }
+            .validation.color-error
+              = partial :_flashes
+          %button.btn.btn-medium.btn-primary.no-border.color-white{ type: "submit" } Login
+          %p{ style: "text-align: center" }
+          .separator30
+          %h4
+            Not registered yet ?
+            %a.color-green{ href: "/register" } Register Now
+        .separator30

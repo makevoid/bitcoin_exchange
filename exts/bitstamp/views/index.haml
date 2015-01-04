@@ -1,0 +1,91 @@
+%head
+  %title Bitstamp order book
+
+
+%section.charts
+  %div
+    %h1 Price Candlestick
+    - deltas = %w(1d 12h  6h  4h  2h  1h 30m)
+    - deltas.each do |delta|
+      %a{ href: "javascript:void(0)", data: { step: delta } }= delta
+    #chart_candlestick
+  %div
+    %h1 Price
+    #chart_price
+  %div
+    %h1 Order Book
+    #chart_orderbook
+
+
+:javascript
+  var charts = {} // chart paths
+  charts["price"]  = "/api/transactions"
+  charts["price_bitstamp"]  = "/api/transactions"
+  charts["candle_bitstamp"] = "/charts/bitstamp_candle"
+%script{ src: "/js/vendor/d3.js" }
+%script{ src: "/js/vendor/d3-techan.js" }
+%script{ src: "/js/bitstamp_ext_techan.js" }
+
+
+/ styles
+
+
+:css
+  body {
+    background: #fefefe;
+  }
+
+  a {
+    text-decoration: none;
+    font-weight: bold;
+    color: blue;
+  }
+  a:hover {
+    color: #003;
+  }
+
+:sass
+  .axis path, .axis line
+    fill: none
+    stroke: #000
+    shape-rendering: crispEdges
+
+  path.candle
+    stroke: #000000
+
+  path.candle.body
+    stroke-width: 0
+
+  path.candle.wick
+    stroke-width: 1
+
+  path.candle.up
+    fill: #00AA00
+    stroke: #00AA00
+
+  path.candle.down
+    fill: #FF0000
+    stroke: #FF0000
+
+  #chart
+    width: 100%
+    height: 500px
+
+
+:sass
+  #chart_price
+    width: 100%
+    height: 500px
+
+    .axis path, .axis line
+      fill: none
+      stroke: #000
+      shape-rendering: crispEdges
+
+    .x.axis path
+      display: none
+
+    .line
+      fill: none
+      stroke: steelblue
+      stroke-width: 1.5px

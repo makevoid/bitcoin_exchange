@@ -1,0 +1,5 @@
+%h1 Users
+
+.users
+  - @users.each do |user|
+    = partial_mod :user, user

@@ -37,6 +37,7 @@ class BigDecimal
 
   # NOTE: use it in only the views (sub is cpu time consuming, not suited for a fast backend)!
   def to_dz
+    return 0 if self == 0
     ("%.8f" % self).sub(/0+$/, '')
   end
 

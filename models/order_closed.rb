@@ -27,15 +27,16 @@ class OrderClosed < Order
 
   def save
     id = R.incr "ids:orders_closed"
-    
-    # todo: use hmset 
-    R.hset "orders_closed:#{id}", "id",       id
-    R.hset "orders_closed:#{id}", "user_id",  user_id
-    R.hset "orders_closed:#{id}", "type",     type
-    R.hset "orders_closed:#{id}", "amount",   amount
-    R.hset "orders_closed:#{id}", "price",    price
-    R.hset "orders_closed:#{id}", "time",     time
-    R.hset "orders_closed:#{id}", "time_close", time_close
+  
+    R.hmset "orders_closed:#{id}", {
+      id:       id, 
+      user_id:  user_id,
+      type:     type,
+      amount:   amount.to_ds, # TODO: recheck if formatting is needed again for amount and price 
+      price:    price.to_2s, 
+      time:     time,
+      time:     time_close,
+    }.to_a.flatten
 
     true
   end

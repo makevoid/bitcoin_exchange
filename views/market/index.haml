@@ -1,0 +1,59 @@
+.line-max-medium.tabbed
+  .line.bg-green.color-white.bg-pattern1
+    .separator10
+    .col4
+      .line-compress
+        %h1.line-compress Market
+    .separator10.tablet.mobile
+    .hr.tablet.mobile
+    .separator10.tablet.mobile
+    .col6.line-tablet
+      .col5.center-content
+        .separator3
+        %h2
+          %i.fa.fa-money.color-darkgreen
+          %span Last price: €500
+      .col5.center-content
+        .separator3
+        %h2
+          %i.fa.fa-bar-chart-o.color-darkgreen
+          %span 24hr volume: 100BTC
+    .separator10
+
+  .line-compress.bg-white
+    .separator15
+    %section.orders_open
+      %section.charts
+        // OUR CHART TODO
+
+        %div
+          %h1 Lemontree
+          #chart_price
+
+        %div
+          %h1 Bitstamp
+          - deltas = %w(1d 12h  6h  4h  2h  1h 30m)
+          - deltas.each do |delta|
+            %a{ href: "javascript:void(0)", data: { step: delta } }= delta
+          #chart_candlestick
+        %div
+          %h1 Price (Bitstamp)
+          #chart_price_bitstamp
+        %div
+          %h1 Order Book
+          #chart_orderbook
+
+
+    .clear
+    .separator50
+  .separator50
+
+
+:javascript
+  var charts = {} // chart paths
+  charts["price"]  = "/api/transactions"
+  charts["price_bitstamp"]  = "/api/transactions"
+  charts["candle_bitstamp"] = "/charts/bitstamp_candle"
+%script{ src: "/js/vendor/d3.js" }
+%script{ src: "/js/vendor/d3-techan.js" }
+%script{ src: "/js/bitstamp_ext_techan.js" }

@@ -4,8 +4,8 @@ require "spec_helper"
 describe "OrderBook" do
 
   before :all do
-    @user  = User.create username: "Ali"
-    @user2 = User.create username: "Bob"
+    @user  = User.create USER1
+    @user2 = User.create USER2
   end
 
   # it "deposits eur (fake deposit)" do
@@ -32,13 +32,13 @@ describe "OrderBook" do
   describe "with orders" do
 
     before :all do
-      @order1 = Order.create user_id: @user.id, type: :buy,  amount: 1.0, price: 500.0
+      @order1 = Order.create user_id: @user.id,  type: :buy,  amount: 1.0, price: 500.0
       @order2 = Order.create user_id: @user2.id, type: :sell, amount: 1.0, price: 500.0
     end
 
     it "matches orders" do
-      orders = Orderbook.matching_orders( @order1 )
-      orders.should eql? [@order2]
+      orders = Orderbook.matching_order( @order1 )
+      orders.should eql? @order2
     end
 
     # it "matches orders maintaining direction" do
@@ -62,15 +62,15 @@ describe "OrderBook" do
 
   describe "with not totally matching orders" do
     before :all do
-      @user  = User.create username: "Ali"
-      @user2 = User.create username: "Bob"
+      @user  = User.create USER1
+      @user2 = User.create USER2
 
       DepositFiat.create user: @user, amount: 500.0
       DepositBtc.create  user: @user2, amount: 0.2
 
       @order2 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 500.0
       @order3 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 500.0
-      @order1 = Order.create user_id: @user.id, type: :buy,  amount: 1.0, price: 500.0
+      @order1 = Order.create user_id: @user.id,  type: :buy,  amount: 1.0, price: 500.0
     end
 
     it "resolves the matching orders" do
@@ -87,15 +87,15 @@ describe "OrderBook" do
 
   describe "with not totally matching orders [sell]" do
     before :all do
-      @user  = User.create username: "Ali"
-      @user2 = User.create username: "Bob"
+      @user  = User.create USER1
+      @user2 = User.create USER2
 
-      DepositFiat.create user: @user, amount: 100.0
+      DepositFiat.create user: @user,  amount: 100.0
       DepositBtc.create  user: @user2, amount: 1.0
 
-      @order1 = Order.create user_id: @user.id, type: :buy,  amount: 0.1, price: 500.0
-      @order2 = Order.create user_id: @user.id, type: :buy, amount: 0.1, price: 500.0
-      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1, price: 500.0
+      @order1 = Order.create user_id: @user.id,  type: :buy,  amount: 0.1, price: 500.0
+      @order2 = Order.create user_id: @user.id,  type: :buy,  amount: 0.1, price: 500.0
+      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1,   price: 500.0
     end
 
     it "resolves the matching orders" do
@@ -120,20 +120,20 @@ describe "OrderBook" do
 
   describe "different prices" do
     before :all do
-      @user  = User.create username: "Ali"
-      @user2 = User.create username: "Bob"
+      @user  = User.create USER1
+      @user2 = User.create USER2
 
       DepositFiat.create user: @user, amount: 100.0
       DepositBtc.create  user: @user2, amount: 1.11
 
-      @order1 = Order.create user_id: @user.id, type: :buy,  amount: 0.1, price: 500.0
-      @order2 = Order.create user_id: @user.id, type: :buy, amount: 0.1, price: 495.0
-      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1, price: 495.0
+      @order1 = Order.create user_id: @user.id,  type: :buy,  amount: 0.1, price: 500.0
+      @order2 = Order.create user_id: @user.id,  type: :buy,  amount: 0.1, price: 495.0
+      @order3 = Order.create user_id: @user2.id, type: :sell, amount: 1,   price: 495.0
       @order4 = Order.create user_id: @user2.id, type: :sell, amount: 0.1, price: 505.0 # should not match
     end
 
     it "resolves the matching orders" do
-      @order3.should_not receive(:resolved)
+      @order3.should_not receive(:resolve!)
       @user.orders_open.count.should  == 0
       @user2.orders_open.count.should == 2
       @user2.orders_open.last.should eql? @order4
@@ -143,8 +143,8 @@ describe "OrderBook" do
 
     it "doesn't match orders" do
       @order4.should be_an Order
-      orders = Orderbook.matching_orders( @order4 )
-      orders.should be_empty
+      orders = Orderbook.matching_order( @order4 )
+      orders.should be_a(NullOrder)
     end
 
     it "update the amount of the big order" do

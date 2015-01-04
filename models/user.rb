@@ -1,16 +1,20 @@
 class User
-
+  # basic definition in ext/auth/models/user.rb
   include DataMapper::Resource
 
-  property    :id,            Serial
-  property    :username,      String, required: true
-  property    :btc_address,   String # TODO: validate this
+  property :id,         Serial
+  property :btc_address,  String # TODO: validate this
 
 
   def orders_open
     Order.user self.id
   end
   alias :orders :orders_open
+
+  def orders_include(id)
+    # FIXME: refactor for speed! (called on every DELETE /orders/:id)
+    orders_open.map(&:id).include? id
+  end
 
   # transactions
   def orders_closed
@@ -23,6 +27,4 @@ class User
     @balance ||= Balance.new self
   end
 
-
-  # store: sql / json?
 end

@@ -1,6 +1,7 @@
 class BitcoinExchange < Sinatra::Base
 
   get "/withdrawals" do
+    login_required
     # list withdrawals (btc, eur)
     haml :"withdrawals/index"
   end
@@ -9,7 +10,7 @@ class BitcoinExchange < Sinatra::Base
   # WITHDRAWAL_BTC_AMOUNT_MAX = 0.01
 
   post "/withdrawals" do
-
+    active_user_required
 
     @withdrawal = { user_id: current_user.id, amount: params[:amount].to_d }
 
@@ -21,6 +22,8 @@ class BitcoinExchange < Sinatra::Base
 
     redirect "/withdrawals"
   end
+
+  private
 
   def withdrawal_eur
     WithdrawalFiat.create @withdrawal

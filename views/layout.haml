@@ -5,11 +5,15 @@
   - TITLE = "BitcoinExchange"
   %head
     %title= TITLE
-    %link{ rel: "stylesheet", href: "/css/helper.css" }
-    %link{ rel: "stylesheet", href: "/css/fontawesome.css"}
-    %link{ rel: "stylesheet", href: "/css/main.css" }
-    %link{ rel: "stylesheet", href: "/css/helpers.css" }
-    %link{ rel: "stylesheet", href: "http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,700italic,500italic,400italic,300italic"}
+    -# %link{ rel: "stylesheet", href: "/css/helper.css" }
+    -# %link{ rel: "stylesheet", href: "/css/fontawesome.css"}
+    -# %link{ rel: "stylesheet", href: "/css/main.css" }
+    -# %link{ rel: "stylesheet", href: "/css/main_sass.css" }
+    -# %link{ rel: "stylesheet", href: "/css/roboto.css" }
+    -# using guard-concat:
+    %link{ rel: "stylesheet", href: "/css/all.css" }
+
+    -# %link{ rel: "stylesheet", href: "http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,700italic,500italic,400italic,300italic"}
     = haml :"_metas" # todo require/implement partial :metas
 
   %body
@@ -33,21 +37,22 @@
     #main
       %header.navbar.bg-white.line.fixed.top.left.layer1.bordered-bottom.over-hidden
         .line-max
-          %h1.col3.logo.color-green
+          %h1.col2.logo.color-green
             .line-compress
               .line-compress
-                %a{ href: "/home" }
+                %a{ href: "/" }
                   %img{class:"v-super", width: "auto", src: "img/logo.png"}
-          %nav.col7.center-content
+          %nav.col8.center-content
             .line
               .col8.desktop
+                - nav_link "/market",      "Market"
                 - nav_link "/orders",      "Orders"
                 - nav_link "/orders_new",  "Buy / Sell"
                 - nav_link "/deposits",    "Deposits"
                 - nav_link "/withdrawals", "Withdrawals"
                 - nav_link "/contact_us",  "Contact us"
 
-              .col6.tablet.mobile
+              .col3.tablet.mobile
               .col2
                 %a.line.desktop{ data: { toggle: "user_details" } }
                   %i.fa.fa-user.color-green
@@ -66,7 +71,25 @@
         .line-compress
           .line-compress
             .line-compress.left-content.debug
-              / FIXME: implement login and remove this
+
+              / standard login
+              - unless logged_in?
+                .separator15
+                %form{ action: "/sessions", method: "post" }
+                  %input{ name: "username", placeholder: "username", type: "text" }
+                  .separator10
+                  %input{ name: "password", placeholder: "password", type: "password" }
+                  .separator10
+                  %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } Login
+                  %p{ style: "text-align: center" }
+                    or
+                    %a.btn.btn-small.btn-primary.no-border.color-white{ href: "/register" } Register
+                  -# input user, :username
+                  -# input user, :password, type: "password"
+                  -# submit "Login"
+
+
+              / quick login - remove afterwards (prod)
               .separator10
               %h3 [test] Switch to user:
               .separator5
@@ -78,6 +101,7 @@
                 - hidden "return_url", request.url, "return_url"
                 .line-compress
                   %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } BOB
+
             .separator15
             %section.line-compress.left-content
               - if cur_user
@@ -99,14 +123,16 @@
               .separator5
           .line.center-content
             %h1
-              %a.line.btn.bg-muted.color-white{ href: "/logout" }
-                .separator5
-                %i.fa.fa-sign-out &nbsp;logout
-                .separator5
+              %form{ action: "/logout", method: "post" }
+                %button.line.bg-muted.color-white{ type: "submit" }
+                  .separator5
+                  %i.fa.fa-sign-out &nbsp;logout
+                  .separator5
 
       .separator50
       .separator30.desktop
       .separator10.tablet.mobile
       .separator3.tablet.mobile
+      = partial :_flashes
       %section.main= yield
     %script{ type: "text/javascript", src: "/js/app.js" }

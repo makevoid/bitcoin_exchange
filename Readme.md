@@ -102,3 +102,17 @@ fa-qrcode
 fa-refresh
 fa-sign-out
 fa-suitcase
+
+##
+
+
+- stop order
+
+```ruby
+watch ->
+  if prezzo == x
+    metti ordine limit(prezzo_y)
+```
+
+
+- trailing stop

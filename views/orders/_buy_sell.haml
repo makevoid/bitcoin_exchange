@@ -13,7 +13,7 @@
   %section.tab
     %section.col8.offset-left1
       %h1.font-x-large Buy
-      %form{ action: "/orders", method: "post" }
+      %form.buy_form{ action: "/orders", method: "post" }
         - hidden "order[type]",   :buy
         %label
           .separator5
@@ -31,7 +31,7 @@
           .separator15
           %p
             Total:
-            %span €xxx
+            %span.eur_total €
           .separator15
           - submit "Buy BTC", "btn color-white radius3 "
   .separator50
@@ -40,7 +40,7 @@
   .separator15
   %section.col8.offset-left1
     %h1.font-x-large Sell
-    %form{ action: "/orders", method: "post" }
+    %form.sell_form{ action: "/orders", method: "post" }
       - hidden "order[type]",   :sell
       %label
         .separator5
@@ -57,7 +57,7 @@
         %input{ type: "text", name: "order[price]", placeholder: "€" }
         .separator15
         Total:
-        %span €xxx
+        %span.eur_total €
         .separator15
         - submit "Sell BTC", "btn color-white radius3 "
   .separator50.desktop

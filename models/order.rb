@@ -1,12 +1,31 @@
+class NullOrder
+end
+
 class Order
   # store: redis
+
+  OrderAmountLimit  = 10    # BTC
+  OrderNumLimit     = 1000  # an user can't open more than OrderNumLimit orders
 
   # notes:
   #
   # orders_[type] is the sorted set
   # orders|[type] is the set
 
-  attr_reader :id, :user_id, :type, :amount, :price, :time
+  class PriceError < ArgumentError
+  end
+  class AmountError < ArgumentError
+  end
+  class TypeError < ArgumentError # not for the user
+  end
+  class NotEnoughFundsError < RuntimeError
+  end
+  class NotEnoughFundsEur < NotEnoughFundsError
+  end
+  class NotEnoughFundsBtc < NotEnoughFundsError
+  end
+
+  attr_reader :id, :user_id, :type, :amount, :price, :time, :resolved
 
   # TODO: consider in removing this, that is used only for orderbook in Order.type_sum atm
   attr_writer :amount
@@ -20,6 +39,8 @@ class Order
     @type     = type.to_sym
     @amount   = amount.to_d
     @price    = price.to_d
+
+    @resolved = false
   end
 
   def price_eur
@@ -80,25 +101,28 @@ class Order
     balance = user.balance
 
     # TODO: FIXME sanitize price parameter (can't place order < 0 or > 3000
-    raise "PriceError" if price <= 0 || price > 3000
+    raise PriceError if price <= 0 || price > 3000
     # TODO: FIXME check if amount is available
-    raise "AmountError" if amount > 10 || amount < 0.0001 # limit to 10 BTC
-    raise "TypeError" unless [:buy, :sell].include?(type)
-    raise "NotEnoughFundsEur - amount: #{amount}, balance: #{balance.eur_available}" if type == :buy && amount > balance.eur_available
-    raise "NotEnoughFundsBtc - amount: #{amount}, balance: #{balance.btc_available}" if type == :sell && amount > balance.btc_available
+    raise AmountError if amount > OrderAmountLimit || amount < 0.0001
+    raise TypeError unless [:buy, :sell].include?(type)
+    raise NotEnoughFundsEur, "amount: #{amount}, balance: #{balance.eur_available}" if type == :buy && amount > balance.eur_available
+    raise NotEnoughFundsBtc, "amount: #{amount}, balance: #{balance.btc_available}" if type == :sell && amount > balance.btc_available
 
     # validate_attributes # ?
 
     # order_keys = %i(id user type amount price time) # sorted the right way
     time = Time.now.to_i
 
-    # TODO: use hmset
-    R.hset "orders:#{id}", "id",      id
-    R.hset "orders:#{id}", "user_id", user_id
-    R.hset "orders:#{id}", "type",    type
-    R.hset "orders:#{id}", "amount",  amount.to_ds
-    R.hset "orders:#{id}", "price",   price.to_2s
-    R.hset "orders:#{id}", "time",    time
+    # puts "create order: #{id}, type: #{type},\t price: #{price.to_2s}, amount: #{amount.to_ds}"
+
+    R.hmset "orders:#{id}", {
+      id:       id,
+      user_id:  user_id,
+      type:     type,
+      amount:   amount.to_ds,
+      price:    price.to_2s,
+      time:     time,
+    }.to_a.flatten
 
     R.zadd "orders_#{type}", (price*100).to_i, id
     R.sadd "orders|#{type}", id # FIXME: probably we don't need a set equal to sorted set
@@ -120,8 +144,10 @@ class Order
     R.hset "orders:#{id}", "amount",  @amount
   end
 
+
   def self.first(order_id)
-    ord = R.hgetall "orders:#{order_id}"
+    ord = hash order_id
+    return NullOrder.new if ord == {}
     init ord
   end
 
@@ -131,7 +157,7 @@ class Order
 
   def self.hashes(order_ids)
     order_ids.map do |order_id|
-      ord = R.hgetall "orders:#{order_id}"
+      ord = hash order_id
       init ord
     end
   end
@@ -156,7 +182,8 @@ class Order
   def self.user(user_id)
     # NOTE: slow implementation, use only in test env or slow page
     orders_id = R.smembers "users:#{user_id}:orders"
-    hashes orders_id
+    orders = hashes orders_id
+    orders.sort_by{ |a,b| [a.price] <=> [a.price] }
   end
 
   def self.type(type)
@@ -198,14 +225,18 @@ class Order
 
   ORDER_MAX = 100_000_00
 
-  def self.buy_amount_match(price)
-    order_ids = R.zrangebyscore "orders_buy",  price, ORDER_MAX
-    hashes order_ids
+  # returns buy orders sorted in reverse (descending order)
+  #
+  def self.buy_ledger_match(price)
+    order_ids = R.zrevrangebyscore "orders_buy", ORDER_MAX, price, limit: [0,1] #, limit: [0,10]
+    first order_ids.first
   end
 
-  def self.sell_amount_match(price)
-    order_ids = R.zrangebyscore "orders_sell",  0, price
-    hashes order_ids
+  # returns sell orders sorted
+  #
+  def self.sell_ledger_match(price)
+    order_ids = R.zrangebyscore "orders_sell",  0, price, limit: [0,1] #, limit: [0,10]
+    first order_ids.first
   end
 
   # type: buy / sell
@@ -247,35 +278,33 @@ class Order
   end
 
   def self.remove(id)
-    order_key = "orders:#{id}"
     # TODO: use hmget
     user_id = R.hget "orders:#{id}", "user_id"
     type    = R.hget "orders:#{id}", "type"
+
+    # puts "removing: #{id} #{type}"
     R.zrem "orders_#{type}", id
     R.srem "orders|#{type}", id
     R.srem "users:#{user_id}:orders", id
     R.srem "users:#{user_id}:orders_#{type}", id
-    R.del order_key
+    R.del "orders:#{id}"
   end
 
-  # TODO: rename to resolve!
-  def resolved
-    #puts "resolved"
-    type    = R.hget "orders:#{id}", "type"
+  def resolve!
+    # puts "resolved: #{self.id}"
+    # puts "orders: #{(R.keys "orders:*").inspect}"
+    type = R.hget "orders:#{id}", "type"
     raise "CannotResolveDeletedOrder" unless type
-    order_closed_add
     Order.remove id
+    @resolved = true
   end
-  alias :resolve! :resolved
 
   def order_closed_add
-    order = Order.hash id
-
-    #puts R.keys "orders:*"
-    #puts order
-    order.delete "id"
-    order.merge! time_close: Time.now.to_i
-    OrderClosed.create sym_keys order
+    order_hash = Order.hash id
+    order_hash.delete "id"
+    order_hash.merge! time_close: Time.now.to_i
+    puts "closed: #{order_hash}"
+    OrderClosed.create sym_keys order_hash
   end
 
   def self.balance_btc(user)
@@ -289,7 +318,11 @@ class Order
   end
 
   def self.puts(string)
-    LOGGERS[:orders].info "orders: #{string}"
+    #LOGGERS[:orders].info "orders: #{string}"
+  end
+
+  def resolved?
+    resolved
   end
 
   protected
@@ -299,7 +332,6 @@ class Order
   #   raise TypeError, "Price must be positive" unless @price > 0
   #   raise TypeError, "Amount must be positive" unless @amount > 0
   # end
-
 
   def balance_eur
     user.balance.eur_available

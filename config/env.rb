@@ -7,7 +7,7 @@ Bundler.require :default
 
 
 require "#{path}/lib/mixins/utils"
-include Utils
+extend Utils
 
 
 require "#{path}/lib/monkeypatches/markedup"
@@ -34,11 +34,26 @@ end
 
 # wallet connections
 
+def slice(hash, *keys)
+  hash_new = {}
+  hash.each do |key, val|
+    hash_new[key] = val if keys.include?(key)
+  end
+  hash_new
+end
+
+# require 'pp'
 require "#{path}/sandbox/wallet"
+
+def initialize_wallet
+  puts "Wallet:"
+puts slice( Wallet.getinfo, "balance", "version", "blocks", "connection", "testnet", "difficulty" ).to_yaml
+puts
+end
 
 def open_wallet
   begin
-    puts Wallet.getinfo
+    initialize_wallet
   rescue Errno::ECONNREFUSED => e
     puts "ERROR launching the app"
     puts
@@ -63,8 +78,10 @@ end
 
 # data store [redis]
 
-options = { driver: :hiredis }
-options[:db] = 1 if app_env == :test
+options = {}
+options[:driver] = :hiredis
+options[:db] = 1
+options[:db] = 2 if app_env == :test
 
 R = Redis.new options
 
@@ -74,9 +91,12 @@ R = Redis.new options
 
 # data store [datamapper] mysql
 
+password = File.read( File.expand_path "~/.password" ).strip if app_env == :production
+
 test_db = "_test" if app_env == :test
 pippo = "bitexchange:asd@" if app_env == :development && `whoami`.strip == "ispuk"
-DataMapper.setup :default, "mysql://#{pippo}localhost/bitcoin_exchange#{test_db}"
+prod = "root:#{password}@"  if app_env == :production
+DataMapper.setup :default, "mysql://#{pippo}#{prod}localhost/bitcoin_exchange#{test_db}"
 
 
 require 'bigdecimal'
@@ -84,6 +104,9 @@ require "#{path}/lib/monkeypatches/numeric"
 require "#{path}/lib/monkeypatches/dates"
 require "#{path}/lib/monkeypatches/hash"
 require "#{path}/lib/monkeypatches/string"
+
+# extension (self-contained models, routes and view - live in ext folder)
+require "#{path}/lib/sinatra_exts"
 
 
 # loggers
@@ -98,10 +121,33 @@ LOGGERS[:orders] = Logger.new STDOUT
 require "#{path}/lib/ticker"
 require_all "models"
 
+# bitstamp extension
+require "#{path}/exts/bitstamp/bitstamp_book"
+
+
+LOAD_DATAMAPPER_MODELS.call
 
 DataMapper.finalize
+
+
+# bitstamp (optional?)
+
+# secrets = File.read( File.expand_path "~/.bitstamp" ).strip
+# bs_user, bs_key, bs_secret = secrets.split "|"
+#
+# Bitstamp.setup do |config|
+#   config.client_id  = bs_user
+#   config.key        = bs_key
+#   config.secret     = bs_secret
+# end
 
 
 # view code
 
 TITLE = "BitcoinExchange"
+
+SESSION_SECRET = "CHANGE_ME_IN_PRODUCTION_SECRET"
+
+EMAIL_SUPPORT = "soon_support@example.com"
+
+### users (sinatra ext)

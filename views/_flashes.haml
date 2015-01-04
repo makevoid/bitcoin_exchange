@@ -1,0 +1,6 @@
+- unless @flash_shown
+  - @flash_shown = true
+  .flashes.line-max-medium.col6.offset-left2.line-tablet
+    - flash.each do |type, message|
+      .flash{ class: type }= message
+      .separator10

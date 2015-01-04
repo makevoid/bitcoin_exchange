@@ -4,3 +4,6 @@ rpcport=3333
 
 # prevents blockchain dl, comment it if you use bitcoind to make test btc transactions (the blockchain is > 23gb atm)
 connect=127.0.0.1
+
+# enables deamon in bitcoin-qt 
+server=1

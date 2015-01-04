@@ -1,18 +1,14 @@
 require_relative "spec_helper"
 
-def create_users
-  @user  = User.create username: "Ali"
-  @user2 = User.create username: "Bob"
-end
-
 describe "Orders" do
 
   before :all do
-    create_users
+    @user  = User.create USER1
+    @user2 = User.create USER2
+    login @user
   end
 
   it "logs user (Ali)" do
-    # post "/login"
     get "/"
     body.should =~ /Ali/
   end
@@ -29,12 +25,6 @@ describe "Orders" do
     Order.buy.size.should == 1 # todo: techeck the Order#buy implementation :)
   end
 
-  it "switches user" do
-    post "/force_login/2"
-    get "/"
-    body.should =~ /Bob/
-  end
-
   it "makes a btc deposit" do
     # TODO: fixme, temporary
     # DepositBtc.create ? nah!
@@ -42,6 +32,7 @@ describe "Orders" do
   end
 
   it "places an order [sell]" do
+    DepositBtc.create user: @user,  amount: 0.1
     @order_sell = { type: :sell, amount: 0.05, price: 495.0 }
     post "/orders", { order: @order_sell }
   end

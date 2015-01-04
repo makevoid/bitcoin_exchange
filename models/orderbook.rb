@@ -14,46 +14,29 @@ class Orderbook
 
 
   def self.price_last
+    # TODO: use last price
     500.0.to_d
   end
 
   def self.price_bid
+    # TODO: use last bid
     500.0.to_d
   end
 
   def self.price_ask
+    # TODO: use last ask
     500.0.to_d
   end
 
-  # called every time after a new order is inserted
+
   def self.resolve(order)
-    # TODO: make operation synchronous, add a lock in redis
-    # for full asynchronicity consider an implementation using reactor pattern (Celluloid)
-
-    # reads orders queue
-    # if an order matches another, resolve it
-
-    # TODO: consider the volume
-
-    orders = matching_orders order
-
-    while orders
-      order_sel = orders.pop
-      break unless order_sel
-
-      resolve_full(order, order_sel)
-
-      # TODO: important
-      # use transactional style or lock (with a lock there is no need to use transactions)
-      # log operation
-
-      break if orders == []
-    end
-
+    matching = matching_order order
+    order_out = resolve_one order, matching unless matching.is_a? NullOrder
+    resolve order_out if order_out
   end
 
   # TODO: naive approach, needs partial resolve into it, see next method's comment
-  def self.resolve_full(order1, order2)
+  def self.resolve_one(order1, order2)
     # puts "log: full resolve"
     if order1.type == :buy
       order_buy, order_sell = order1, order2
@@ -63,12 +46,10 @@ class Orderbook
 
     fee = Orderbook::TX_FEE
 
-    if order_buy.amount < order_sell.amount
-      amount_max = order_buy.amount
-      type_max = :buy
+    amount_max = if order_buy.amount < order_sell.amount
+      order_buy.amount
     else
-      amount_max = order_sell.amount
-      type_max = :sell
+      order_sell.amount
     end
 
     # update buy
@@ -104,41 +85,77 @@ class Orderbook
     R["exchange:eur"] = (exch_eur + buy_fee_eur).to_ds
     R["exchange:btc"] = (exch_btc + sell_fee_btc).to_ds
 
-    
-    if order_buy.amount == order_sell.amount
-      order_buy.resolved
-      order_sell.resolved
-    else
-      if order_buy.amount > order_sell.amount
-        order_sell.resolved
-        order_buy.update_amount order_sell.amount
-      else
-        order_buy.resolved
-        order_sell.update_amount order_buy.amount
-      end
-    end
-    true
-  end
+    # TODO: refactor ?
+    # amount = amount_max - buy_fee_btc # is this right?
+    order_buy.update_amount  amount_max
+    order_buy.order_closed_add#  amount
+    order_sell.update_amount amount_max
+    order_sell.order_closed_add# amount
 
-  def self.resolve_partial(order1, order2)
-    # puts "log: partial resolve"
-    # re-create new order with less volume
-    true
+    order1.resolve! if order1.amount == 0
+    order2.resolve! if order2.amount == 0
+
+    order1 unless order1.resolved?
   end
 
   ####
 
   # TODO: move in order.rb ?
 
-  def self.matching_orders(order)
+  def self.matching_order(order)
     type = order.type == :buy ? :sell : :buy
     price = order.price * 100
 
+    # note: these methods have to return properly sorted results
     if type == :buy
-      Order.buy_amount_match  price
+      Order.buy_ledger_match  price
     else # sell
-      Order.sell_amount_match price
+      Order.sell_ledger_match price
     end
   end
 
+
+  def nah
+    if order_buy.amount == order_sell.amount
+      # puts "order equals - resolving both"
+      order_buy.resolve!
+      order_sell.resolve!
+    else
+      if order_buy.amount > order_sell.amount
+        # puts "buy is higher - resolving sell"
+        order_sell.resolve!
+        order_buy.update_amount order_sell.amount
+      else
+        # puts "sell is higher - resolving buy"
+        order_buy.resolve!
+        order_sell.update_amount order_buy.amount
+      end
+    end
+
+    order1.resolved?
+  end
+
 end
+
+
+# # called every time after a new order is inserted
+# def self.resolve_old(order)
+#   # TODO: make operation synchronous, add a lock in redis
+#   # for full asynchronicity consider an implementation using reactor pattern (Celluloid)
+
+#   order = matching_order order
+
+#   while orders
+#     order_sel = orders.pop
+#     break unless order_sel
+
+#     resolved = resolve_one order, order_sel
+
+#     # TODO: important
+#     # use transactional style or lock (with a lock there is no need to use transactions)
+#     # log operation
+
+#     break if orders == [] || resolved
+#   end
+
+# end

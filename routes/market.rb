@@ -1,5 +1,7 @@
 class BitcoinExchange < Sinatra::Base
-  get "/logout" do
-    redirect "/"
+
+  get "/market" do
+    haml :"market/index"
   end
+
 end

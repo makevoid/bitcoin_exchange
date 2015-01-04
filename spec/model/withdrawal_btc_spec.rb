@@ -3,7 +3,7 @@ require "spec_helper"
 describe WithdrawalBtc do
 
   before :all do
-    @user  = User.create username: "Ali"
+    @user  = User.create USER1
   end
 
   it "returns an empty withdrawals array" do

@@ -35,7 +35,8 @@
             debug:
             ---
           %form{ action: "/deposits/fake_add", method: "post"}
-            %button{ type: "submit" } fake new deposit
+
+            - submit "fake new deposit", "btn color-white radius3"
 
           (the deposit has to be accepted by admin / banking assistant)
           / TODO: start admin app
@@ -47,7 +48,7 @@
             %input.btc_address{ type: "text", disabled: true, value: CURRENT_ADDRESS }
           - else
             %form{ action: "/users/generate_address", method: :post }
-              - submit "Generate address"
+              - submit "Generate address", "btn color-white radius3"
             todo: add ajax
         .separator30
 
@@ -75,33 +76,53 @@
 
     %section
       %h1 Euro
+      .separator10
       - deposits = DepositFiat.all(user_id: current_user.id)
       - if deposits == []
         There are no Euro deposits.
       - else
-        %table
-          %tr
-            %th Amount
-            %th Status
-            %th Request Date
-            %th Fulfillment Date
+        .line
+          .line-compress.bg-greeny.color-muted.radius5-top
+            .separator10
+            .col2 Amount
+            .col2 Status
+            .col3 Request Date
+            .col3 Fulfillment Date
+            .separator5
+            .separator3
           - for deposit in deposits
-            %tr
-              %td.aright €#{deposit.amount.f_eur}
-              %td Fulfilled
-              %td #{deposit.created_at.time_f}
-              %td #{deposit.created_at.time_f}
+            .line-compress.table-row
+              .separator10
+              .col2 €#{deposit.amount.f_eur}
+              .col2 Fulfilled
+              .col3 #{deposit.created_at.time_f}
+              .col3 #{deposit.created_at.time_f} x
+              .separator5
+            .hr
           / #{deposit.id}
           / old: .row €#{deposit.amount.f_eur} #{deposit.created_at.time_f}
     .separator10
-
     %section
       %h1 Bitcoin
+      .separator10
       - deposits = DepositBtc.all(user_id: current_user.id)
       - if deposits == []
         There are no BTC deposits.
-      - for deposit in deposits
-        / #{deposit.id}
-        .row #{deposit.amount} BTC #{deposit.created_at.time_f}
+      .line
+        .line-compress.bg-greeny.color-muted.radius5-top
+          .separator10
+          .col2 Amount
+          .col4 Status
+          .col4 Request Date
+          .separator5
+          .separator3
+        - for deposit in deposits
+          .line-compress.table-row
+            .separator10
+            .col2 #{deposit.amount} BTC
+            .col4 Confirmed
+            .col4 #{deposit.created_at.time_f}
+            .separator5
+          .hr
     .separator10
   .separator10

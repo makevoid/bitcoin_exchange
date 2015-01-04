@@ -1,25 +1,14 @@
 - unless logged_in?
-  %section
 
-    %h1 What is bitcoin?
-
-    Bitcoin video.
-
-
-    %h1 What is an exchange?
-
-    An exchange is a place where you can buy/sell bitcoins.
-
-
-    %h1 You can Buy / Sell bitcoins
-
-    BitcoinExchange is exchange made easy, this project is open source.
-
-
-  %a{ href: "/login" } Login
-  or
-  %a{ href: "/register" } Register
-
+  .col8.offset-left1.bg-white.radius3
+    .offset-left1.offset_right1
+      .separator30
+      %h1 Welcome to Lemontree!
+      .separator10
+      %a.btn.btn-small.btn-primary.no-border.color-white{ href: "/login" } Login
+      %p{ style: "text-align: center"} or
+      %a.btn.btn-small.btn-primary.no-border.color-white{ href: "/register" } Register
+      .separator50
 
 - else
   .line
@@ -82,18 +71,24 @@
         Chart
       .separator10
 
-      %section.infos.line-compress
-        %h2 Infos
-        %p Current time: #{Time.now.strftime "%H:%M:%S"}
-        %p Last login: 127.0.0.1 @ #{Time.now.time_f}
-
-        .row
-          %button Logins logs list
-          .separator5
-        .row
-          %button Canceled orders
-          .separator5
-        .row
-          %button Operations log
-          .separator5
+      %section.line-compress
+        %strong
+          %a{ href: "/home" } Check the home page too!
       .separator10
+
+      .hidden
+        %section.infos.line-compress
+          %h2 Infos
+          %p Current time: #{Time.now.strftime "%H:%M:%S"}
+          %p Last login: 127.0.0.1 @ #{Time.now.time_f}
+
+          .row
+            %button Logins logs list
+            .separator5
+          .row
+            %button Canceled orders
+            .separator5
+          .row
+            %button Operations log
+            .separator5
+        .separator10

@@ -8,7 +8,7 @@
   buy   = Blizz.load BalancePresenter, buy
   sell  = Blizz.load BalancePresenter, sell
 
-%h1 Advanced
+%h1 Limit order
 
 .clear
 
@@ -26,7 +26,9 @@
     .separator5
     %input{ type: "text", name: "order[price]", placeholder: "price  (€#{buy.price})" , value: buy.price }
     .separator5
-    %h3 Total: #{buy.total}
+    %h3
+      Total:
+      %span.buy_total #{buy.total}
     .separator5
     - submit "Buy BTC" , "btn color-white radius3"
 
@@ -44,7 +46,9 @@
     .separator5
     %input{ type: "text", name: "order[price]", placeholder: "price  (€#{sell.price})" }
     .separator5
-    %h3 Total: #{sell.total}
+    %h3
+      Total:
+      %span.sell_total #{sell.total}
     .separator5
     - submit "Sell BTC" , "btn color-white radius3"
 

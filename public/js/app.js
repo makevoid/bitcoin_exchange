@@ -1,4 +1,4 @@
-var all, bind_overlay_dismiss, bind_tabbed, bind_tabs, bind_togglables, boot, hash_change_return_url, http, main, q, show_hash_section, toggle;
+var all, bind_limit_order_calc, bind_overlay_dismiss, bind_tabbed, bind_togglables, bind_user_details_position, boot, filter, hash_change_return_url, http, is_form, limit_order_calc, limit_order_calc_form, main, q, show_hash_section, toggle, toggle_all;
 
 boot = function(cb) {
   return document.addEventListener("DOMContentLoaded", cb);
@@ -20,8 +20,26 @@ all = function(name, in_children) {
   }
 };
 
+filter = function(nodes, fn) {
+  return Array.prototype.filter.call(nodes, fn);
+};
+
+toggle_all = function(nodes, className) {
+  var node, _i, _len, _results;
+  _results = [];
+  for (_i = 0, _len = nodes.length; _i < _len; _i++) {
+    node = nodes[_i];
+    _results.push(toggle(node, className));
+  }
+  return _results;
+};
+
 toggle = function(node, className) {
   return node.classList.toggle(className);
+};
+
+is_form = function(element) {
+  return element.tagName === "FORM";
 };
 
 http = function(settings) {
@@ -42,11 +60,52 @@ http = function(settings) {
 };
 
 main = function() {
+  var form;
   bind_togglables();
   bind_tabbed();
   bind_overlay_dismiss();
   show_hash_section();
-  return hash_change_return_url();
+  hash_change_return_url();
+  bind_user_details_position();
+  bind_limit_order_calc();
+  form = q("form.buy_form");
+  limit_order_calc_form(form);
+  form = q("form.sell_form");
+  return limit_order_calc_form(form);
+};
+
+limit_order_calc = function(evt) {
+  var form;
+  form = evt.target.parentNode.parentNode;
+  return limit_order_calc_form(form);
+};
+
+limit_order_calc_form = function(form) {
+  var amount, price, total, value;
+  if (form && is_form(form)) {
+    amount = q("input[name='order[amount]']", form);
+    price = q("input[name='order[price]']", form);
+    total = q("span.eur_total", form);
+    amount = amount.value;
+    price = price.value;
+    value = amount * price;
+    if (value === parseFloat(value)) {
+      return total.innerHTML = "€" + (value.toFixed(2));
+    } else {
+      return total.innerHTML = "€";
+    }
+  }
+};
+
+bind_limit_order_calc = function() {
+  var elem, elems, _i, _len, _results;
+  elems = all(".limit_order.limit input[name='order[amount]'], .limit_order.limit input[name='order[price]']");
+  _results = [];
+  for (_i = 0, _len = elems.length; _i < _len; _i++) {
+    elem = elems[_i];
+    _results.push(elem.addEventListener("keyup", limit_order_calc));
+  }
+  return _results;
 };
 
 hash_change_return_url = function() {
@@ -80,22 +139,6 @@ show_hash_section = function() {
   }
 };
 
-bind_tabs = function() {
-  var elements, inside, tab, tabs, _i, _len, _results;
-  tabs = all(".tab > h1 a");
-  elements = [];
-  inside = [];
-  _results = [];
-  for (_i = 0, _len = tabs.length; _i < _len; _i++) {
-    tab = tabs[_i];
-    tab.addEventListener("click", function(evt) {
-      return console.log(evt.target.dataset);
-    });
-    _results.push(true);
-  }
-  return _results;
-};
-
 bind_togglables = function() {
   var tog, togs, _i, _len, _results;
   togs = all("[data-toggle]");
@@ -103,9 +146,13 @@ bind_togglables = function() {
   for (_i = 0, _len = togs.length; _i < _len; _i++) {
     tog = togs[_i];
     tog.addEventListener("click", function(evt) {
-      var toggled;
-      toggled = q("." + evt.target.dataset.toggle);
-      toggle(toggled, "hidden");
+      var target, toggled;
+      target = evt.target;
+      if (!(target.nodeName === "BUTTON" || target.nodeName === "A")) {
+        target = target.parentNode;
+      }
+      toggled = all("." + target.dataset.toggle);
+      toggle_all(toggled, "hidden");
       return true;
     });
     _results.push(true);
@@ -164,6 +211,22 @@ bind_overlay_dismiss = function() {
       toggle(over, "hidden");
     }
     return over_click = false;
+  });
+};
+
+bind_user_details_position = function() {
+  var max, user_details, usr_det_btn;
+  return;
+  usr_det_btn = q("[data-toggle=user_details]");
+  user_details = q("section.user_details");
+  max = 980;
+  return usr_det_btn.addEventListener("click", function(evt) {
+    var ud, width;
+    ud = q(".user_details").offsetWidth;
+    width = window.screen.availWidth;
+    width = (width - max) / 2 - ud;
+    console.log(ud, width);
+    return user_details.style.right = "" + width + "px";
   });
 };
 

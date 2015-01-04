@@ -1,12 +1,16 @@
 - if orders.empty?
   There are no open orders
 - else
-  %table
-    %tr
-      %th Type
-      %th Amount
-      %th Price
-      %th Value
-      %th
+  .line
+    .line-compress.bg-greeny.color-muted.radius5-top
+      .separator10
+      .col2 Type
+      .col2 Amount
+      .col3 Price
+      .col2 Value
+      .col1
+      .separator5
+      .separator3
     - orders.each do |order|
       = partial :"orders/_order", order: order
+      

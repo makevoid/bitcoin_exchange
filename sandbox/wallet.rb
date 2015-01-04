@@ -11,9 +11,14 @@
 
 bitcoin_conf = File.read File.expand_path("~/.bitcoin/bitcoin.conf")
 
-# sorry, naive approach
-USER = bitcoin_conf.lines[0].split("=")[1].strip
-PASS = bitcoin_conf.lines[1].split("=")[1].strip
+# # sorry, naive approach
+# ruby 2 - final
+# USER = bitcoin_conf.lines[0].split("=")[1].strip
+# PASS = bitcoin_conf.lines[1].split("=")[1].strip
+# ruby 1.9 -  server
+USER = bitcoin_conf.split("\n")[0].split("=")[1].strip
+PASS = bitcoin_conf.split("\n")[1].split("=")[1].strip
+
 PORT = 3333
 
 require 'bitcoin-client'
