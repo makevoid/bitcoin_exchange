@@ -1,24 +1,52 @@
+-content_for :header do
+  = stylesheet_tag 'pages'
+
 - user = User.new(params[:user])
 
-.line-compress.line-mobile.line-tablet
-  .separator30
-  .col6.offset-left2.bg-white.line-tablet.line-mobile
-    .line-compress
-      .line-compress
-        .separator10
-        %h1.color-black Login
-        .separator15
-        %form{ action: "/sessions", method: "post" }
-          - input user, :username, placeholder: true
-          .separator10
-          - input user, :password, placeholder: true, type: "password"
-          .separator30
-          .validation.color-error
-            = partial :_flashes
-          %button.btn.btn-medium.btn-primary.no-border.color-white{ type: "submit" } Login
-          %p{ style: "text-align: center" }
-          .separator30
-          %h4
-            Not registered yet ?
-            %a.color-green{ href: "/register" } Register Now
-        .separator30
+#signin.tab-pane.active
+  %h2.signin-brand.animated-hue
+    {
+    %i.fa.fa-rocket
+    =t('login.header')
+    }
+  %form#signinForm{:action => "/sessions", method: "post"}
+
+    %p.lead= t('login.lead')
+    .form-group
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-user
+        %input#username.form-control{:name => "username", :placeholder => "Username"}/
+    .form-group
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-lock
+        %input#passwd.form-control{:name => "password", :placeholder => "Password", :type => "password"}/
+    - unless flash.find{ |type, msg| type == :notice }
+      .validation.color-error
+      = partial :_flashes
+    .form-group.clearfix
+      .animated-hue.pull-right
+        %button#btnSignin.btn.btn-primary{:type => "submit"}
+          =t('login.submitButton')
+          %i.fa.fa-chevron-circle-right
+      .nice-checkbox.nice-checkbox-inline
+        %input#keepSignin{:checked => "checked", :name => "keepSignin", :type => "checkbox"}/
+        %label{:for => "keepSignin"}= t('login.keepSignin')
+    %hr/
+    -# %p
+    -#   %a{"data-toggle" => "modal", :href => "#recoverAccount"} Can't Access your Account?
+    -# %p.lead Signin with another account?
+    -# .signin-alt
+    -#   %a.btn.btn-sm.btn-belpet{:href => "#"}
+    -#     %i.fa.fa-facebook
+    -#   %a.btn.btn-sm.btn-info{:href => "#"}
+    -#     %i.fa.fa-twitter
+    -#   %a.btn.btn-sm.btn-danger{:href => "#"}
+    -#     %i.fa.fa-google-plus
+    -#   %a.btn.btn-sm.btn-silc{:href => "#"}
+    -#     %i.fa.fa-github
+    -# %hr/
+    %p
+      =t('login.noAccountLabel')
+      %a{:href => "/register"}= t('login.createAccountLabel') 

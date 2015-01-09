@@ -1,0 +1,8 @@
+it:
+  login:
+    header: "BitDirect"
+    lead: "Login to your account"
+    submitButton: "SignIn"
+    keepSignin: "Keep me sign in"
+    noAccountLabel: "Don't have a account?"
+    createAccountLabel: "Create an Account"

@@ -40,7 +40,7 @@ class BitcoinExchange < Sinatra::Base
   end
 
   get "/login" do
-    haml_mod :login
+    haml_mod :login, layout: "../exts/auth/views/layout_login".to_sym
   end
 
   post "/sessions" do
