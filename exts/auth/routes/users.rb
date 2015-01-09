@@ -12,7 +12,7 @@ class BitcoinExchange < Sinatra::Base
 
   get "/register" do
     @user = User.new
-    haml_mod :register
+    haml_mod :register, layout: "../exts/auth/views/layout_login".to_sym
   end
 
   post "/users" do

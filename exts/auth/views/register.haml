@@ -1,35 +1,89 @@
+-content_for :header do
+  = stylesheet_tag 'pages'
 
-.line-compress.line-mobile.line-tablet
-  .separator30
-  .col6.offset-left2.bg-white.line-tablet.line-mobile
-    .line-compress
-      .line-compress
-        .separator10
-        %h1.color-black Register
-        .separator15
-        %form{ action: "/users", method: "post" }
-          Username
-          .separator3
-          %input{ name: "user[username]", placeholder: "username", type: "text" }
-          .separator10
-          Email
-          .separator3
-          %input{ name: "user[email]",    placeholder: "email",    type: "text" }
-          .separator10
-          Password
-          .separator3
-          %input{ name: "user[password]", placeholder: "password", type: "password" }
-          .separator10
-          Confirm-password
-          .separator3
-          %input{ name: "user[password_confirmation]", placeholder: "confirm password", type: "password" }
-          .separator30
-          .validation.color-error
-            - validations_for @user
-            .separator30
-          %button.btn.btn-medium.btn-primary.color-white{ type: "submit" } Register
-          -# input @user, :username
-          -# input @user, :password, type: "password"
-          -# input @user, :password_confirmation, type: "password", label: "Confirm password"
-          -# submit "Register"
-      .separator30
+- user = User.new(params[:user])
+
+#signup.tab-pane.active
+  %h2.signin-brand.animated-hue
+    {
+    %i.fa.fa-rocket
+    =t('register.header')
+    }
+  %form#signinForm{:action => "/sessions", method: "post"}
+    %p.lead= t('register.lead')
+    %p.text-muted
+      %strong= t('register.headerpersonaltext')
+    .form-group.has-feedback
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-font
+        %input#fullName.form-control{:name => "fullName", :placeholder => "Full Name"}/
+        %span.form-control-feedback
+    .form-group.has-feedback
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-envelope
+        %input#email.form-control{:name => "email", :placeholder => "Email", :type => "email"}/
+        %span.form-control-feedback
+    .form-group.has-feedback
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-road
+        %input#address.form-control{:name => "address", :placeholder => "Address"}/
+        %span.form-control-feedback
+    .form-group.has-feedback
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-map-marker
+        %input#city.form-control{:name => "city", :placeholder => "City"}/
+        %span.form-control-feedback
+    .form-group.has-feedback
+      .input-group.input-group-in
+        %span.input-group-addon{:title => "unable to find any Country that match the current query!"}
+          %i.fa.fa-flag
+        %input#country.form-control{:name => "country", :placeholder => "Countries"}/
+        %span.form-control-feedback
+    .form-group
+      %label.control-label{:style => "margin-right:15px"}= t('register.gender')
+      .nice-radio.nice-radio-inline
+        %input#genderMale{:checked => "checked", :name => "gender", :type => "radio", :value => "male"}/
+        %label{:for => "genderMale"}= t('register.gender-male')
+      .nice-radio.nice-radio-inline
+        %input#genderFemale{:name => "gender", :type => "radio", :value => "female"}/
+        %label{:for => "genderFemale"}= t('register.gender-female')
+    %hr/
+    %p.text-muted
+      %strong= t('register.headeraccounttext')
+    .form-group.has-feedback
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-user
+        %input#usrName.form-control{:name => "usrName", :placeholder => "Username"}/
+        %span.form-control-feedback
+    .form-group.has-feedback
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-key
+        %input#password.form-control{:name => "password", :placeholder => "Password", :type => "password"}/
+        %span.form-control-feedback
+    .form-group.has-feedback
+      .input-group.input-group-in
+        %span.input-group-addon
+          %i.fa.fa-check
+        %input#cpassword.form-control{:name => "cpassword", :placeholder => "Enter Password Again", :type => "password"}/
+        %span.form-control-feedback
+    .form-group.animated-hue.clearfix
+      .pull-right
+        %button.btn.btn-primary{:type => "submit"}
+          =t('register.submitButton')
+          %i.fa.fa-chevron-circle-right
+      .pull-left
+        %a.btn.btn-default{:href => "/login"}
+          %i.fa.fa-chevron-circle-left.fa-fw
+          =t('login.submitButton')
+  %hr/
+  %p
+    = t('register.accepttermtext')
+    %a{:href => "#"}= t('register.termsofuse')
+    and
+    %a{:href => "#"}= t('register.privacypolicy')

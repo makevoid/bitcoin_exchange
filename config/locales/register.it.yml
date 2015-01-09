@@ -1,0 +1,13 @@
+it:
+  register:
+    header: "BitDirect"
+    lead: "Create a new account"
+    headerpersonaltext: "Enter your personal data"
+    gender: "Gender"
+    gender-male: "Male"
+    gender-female: "Female"
+    headeraccounttext: "Enter your account data"
+    submitButton: "Create account"
+    accepttermtext: "By creating an account you agree to the"
+    termsofuse: "Terms of use"
+    privacypolicy: "Privacy Policy"
