@@ -1,19 +1,338 @@
 %header.header
-  / bootstrap navbar
   .navbar
-    / recomended to add a .container-fluid
     .container-fluid
-      / wrapkit need .navbar-block to use with .navbar-header
       .navbar-header.navbar-block
-        / navbar toggle button, show on toggle screen
-        %button.navbar-toggle.navbar-toggle-alt{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %button.navbar-toggle.navbar-toggle-alt{"data-target" => "", "data-toggle" => "collapse", :type => "button"}
           %span.fa.fa-bars
-        / app title
-        %a.navbar-brand{:href => "/"} BitDirect
-        / navbar nav
+        %a.navbar-brand{:href => "#"}
+          %strong {
+          %i.fa.fa-rocket
+          %strong BitDirect }
         %ul.nav.navbar-nav.pull-right
-          / just navbar nav lists here
-      / /.navbar-header
-    / /.container-fluid
-  / /.navbar
-/ /.header
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "7 unread notifications"}
+              %span.badge 7
+              %i.fa.fa-bell
+            .dropdown-menu.dropdown-menu-md.stop-propagation
+              .dropdown-header.text-center BitDirect notifications
+              / /.dropdown-header
+              .dropdown-body
+                / Nav tabs
+                %ul.nav.nav-tabs.nav-tabs-alt.nav-justified{:role => "tablist"}
+                  %li.active
+                    %a{"data-toggle" => "tab", :href => "#notif-activities", :role => "tab"}
+                      Activities
+                      %small.text-muted (3)
+                  %li
+                    %a{"data-toggle" => "tab", :href => "#notif-messages", :role => "tab"}
+                      Messages
+                      %small.text-muted (2)
+                  %li
+                    %a{"data-toggle" => "tab", :href => "#notif-tasks", :role => "tab"}
+                      Tasks
+                      %small.text-muted (2)
+                / /.nav-tabs
+                / Tab panes
+                .tab-content
+                  #notif-activities.tab-pane.fade.in.active
+                    .nice-scroll{:style => "max-height:354px"}
+                      %ul.kit-droplists
+                        %li.unread
+                          %a{:href => "pages-profile.html"}
+                            .kit-avatar.kit-avatar-32.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces14.jpg"}/
+                            .droplists-text
+                              %strong Bent
+                              just update his project
+                              %strong Wrapkit - Admin template
+                              %div
+                                %small 6 minutes
+                            / /.media-body
+                        %li.unread
+                          %a{:href => "pages-profile.html"}
+                            .kit-avatar.kit-avatar-32.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces14.jpg"}/
+                            .droplists-text
+                              %strong Ofelia Camacho
+                              favorite your Post
+                              %div
+                                %small 11 minutes
+                            / /.media-body
+                        %li
+                          %a{:href => "pages-profile.html"}
+                            .kit-avatar.kit-avatar-32.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces14.jpg"}/
+                            .droplists-text
+                              %strong Nidia Djuvara
+                              just Upload a revision design
+                              %strong #D7043
+                              %div
+                                %small 42 minutes
+                            / /.media-body
+                        %li
+                          %a{:href => "pages-profile.html"}
+                            .kit-avatar.kit-avatar-32.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces14.jpg"}/
+                            .droplists-text
+                              %strong Jake Thomas
+                              just update his profile name from
+                              %strong J. Thomas
+                              %div
+                                %small 1 hour
+                            / /.media-body
+                        %li
+                          %a{:href => "pages-profile.html"}
+                            .kit-avatar.kit-avatar-32.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces14.jpg"}/
+                            .droplists-text
+                              %strong Jayden Williams
+                              register as a member
+                              %div
+                                %small 1 hour
+                            / /.media-body
+                        %li
+                          %a{:href => "pages-profile.html"}
+                            .kit-avatar.kit-avatar-32.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces14.jpg"}/
+                            .droplists-text
+                              %strong Antonie David
+                              comment on your Post
+                              %div
+                                %small 1 hours ago
+                            / /.media-body
+                        %li.unread
+                          %a{:href => "pages-profile.html"}
+                            .kit-avatar.kit-avatar-32.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces14.jpg"}/
+                            .droplists-text
+                              %strong Laura Ferguson
+                              is no following You
+                              %div
+                                %small 2 hours ago
+                            / /.media-body
+                      / /.kit-droplists
+                    / /.nice-scroll
+                  / /.tab-pane
+                  #notif-messages.tab-pane.fade
+                    .nice-scroll{:style => "max-height:354px"}
+                      %ul.kit-droplists
+                        %li
+                          %a{:href => "pages-email.html"}
+                            .kit-avatar.kit-avatar-32.kit-avatar-square.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces14.jpg"}
+                            .droplists-text
+                              %strong Stilearning
+                              Newest Themes  Templates - Et est, sed mattis, donec hac
+                              %div
+                                %small
+                                  Today,
+                                  %strong 04:30 AM
+                            / /.media-body
+                        %li
+                          %a{:href => "pages-email.html"}
+                            .kit-avatar.kit-avatar-32.kit-avatar-square.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces15.jpg"}
+                            .droplists-text
+                              %strong Eugene Barnett
+                              Service Update: added support for Angular - Sed ultricies nibh, in feugiat sapien
+                              %div
+                                %small
+                                  Today,
+                                  %strong 03:11 AM
+                            / /.media-body
+                        %li.unread
+                          %a{:href => "pages-email.html"}
+                            .kit-avatar.kit-avatar-32.kit-avatar-square.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces15.jpg"}
+                            .droplists-text
+                              %strong bent10@stilearning.com
+                              Spread the Word  Earn! - Dapibus nec. Integer sed purus
+                              %div
+                                %small
+                                  Today,
+                                  %strong 02:47 AM
+                            / /.media-body
+                        %li
+                          %a{:href => "pages-email.html"}
+                            .kit-avatar.kit-avatar-32.kit-avatar-square.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces15.jpg"}
+                            .droplists-text
+                              %strong David Lloyd
+                              Say thanks for your awesome works! - Viverra fermentum ac. Litora mauris elit
+                              %div
+                                %small
+                                  Yesterday,
+                                  %strong 11:41 PM
+                            / /.media-body
+                        %li.unread
+                          %a{:href => "pages-email.html"}
+                            .kit-avatar.kit-avatar-32.kit-avatar-square.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces15.jpg"}
+                            .droplists-text
+                              %strong Dribbble
+                              Design brief from Apple - Quis in nonummy. Ut augue, proident habitant
+                              %div
+                                %small
+                                  Yesterday,
+                                  %strong 11:23 PM
+                            / /.media-body
+                        %li
+                          %a{:href => "pages-email.html"}
+                            .kit-avatar.kit-avatar-32.kit-avatar-square.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces19.jpg"}
+                            .droplists-text
+                              %strong Sofia Manea
+                              Need help getting started with Wrapkit - Nonummy vitae. Vehicula eget, eleifend arcu
+                              %div
+                                %small
+                                  Yesterday,
+                                  %strong 10:04 PM
+                            / /.media-body
+                        %li
+                          %a{:href => "pages-email.html"}
+                            .kit-avatar.kit-avatar-32.kit-avatar-square.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces20.jpg"}
+                            .droplists-text
+                              %strong Olivia Gonzales
+                              Updating some of the designs! - Commodo non ac, sem netus adipiscing
+                              %div
+                                %small
+                                  Yesterday,
+                                  %strong 08:55 PM
+                              / /.media-body
+                        %li
+                          %a{:href => "pages-email.html"}
+                            .kit-avatar.kit-avatar-32.kit-avatar-square.pull-left
+                              %img{:alt => "user", :src => "assets/uifaces15.jpg"}
+                            .droplists-text
+                              %strong Marco Auer
+                              Request custom designs! - Adipiscing pellentesque cum, proin luctus
+                              %div
+                                %small
+                                  Yesterday,
+                                  %strong 03:57 PM
+                            / /.media-body
+                    / /.kit-droplists
+                  / /.tab-pane
+                  #notif-tasks.tab-pane.fade
+                    .nice-scroll{:style => "max-height:318px"}
+                      %ul.kit-droplists
+                        %li.droplists-content
+                          %p.pull-right.text-muted
+                            %small 60%
+                          %p
+                            %small
+                              %a{:href => "#"} Uploading...
+                          .progress.progress-xs
+                            .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "60", :role => "progressbar", :style => "width: 60%"}
+                              %span.sr-only 60% Complete
+                        %li.droplists-content
+                          %p.pull-right.text-muted
+                            %small 33%
+                          %p
+                            %small
+                              %a{:href => "#"} Upgrade Theme
+                          .progress.progress-xs
+                            .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "33", :role => "progressbar", :style => "width: 33%"}
+                              %span.sr-only 33% Complete
+                        %li.droplists-content
+                          %p.pull-right.text-muted
+                            %small 87%
+                          %p
+                            %small
+                              %a{:href => "#"} Webapp Development
+                          .progress.progress-xs
+                            .progress-bar.progress-bar-info{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "87", :role => "progressbar", :style => "width: 87%"}
+                              %span.sr-only 87% Complete
+                        %li.droplists-content
+                          %p.pull-right.text-muted
+                            %small 54%
+                          %p
+                            %small
+                              %a{:href => "#"} Backup Data
+                          .progress.progress-xs
+                            .progress-bar.progress-bar-warning{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "54", :role => "progressbar", :style => "width: 54%"}
+                              %span.sr-only 54% Complete
+                        %li.droplists-content
+                          %p.pull-right.text-muted
+                            %small 92%
+                          %p
+                            %small
+                              %a{:href => "#"} Bandwidth Limit
+                          .progress.progress-xs
+                            .progress-bar.progress-bar-danger{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "92", :role => "progressbar", :style => "width: 92%"}
+                              %span.sr-only 92% Complete
+                        %li.droplists-content
+                          %p.pull-right.text-muted
+                            %small 24%
+                          %p
+                            %small
+                              %a{:href => "#"} Clean System
+                          .progress.progress-xs
+                            .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "24", :role => "progressbar", :style => "width: 24%"}
+                              %span.sr-only 24% Complete
+                        %li.droplists-content.unread
+                          %p.pull-right.text-muted
+                            %small 100%
+                          %p
+                            %small
+                              %a{:href => "#"} Done
+                              some tasks
+                          .progress.progress-xs
+                            .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", :role => "progressbar", :style => "width: 100%"}
+                              %span.sr-only 100% Complete
+                        %li.droplists-content.unread
+                          %p.pull-right.text-muted
+                            %small 100%
+                          %p
+                            %small
+                              %a{:href => "#"} Done
+                              another tasks
+                          .progress.progress-xs
+                            .progress-bar.progress-bar-info{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", :role => "progressbar", :style => "width: 100%"}
+                              %span.sr-only 100% Complete
+                      / /.kit-droplists
+                    / /.nice-scroll
+                  / /.tab-pane
+                / /.tab-content
+              / /.dropdown-body
+              .dropdown-footer
+                .pull-right
+                  %p
+                    %a{:href => "#"} Mark as read
+                    |
+                    %a{:href => "#"} Settings
+                %p.text-muted
+                  %button.btn.btn-xs.btn-default{"data-context" => "inverse", :rel => "tooltip-bottom", :title => "Refresh"}
+                    %i.fa.fa-refresh
+                  Last update 2 minutes ago
+              / /.dropdown-footer
+            / /.dropdown-menu
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Bent Smith"}
+              %img.profile-nav{:alt => "profile", :src => "assets/uifaces14.jpg"}
+                Bent
+                %i.fa.fa-angle-down
+              %ul.dropdown-menu
+                %li
+                  %a{:href => "#"} View Site
+                %li.divider
+                %li
+                  %a{:href => "pages-profile.html"} Profile
+                %li
+                  %a{:href => "pages-timeline.html"} Timeline
+                %li
+                  %a{:href => "pages-email.html"} Inbox
+                %li.divider
+                %li
+                  %a{:href => "pages-help.html"} Help
+                %li.divider
+                %li
+                  %a{:href => "pages-locked.html"} Locked
+                %li
+                  %a{:href => "pages-signin.html"} Sign out
+          / /navbar-nav
+        / /.navbar-header
+      / /.container-fluid
+    / /.navbar
+  / /.header

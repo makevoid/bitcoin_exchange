@@ -115,7 +115,7 @@
 		} // end of sidebar form search
 
 	} // end of sidebar actions
-	
+
 
 	.sidebar-nav{
 		padding-bottom: $sidebar-nav-item-padding-vertical;
@@ -123,7 +123,7 @@
 
 		.nav{
 			border-bottom: $sidebar-nav-item-border-top; // don't remove it! this line use to hack the jquery.niceScroll on IE
-			
+
 			.divider{
 				@include nav-divider( $sidebar-divider-color );
 				height: $sidebar-divider-height;
@@ -160,7 +160,7 @@
 					@include text-overflow();
 				}
 			}  // end of nav header
-			
+
 			li {
 				position: static;
 
@@ -187,11 +187,11 @@
 						right: $sidebar-nav-item-padding-horizontal;
 					}
 				}
-				
+
 				// for parent item
 				&.loader-state > a{
 					color: $sidebar-nav-item-color !important;
-					
+
 					.caret,
 					.badge{
 						visibility: hidden;
@@ -201,11 +201,11 @@
 						color: $sidebar-nav-icon-color !important;
 					} // end nav-item-icon
 				} // end of loader-state
-				
+
 				// for child item
 				.loader-state > a{
 					color: $sidebar-nav-item-color !important;
-					
+
 					.caret,
 					.badge{
 						visibility: hidden;
@@ -290,7 +290,7 @@
 						background-color: $sidebar-nav-item-bg-active;
 						color: $sidebar-nav-item-color-hover;
 						outline: 0;
-						
+
 						.badge{
 							color: $sidebar-context-color;
 							background-color: $sidebar-context-bg;
@@ -301,7 +301,7 @@
 					}
 				} // end of sidebar item active/open state
 
-				
+
 				&.open{
 					& > a,
 					& > a.active,
@@ -336,7 +336,7 @@
 					margin-bottom: 0;
 					padding: $sidebar-nav-item-padding-vertical 0;
 					display: none;
-					
+
 					li.divider{
 						margin: $sidebar-nav-item-padding-vertical $sidebar-nav-item-padding-horizontal;
 						height: 1px;
@@ -391,7 +391,7 @@
 									color: $sidebar-context-color;
 									background-color: $sidebar-context-bg;
 								} // end of sidebar item open/active badge
-								
+
 							}// end of link on open/active state
 
 							.nav-item-child{
@@ -500,7 +500,7 @@
 
 // below is medium version of sidebar
 body.wrapkit-sidebar-md{
-	
+
 	.sidebar{
 		width: $sidebar-width-md;
 
@@ -550,7 +550,7 @@ body.wrapkit-sidebar-md{
 
 		.sidebar-nav{
 			overflow: visible;
-			
+
 			.nav{
 
 				.divider{
@@ -607,7 +607,7 @@ body.wrapkit-sidebar-md{
 							display: block;
 						}
 					} // end of nav header hover
-					
+
 				} // end of sidebar nav header
 
 				li.nav-item{
@@ -629,7 +629,7 @@ body.wrapkit-sidebar-md{
 							visibility: hidden;
 						} // end .caret/.badge
 					} // end of loader state <a>
-					
+
 					& > a{
 						border: none;
 						padding-left: 0;
@@ -701,17 +701,17 @@ body.wrapkit-sidebar-md{
 							background-color: transparent;
 							z-index: 1;
 						} // end of helper hover (nav-item-child hover hack)
-						
+
 						& > li{
 
 							& > a{
 								padding-left: $sidebar-nav-item-padding-vertical * 2;
-								
+
 								.caret{
 									margin-left: -20px;
 								} // end of caret
 
-								.nav-item-text{ 
+								.nav-item-text{
 									font-size: $font-size-base;
 								} // end of nav-item-text
 
@@ -741,12 +741,12 @@ body.wrapkit-sidebar-md{
 
 								a{
 									padding-left: $sidebar-nav-item-padding-vertical * 3;
-									
+
 									.caret{
 										margin-left: -20px;
 									} // end of caret (show on level > 1)
 
-									.nav-item-text{ 
+									.nav-item-text{
 										font-size: $font-size-base;
 									} // end of nav-item-text
 
@@ -795,7 +795,7 @@ body.wrapkit-sidebar-md{
 
 // below is small version of sidebar
 body.wrapkit-sidebar-sm{
-	
+
 	.sidebar{
 		width: $sidebar-width-sm;
 
@@ -846,7 +846,7 @@ body.wrapkit-sidebar-sm{
 
 		.sidebar-nav{
 			overflow: visible;
-			
+
 			.nav{
 
 				.divider{
@@ -921,7 +921,7 @@ body.wrapkit-sidebar-sm{
 							visibility: hidden;
 						} // end .caret/.badge/.nav-item-icon
 					}
-					
+
 					& > a{
 						position: static;
 						border: none;
@@ -931,7 +931,7 @@ body.wrapkit-sidebar-sm{
 						overflow: initial;
 						text-overflow: initial;
 						width: auto;
-						
+
 						.badge{
 							position: absolute;
 							top: auto;
@@ -939,7 +939,7 @@ body.wrapkit-sidebar-sm{
 							right: -($sidebar-nav-item-padding-vertical/2);
 						} // end of nav item badge
 
-						
+
 						.caret{
 							// disable caret on medium
 							display: none;
@@ -1039,17 +1039,17 @@ body.wrapkit-sidebar-sm{
 							background-color: transparent;
 							z-index: 1;
 						} // end of helper hover (nav-item-child hover hack)
-						
+
 						& > li{
 
 							& > a{
 								padding-left: $sidebar-nav-item-padding-vertical * 2;
-								
+
 								.caret{
 									margin-left: -20px;
 								} // end of caret
 
-								.nav-item-text{ 
+								.nav-item-text{
 									font-size: $font-size-base;
 								} // end of nav-item-text
 
@@ -1075,12 +1075,12 @@ body.wrapkit-sidebar-sm{
 
 								a{
 									padding-left: $sidebar-nav-item-padding-vertical * 3;
-									
+
 									.caret{
 										margin-left: -20px;
 									} // end of caret (show on level > 1)
 
-									.nav-item-text{ 
+									.nav-item-text{
 										font-size: $font-size-base;
 									} // end of nav-item-text
 
@@ -1133,7 +1133,7 @@ body.wrapkit-sidebar-hidden{
 
 		.loader-state > a{
 			color: $sidebar-nav-item-color !important;
-			
+
 			.caret,
 			.badge{
 				visibility: hidden;
@@ -1155,7 +1155,7 @@ body.wrapkit-sidebar-hidden{
 			border-top: none;
 			border-right: 1px solid $sidebar-border-color;
 			// @include transition( all .1s ease );
-			
+
 			& > .nav-item-loader{
 				position: absolute;
 				top: 0;
@@ -1169,7 +1169,7 @@ body.wrapkit-sidebar-hidden{
 					position: absolute;
 					top: 0;
 					right: 0;
-		
+
 					-webkit-animation-duration: 1s;
 					-moz-animation-duration: 1s;
 					-o-animation-duration: 1s;
@@ -1246,7 +1246,7 @@ body.wrapkit-sidebar-hidden{
 			} // end of sidebar-actions
 
 		} // end of hover state
-		
+
 		.sidebar-nav{
 			display: none;
 		}
@@ -1258,7 +1258,7 @@ body.wrapkit-sidebar-hidden{
 
 // below is fixed version of sidebar
 body.wrapkit-sidebar-fixed{
-	
+
 	.sidebar{
 		position: fixed !important;
 		&.sidebar-fixer{
@@ -1348,4 +1348,3 @@ body.wrapkit-sidebar-fixed{
 	}
 
 } // end of wrapkit sidebar fixed
-

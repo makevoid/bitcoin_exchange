@@ -10,6 +10,17 @@
     %meta{:content => "", :name => "description"}/
     %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
     = stylesheet_tag 'application'
+    = stylesheet_tag 'bootstrap'
+    = stylesheet_tag 'jquery-ui'
+    = stylesheet_tag 'pages'
+    = stylesheet_tag 'uikits'
+
+    = stylesheet_tag 'header'
+    = stylesheet_tag 'content'
+    = stylesheet_tag 'pages'
+
+    = stylesheet_tag 'footer'
+
     = javascript_tag 'application'
     /= csrf_meta_tags
     = yield_content(:header) if content_for? :header
@@ -25,19 +36,19 @@
     %main#wrapper.wrapkit-wrapper
       / Your awesome app here
     = partial :"templates/_header"
-    = partial :"templates/_sidebar"
-
-    %section.content-wrapper
-      .content-header
-        %h1.content-title
-          Content Title
-          %span.content-subtitle Content subtitle goes here...
-      / /.content-header
-      .content-actions
-        / You can put breadcrumb, button, button group or something else here...
-      / /.content-actions
-      .content
-        / Your awesome app here
-      / /.content
-    / /.content-wrapper
-    = partial :"templates/_footer"
+    -# = partial :"templates/_sidebar"
+    -#
+    -# %section.content-wrapper
+    -#   .content-header
+    -#     %h1.content-title
+    -#       Content Title
+    -#       %span.content-subtitle Content subtitle goes here...
+    -#   / /.content-header
+    -#   .content-actions
+    -#     / You can put breadcrumb, button, button group or something else here...
+    -#   / /.content-actions
+    -#   .content
+    -#     / Your awesome app here
+    -#   / /.content
+    -# / /.content-wrapper
+    -# = partial :"templates/_footer"
