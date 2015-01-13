@@ -1,3 +1,6 @@
+:ruby
+  cur_user = current_user
+!!! 5
 %header.header
   .navbar
     .container-fluid
@@ -311,26 +314,40 @@
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "Bent Smith"}
               %img.profile-nav{:alt => "profile", :src => "assets/uifaces14.jpg"}
-                Bent
+                - if cur_user
+                  #{cur_user.username}
+                - else
+                  Username
                 %i.fa.fa-angle-down
-              %ul.dropdown-menu
-                %li
-                  %a{:href => "#"} View Site
-                %li.divider
-                %li
-                  %a{:href => "pages-profile.html"} Profile
-                %li
-                  %a{:href => "pages-timeline.html"} Timeline
-                %li
-                  %a{:href => "pages-email.html"} Inbox
-                %li.divider
-                %li
-                  %a{:href => "pages-help.html"} Help
-                %li.divider
-                %li
-                  %a{:href => "pages-locked.html"} Locked
-                %li
-                  %a{:href => "pages-signin.html"} Sign out
+            %ul.dropdown-menu
+              %li
+                .form-group
+                  %form{ action: "/force_login/1", method: :post }
+                    - hidden "return_url", request.url, "return_url"
+                    %button.btn.btn-default{ type: "submit" } Alice
+              %li
+                .form-group
+                  %form{ action: "/force_login/2", method: :post }
+                    - hidden "return_url", request.url, "return_url"
+                    %button.btn.btn-default{ type: "submit" } Bob
+              %li.divider
+              %li
+                %a{:href => "pages-profile.html"} Profile
+              %li
+                %a{:href => "pages-timeline.html"} Timeline
+              %li
+                %a{:href => "pages-email.html"} Inbox
+              %li.divider
+              %li
+                %a{:href => "pages-help.html"} Help
+              %li.divider
+              %li
+                %a{:href => "pages-locked.html"} Locked
+              %li
+                .form-group
+                  %form{ action: "/logout", method: :post }
+                    - hidden "return_url", request.url, "return_url"
+                    %button.btn.btn-default{ type: "submit" } Logout
           / /navbar-nav
         / /.navbar-header
       / /.container-fluid
