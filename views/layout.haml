@@ -1,135 +1,43 @@
 :ruby
   cur_user = current_user
 !!! 5
-%html
-  - TITLE = "BitcoinExchange"
+!!!
+%html{:lang => "en"}
   %head
-    %title= TITLE
-    %link{ rel: "stylesheet", href: "/css/helper.css" }
-    %link{ rel: "stylesheet", href: "/css/fontawesome.css"}
-    %link{ rel: "stylesheet", href: "/css/main.css" }
-    %link{ rel: "stylesheet", href: "/css/main_sass.css" }
-    %link{ rel: "stylesheet", href: "/css/roboto.css" }
-    -# %link{ rel: "stylesheet", href: "http://fonts.googleapis.com/css?family=Roboto:400,300,500,700,700italic,500italic,400italic,300italic"}
-    = haml :"_metas" # todo require/implement partial :metas
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %title BitDirect
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}/
+    = stylesheet_tag 'application'
+    = javascript_tag 'application'
+    /= csrf_meta_tags
+    = yield_content(:header) if content_for? :header
+    / fav and touch icons here
+    / Font Awesome
+    %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    / HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    / WARNING: Respond.js doesn't work if you view the page via file://
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  %body{"data-spy" => "scroll", "data-target" => ".navbar"}
+    %main#wrapper.wrapkit-wrapper
+      / Your awesome app here
+    = partial :"templates/_header"
+    = partial :"templates/_sidebar"
 
-  %body
-    .overlay.overlay-dark.navbar-overlay-mobile-menu.overlay_main.mobile.tablet.hidden
-      .line-compress.navbar-mobile-menu
-        .separator100
-        %a.line.bg-muted.color-white.radius3.active{ href: "/orders"}
-          Orders
-        .separator10
-        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover{ href: "/orders_new"}
-          Buy/Sell
-        .separator10
-        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover{ href: "/deposits"}
-          Deposit
-        .separator10
-        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover{ href: "/withdrawals"}
-          Withdrawals
-        .separator10
-        %a.line.bg-muted.color-white.radius3.toggle-opacity-hover{ href: "/contact_us"}
-          Contact us
-    #main
-      %header.navbar.bg-white.line.fixed.top.left.layer1.bordered-bottom.over-hidden
-        .line-max
-          %h1.col2.logo.color-green
-            .line-compress
-              .line-compress
-                %a{ href: "/" }
-                  %img{class:"v-super", width: "auto", src: "img/logo.png"}
-          %nav.col8.center-content
-            .line
-              .col8.desktop
-                - nav_link "/market",      "Market"
-                - nav_link "/orders",      "Orders"
-                - nav_link "/orders_new",  "Buy / Sell"
-                - nav_link "/deposits",    "Deposits"
-                - nav_link "/withdrawals", "Withdrawals"
-                - nav_link "/contact_us",  "Contact us"
-
-              .col3.tablet.mobile
-              .col2
-                %a.line.desktop{ data: { toggle: "user_details" } }
-                  %i.fa.fa-user.color-green
-                  - unless cur_user
-                    Log In
-                  - else
-                    = cur_user.username
-
-                %a.line.mobile.tablet{ data: { toggle: "user_details" } }
-                  %i.fa.fa-user.color-green
-
-              .col2.tablet.mobile
-                %button.line.tablet.mobile.btn-navbar{ data: { toggle: "navbar-overlay-mobile-menu" } }
-                  %i.fa.fa-bars
-      %section.user_details.navbar-dropdown.line-tablet.color-white.fixed.right.top.push-right.bg-muted.layer2.hidden
-        .line-compress
-          .line-compress
-            .line-compress.left-content.debug
-
-              / standard login
-              - unless logged_in?
-                .separator15
-                %form{ action: "/sessions", method: "post" }
-                  %input{ name: "username", placeholder: "username", type: "text" }
-                  .separator10
-                  %input{ name: "password", placeholder: "password", type: "password" }
-                  .separator10
-                  %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } Login
-                  %p{ style: "text-align: center" }
-                    or
-                    %a.btn.btn-small.btn-primary.no-border.color-white{ href: "/register" } Register
-                  -# input user, :username
-                  -# input user, :password, type: "password"
-                  -# submit "Login"
-
-
-              / quick login - remove afterwards (prod)
-              .separator10
-              %h3 [test] Switch to user:
-              .separator5
-              %form.col5{ action: "/force_login/1", method: :post }
-                - hidden "return_url", request.url, "return_url"
-                .line-compress
-                  %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } ALI
-              %form.col5{ action: "/force_login/2", method: :post }
-                - hidden "return_url", request.url, "return_url"
-                .line-compress
-                  %button.btn.btn-small.btn-primary.no-border.color-white{ type: "submit" } BOB
-
-            .separator15
-            %section.line-compress.left-content
-              - if cur_user
-                %h3 Logged as
-                %h2.color-lightgreen #{cur_user.username}
-              - else
-                %a.btn.bg-muted.color-white{ href: "#"} Login
-        .separator10
-
-        - if cur_user
-          %section.line-compress.bg-black.left-content
-            .line-compress
-              .separator5
-              %p Current price: €#{Ticker.last.f_eur}
-              %p
-                Balance:
-                = haml :"_balance"
-              %p Total value: €#{cur_user_balance.total_value.f_eur}
-              .separator5
-          .line.center-content
-            %h1
-              %form{ action: "/logout", method: "post" }
-                %button.line.bg-muted.color-white{ type: "submit" }
-                  .separator5
-                  %i.fa.fa-sign-out &nbsp;logout
-                  .separator5
-
-      .separator50
-      .separator30.desktop
-      .separator10.tablet.mobile
-      .separator3.tablet.mobile
-      = partial :_flashes
-      %section.main= yield
-    %script{ type: "text/javascript", src: "/js/app.js" }
+    %section.content-wrapper
+      .content-header
+        %h1.content-title
+          Content Title
+          %span.content-subtitle Content subtitle goes here...
+      / /.content-header
+      .content-actions
+        / You can put breadcrumb, button, button group or something else here...
+      / /.content-actions
+      .content
+        / Your awesome app here
+      / /.content
+    / /.content-wrapper
+    = partial :"templates/_footer"

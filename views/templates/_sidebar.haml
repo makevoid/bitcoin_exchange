@@ -1,0 +1,73 @@
+%aside.sidebar
+  / Sidebar actions template
+  .sidebar-actions
+    / .sidebar-actions-pane work like bootstrap .tab-pane, so you can have a lot .sidebar-actions-bar or something else there
+    / use with data-toggle="sidebar-actions" (required wrapkitSidebar.js)
+    #sidebar-actions-default.sidebar-actions-pane.active
+      / max sidebar actions item is 4
+      %ul.sidebar-actions-bar
+        %li
+          %a{"data-toggle" => "sidebar-actions", :href => "#sidebar-actions-2"}
+            %i.fa.fa-bars
+        %li
+          %a{:href => "#"}
+            %i.fa.fa-bars
+        %li
+          %a{:href => "#"}
+            %i.fa.fa-bars
+        %li
+          %a{:href => "#"}
+            %i.fa.fa-bars
+      / /.sidebar-actions-bar
+    / /.sidebar-actions-bar
+    / another .sidebar-actions-pane
+    #sidebar-actions-2.sidebar-actions-pane
+      %p Hey I'm a hidden sidebar actions pane
+    / /.sidebar-actions-bar
+  / /.sidebar-actions
+  / Sidebar nav template
+  %nav.sidebar-nav
+    %ul.nav
+      %li.nav-item
+        %a{:href => "#"}
+          %span.badge 3
+          %i.nav-item-icon.fa.fa-home
+          %span.nav-item-text Menu
+      / ./nav-item
+      %li.nav-header
+        %a.nav-header-icon{:href => "#"}
+          %i.fa.fa-wrench
+        %span.nav-header-text Nav Header
+      / /.nav-header
+      %li.nav-item
+        %a{"data-toggle" => "nav-item-child", :href => "#"}
+          %span.caret
+          %i.nav-item-icon.fa.fa-list-ul
+          %span.nav-item-text Level Menu
+        / sidebar nav child: level 1
+        %ul.nav-item-child
+          %li
+            %a{"data-toggle" => "nav-item-child", :href => "#"}
+              %span.caret
+              %span.badge 8
+              %span.nav-item-text Child level 1
+            / sidebar nav child: level 2
+            %ul.nav-item-child
+              %li
+                %a{"data-toggle" => "nav-item-child", :href => "#"}
+                  %span.caret
+                  %span.nav-item-text Child level 2
+                / sidebar nav child: level 3
+                %ul.nav-item-child
+                  %li
+                    %a{:href => "#"}
+                      %span.nav-item-text Child level 3
+                  / /.nav-child-item
+                / /.nav-item-child (level 3)
+            / /.nav-item-child (level 2)
+          / /.nav-child-item
+        / /.nav-item-child (level 1)
+      / /.nav-item
+    / /.nav
+  / /.sidebar-nav
+/ /.sidebar

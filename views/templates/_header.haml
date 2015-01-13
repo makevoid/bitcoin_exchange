@@ -1,0 +1,19 @@
+%header.header
+  / bootstrap navbar
+  .navbar
+    / recomended to add a .container-fluid
+    .container-fluid
+      / wrapkit need .navbar-block to use with .navbar-header
+      .navbar-header.navbar-block
+        / navbar toggle button, show on toggle screen
+        %button.navbar-toggle.navbar-toggle-alt{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+          %span.fa.fa-bars
+        / app title
+        %a.navbar-brand{:href => "/"} BitDirect
+        / navbar nav
+        %ul.nav.navbar-nav.pull-right
+          / just navbar nav lists here
+      / /.navbar-header
+    / /.container-fluid
+  / /.navbar
+/ /.header
