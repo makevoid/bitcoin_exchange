@@ -1,0 +1,207 @@
+.landing-wrapper{
+	/* Special class on .container surrounding .navbar, used for positioning it into place. */
+	.navbar-wrapper {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		margin-top: 20px;
+		z-index: 20;
+
+		&.affix{
+			position: fixed;
+			margin-top: 0 !important;
+			.navbar {
+				border-radius: 0;
+				background-color: $navbar-inverse-bg !important;
+				border-color: $navbar-inverse-border !important;
+			}
+		}
+
+		/* Reset the navbar style */
+		.navbar {
+			background-color: transparent;
+			border-color: transparent;
+
+			.navbar-brand{
+				color: $gray-lighter;
+			}
+
+			li{
+				> a{
+					color: $gray-light;
+
+					&:hover,
+					&:focus,
+					&:active{
+						background-color: transparent !important; // also on collapse
+						color: #fff;
+					}
+				}
+				&.active,
+				&.open{
+					> a{
+						color: #fff;
+						background-color: transparent !important; // also on collapse
+					}
+				}
+			}
+		}
+		.navbar-form.navbar-right {
+			margin-left: 10px;
+		}
+		.btn-silc:hover,
+		.btn-silc:focus,
+		.btn-silc:active,
+		.btn-silc.active,
+		.btn-silc.open{
+			border-color: #fff;
+			color: #fff;
+			background-color: transparent;
+		}
+	}
+
+	.headline{
+		margin-bottom: 0;
+  		color: #fff;
+  		text-align: center;
+
+  		> .kit-cover{
+  			padding: 150px 0 48px;
+  		}
+		.jumbotron{
+			margin-bottom: 0;
+		}
+  		.container{
+  			position: relative;
+  		}
+	}
+
+	.about-us{
+		padding: ($padding-base-horizontal*6) 0 ($padding-base-horizontal*7);
+		text-align: center;
+
+		.team-lists{
+			margin: 40px 0 20px;
+		}
+
+		.lead:after{
+			content: '';
+			position: absolute;
+			display: block;
+			left: 50%;
+			width: 50px;
+			height: 3px;
+			margin-top: $padding-base-horizontal;
+			margin-left: -25px;
+			background-color: $brand-primary;
+		}
+	}
+
+	.landing-section{
+		padding: ($padding-base-horizontal*4) 0;
+		text-align: center;
+	}
+
+	svg{
+		width: 100%;
+		height: 100px;
+		pointer-events: none;
+		display: block;
+
+		&:not(:root){
+			overflow: hidden;
+		}
+	}
+
+	.services{
+		background-color: $content-bg;
+
+		.services-item{
+			margin-bottom: 20px
+		}
+	}
+
+	.footer{
+		padding: $padding-base-vertical 0;
+		color: $gray-light;
+		background-color: $base-dark;
+		@include clearfix();
+
+		h3{
+			margin: 0;
+		}
+
+		a{
+			color: $gray-light;
+
+			&:hover,
+			&:focus,
+			&:active{
+				color: $gray-lighter;
+				text-decoration: none;
+			}
+
+			&.twitter,
+			&.twitter:hover,
+			&.twitter:focus,
+			&.twitter:active{
+				color: #00ACED;
+			}
+
+			&.skype,
+			&.skype:hover,
+			&.skype:focus,
+			&.skype:active{
+				color: #00AFF0;
+			}
+
+			&.mail,
+			&.mail:hover,
+			&.mail:focus,
+			&.mail:active{
+				color: #DD4B39;
+			}
+		}
+	}
+}
+
+@media (max-width: $screen-xs-max){
+	.landing-wrapper{
+
+		.navbar-wrapper {
+			margin-top: 0;
+
+			.navbar-form.navbar-right {
+				margin-left: -15px;
+			}
+		}
+
+		.navbar .navbar-toggle{
+			.icon-bar{
+				background-color: $border-color;
+			}
+
+			&:hover,
+			&:focus,
+			&:active{
+				background-color: transparent;
+				.icon-bar{
+					background-color: #fff;
+				}
+			}
+
+		}
+
+		.navbar .navbar-collapse, 
+		.navbar .navbar-form{
+			border-color: transparent;
+			background-color: $base-dark;
+		}
+	}
+}
+@media (max-width: $screen-xs-min){
+	.landing-wrapper .headline > .kit-cover{
+		padding-top: 120px;
+	}
+}

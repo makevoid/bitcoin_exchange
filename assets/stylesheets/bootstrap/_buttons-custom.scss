@@ -1,0 +1,43 @@
+// More of Alternate buttons
+// --------------------------------------------------
+
+// Inverse
+.btn-inverse {
+  @include button-variant($btn-inverse-color, $btn-inverse-bg, $btn-inverse-border);
+}
+// Greentur
+.btn-greentur {
+  @include button-variant($btn-greentur-color, $btn-greentur-bg, $btn-greentur-border);
+}
+// Nephem
+.btn-nephem {
+  @include button-variant($btn-nephem-color, $btn-nephem-bg, $btn-nephem-border);
+}
+// Belpet
+.btn-belpet {
+  @include button-variant($btn-belpet-color, $btn-belpet-bg, $btn-belpet-border);
+}
+// Wistam
+.btn-wistam {
+  @include button-variant($btn-wistam-color, $btn-wistam-bg, $btn-wistam-border);
+}
+// Osun
+.btn-osun {
+  @include button-variant($btn-osun-color, $btn-osun-bg, $btn-osun-border);
+}
+// Pumcar
+.btn-pumcar {
+  @include button-variant($btn-pumcar-color, $btn-pumcar-bg, $btn-pumcar-border);
+}
+// Pomeal
+.btn-pomeal {
+  @include button-variant($btn-pomeal-color, $btn-pomeal-bg, $btn-pomeal-border);
+}
+// Silc
+.btn-silc {
+  @include button-variant($btn-silc-color, $btn-silc-bg, $btn-silc-border);
+}
+// Ascon
+.btn-ascon {
+  @include button-variant($btn-ascon-color, $btn-ascon-bg, $btn-ascon-border);
+}

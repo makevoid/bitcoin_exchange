@@ -1,0 +1,1346 @@
+.sidebar{
+	position: absolute;
+	top: $navbar-height;
+	bottom: 0;
+	padding-bottom: $sidebar-nav-item-padding-vertical;
+	width: $sidebar-width-lg;
+	background-color: $sidebar-bg;
+	color: $sidebar-color;
+	border-right: 1px solid $sidebar-border-color;
+	z-index: $zindex-sidebar;
+
+	&.navbar-collapse{
+		padding: 0;
+		overflow: visible;
+		max-height: none;
+		z-index: $zindex-sidebar;
+	}
+
+	.sidebar-actions{
+		position: relative;
+		margin: $sidebar-actions-margin;
+		padding: 0;
+		border-top: 1px solid $sidebar-border-color;
+		border-bottom: 1px solid $sidebar-divider-color;
+		z-index: 99;
+
+		.sidebar-actions-pane{
+			display: none;
+
+			&.active{
+				display: block;
+			}
+		}
+
+		.sidebar-actions-bar{
+			margin: 0;
+			padding: 0 $sidebar-nav-item-padding-horizontal;
+			list-style: none;
+
+			& > li{
+				position: relative;
+				margin-bottom: -1px;
+				margin-right: -3px;
+				list-style: none;
+				padding: 0;
+				display: inline-block;
+				width: 25%;
+
+				& > a{
+					position: static;
+					color: $sidebar-nav-icon-color;
+					padding: $sidebar-actions-padding-base 0;
+					display: block;
+					text-align: center;
+					border-style: solid;
+					border-color: transparent;
+					border-width: 0 0 3px 0;
+					font-size: $sidebar-actions-font-size;
+					line-height: $sidebar-actions-line-height;
+
+					&:hover{
+						border-color: $sidebar-context-border;
+						color: $sidebar-nav-item-color-hover;
+					}
+				} // end of a
+
+				&.open{
+					& > a{
+						color: $sidebar-nav-item-color-hover;
+						border-color: $sidebar-context-border;
+						box-shadow: none;
+					}
+				} // end of open state
+
+			} // end of sidebar actions bar item
+
+		} // end of sidebar actions bar
+
+
+		.sidebar-form-search{
+			margin: 0;
+			padding: 0 $sidebar-nav-item-padding-horizontal;
+			background-color: $sidebar-nav-item-bg-hover;
+			border-right: 1px solid $sidebar-border-color;
+
+			.form-control{
+				background-color: transparent;
+				border: none;
+				box-shadow: none;
+				height: 40px;
+				padding: $sidebar-actions-padding-base $sidebar-actions-padding-base $sidebar-actions-padding-base 0;
+				color: $sidebar-nav-item-color;
+
+				:focus{
+					box-shadow: none;
+				} // end of :focus state
+
+			} // end of form control
+
+			.btn,
+			.btn:visited,
+			.btn:active,
+			.btn:focus{
+				background-color: transparent !important;
+				border: none !important;
+				padding: 0;
+				color: $sidebar-nav-item-color;
+				box-shadow: none;
+			} // end of btn state
+
+		} // end of sidebar form search
+
+	} // end of sidebar actions
+
+
+	.sidebar-nav{
+		padding-bottom: $sidebar-nav-item-padding-vertical;
+		overflow: auto;
+
+		.nav{
+			border-bottom: $sidebar-nav-item-border-top; // don't remove it! this line use to hack the jquery.niceScroll on IE
+
+			.divider{
+				@include nav-divider( $sidebar-divider-color );
+				height: $sidebar-divider-height;
+				margin: $sidebar-divider-margin;
+
+				&:first-child{
+					margin-top: 0;
+				}
+			} // end of nav divider
+
+			.nav-header{
+				padding: $sidebar-nav-item-padding-vertical $sidebar-nav-item-padding-horizontal ($sidebar-nav-item-padding-vertical / 2);
+				text-transform: uppercase;
+				font-size: $font-size-small;
+				color: $sidebar-nav-header-color;
+				border-top: $sidebar-nav-item-border-top;
+				border-bottom: $sidebar-nav-item-border-bottom;
+				white-space:nowrap;
+
+				.nav-header-icon{
+					padding: 0;
+					color: inherit;
+					float: right;
+					background-color: transparent;
+
+					&:hover{
+						color: $sidebar-nav-item-color-hover;
+					}
+				}
+
+				.nav-header-text{
+					display: inline-block;
+					width: 80%;
+					@include text-overflow();
+				}
+			}  // end of nav header
+
+			li {
+				position: static;
+
+				a{
+					text-decoration: none !important;
+				}
+			}
+			li.nav-item{
+				border-top: $sidebar-nav-item-border-top;
+				border-bottom: $sidebar-nav-item-border-bottom;
+				border-right: $sidebar-nav-item-border-right;
+				white-space:nowrap;
+
+				.nav-item-loader{
+					position: absolute;
+					right: 0;
+					left: 0;
+					background-color: $sidebar-nav-item-loader-bg;
+					z-index: 2;
+
+					& > i{
+						position: absolute;
+						top: $sidebar-nav-item-padding-horizontal - 1;
+						right: $sidebar-nav-item-padding-horizontal;
+					}
+				}
+
+				// for parent item
+				&.loader-state > a{
+					color: $sidebar-nav-item-color !important;
+
+					.caret,
+					.badge{
+						visibility: hidden;
+					} // end .caret/.badge
+
+					.nav-item-icon{
+						color: $sidebar-nav-icon-color !important;
+					} // end nav-item-icon
+				} // end of loader-state
+
+				// for child item
+				.loader-state > a{
+					color: $sidebar-nav-item-color !important;
+
+					.caret,
+					.badge{
+						visibility: hidden;
+					} // end .caret/.badge
+
+					.nav-item-icon{
+						color: $sidebar-nav-icon-color !important;
+					} // end nav-item-icon
+				} // end of loader-state
+
+				a{
+					padding: $sidebar-nav-item-padding-vertical $sidebar-nav-item-padding-horizontal;
+					border-style: $sidebar-nav-border-style;
+					border-width: $sidebar-nav-border-width;
+					border-color: $sidebar-nav-border-color;
+					background-color: $sidebar-nav-item-bg;
+					color: $sidebar-nav-item-color;
+					@include text-overflow();
+
+					.badge, .caret{
+						position: relative;
+						float: right;
+						margin-left: 10px;
+						z-index: 3;
+					} // end of sidebar badge/caret
+
+					.badge{
+						top: 2px;
+						right: -4px;
+						padding: 3px 6px;
+						color: $sidebar-nav-item-color;
+						background-color: $sidebar-nav-item-bg-active;
+					} // end of sidebar badge
+					.caret{
+						border-color: transparent;
+						color: $sidebar-nav-item-color;
+						width: 14px;
+					} // end of sidebar caret
+
+					&:hover{
+						background-color: $sidebar-nav-item-bg-hover;
+						color: $sidebar-nav-item-color-hover;
+
+						.caret{
+							color: $sidebar-nav-item-color-hover;
+						} // end of sidebar item:hover caret
+
+						.badge{
+							color: $sidebar-context-color;
+							background-color: $sidebar-context-bg;
+						} // end of sidebar item:hover badge
+
+						.nav-item-icon{
+							color: $sidebar-nav-item-color-hover;
+						} // end nav-item-icon
+
+					} // end a:hover
+
+					.nav-item-icon{
+						font-size: $sidebar-nav-icon-size;
+						color: $sidebar-nav-icon-color;
+						min-width: 14px;
+					} // end nav-item-icon
+
+					.nav-item-text{
+						padding-left: $sidebar-nav-text-padding;
+						font-size: $sidebar-nav-text-size;
+						color: $sidebar-nav-text-color;
+					} // end nav-item-text
+
+				} // end of a
+
+				&.active,
+				&.open{
+
+					& > a,
+					& > a.active,
+					& > a:active,
+					& > a:hover,
+					& > a:focus,
+					& > a:visited{
+						background-color: $sidebar-nav-item-bg-active;
+						color: $sidebar-nav-item-color-hover;
+						outline: 0;
+
+						.badge{
+							color: $sidebar-context-color;
+							background-color: $sidebar-context-bg;
+						} // end of sidebar item open/active badge
+						.nav-item-icon{
+							color: $sidebar-nav-item-color-hover;
+						} // end nav-item-icon
+					}
+				} // end of sidebar item active/open state
+
+
+				&.open{
+					& > a,
+					& > a.active,
+					& > a:active,
+					& > a:hover,
+					& > a:focus,
+					& > a:visited{
+						border-color: $sidebar-nav-border-color;
+					} // link on item open state
+
+					.nav-item-child{
+						display: block;
+
+						& > li{
+							@include opacity(1);
+						}
+					}// end of nav item child on open state
+				} // end of sidebar item open state
+				&.active{
+					& > a,
+					& > a.active,
+					& > a:active,
+					& > a:hover,
+					& > a:focus,
+					& > a:visited{
+						border-color: $sidebar-context-border;
+					}
+				}
+
+				.nav-item-child{
+					list-style: none;
+					margin-bottom: 0;
+					padding: $sidebar-nav-item-padding-vertical 0;
+					display: none;
+
+					li.divider{
+						margin: $sidebar-nav-item-padding-vertical $sidebar-nav-item-padding-horizontal;
+						height: 1px;
+					}
+
+					& > li{
+						position: relative;
+						display: block;
+						border-bottom: 1px solid transparent;
+						@include opacity(0);
+						@include transition(opacity .5s ease);
+
+
+						& > a{
+							display: block;
+							font-size: $font-size-base - 1;
+							background-color: transparent;
+							color: $sidebar-nav-item-color;
+							padding: $sidebar-nav-item-padding-vertical $sidebar-nav-item-padding-horizontal;
+							padding-left: $nav-item-child-indent-level1;
+							@include text-overflow();
+
+							&:hover{
+								text-decoration: none;
+								color: $sidebar-nav-item-color-hover;
+								background-color: $sidebar-nav-item-child-bg-hover;
+							}
+
+							.caret{
+								float: left;
+								margin-left: -20px;
+							} // end caret nav child
+
+							.nav-item-text{
+								padding-left: 0;
+							} // end nav-item-text on nav child
+
+						} // end of a
+
+						&.active,
+						&.open{
+							& > a,
+							& > a.active,
+							& > a:active,
+							& > a:hover,
+							& > a:focus,
+							& > a:visited{
+								color: $sidebar-nav-item-child-color-hover;
+								background-color: $sidebar-nav-item-child-bg-active;
+
+								.badge{
+									color: $sidebar-context-color;
+									background-color: $sidebar-context-bg;
+								} // end of sidebar item open/active badge
+
+							}// end of link on open/active state
+
+							.nav-item-child{
+								display: block;
+
+								& > li{
+									@include opacity(1);
+								}
+							} // end of nav child level 2 on open/active state
+
+						} // end of open/active state
+
+						.nav-item-child{
+							display: none;
+
+							li{
+								position: relative;
+								display: block;
+								@include opacity(0);
+								@include transition(opacity .5s ease);
+
+								& > a{
+									padding-left: $nav-item-child-indent-level3;
+									@include text-overflow();
+								}
+
+								&.active,
+								&.open{
+									& > a,
+									& > a.active,
+									& > a:active,
+									& > a:hover,
+									& > a:focus,
+									& > a:visited{
+										color: $sidebar-nav-item-child-color-hover;
+										background-color: $sidebar-nav-item-child-bg-active;
+									}// end of link on open/active state
+
+									.nav-item-child{
+										display: block;
+
+										& > li{
+											@include opacity(1);
+										}
+									} // end of nav child level 3 on open/active state
+
+								} // end of open/active state
+
+								.nav-item-child{
+									display: none;
+
+									li{
+										position: relative;
+										display: block;
+										@include opacity(0);
+										@include transition(opacity .5s ease);
+
+										& > a{
+											padding-left: $nav-item-child-indent-level4;
+											@include text-overflow();
+										}
+
+										&.active,
+										&.open{
+											& > a,
+											& > a.active,
+											& > a:active,
+											& > a:hover,
+											& > a:focus,
+											& > a:visited{
+												color: $sidebar-nav-item-child-color-hover;
+												background-color: $sidebar-nav-item-child-bg-active;
+											}// end of link on open/active state
+
+											.nav-item-child{
+												display: block;
+
+												& > li{
+													@include opacity(1);
+												}
+											} // end of nav child level >= 3 on open/active state
+
+										} // end of open/active state
+
+									} // end of nav child level 3
+
+								} // end of nav child level > 3
+
+							} // end of li (like .nav-item)
+
+						} // end of nav child level 2
+
+					} // end of li (like .nav-item)
+
+				} // end of nav child level 1
+
+			} // end .nav-item
+
+		} // end .nav
+
+	} // end .sidebar-nav
+
+} // end .sidebar
+
+
+
+// below is medium version of sidebar
+body.wrapkit-sidebar-md{
+
+	.sidebar{
+		width: $sidebar-width-md;
+
+		.sidebar-actions{
+			margin: 0;
+			width: $sidebar-width-md;
+			background-color: $sidebar-bg;
+			white-space: nowrap; // required for auto width
+			border-right: 1px solid $sidebar-border-color;
+
+			&:hover,
+			&.open{
+				width: $sidebar-width-md * 4;
+				@include box-shadow( 3px 3px 6px rgba(0,0,0,.175) );
+
+				.sidebar-actions-bar > li{
+					display: inline-block !important;
+				}
+			} // end of sidebar actions open/hover state
+
+			.sidebar-actions-bar{
+				padding: 0;
+
+				& > li{
+					width: $sidebar-width-md;
+
+					&:not(:first-child){
+						display: none;
+					}
+				} // end of li
+
+				// hack bootstrap dropdown-menu on medium/small
+				.dropdown-menu:before{
+					content: '';
+					position: absolute;
+					top: 0;
+					margin-top: -$caret-width-large;
+					height: 20px;
+					width: 100%;
+					background-color: transparent;
+					z-index: -2;
+				}
+
+			} // end of sidebar actions bar
+
+		} // end of sidebar actions
+
+		.sidebar-nav{
+			overflow: visible;
+
+			.nav{
+
+				.divider{
+					// disable divider
+					display: none;
+				} // end of nav divider
+
+				.nav-header{
+					padding: 0;
+					white-space: nowrap;
+					border-top: none;
+					border-bottom: 1px solid $sidebar-divider-color;
+
+					.nav-header-icon{
+						float: none;
+						font-size: $font-size-large;
+						text-align: center;
+						display: block;
+						padding: $sidebar-nav-item-padding-vertical 0;
+					} // end of nav header icon
+
+					.nav-header-text{
+						position: absolute;
+						margin-top: -40px;
+						left: $sidebar-width-md + $tooltip-arrow-width;
+						display: none;
+						padding: $sidebar-nav-item-padding-vertical $sidebar-nav-item-padding-horizontal;
+						background-color: $sidebar-nav-item-bg;
+						border-radius: $border-radius-base;
+						white-space: nowrap;
+						overflow: visible;
+						text-overflow: initial;
+						width: auto;
+						@include box-shadow( 3px 3px 6px rgba(0,0,0,.175) );
+
+						&:before{
+							position: absolute;
+							content: '';
+							top: 50%;
+							left: -$tooltip-arrow-width;
+							margin-top: -$tooltip-arrow-width;
+							width: 0;
+							height: 0;
+							border-color: transparent;
+							border-right-color:  $sidebar-nav-item-bg;
+							border-style: solid;
+							border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+						} // end of nav header text arrow
+
+					} // end of nav header text
+
+					&:hover{
+						.nav-header-text{
+							display: block;
+						}
+					} // end of nav header hover
+
+				} // end of sidebar nav header
+
+				li.nav-item{
+					position: static;
+
+					.badge{
+						position: absolute;
+						top: 4px;
+						right: $sidebar-nav-item-padding-vertical;
+					} // end of nav item badge
+
+					.nav-item-loader > i{
+						top: 4px;
+						right: $sidebar-nav-item-padding-horizontal;
+					} // end of nav item loader <i>
+
+					&.loader-state > a{
+						.badge{
+							visibility: hidden;
+						} // end .caret/.badge
+					} // end of loader state <a>
+
+					& > a{
+						border: none;
+						padding-left: 0;
+						padding-right: 0;
+						text-align: center;
+
+						.caret{
+							// disable caret on medium
+							display: none;
+						} // end of nav item caret
+					} // end of nav item a
+
+					.nav-item-icon{
+						display: block;
+						font-size: $font-size-large;
+						padding: 0 0 ($sidebar-nav-item-padding-horizontal/2);
+					} // end nav-item-icon
+
+					.nav-item-text{
+						display: block;
+						padding: 0 5px;
+						font-size: $font-size-small;
+						@include text-overflow();
+					} // end nav-item-text
+
+					&:hover > .nav-item-child{
+						display: block !important;
+
+						& > li{
+							@include opacity(1);
+						}
+					} // end sidebar-md nav-item-child hover
+
+					& > .nav-item-child{
+						position: absolute;
+						padding: 0;
+						margin-top: -63px;
+						min-width: $sidebar-width-md * 3;
+						left: $sidebar-width-md + $tooltip-arrow-width;
+						white-space: nowrap; /* make box available auto width */
+						background-clip: padding-box;
+						background-color: $sidebar-nav-item-bg;
+						border-radius: $border-radius-base;
+						@include box-shadow( 3px 3px 6px rgba(0,0,0,.175) );
+
+						&:before{
+							position: absolute;
+							content: '';
+							top: 20px;
+							left: 0;
+							margin-top: -$tooltip-arrow-width;
+							margin-left: -$tooltip-arrow-width;
+							width: 0;
+							height: 0;
+							border-color: transparent;
+							border-right-color:  $sidebar-nav-item-bg;
+							border-style: solid;
+							border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+							z-index: 2;
+						} // end of arrow item child
+
+						&:after{
+							content: '';
+							position: absolute;
+							height: 100%;
+							top: 0;
+							left: -$tooltip-arrow-width - 2; // 2 is border width ( 1px border-right sidebar + 1px border-right nav item  )
+							width: $tooltip-arrow-width + 2; // 2 is border width ( 1px border-right sidebar + 1px border-right nav item  )
+							background-color: transparent;
+							z-index: 1;
+						} // end of helper hover (nav-item-child hover hack)
+
+						& > li{
+
+							& > a{
+								padding-left: $sidebar-nav-item-padding-vertical * 2;
+
+								.caret{
+									margin-left: -20px;
+								} // end of caret
+
+								.nav-item-text{
+									font-size: $font-size-base;
+								} // end of nav-item-text
+
+								.badge{
+									position: relative;
+									float: right;
+									top: auto;
+									right: auto;
+								} // end of badge
+
+							} // end of a
+
+							&:first-child > a{
+								border-top-left-radius: $border-radius-base;
+								border-top-right-radius: $border-radius-base;
+							}
+							&:last-child > a{
+								border-bottom-left-radius: $border-radius-base;
+								border-bottom-right-radius: $border-radius-base;
+							}
+
+						} // end of li
+
+						.nav-item-child{
+
+							li{
+
+								a{
+									padding-left: $sidebar-nav-item-padding-vertical * 3;
+
+									.caret{
+										margin-left: -20px;
+									} // end of caret (show on level > 1)
+
+									.nav-item-text{
+										font-size: $font-size-base;
+									} // end of nav-item-text
+
+									.badge{
+										position: relative;
+										float: right;
+										top: auto;
+										right: auto;
+									} // end of .badge
+								} // end of a
+
+								.nav-item-child{
+									li{
+										a{
+											padding-left: $sidebar-nav-item-padding-vertical * 4;
+										} // end of a
+
+										.nav-item-child{
+											a{
+												padding-left: $sidebar-nav-item-padding-vertical * 5;
+											} // end of a
+
+										} // end of nav-item-child
+
+									} // end of li
+
+								} // end of nav-item-child level >= 3
+
+							} // end of li
+
+						} // end of nav-item-child level 2
+
+					} // end of nav item child
+
+				} // end of sidebar nav item
+
+			} // end of nav
+
+		} // end of sidebar nav
+
+	} // end of sidebar-md
+
+} // end of wrapkit sidebar-md mode
+
+
+
+// below is small version of sidebar
+body.wrapkit-sidebar-sm{
+
+	.sidebar{
+		width: $sidebar-width-sm;
+
+		.sidebar-actions{
+			margin: 0;
+			width: $sidebar-width-sm;
+			background-color: $sidebar-bg;
+			border-right: 1px solid $sidebar-border-color;
+			white-space: nowrap; // required for auto width
+
+			&:hover,
+			&.open{
+				width: $sidebar-width-sm * 7;
+				@include box-shadow( 3px 3px 6px rgba(0,0,0,.175) );
+
+				.sidebar-actions-bar > li{
+					display: inline-block !important;
+				}
+			} // end of sidebar actions open/hover state
+
+			.sidebar-actions-bar{
+				padding: 0;
+
+				& > li{
+					width: $sidebar-width-sm;
+
+					&:not(:first-child){
+						display: none;
+						width: $sidebar-width-sm * 2;
+					}
+				} // end of li
+
+				// hack bootstrap dropdown-menu on medium/small
+				.dropdown-menu:before{
+					content: '';
+					position: absolute;
+					top: 0;
+					margin-top: -$caret-width-large;
+					height: 20px;
+					width: 100%;
+					background-color: transparent;
+					z-index: -2;
+				}
+
+			} // end of sidebar actions bar
+
+		} // end of sidebar actions
+
+		.sidebar-nav{
+			overflow: visible;
+
+			.nav{
+
+				.divider{
+					// disable divider
+					display: none;
+				} // end of nav divider
+
+				.nav-header{
+					padding: 0;
+					white-space: nowrap;
+					border-top: none;
+					border-bottom: 1px solid $sidebar-divider-color;
+
+					.nav-header-icon{
+						float: none;
+						font-size: $font-size-large;
+						text-align: center;
+						display: block;
+						padding: $sidebar-nav-item-padding-vertical 0;
+					}// end of nav header icon
+
+					.nav-header-text{
+						position: absolute;
+						margin-top: -40px;
+						left: $sidebar-width-sm + $tooltip-arrow-width;
+						display: none;
+						padding: $sidebar-nav-item-padding-vertical $sidebar-nav-item-padding-horizontal;
+						background-color: $sidebar-nav-item-bg;
+						border-radius: $border-radius-base;
+						z-index: 1;
+						white-space: nowrap;
+						overflow: visible;
+						text-overflow: initial;
+						width: auto;
+						@include box-shadow( 3px 3px 6px rgba(0,0,0,.175) );
+
+						&:before{
+							position: absolute;
+							content: '';
+							top: 50%;
+							left: -$tooltip-arrow-width;
+							margin-top: -$tooltip-arrow-width;
+							width: 0;
+							height: 0;
+							border-color: transparent;
+							border-right-color: $sidebar-nav-item-bg;
+							border-style: solid;
+							border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+							z-index: 1;
+						}// end of nav header text arrow
+					} // end of nav header text
+
+					&:hover{
+						.nav-header-text{
+							display: block;
+						}
+					} // end of nav header hover
+				} // end of sidebar nav header
+
+				li.nav-item{
+					position: static;
+					white-space: initial;
+
+					.nav-item-loader > i{
+						top: $sidebar-nav-item-padding-vertical;
+						right: $sidebar-nav-item-padding-horizontal;
+					}
+
+					&.loader-state > a{
+						.badge,
+						.nav-item-icon{
+							visibility: hidden;
+						} // end .caret/.badge/.nav-item-icon
+					}
+
+					& > a{
+						position: static;
+						border: none;
+						padding: $sidebar-nav-item-padding-vertical 0;
+						text-align: center;
+						white-space: initial;
+						overflow: initial;
+						text-overflow: initial;
+						width: auto;
+
+						.badge{
+							position: absolute;
+							top: auto;
+							margin-top: -$sidebar-nav-item-padding-horizontal;
+							right: -($sidebar-nav-item-padding-vertical/2);
+						} // end of nav item badge
+
+
+						.caret{
+							// disable caret on medium
+							display: none;
+						} // end of nav item caret
+
+						& > .nav-item-text{
+							position: absolute;
+							left: $sidebar-width-sm + $tooltip-arrow-width;
+							margin-top: -28px;
+							display: none;
+							background-color: inherit;
+							padding: $sidebar-nav-item-padding-vertical $sidebar-nav-item-padding-horizontal;
+							border-radius: $border-radius-base;
+							font-size: $font-size-base;
+							text-align: left;
+							overflow: visible;
+							text-overflow: clip;
+							white-space: nowrap;
+							z-index: 1;
+							@include box-shadow( 3px 0 6px rgba(0,0,0,.175) );
+
+							&:before{
+								position: absolute;
+								content: '';
+								display: block;
+								top: 50%;
+								left: 0;
+								margin-top: -$tooltip-arrow-width;
+								margin-left: -$tooltip-arrow-width;
+								width: 0;
+								height: 0;
+								border-color: transparent;
+								border-right-color: $sidebar-nav-item-bg-hover;
+								border-style: solid;
+								border-width: $tooltip-arrow-width $tooltip-arrow-width $tooltip-arrow-width 0;
+								z-index: 1;
+							} // end of arrow item text
+
+						} // end of nav item text
+
+					} // end of nav item a
+
+					.nav-item-icon{
+						display: block;
+						font-size: $font-size-large;
+					} // end nav-item-icon
+
+					.nav-item-text{
+						display: block;
+						padding: 0 5px;
+						font-size: $font-size-small;
+						@include text-overflow();
+					} // end nav-item-text
+
+					&:hover{
+						& > a > .nav-item-text{
+							display: block;
+						} // end of hover state nav item text
+
+						& > .nav-item-child{
+							display: block !important;
+
+							& > li{
+								@include opacity(1);
+							}
+						} // end sidebar-sm nav-item-child hover
+					} // end of hover state
+
+					&.active,
+					&.open{
+						& > a > .nav-item-text{
+							min-width: $sidebar-width-sm * 6;
+						}
+					} // end of open/active state
+
+					& > .nav-item-child{
+						position: absolute;
+						padding: 0;
+						margin-top: -1px;
+						min-width: $sidebar-width-sm * 6;
+						left: $sidebar-width-sm + $tooltip-arrow-width;
+						white-space: nowrap; /* make box available auto width */
+						background-clip: padding-box;
+						background-color: $sidebar-bg;
+						border-bottom-left-radius: $border-radius-base;
+						border-bottom-right-radius: $border-radius-base;
+						z-index: 1;
+						@include box-shadow( 3px 3px 6px rgba(0,0,0,.175) );
+
+						&:after{
+							content: '';
+							position: absolute;
+							height: 100%;
+							top: -35px;
+							left: -$tooltip-arrow-width - 2; // 2 is border width ( 1px border-right sidebar + 1px border-right nav item  )
+							width: $tooltip-arrow-width + 2; // 2 is border width ( 1px border-right sidebar + 1px border-right nav item  )
+							background-color: transparent;
+							z-index: 1;
+						} // end of helper hover (nav-item-child hover hack)
+
+						& > li{
+
+							& > a{
+								padding-left: $sidebar-nav-item-padding-vertical * 2;
+
+								.caret{
+									margin-left: -20px;
+								} // end of caret
+
+								.nav-item-text{
+									font-size: $font-size-base;
+								} // end of nav-item-text
+
+								.badge{
+									position: relative;
+									float: right;
+									top: auto;
+									right: auto;
+								} // end of badge
+
+							} // end of a
+
+							&:last-child > a{
+								border-bottom-left-radius: $border-radius-base;
+								border-bottom-right-radius: $border-radius-base;
+							}
+
+						} // end of li
+
+						.nav-item-child{
+
+							li{
+
+								a{
+									padding-left: $sidebar-nav-item-padding-vertical * 3;
+
+									.caret{
+										margin-left: -20px;
+									} // end of caret (show on level > 1)
+
+									.nav-item-text{
+										font-size: $font-size-base;
+									} // end of nav-item-text
+
+									.badge{
+										position: relative;
+										float: right;
+										top: auto;
+										right: auto;
+									} // end of .badge
+								} // end of a
+
+								.nav-item-child{
+									li{
+										a{
+											padding-left: $sidebar-nav-item-padding-vertical * 4;
+										}
+
+										.nav-item-child{
+											a{
+												padding-left: $sidebar-nav-item-padding-vertical * 5;
+											}
+										}
+									} // end of li
+
+								} // end of nav-item-child level >= 3
+
+							} // end of li
+
+						} // end of nav-item-child level 2
+					}
+				} // end of sidebar nav item
+			} // end of nav
+
+		} // end of sidebar nav
+
+	} // end of sidebar-sm
+
+} // end of wrapkit sidebar-sm mode
+
+
+// below is hidden version of sidebar
+body.wrapkit-sidebar-hidden{
+
+	.sidebar{
+		top: 0;
+		bottom: auto;
+		width: $sidebar-width-lg/4 !important;
+		z-index: $zindex-header + 1;
+		border-bottom: 1px solid $sidebar-border-color;
+
+		.loader-state > a{
+			color: $sidebar-nav-item-color !important;
+
+			.caret,
+			.badge{
+				visibility: hidden;
+			} // end .caret/.badge
+
+			.nav-item-icon{
+				color: $sidebar-nav-icon-color !important;
+			} // end nav-item-icon
+		}
+
+		.sidebar-actions{
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin-bottom: 0;
+			height: $navbar-height+1;
+			width: $sidebar-width-lg/4;
+			background-color: $sidebar-nav-item-bg-hover;
+			border-top: none;
+			border-right: 1px solid $sidebar-border-color;
+			// @include transition( all .1s ease );
+
+			& > .nav-item-loader{
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background-color: $sidebar-nav-item-loader-bg;
+				z-index: 2;
+
+				& > i{
+					position: absolute;
+					top: 0;
+					right: 0;
+
+					-webkit-animation-duration: 1s;
+					-moz-animation-duration: 1s;
+					-o-animation-duration: 1s;
+					animation-duration: 1s;
+				}
+			} // end of nav loader
+
+			.sidebar-actions-bar{
+				padding: 0;
+
+				& > li{
+					width: $sidebar-width-lg/4;
+
+					&:not(:first-child){
+						display: none;
+					}
+
+					& > a{
+						border: none;
+						padding: ($sidebar-nav-item-padding-horizontal+1) 0;
+						border-radius: 0;
+					}
+
+					&:hover{
+						& > a{
+							background-color: $sidebar-nav-item-bg-hover;
+						}
+					}
+				} // end of li
+
+				// hack bootstrap dropdown-menu on medium/small
+				.dropdown-menu:before{
+					content: '';
+					position: absolute;
+					top: 0;
+					margin-top: -$caret-width-large;
+					height: 20px;
+					width: 100%;
+					background-color: transparent;
+					z-index: -2;
+				}
+
+			} // end of sidebar-actions-bar
+
+		} // end of sidebar-actions
+
+		.sidebar-form-search{
+			.form-control{
+				padding: $sidebar-actions-padding-lg 0;
+				height: 100%;
+			}
+		} // end of sidebar-form
+
+		&:hover{
+			width: $sidebar-width-lg;
+
+			.sidebar-actions{
+
+				background-color: $sidebar-nav-item-bg;
+				width: $sidebar-width-lg;
+
+				.sidebar-actions-bar{
+					& > li{
+						width: 25%;
+
+						&:not(:first-child){
+							display: inline-block;
+						}
+
+					} // end of li
+
+				} // end of sidebar-actions-bar
+
+			} // end of sidebar-actions
+
+		} // end of hover state
+
+		.sidebar-nav{
+			display: none;
+		}
+
+	} // end of wrapkit sidebar
+
+} // end of wrapkit sidebar-hidden mode
+
+
+// below is fixed version of sidebar
+body.wrapkit-sidebar-fixed{
+
+	.sidebar{
+		position: fixed !important;
+		&.sidebar-fixer{
+			top: 0 !important;
+		}
+	} // end of sidebar
+
+	&.wrapkit-sidebar-md,
+	&.wrapkit-sidebar-sm{
+		.sidebar .sidebar-nav .nav li.nav-item > .nav-item-child{
+			border-radius: 0;
+			left: $sidebar-width-md - 1; // 1 is sidebar border
+			top: 0;
+			bottom: 0;
+			margin-top: 0;
+			overflow-x: hidden;
+			overflow-y: auto;
+
+			&:before{
+				display: none;
+			}
+		}
+		&.wrapkit-sidebar-right{
+			.sidebar .sidebar-nav .nav li.nav-item > .nav-item-child{
+				left: auto;
+				right: $sidebar-width-md - 1; // 1 is sidebar border
+			}
+		}
+	}
+
+	&.wrapkit-sidebar-sm{
+		.sidebar .sidebar-nav .nav li.nav-item{
+			& > a > .nav-item-text{
+				top: 0;
+				left: $sidebar-width-sm - 1; // 1 is sidebar border
+				margin-top: 0;
+				border-radius: 0;
+
+				&:before{
+					display: none;
+				}
+			}
+			& > .nav-item-child{
+				margin-top: 0;
+				top: 38px;
+				left: $sidebar-width-sm - 1; // 1 is sidebar border
+			}
+		}
+
+		&.wrapkit-sidebar-right{
+			.sidebar .sidebar-nav .nav li.nav-item{
+				& > a > .nav-item-text{
+					left: auto;
+					right: $sidebar-width-sm - 1; // 1 is sidebar border
+				}
+				& > .nav-item-child{
+					left: auto;
+					right: $sidebar-width-sm - 1; // 1 is sidebar border
+				}
+			}
+		}
+	}
+
+	&.wrapkit-header-fixed-bottom{
+		&.wrapkit-sidebar-md,
+		&.wrapkit-sidebar-sm{
+			.sidebar .sidebar-nav .nav li.nav-item > .nav-item-child{
+				bottom: $navbar-height;
+			}
+		}
+	}
+
+	&.wrapkit-sidebar-hidden{
+		&.sidebar-fixer{
+			& > .sidebar-actions{
+				@include box-shadow( 3px 3px 6px rgba(0, 0, 0, .175) );
+			}
+		}
+	}
+
+	&.wrapkit-header-fixed-top:not(.wrapkit-sidebar-hidden){
+		.sidebar{
+			&.sidebar-fixer{
+				top: $navbar-height !important;
+			}
+		} // end of sidebar
+	}
+
+} // end of wrapkit sidebar fixed

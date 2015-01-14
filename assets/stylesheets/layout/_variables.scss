@@ -1,0 +1,8 @@
+// layout
+$layout-min-height: 1280px !default;
+
+// Layering with z-index
+$zindex-header: $zindex-navbar !default;
+$zindex-sidebar: $zindex-navbar - 1 !default;
+$zindex-content: $zindex-navbar - 3 !default;
+$zindex-footer: $zindex-header - 2 !default;

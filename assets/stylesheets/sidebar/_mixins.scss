@@ -1,0 +1,855 @@
+//
+// Wrapkit Mixins
+// --------------------------------------------------
+
+
+// SIDEBAR
+// --------------------------------------------------
+
+// sidebar skins
+// --------------------------------------------------
+@mixin sidebar-skin( $skinName, $sidebar-bg, $sidebar-color, $sidebar-border-color, $sidebar-ui-resizable-handle, $sidebar-divider-color, $sidebar-divider-height, $sidebar-nav-header-color, $sidebar-nav-item-bg, $sidebar-nav-item-bg-hover, $sidebar-nav-item-bg-active, $sidebar-nav-item-color, $sidebar-nav-item-color-hover, $sidebar-nav-text-color, $sidebar-nav-border-color, $sidebar-nav-item-border-top, $sidebar-nav-item-border-bottom, $sidebar-nav-item-border-right, $sidebar-nav-icon-color, $sidebar-nav-item-loader-bg, $sidebar-nav-item-child-bg-hover, $sidebar-nav-item-child-color-hover, $sidebar-nav-item-child-bg-active ) {
+	
+	body.wrapkit-sidebar-variant-line,
+	body.wrapkit-sidebar-variant-caretal{
+		.sidebar.sidebar-#{$skinName} li.active > a{
+			background-color: $sidebar-nav-item-bg-active !important;
+		}
+	}
+
+	.sidebar.sidebar-#{$skinName} {
+
+		background-color: $sidebar-bg;
+		color: $sidebar-color;
+		border-color: $sidebar-border-color;
+
+		.sidebar-actions{
+			border-color: $sidebar-divider-color $sidebar-border-color;
+
+			.sidebar-actions-bar{
+
+				& > li{
+					& > a{
+						color: $sidebar-nav-icon-color;
+					}
+
+					& > a:hover,
+					&.open > a{
+						color: $sidebar-nav-item-color-hover;
+					}
+				}
+			}
+
+			.sidebar-form-search{
+				background-color: $sidebar-nav-item-bg-hover;
+				border-color: $sidebar-border-color;
+
+				.form-control,
+				.btn,
+				.btn:visited,
+				.btn:active,
+				.btn:focus{
+					color: $sidebar-nav-item-color;
+				} // end of form control & btn state
+
+				.form-control{
+					@include placeholder( $sidebar-nav-item-color );
+				}
+
+			} // end of sidebar form search
+
+		} // end of sidebar-actions (skin)
+
+
+		.sidebar-nav{
+			
+			.nav{
+				border-bottom: $sidebar-nav-item-border-top;
+
+				.divider{
+					@include nav-divider( $sidebar-divider-color );
+					height: $sidebar-divider-height;
+				} // end of nav divider
+
+				.nav-header{
+					color: $sidebar-nav-header-color;
+					border-top: $sidebar-nav-item-border-top;
+					border-bottom: $sidebar-nav-item-border-bottom;
+
+					.nav-header-icon:hover{
+						color: $sidebar-nav-item-color-hover;
+					}
+				} // end of nav-header
+
+				li.nav-item{
+					border-top: $sidebar-nav-item-border-top;
+					border-bottom: $sidebar-nav-item-border-bottom;
+					border-right: $sidebar-nav-item-border-right;
+
+					.nav-item-loader{
+						background-color: $sidebar-nav-item-loader-bg;
+					}
+
+					// for parent item
+					&.loader-state > a{
+						color: $sidebar-nav-item-color !important;
+						
+						.nav-item-icon{
+							color: $sidebar-nav-icon-color !important;
+						} // end nav-item-icon
+					} // end of loader-state
+
+					// for child item
+					.loader-state > a{
+						color: $sidebar-nav-item-color !important;
+						
+						.nav-item-icon{
+							color: $sidebar-nav-icon-color !important;
+						} // end nav-item-icon
+					} // end of loader-state
+
+					a{
+						background-color: $sidebar-nav-item-bg;
+						color: $sidebar-nav-item-color;
+
+						.badge{
+							color: $sidebar-nav-item-color;
+							background-color: $sidebar-nav-item-bg-active;
+						} // end of sidebar badge
+						.caret{
+							color: $sidebar-nav-item-color;
+						} // end of sidebar caret
+
+						&:hover{
+							background-color: $sidebar-nav-item-bg-hover;
+							color: $sidebar-nav-item-color-hover;
+
+							.caret{
+								color: $sidebar-nav-item-color-hover;
+							} // end of sidebar item:hover caret
+
+							.badge{
+								color: $sidebar-context-color;
+								background-color: $sidebar-context-bg;
+							} // end of sidebar item:hover badge
+
+							.nav-item-icon{
+								color: $sidebar-nav-item-color-hover;
+							} // end nav-item-icon
+
+						} // end a:hover
+
+						.nav-item-icon{
+							color: $sidebar-nav-icon-color;
+						} // end nav-item-icon
+
+						.nav-item-text{
+							color: $sidebar-nav-text-color;
+						} // end nav-item-text
+
+					} // end of a
+
+					&.active,
+					&.open{
+
+						& > a,
+						& > a.active,
+						& > a:active,
+						& > a:hover,
+						& > a:focus,
+						& > a:visited{
+							background-color: $sidebar-nav-item-bg-active;
+							color: $sidebar-nav-item-color-hover;
+							
+							.badge{
+								color: $sidebar-context-color;
+								background-color: $sidebar-context-bg;
+							} // end of sidebar item open/active badge
+							.nav-item-icon{
+								color: $sidebar-nav-item-color-hover;
+							} // end nav-item-icon
+						}
+					} // end of sidebar item active/open state
+
+					.nav-item-child{
+						& > li{
+
+							& > a{
+								color: $sidebar-nav-item-color;
+
+								&:hover{
+									color: $sidebar-nav-item-color-hover;
+									background-color: $sidebar-nav-item-child-bg-hover;
+								}
+							} // end of a
+
+							&.active,
+							&.open{
+								& > a,
+								& > a.active,
+								& > a:active,
+								& > a:hover,
+								& > a:focus,
+								& > a:visited{
+									color: $sidebar-nav-item-child-color-hover;
+									background-color: $sidebar-nav-item-child-bg-active;
+
+									.badge{
+										color: $sidebar-context-color;
+										background-color: $sidebar-context-bg;
+									} // end of sidebar item open/active badge
+									
+								}// end of link on open/active state
+
+							} // end of open/active state
+
+							.nav-item-child{
+
+								li{
+
+									&.active,
+									&.open{
+										& > a,
+										& > a.active,
+										& > a:active,
+										& > a:hover,
+										& > a:focus,
+										& > a:visited{
+											color: $sidebar-nav-item-child-color-hover;
+											background-color: $sidebar-nav-item-child-bg-active;
+										}// end of link on open/active state
+
+									} // end of open/active state
+								}
+							}
+
+						} // end of li
+
+					} // end of nav-item-child
+
+				} // end of nav-item
+
+			} // end of nav
+
+		} // end of sidebar-nav (skin)
+
+
+		// ui resizable handle
+		&.resizestart .ui-resizable-handle{
+			background-color: $sidebar-ui-resizable-handle;
+		}
+	} // end of sidebar (skin)
+
+
+	// below is medium version of sidebar (skin)
+	body.wrapkit-sidebar-md{
+		
+		.sidebar.sidebar-#{$skinName} {
+			
+			.sidebar-actions{
+				border-color: $sidebar-divider-color $sidebar-border-color;
+				background-color: $sidebar-bg;
+			} // end of sidebar actions
+
+			.sidebar-nav{
+
+				.nav{
+					
+					.nav-header{
+						border-color: $sidebar-divider-color;
+
+						.nav-header-text{
+							background-color: $sidebar-nav-item-bg;
+
+							&:before{
+								border-right-color:  $sidebar-nav-item-bg;
+							} // arrow
+
+						}// end of nav header text arrow
+
+					} // end of nav header
+
+					li.nav-item{
+						
+						& > .nav-item-child{
+							background-color: $sidebar-nav-item-bg;
+
+							&:before{
+								border-right-color:  $sidebar-nav-item-bg;
+							} // end of arrow item child
+						} // end of nav item child
+
+					} // end of nav item
+
+				} // end of nav
+
+			} // end of sidebar nav
+
+		} // end of sidebar (skin)
+
+	} // end of sidebar medium (skin)
+
+
+	// below is small version of sidebar (skin)
+	body.wrapkit-sidebar-sm{
+		
+		.sidebar.sidebar-#{$skinName} {
+			
+			.sidebar-actions{
+				border-color: $sidebar-divider-color $sidebar-border-color;
+				background-color: $sidebar-bg;
+			} // end of sidebar actions
+
+			.sidebar-nav{
+
+				.nav{
+					
+					.nav-header{
+						border-color: $sidebar-divider-color;
+
+						.nav-header-text{
+							background-color: $sidebar-nav-item-bg;
+
+							&:before{
+								border-right-color:  $sidebar-nav-item-bg;
+							} // arrow
+
+						}// end of nav header text arrow
+
+					} // end of nav header
+
+					li.nav-item{
+						
+						& > a{
+							
+							& > .nav-item-text{
+								background-color: $sidebar-nav-item-bg-hover;
+
+								&:before{
+									border-right-color:  $sidebar-nav-item-bg-hover;
+								} // end of arrow item text
+							} // end of nav item text
+
+						} // end of item a
+
+						&.active > a > .nav-item-text{
+							color: $sidebar-nav-item-color-hover;
+						}
+
+						& > .nav-item-child{
+							background-color: $sidebar-bg;
+						} // end of nav-item-child
+
+					} // end of nav item
+
+				} // end of nav
+
+			} // end of sidebar nav
+
+		} // end of sidebar (skin)
+
+	} // end of sidebar small (skin)
+
+
+	// below is hidden version of sidebar (skin)
+	body.wrapkit-sidebar-hidden{
+		
+		.sidebar.sidebar-#{$skinName} {
+
+			.sidebar-actions{
+				background-color: $sidebar-nav-item-bg-hover;
+				border-color: $sidebar-border-color;
+
+				& > .nav-item-loader{
+
+					background-color: $sidebar-nav-item-loader-bg;
+				} // end of nav loader
+
+				.sidebar-actions-bar{
+						
+					& > li:hover > a{
+						background-color: $sidebar-nav-item-bg-hover;
+					} // end of li:hover a
+
+				} // end of sidebar-actions-bar
+
+			} // end of nav actions
+
+			&:hover{
+
+				.sidebar-actions{
+					background-color: $sidebar-nav-item-bg;
+				} // end of nav actions
+
+			} // end of sidebar hover
+
+		} // end of sidebar (skin)
+
+	} // end of sidebar hidden (skin)
+
+
+
+	// SIDEBAR RIGHT
+	// below is sidebar right mode
+	body.wrapkit-sidebar-right{
+
+		.sidebar.sidebar-#{$skinName} {
+			border-color: $sidebar-border-color;
+
+			.sidebar-actions{
+
+				.sidebar-form-search{
+					border-color: $sidebar-border-color;
+				} // end of sidebar-form-search
+
+			} // end of sidebar actions
+
+		} // end of sidebar
+		
+		// below is medium version of sidebar on right
+		&.wrapkit-sidebar-md{
+
+			.sidebar.sidebar-#{$skinName} {
+
+				.sidebar-nav{
+
+					.nav-header{
+						
+						.nav-header-text:before{
+							border-left-color: $sidebar-nav-item-bg;
+						} // end of nav header text arrow
+
+					} // end of nav header
+
+					li.nav-item{
+
+						& > .nav-item-child:before{
+							border-left-color: $sidebar-nav-item-bg;
+						} // end of arrow item child
+						
+					} // end .nav-item
+
+				} // end of sidebar nav
+
+			} // end .sidebar
+
+		} // end of sidebar medium version of sidebar on right
+		
+
+		// below is small version of sidebar on right
+		&.wrapkit-sidebar-sm{
+
+			.sidebar.sidebar-#{$skinName} {
+
+				.sidebar-nav{
+
+					.nav-header{
+
+						.nav-header-text:before{
+							border-left-color: $sidebar-nav-item-bg;
+						} // end of nav header text arrow
+
+					} // end of sidebar nav header
+
+					li.nav-item{
+
+						& > a{
+
+							.nav-item-text:before{
+
+								border-left-color: $sidebar-nav-item-bg-hover;
+							} // end of nav header text arrow
+
+						} // end of nav item a
+						
+						& > .nav-item-child:before{
+							border-left-color: $sidebar-nav-item-bg;
+						} // end of arrow item child
+
+					} // end .nav-item
+
+				} // end .sidebar-nav
+
+			} // end .sidebar
+
+		} // end of sidebar small version of sidebar on right
+
+
+		// below is small version of sidebar on right
+		&.wrapkit-sidebar-hidden{
+			
+			.sidebar.sidebar-#{$skinName} {
+				
+				.sidebar-actions{
+					border-color: $sidebar-border-color;
+				} // end of sidebar actions
+
+			} // end of sidebar
+
+		} // end of sidebar hidden version of sidebar on right
+
+	} // end of sidebar right mode (skin)
+
+
+	body.wrapkit-sidebar-rtl.wrapkit-sidebar-right{
+		
+		.sidebar.sidebar-#{$skinName}{
+
+			.sidebar-nav{
+
+				.nav{
+
+					li.nav-item{
+						border-left: $sidebar-nav-item-border-right;
+					} // end .nav-item
+
+				} // end .nav
+
+			} // end .sidebar-nav
+
+		} // end .sidebar
+
+	} // end of sidebar right rtl mode (skin)
+
+
+	// below is style for small screen ( <= screen-xs-max )
+	@media (max-width: $screen-xs-max) {
+
+		body.wrapkit-sidebar-coltonav{
+			
+			&.wrapkit-sidebar-hidden{
+				
+				.sidebar.sidebar-#{$skinName} {
+
+					.sidebar-actions{
+
+						background-color: $sidebar-nav-item-bg;
+
+						.sidebar-actions-bar{
+							
+							& > li > a:hover,
+							& > li.open > a{
+								background-color: $sidebar-nav-item-bg !important;
+								border-color: $sidebar-context-border;
+							}
+						}
+
+					} // end of .sidebar-actions
+
+				} // end of .sidebar
+
+			} // end of wrapkit sidebar-hidden mode
+
+		}  // end of .wrapkit-sidebar-coltonav
+
+	} // end of screen-xs-max (skin)
+
+}
+
+
+
+// sidebar context
+// --------------------------------------------------
+
+// sidebar line context
+@mixin sidebar-line-context( $contextName, $bg-color, $font-color, $border-color ) {
+	
+	body.wrapkit-sidebar-variant-line{
+		
+		.sidebar.sidebar-context-#{$contextName} {
+
+			.sidebar-actions .sidebar-actions-bar > li > a:hover,
+			.sidebar-actions .sidebar-actions-bar > li.open > a{
+				border-color: $border-color;
+			} // end sidebar actions a:hover
+
+
+			.sidebar-nav .nav li.nav-item a:hover .badge{
+				color: $font-color;
+				background-color: $bg-color;
+			} // end sidebar nav => item => a:hover
+
+			.sidebar-nav .nav li.nav-item.open,
+			.sidebar-nav .nav li.nav-item.active{
+				& > a,
+				& > a.active,
+				& > a:active,
+				& > a:hover,
+				& > a:focus,
+				& > a:visited{
+					.badge{
+						color: $font-color;
+						background-color: $bg-color;
+					} // end of sidebar item open/active badge
+				}
+			} // end of sidebar item active/open state
+
+			.sidebar-nav .nav li.nav-item.active{
+				& > a,
+				& > a.active,
+				& > a:active,
+				& > a:hover,
+				& > a:focus,
+				& > a:visited{
+					border-color: $border-color !important;
+				}
+			} // end of sidebar item active state
+
+
+			.sidebar-nav .nav li.nav-item .nav-item-child > li.active,
+			.sidebar-nav .nav li.nav-item .nav-item-child > li.open{
+				& > a,
+				& > a.active,
+				& > a:active,
+				& > a:hover,
+				& > a:focus,
+				& > a:visited{
+
+					.badge{
+						color: $font-color;
+						background-color: $bg-color;
+					} // end of sidebar item open/active badge
+					
+				}// end of link on open/active state
+
+			}// end of sidebar item active/open state
+
+		} // end of .sidebar-context
+
+	} // end of .sidebar-variant-line
+
+} // end of sidebar variant line context mixin
+
+
+// sidebar variant extend context
+@mixin sidebar-extend-context( $contextName, $bg-color, $font-color, $border-color ) {
+	
+	body.wrapkit-sidebar-variant-extend{
+		
+		.sidebar.sidebar-context-#{$contextName} {
+			
+			.sidebar-actions .sidebar-actions-bar > li > a:hover,
+			.sidebar-actions .sidebar-actions-bar > li.open > a{
+				border-color: $border-color;
+			} // end sidebar actions a:hover
+
+			.sidebar-nav .nav li.nav-item > a:hover .badge,
+			.sidebar-nav .nav li.nav-item > a:focus .badge,
+			.sidebar-nav .nav li.nav-item > a:active .badge,
+			.sidebar-nav .nav li.nav-item.open > a .badge,
+			.sidebar-nav .nav li.nav-item .nav-item-child > li > a:hover .badge,
+			.sidebar-nav .nav li.nav-item .nav-item-child > li > a:focus .badge,
+			.sidebar-nav .nav li.nav-item .nav-item-child > li > a:active .badge,
+			.sidebar-nav .nav li.nav-item .nav-item-child > li.open > a .badge{
+				color: $font-color;
+				background-color: $bg-color;
+			} // end sidebar nav => item => a:hover
+
+			.sidebar-nav .nav li.nav-item{
+				// loader
+				.nav-item-loader > i{
+					color: $bg-color;
+				}
+				&.loader-state > a,
+				.loader-state > a{
+					color: $bg-color !important;
+
+					.nav-item-icon{
+						color: $bg-color !important;
+					} // end nav-item-icon
+				} // end of loader-state
+
+			} // end of nav-item
+
+			.sidebar-nav .nav li.nav-item.active,
+			.sidebar-nav .nav li.nav-item .nav-item-child > li.active{
+				& > a,
+				& > a.active,
+				& > a:active,
+				& > a:hover,
+				& > a:focus,
+				& > a:visited{
+					color: $bg-color !important;
+					
+					.caret{
+						color: $bg-color;
+					} // end of sidebar item:hover caret
+
+					.badge{
+						color: $font-color;
+						background-color: $bg-color;
+					} // end of sidebar item open/active badge
+
+					.nav-item-icon{
+						color: $bg-color;
+					} // end nav-item-icon
+				}
+			} // end of sidebar item active/open state
+
+		} // end of .sidebar-context
+
+	} // end of .sidebar-variant-extend
+
+} // end of sidebar variant extend context mixin
+
+
+// sidebar variant caretal context
+@mixin sidebar-caretal-context( $contextName, $bg-color, $font-color, $border-color ) {
+	
+	
+	body.wrapkit-sidebar-variant-caretal{
+		
+		.sidebar.sidebar-context-#{$contextName} {
+			
+			.sidebar-actions .sidebar-actions-bar > li > a:hover,
+			.sidebar-actions .sidebar-actions-bar > li.open > a{
+				color: $bg-color;
+				border-color: $border-color;
+			} // end sidebar actions a:hover
+
+
+			.sidebar-nav .nav li.nav-item a:hover .badge{
+				color: $font-color;
+				background-color: $bg-color;
+			} // end sidebar nav => item => a:hover
+
+			.sidebar-nav .nav li.nav-item a:hover .nav-item-icon{
+				color: $bg-color;
+			} // end nav-item-icon on item
+
+			.sidebar-nav .nav li.nav-item.open,
+			.sidebar-nav .nav li.nav-item.active{
+				& > a,
+				& > a.active,
+				& > a:active,
+				& > a:hover,
+				& > a:focus,
+				& > a:visited{
+
+					.badge{
+						color: $font-color;
+						background-color: $bg-color;
+					} // end of sidebar item open/active badge
+
+					.nav-item-icon{
+						color: $bg-color;
+					} // end nav-item-icon
+				}
+			} // end of sidebar item active/open state
+
+			.sidebar-nav .nav li.nav-item .nav-item-child > li.active,
+			.sidebar-nav .nav li.nav-item .nav-item-child > li.open{
+				& > a,
+				& > a.active,
+				& > a:active,
+				& > a:hover,
+				& > a:focus,
+				& > a:visited{
+
+					.badge{
+						color: $font-color;
+						background-color: $bg-color;
+					} // end of sidebar item open/active badge
+
+					.nav-item-icon{
+						color: $bg-color;
+					} // end nav-item-icon
+					
+				}// end of link on open/active state
+
+			}// end of sidebar item active/open state
+
+		} // end of sidebar context
+
+	} // end of variant
+
+} // end of sidebar variant caretal context mixin
+
+
+// sidebar variant block context
+@mixin sidebar-block-context( $contextName, $bg-color, $font-color, $border-color ) {
+
+	body.wrapkit-sidebar-variant-block{
+		
+		.sidebar.sidebar-context-#{$contextName} {
+			
+			.sidebar-actions .sidebar-actions-bar > li{
+				& > a:hover,
+				&.open > a{
+					color: $font-color;
+					background-color: $bg-color !important;
+					border-color: $border-color;
+				}
+			} // end of sidebar actions
+
+			.sidebar-nav .nav{
+
+				li.nav-item a:hover .badge{
+					color: $font-color;
+					background-color: $bg-color;
+				} // end sidebar nav => item => a:hover
+
+				li.nav-item.open{
+					& > a,
+					& > a.active,
+					& > a:active,
+					& > a:hover,
+					& > a:focus,
+					& > a:visited{
+						border-color: $border-color
+					}
+				}
+				li.nav-item,
+				li.nav-item .nav-item-child > li,
+				li.nav-item .nav-item-child > li .nav-item-child li{
+
+					&.active{
+
+						& > a,
+						& > a.active,
+						& > a:active,
+						& > a:hover,
+						& > a:focus,
+						& > a:visited{
+							background-color: $bg-color;
+							color: $font-color;
+							border-color: $border-color;
+							
+							.badge{
+								color: $bg-color;
+								background-color: $font-color;
+							} // end of sidebar item open/active badge
+
+							.caret,
+							.nav-item-icon{
+								color: $font-color;
+							} // end nav-item-icon & caret
+
+						} // end of a
+
+					} // end of sidebar item active state
+
+					&.open:not(.active){
+						& > a,
+						& > a.active,
+						& > a:active,
+						& > a:hover,
+						& > a:focus,
+						& > a:visited{							
+							.badge{
+								color: $font-color;
+								background-color: $bg-color;
+							} // end of sidebar item open/active badge
+
+						} // end of a
+					} // end of sidebar item open state
+
+				} // end of nav-item
+
+			} // end of nav
+
+		} // end of context
+
+	} // end of variant
+
+} // end of sidebar variant block context mixin

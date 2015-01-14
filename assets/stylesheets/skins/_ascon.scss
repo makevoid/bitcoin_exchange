@@ -1,0 +1,24 @@
+// ==============================================
+// CORE VARIABLES AND MIXINS (custom fot wrapkit)
+// ==============================================
+@import "scss/variables";
+@import "scss/mixins";
+
+
+
+
+// NAVBAR: Ascon
+@include navbar( 'ascon', $navbar-ascon-color, $navbar-ascon-bg, $navbar-ascon-border, $navbar-ascon-link-color, $navbar-ascon-link-hover-color, $navbar-ascon-link-hover-bg, $navbar-ascon-link-active-color, $navbar-ascon-link-active-bg, $navbar-ascon-link-disabled-color, $navbar-ascon-link-disabled-bg, $navbar-ascon-brand-color, $navbar-ascon-brand-hover-color, $navbar-ascon-brand-hover-bg, $navbar-ascon-toggle-hover-bg, $navbar-ascon-toggle-icon-bar-bg, $navbar-ascon-toggle-border-color );
+
+// SIDEBAR: Ascon
+@include sidebar-skin( 'ascon', $sidebar-ascon-bg, $sidebar-ascon-color, $sidebar-ascon-border-color, $sidebar-ascon-ui-resizable-handle, $sidebar-ascon-divider-color, $sidebar-ascon-divider-height, $sidebar-ascon-nav-header-color, $sidebar-ascon-nav-item-bg, $sidebar-ascon-nav-item-bg-hover, $sidebar-ascon-nav-item-bg-active, $sidebar-ascon-nav-item-color, $sidebar-ascon-nav-item-color-hover, $sidebar-ascon-nav-text-color, $sidebar-ascon-nav-border-color, $sidebar-ascon-nav-item-border-top, $sidebar-ascon-nav-item-border-bottom, $sidebar-ascon-nav-item-border-right, $sidebar-ascon-nav-icon-color, $sidebar-ascon-nav-item-loader-bg, $sidebar-ascon-nav-item-child-bg-hover, $sidebar-ascon-nav-item-child-color-hover, $sidebar-ascon-nav-item-child-bg-active );
+
+// FOOTER: Ascon
+footer.footer-wrapper.footer-ascon{
+	background: $footer-ascon-bg;
+	color: $footer-ascon-color;
+
+	.footer{
+		border-color: $footer-ascon-border-color;
+	}
+} // end of footer (skin ascon)
