@@ -5,388 +5,43 @@
         %li
           %a{"data-toggle" => "sidebar-size", :href => "#", :title => "Toggle Sidebar Size"}
             %i.fa.fa-bars
-        %li
-          %a{"data-toggle" => "sidebar-actions", :href => "#sidebar-form-search", :title => "Search"}
-            %i.fa.fa-search
-        %li
-          %a{"data-scripts" => "_includes/setups.js", "data-target" => "#templateSetup", "data-toggle" => "modal", :href => "_includes/setups.html", :title => "Template Setup"}
-            %i.fa.fa-cogs
-        %li
-          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#", :title => "More"}
-            %i.fa.fa-ellipsis-v
-          %ul.dropdown-menu.pull-right{:role => "menu"}
-            %li
-              %a{:href => "#"} View Site
-            %li.divider
-            %li
-              %a{:href => "pages-profile.html"} Profile
-            %li
-              %a{:href => "pages-timeline.html"} Timeline
-            %li
-              %a{:href => "pages-email.html"} Inbox
-            %li.divider
-            %li
-              %a{:href => "pages-help.html"} Help
-            %li.divider
-            %li
-              %a{:href => "pages-locked.html"} Locked
-            %li
-              %a{:href => "pages-signin.html"} Sign out
-      / /.sidebar-actions-bar
-    / /.sidebar-actions-pane
-    #sidebar-form-search.sidebar-actions-pane
-      %form.sidebar-form-search{:action => "#", :role => "form"}
-        .input-group
-          %input.form-control{:placeholder => "Type to search..."}
-            %span.input-group-btn
-              %a.btn{"data-toggle" => "sidebar-actions", :href => "#sidebar-actions-bar"}
-                %i.fa.fa-times
-            / /input-group-btn
-          / /input-group
-        / /form-search
-      / /.sidebar-actions-pane
-    / /.sidebar-actions
+
     %nav.sidebar-nav
       %ul.nav
         %li.nav-item.active
-          %a{:href => "index.html"}
+          %a{:href => "/"}
             %i.nav-item-icon.fa.fa-home
             %span.nav-item-text Dashboard
-        / /.nav-item
-        %li.nav-header
-          %a.nav-header-icon{:href => "#"}
-            %i.fa.fa-wrench
-          %span.nav-header-text Get started
-        / /.nav-header
         %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-th
-            %span.nav-item-text Layouts
-          %ul.nav-item-child
-            %li
-              %a{:href => "layout-blank.html"}
-                %span.nav-item-text Blank Page
-            %li
-              %a{:href => "layout-alt1.html"}
-                %span.nav-item-text Alternative #1
-            %li
-              %a{:href => "layout-alt2.html"}
-                %span.nav-item-text Alternative #2
-            %li
-              %a{:href => "layout-alt3.html"}
-                %span.nav-item-text Sidebar Small
-            %li
-              %a{:href => "layout-alt4.html"}
-                %span.nav-item-text Sidebar Right
-            %li
-              %a{:href => "layout-custom-fixed.html"}
-                %span.nav-item-text Custom Fixed
-            %li
-              %a{:href => "layout-rtl.html"}
-                %span.nav-item-text RTL Mode
-        / /.nav-item
-        %li.nav-item
-          %a{:href => "ecosystem.html"}
-            %i.nav-item-icon.fa.fa-code-fork
-            %span.nav-item-text Ecosystem
-        / /.nav-item
-        %li.nav-item
-          %a{:href => "panels.html"}
-            %i.nav-item-icon.fa.fa-puzzle-piece
-            %span.nav-item-text Panels
-        / /.nav-item
-        %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
-            %span.caret
-            %span.badge 3
-            %i.nav-item-icon.fa.fa-list-ul
-            %span.nav-item-text Level Menu
-          %ul.nav-item-child
-            %li
-              %a{:href => "#"}
-                %span.nav-item-text Lorem
-            / /.nav-child-item
-            %li
-              %a{"data-toggle" => "nav-item-child", :href => "#"}
-                %span.caret
-                %span.badge 8
-                %span.nav-item-text Ipsum dolor
-              %ul.nav-item-child
-                %li
-                  %a{:href => "#"}
-                    %span.nav-item-text Lorem
-                / /.nav-child-item
-                %li
-                  %a{"data-toggle" => "nav-item-child", :href => "#"}
-                    %span.caret
-                    %span.nav-item-text Ipsum dolor
-                  %ul.nav-item-child
-                    %li
-                      %a{:href => "#"}
-                        %span.nav-item-text Lorem
-                    / /.nav-child-item
-                    %li
-                      %a{:href => "#"}
-                        %span.nav-item-text Ipsum dolor
-                    / /.nav-child-item
-                    %li
-                      %a{:href => "#"}
-                        %span.badge 7
-                        %span.nav-item-text Site Amett
-                    / /.nav-child-item
-                    %li
-                      %a{:href => "#"}
-                        %span.nav-item-text Nav Child
-                    / /.nav-child-item
-                  / /.nav-item-child (level 3)
-                %li
-                  %a{:href => "#"}
-                    %span.nav-item-text Site Amett
-                / /.nav-child-item
-                %li
-                  %a{:href => "#"}
-                    %span.nav-item-text Nav Child
-                / /.nav-child-item
-              / /.nav-item-child (level 2)
-            / /.nav-child-item
-            %li
-              %a{:href => "#"}
-                %span.badge 11
-                %span.nav-item-text Site Amett
-            / /.nav-child-item
-            %li
-              %a{:href => "#"}
-                %span.nav-item-text Nav Child
-            / /.nav-child-item
-          / /.nav-item-child (level 1)
-        / /.nav-item
-        %li.divider
-        / /.divider nav
-        %li.nav-header
-          %a.nav-header-icon{:href => "#"}
-            %i.fa.fa-wrench
-          %span.nav-header-text User Interfaces
-        / /.nav-header
-        %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-bold
-            %span.nav-item-text Components
-          %ul.nav-item-child
-            %li
-              %a{:href => "component-grid.html"}
-                %span.nav-item-text Grids
-            %li
-              %a{:href => "component-typography.html"}
-                %span.nav-item-text Typography
-            %li
-              %a{:href => "component-button.html"}
-                %span.nav-item-text Button
-            %li
-              %a{:href => "component-modal.html"}
-                %span.nav-item-text Modal
-            %li
-              %a{:href => "component-tooltip-popover.html"}
-                %span.nav-item-text Tooltip  Popover
-            %li
-              %a{:href => "component-alert-callout.html"}
-                %span.nav-item-text Alert  Callout
-            %li
-              %a{:href => "component-progressbar.html"}
-                %span.nav-item-text Progressbar
-            %li
-              %a{:href => "component-label-badge.html"}
-                %span.nav-item-text Label  Badge
-            %li
-              %a{:href => "component-nav-navbar.html"}
-                %span.nav-item-text Nav  Navbar
-            %li
-              %a{:href => "component-tabs-collapse.html"}
-                %span.nav-item-text Tabs  Collapse
-        / /.nav-item
-        %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-magnet
-            %span.nav-item-text jQuery UI
-          %ul.nav-item-child
-            %li
-              %a{:href => "jui-widgets.html"}
-                %span.nav-item-text jUI Widgets
-            %li
-              %a{:href => "jui-interactions.html"}
-                %span.nav-item-text Interactions
-        / /.nav-item
-        %li.nav-item
-          %a{:href => "icons.html"}
-            %span.badge 4
-            %i.nav-item-icon.fa.fa-gift
-            %span.nav-item-text Icons
-        / /.nav-item
-        %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-edit
-            %span.nav-item-text Forms
-          %ul.nav-item-child
-            %li
-              %a{:href => "form-basic.html"}
-                %span.nav-item-text Basic Form
-            %li
-              %a{:href => "form-elements.html"}
-                %span.nav-item-text Form Elements
-            %li
-              %a{:href => "form-uploader.html"}
-                %span.nav-item-text Uploader
-            %li
-              %a{:href => "form-xeditable.html"}
-                %span.nav-item-text X Editable
-            %li
-              %a{:href => "form-wizard.html"}
-                %span.nav-item-text Wizard
-            %li
-              %a{:href => "form-editor.html"}
-                %span.nav-item-text Editor
-            %li
-              %a{:href => "form-imagecropping.html"}
-                %span.nav-item-text Image Cropping
-            %li
-              %a{:href => "form-validator.html"}
-                %span.nav-item-text Validator
-        / /.nav-item
-        %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
+          %a{:href => "/market"}
             %span.caret
             %i.nav-item-icon.fa.fa-bar-chart-o
-            %span.nav-item-text Charts
-          %ul.nav-item-child
-            %li
-              %a{:href => "chart-rickshaw.html"}
-                %span.nav-item-text Rickshaw
-            %li
-              %a{:href => "chart-morris.html"}
-                %span.nav-item-text Morris
-            %li
-              %a{:href => "chart-inline.html"}
-                %span.nav-item-text Inline Chart
-        / /.nav-item
+            %span.nav-item-text Markets
+
         %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
+          %a{:href => "/orders"}
             %span.caret
-            %i.nav-item-icon.fa.fa-table
-            %span.nav-item-text Tables
-          %ul.nav-item-child
-            %li
-              %a{:href => "table-basic.html"}
-                %span.nav-item-text Basic Table
-            %li
-              %a{:href => "table-datatables.html"}
-                %span.nav-item-text Datatables
-        / /.nav-item
-        %li.divider
-        / /.divider nav
-        %li.nav-header
-          %a.nav-header-icon{:href => "#"}
-            %i.fa.fa-wrench
-          %span.nav-header-text Development
-        / /.nav-header
+            %i.nav-item-icon.fa.fa-exchange
+            %span.nav-item-text Orders
+
         %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
+          %a{:href => "/orders_new"}
             %span.caret
-            %i.nav-item-icon.fa.fa-code
-            %span.nav-item-text Extras
-          %ul.nav-item-child
-            %li
-              %a{:href => "extras-animate.html"}
-                %span.nav-item-text Animated CSS
-            %li
-              %a{:href => "extras-bootbox.html"}
-                %span.nav-item-text Bootbox
-            %li
-              %a{:href => "extras-calendar.html"}
-                %span.nav-item-text Calendar
-            %li
-              %a{:href => "extras-maps.html"}
-                %span.nav-item-text Maps
-            %li
-              %a{:href => "extras-nestablelist.html"}
-                %span.nav-item-text Nestable List
-            %li
-              %a{:href => "extras-session-idle.html"}
-                %span.nav-item-text Session Idle
-            %li
-              %a{:href => "extras-session-timeout.html"}
-                %span.nav-item-text Session Timeout
-            %li
-              %a{:href => "extras-toastr.html"}
-                %span.nav-item-text Toastr Notifications
-            %li
-              %a{:href => "extras-treeview.html"}
-                %span.nav-item-text Tree view
-        / /.nav-item
+            %i.nav-item-icon.fa.fa-money
+            %span.nav-item-text Buy/Sell
+
         %li.nav-item
-          %a{:href => "ui-kits.html"}
-            %i.nav-item-icon.fa.fa-magic
-            %span.nav-item-text UI Kits
-        / /.nav-item
-        %li.nav-item
-          %a{"data-toggle" => "nav-item-child", :href => "#"}
+          %a{:href => "/deposits"}
             %span.caret
-            %i.nav-item-icon.fa.fa-files-o
-            %span.nav-item-text Pages
-          %ul.nav-item-child
-            %li
-              %a{:href => "pages-signin.html"}
-                %span.nav-item-text Signin
-            %li
-              %a{:href => "pages-locked.html"}
-                %span.nav-item-text Lock Screen
-            %li
-              %a{:href => "pages-error.html"}
-                %span.nav-item-text Error
-            %li
-              %a{:href => "pages-error-alt.html"}
-                %span.nav-item-text Error Alt
-            %li
-              %a{:href => "pages-profile.html"}
-                %span.nav-item-text Profile
-            %li
-              %a{:href => "pages-email.html"}
-                %span.nav-item-text Email
-            %li
-              %a{"data-toggle" => "nav-item-child", :href => "#"}
-                %span.caret
-                %span.nav-item-text Email Template
-              %ul.nav-item-child
-                %li
-                  %a{:href => "email-activation.html", :target => "_blank"}
-                    %span.nav-item-text Email Activation
-                %li
-                  %a{:href => "email-newsletter.html", :target => "_blank"}
-                    %span.nav-item-text Email Newsletter
-            %li
-              %a{:href => "pages-timeline.html"}
-                %span.nav-item-text Timeline
-            %li
-              %a{:href => "pages-gallery.html"}
-                %span.nav-item-text Gallery
-            %li
-              %a{:href => "pages-pricing.html"}
-                %span.nav-item-text Pricing
-            %li
-              %a{:href => "pages-invoice.html"}
-                %span.nav-item-text Invoice
-            %li
-              %a{:href => "pages-landing.html"}
-                %span.nav-item-text Landing
-            %li
-              %a{:href => "pages-help.html"}
-                %span.nav-item-text Help
-            %li
-              %a{:href => "pages-search.html"}
-                %span.nav-item-text Search Result
-        / /.nav-item
-      / /.nav
-    / /.sidebar-nav
-  / /.sidebar
+            %i.nav-item-icon.fa.fa-arrow-circle-o-down
+            %span.nav-item-text Deposits
+
+        %li.nav-item
+          %a{:href => "/withdrawals"}
+            %span.caret
+            %i.nav-item-icon.fa.fa-arrow-circle-o-up
+            %span.nav-item-text Withdrawals
+
+    / /.nav
+  / /.sidebar-nav
+/ /.sidebar

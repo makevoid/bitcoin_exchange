@@ -13,6 +13,7 @@
 //= require bootstrap
 //= require jquery-ui
 //= require jquery.ui.touch-punch
+//= require jquery.easypiechart
 //= require jquery.cookie
 //= require screenfull
 //= require jquery.autogrowtextarea
@@ -28,3 +29,8 @@
 //= require wrapkit-footer
 //= require wrapkit-panel
 //= require wrapkit-setup
+//= require morris
+//= require moment
+//= require switchery
+//= require daterangepicker
+//= require raphael
