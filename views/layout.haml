@@ -38,18 +38,15 @@
       / Your awesome app here
     = partial :"templates/_header"
     = partial :"templates/_sidebar"
-    -#
-    -# %section.content-wrapper
-    -#   .content-header
-    -#     %h1.content-title
-    -#       Content Title
-    -#       %span.content-subtitle Content subtitle goes here...
-    -#   / /.content-header
-    -#   .content-actions
-    -#     / You can put breadcrumb, button, button group or something else here...
-    -#   / /.content-actions
-    -#   .content
-    -#     / Your awesome app here
-    -#   / /.content
-    -# / /.content-wrapper
-    -# = partial :"templates/_footer"
+
+    %section.content-wrapper
+      .content-header
+        %h1.content-title
+          Content Title
+          %span.content-subtitle Content subtitle goes here...
+      .content-actions
+
+      .content
+
+      = yield
+    = partial :"templates/_footer"
