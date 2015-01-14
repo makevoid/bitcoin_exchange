@@ -1,0 +1,303 @@
+// Navbar type mixin
+@mixin navbar( $navbar-type, $navbar-color, $navbar-bg, $navbar-border, $navbar-link-color, $navbar-link-hover-color, $navbar-link-hover-bg, $navbar-link-active-color, $navbar-link-active-bg, $navbar-link-disabled-color, $navbar-link-disabled-bg, $navbar-brand-color, $navbar-brand-hover-color, $navbar-brand-hover-bg, $navbar-toggle-hover-bg, $navbar-toggle-icon-bar-bg, $navbar-toggle-border-color ){
+	
+	.navbar-#{$navbar-type} {
+		background-color: $navbar-bg;
+		border-color: $navbar-border;
+
+		.navbar-brand {
+			color: $navbar-brand-color;
+			&:hover,
+			&:focus {
+				color: $navbar-brand-hover-color;
+				background-color: $navbar-brand-hover-bg;
+			}
+		}
+
+		.navbar-text {
+			color: $navbar-color;
+		}
+
+		.navbar-nav {
+			> li > a {
+				color: $navbar-link-color;
+
+				&:hover,
+				&:focus {
+					color: $navbar-link-hover-color;
+					background-color: $navbar-link-hover-bg;
+				}
+			}
+			> .active > a {
+				&,
+				&:hover,
+				&:focus {
+					color: $navbar-link-active-color;
+					background-color: $navbar-link-active-bg;
+				}
+			}
+			> .disabled > a {
+				&,
+				&:hover,
+				&:focus {
+					color: $navbar-link-disabled-color;
+					background-color: $navbar-link-disabled-bg;
+				}
+			}
+		}
+
+		// Darken the responsive nav toggle
+		.navbar-toggle {
+			color: $navbar-color;
+			border-color: $navbar-toggle-border-color;
+			&:hover {
+				background-color: $navbar-toggle-hover-bg;
+			}
+			.icon-bar {
+				background-color: $navbar-toggle-icon-bar-bg;
+			}
+		}
+
+		.navbar-collapse,
+		.navbar-form {
+			border-color: darken($navbar-bg, 7%);
+		}
+
+		// Dropdowns
+		.navbar-nav {
+			> .open > a {
+				&,
+				&:hover,
+				&:focus {
+					background-color: $navbar-link-active-bg;
+					color: $navbar-link-active-color;
+				}
+			}
+			> .dropdown > a:hover .caret {
+				border-top-color: $navbar-link-hover-color;
+				border-bottom-color: $navbar-link-hover-color;
+			}
+			> .dropdown > a .caret {
+				border-top-color: $navbar-link-color;
+				border-bottom-color: $navbar-link-color;
+			}
+			> .open > a {
+				&,
+				&:hover,
+				&:focus {
+					.caret {
+						border-top-color: $navbar-link-active-color;
+						border-bottom-color: $navbar-link-active-color;
+					}
+				}
+			}
+		}
+		
+		// dropdown
+		.navbar-collapse .navbar-nav{
+			@media (max-width: $screen-xs-max) {
+				// Dropdowns get custom display
+				.open .dropdown-menu {
+					> .dropdown-header {
+						border-color: $navbar-border;
+					}
+					> li > a {
+						color: $navbar-link-color;
+						&:hover,
+						&:focus {
+							color: $navbar-link-hover-color;
+							background-color: $navbar-link-hover-bg;
+						}
+					}
+					> .active > a {
+						&,
+						&:hover,
+						&:focus {
+							color: $navbar-link-active-color;
+							background-color: $navbar-link-active-bg;
+						}
+					}
+					> .disabled > a {
+						&,
+						&:hover,
+						&:focus {
+							color: $navbar-link-disabled-color;
+							background-color: $navbar-link-disabled-bg;
+						}
+					}
+				}
+			}
+		}
+
+		.navbar-link {
+			color: $navbar-link-color;
+			&:hover {
+				color: $navbar-link-hover-color;
+			}
+		}
+
+	}
+} // end of navbar mixin
+
+
+// Badges
+// -------------------------
+@mixin badge-variant($color) {
+  background-color: $color;
+  &[href] {
+    &:hover,
+    &:focus {
+      background-color: darken($color, 10%);
+    }
+  }
+}
+
+
+// Callout
+// -------------------------
+@mixin callout-variant( $background, $border ) {
+  &,
+  &.callout-right{
+      background-color: $background;
+      border-color: $border;
+  }
+  & > h4{ color: darken( $border, 33% ); }
+}
+
+
+// Tooltip
+@mixin tooltip-variant( $color ){
+  .tooltip-inner{
+    background-color: $color;
+  }
+
+  &.top .tooltip-arrow,
+  &.top-left .tooltip-arrow,
+  &.top-right .tooltip-arrow {
+    border-top-color: $color;
+  }
+
+  &.right .tooltip-arrow {
+    border-right-color: $color;
+  }
+
+  &.left .tooltip-arrow {
+    border-left-color: $color;
+  }
+  
+  &.bottom .tooltip-arrow,
+  &.bottom-left .tooltip-arrow,
+  &.bottom-right .tooltip-arrow {
+    border-bottom-color: $color;
+  }
+}
+
+// Popovers
+@mixin popover-variant($background, $border, $text-color){
+  &{
+    border-color: $border;
+  }
+
+  & .popover-title {
+    background-color: $background;
+    border-color: $border;
+    color: $text-color;
+  }
+
+  &.top .arrow {
+    border-top-color: $border;
+  }
+
+  &.right .arrow {
+    border-right-color: $border;
+  }
+
+  &.bottom .arrow {
+    border-bottom-color: $border;
+  }
+
+  &.left .arrow {
+    border-left-color: $border;
+  }
+}
+
+// Panels
+// -------------------------
+@mixin panel-variant($context, $border, $heading-text-color, $heading-bg-color, $heading-border, $action-text-color) {
+  border-color: $border;
+  @if $context == minimalize{
+    background-color: transparent;
+    box-shadow: none;
+
+    & > .panel-heading{
+      border-bottom: 1px solid $border-color !important;
+    }
+    & > .panel-body{
+      background-color: $panel-bg;
+      border: 1px solid $border-color;
+      border-top: none;
+    }
+    &.panel-minimalize-alt > .panel-body{
+      padding: 15px 0 0;
+      background-color: transparent;
+      border-width: 1px 0 0;
+    }
+  }
+
+  & > .panel-heading {
+    color: $heading-text-color;
+    background-color: $heading-bg-color;
+    border-color: $heading-border;
+    @if $context == minimalize{
+      padding: 10px 5px;
+    }
+
+    & > .panel-title{
+      color: $heading-text-color;
+    }
+
+    + .panel-collapse .panel-body {
+      border-top-color: $border;
+    }
+    & > .dropdown .caret {
+      border-color: $heading-text-color transparent;
+    }
+  }
+
+  .panel-actions{
+    & > li > a:not(.btn){
+      color: $action-text-color;
+
+      &:hover{
+        color: $heading-text-color;
+      }
+    }
+    & > .active > a:not(.btn),
+    & > .open > a:not(.btn){
+      color: $heading-text-color;
+    }
+
+    &.panel-actions-alt{
+      & > .active > a:not(.btn),
+      & > .open > a:not(.btn),
+      & > li > a:not(.btn):hover{
+        @if $context == default{
+          color: $gray-lighter;
+          background-color: $brand-primary;
+        } @else if $context == minimalize{
+          color: $gray-lighter;
+          background-color: $brand-primary;
+        } @else{
+          color: $heading-text-color;
+          background-color: darken( $heading-bg-color, 10% );
+        }
+      }
+    }
+  }
+
+  & > .panel-footer {
+    + .panel-collapse .panel-body {
+      border-bottom-color: $border;
+    }
+  }
+}

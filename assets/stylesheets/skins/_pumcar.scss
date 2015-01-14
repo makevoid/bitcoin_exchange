@@ -1,0 +1,24 @@
+// ==============================================
+// CORE VARIABLES AND MIXINS (custom fot wrapkit)
+// ==============================================
+@import "scss/variables";
+@import "scss/mixins";
+
+
+
+
+// NAVBAR: Pumcar
+@include navbar( 'pumcar', $navbar-pumcar-color, $navbar-pumcar-bg, $navbar-pumcar-border, $navbar-pumcar-link-color, $navbar-pumcar-link-hover-color, $navbar-pumcar-link-hover-bg, $navbar-pumcar-link-active-color, $navbar-pumcar-link-active-bg, $navbar-pumcar-link-disabled-color, $navbar-pumcar-link-disabled-bg, $navbar-pumcar-brand-color, $navbar-pumcar-brand-hover-color, $navbar-pumcar-brand-hover-bg, $navbar-pumcar-toggle-hover-bg, $navbar-pumcar-toggle-icon-bar-bg, $navbar-pumcar-toggle-border-color );
+
+// SIDEBAR: Pumcar
+@include sidebar-skin( 'pumcar', $sidebar-pumcar-bg, $sidebar-pumcar-color, $sidebar-pumcar-border-color, $sidebar-pumcar-ui-resizable-handle, $sidebar-pumcar-divider-color, $sidebar-pumcar-divider-height, $sidebar-pumcar-nav-header-color, $sidebar-pumcar-nav-item-bg, $sidebar-pumcar-nav-item-bg-hover, $sidebar-pumcar-nav-item-bg-active, $sidebar-pumcar-nav-item-color, $sidebar-pumcar-nav-item-color-hover, $sidebar-pumcar-nav-text-color, $sidebar-pumcar-nav-border-color, $sidebar-pumcar-nav-item-border-top, $sidebar-pumcar-nav-item-border-bottom, $sidebar-pumcar-nav-item-border-right, $sidebar-pumcar-nav-icon-color, $sidebar-pumcar-nav-item-loader-bg, $sidebar-pumcar-nav-item-child-bg-hover, $sidebar-pumcar-nav-item-child-color-hover, $sidebar-pumcar-nav-item-child-bg-active );
+
+// FOOTER: Pumcar
+footer.footer-wrapper.footer-pumcar{
+	background: $footer-pumcar-bg;
+	color: $footer-pumcar-color;
+
+	.footer{
+		border-color: $footer-pumcar-border-color;
+	}
+} // end of footer (skin pumcar)

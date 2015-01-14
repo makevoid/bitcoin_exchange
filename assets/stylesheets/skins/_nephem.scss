@@ -1,0 +1,24 @@
+// ==============================================
+// CORE VARIABLES AND MIXINS (custom fot wrapkit)
+// ==============================================
+@import "scss/variables";
+@import "scss/mixins";
+
+
+
+
+// NAVBAR: Nephem
+@include navbar( 'nephem', $navbar-nephem-color, $navbar-nephem-bg, $navbar-nephem-border, $navbar-nephem-link-color, $navbar-nephem-link-hover-color, $navbar-nephem-link-hover-bg, $navbar-nephem-link-active-color, $navbar-nephem-link-active-bg, $navbar-nephem-link-disabled-color, $navbar-nephem-link-disabled-bg, $navbar-nephem-brand-color, $navbar-nephem-brand-hover-color, $navbar-nephem-brand-hover-bg, $navbar-nephem-toggle-hover-bg, $navbar-nephem-toggle-icon-bar-bg, $navbar-nephem-toggle-border-color );
+
+// SIDEBAR: Nephem
+@include sidebar-skin( 'nephem', $sidebar-nephem-bg, $sidebar-nephem-color, $sidebar-nephem-border-color, $sidebar-nephem-ui-resizable-handle, $sidebar-nephem-divider-color, $sidebar-nephem-divider-height, $sidebar-nephem-nav-header-color, $sidebar-nephem-nav-item-bg, $sidebar-nephem-nav-item-bg-hover, $sidebar-nephem-nav-item-bg-active, $sidebar-nephem-nav-item-color, $sidebar-nephem-nav-item-color-hover, $sidebar-nephem-nav-text-color, $sidebar-nephem-nav-border-color, $sidebar-nephem-nav-item-border-top, $sidebar-nephem-nav-item-border-bottom, $sidebar-nephem-nav-item-border-right, $sidebar-nephem-nav-icon-color, $sidebar-nephem-nav-item-loader-bg, $sidebar-nephem-nav-item-child-bg-hover, $sidebar-nephem-nav-item-child-color-hover, $sidebar-nephem-nav-item-child-bg-active );
+
+// FOOTER: Nephem
+footer.footer-wrapper.footer-nephem{
+	background: $footer-nephem-bg;
+	color: $footer-nephem-color;
+
+	.footer{
+		border-color: $footer-nephem-border-color;
+	}
+} // end of footer (skin nephem)

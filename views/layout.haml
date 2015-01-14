@@ -16,6 +16,7 @@
     = stylesheet_tag 'uikits'
 
     = stylesheet_tag 'header'
+    = stylesheet_tag 'sidebar'
     = stylesheet_tag 'content'
     = stylesheet_tag 'pages'
 
@@ -36,7 +37,7 @@
     %main#wrapper.wrapkit-wrapper
       / Your awesome app here
     = partial :"templates/_header"
-    -# = partial :"templates/_sidebar"
+    = partial :"templates/_sidebar"
     -#
     -# %section.content-wrapper
     -#   .content-header

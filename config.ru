@@ -7,4 +7,5 @@ require "#{path}/bitcoin_exchange"
 # use Api
 ENV['RACK_ENV'] ||= 'development'
 
-run BitcoinExchange
+use BitcoinExchange
+run Sinatra::Application

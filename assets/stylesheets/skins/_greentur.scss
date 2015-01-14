@@ -1,0 +1,24 @@
+// ==============================================
+// CORE VARIABLES AND MIXINS (custom fot wrapkit)
+// ==============================================
+@import "scss/variables";
+@import "scss/mixins";
+
+
+
+// NAVBAR: Greentur
+@include navbar( 'greentur', $navbar-greentur-color, $navbar-greentur-bg, $navbar-greentur-border, $navbar-greentur-link-color, $navbar-greentur-link-hover-color, $navbar-greentur-link-hover-bg, $navbar-greentur-link-active-color, $navbar-greentur-link-active-bg, $navbar-greentur-link-disabled-color, $navbar-greentur-link-disabled-bg, $navbar-greentur-brand-color, $navbar-greentur-brand-hover-color, $navbar-greentur-brand-hover-bg, $navbar-greentur-toggle-hover-bg, $navbar-greentur-toggle-icon-bar-bg, $navbar-greentur-toggle-border-color );
+
+// SIDEBAR: Greentur
+@include sidebar-skin( 'greentur', $sidebar-greentur-bg, $sidebar-greentur-color, $sidebar-greentur-border-color, $sidebar-greentur-ui-resizable-handle, $sidebar-greentur-divider-color, $sidebar-greentur-divider-height, $sidebar-greentur-nav-header-color, $sidebar-greentur-nav-item-bg, $sidebar-greentur-nav-item-bg-hover, $sidebar-greentur-nav-item-bg-active, $sidebar-greentur-nav-item-color, $sidebar-greentur-nav-item-color-hover, $sidebar-greentur-nav-text-color, $sidebar-greentur-nav-border-color, $sidebar-greentur-nav-item-border-top, $sidebar-greentur-nav-item-border-bottom, $sidebar-greentur-nav-item-border-right, $sidebar-greentur-nav-icon-color, $sidebar-greentur-nav-item-loader-bg, $sidebar-greentur-nav-item-child-bg-hover, $sidebar-greentur-nav-item-child-color-hover, $sidebar-greentur-nav-item-child-bg-active );
+
+
+// FOOTER: Greentur
+footer.footer-wrapper.footer-greentur{
+	background: $footer-greentur-bg;
+	color: $footer-greentur-color;
+
+	.footer{
+		border-color: $footer-greentur-border-color;
+	}
+} // end of footer (skin greentur)
