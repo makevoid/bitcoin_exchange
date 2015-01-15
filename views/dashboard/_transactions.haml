@@ -1,0 +1,50 @@
+-content_for :header do
+  = javascript_tag 'jquery.dataTables'
+  = javascript_tag 'datatables-bs3'
+  = javascript_tag 'datatables-plugins'
+  = javascript_tag 'datatables-demo'
+
+
+#panel-datatableTools.panel.panel-default
+  .panel-heading
+    #tt-actions.panel-actions-input
+      .btn-group.btn-group-sm
+        %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown"}
+          More
+          %i.fa.fa-angle-down
+        %ul.dropdown-menu.pull-right
+          %li
+            %a{"data-toggle" => "panel-refresh", :href => "#"} Refresh data
+          %li
+            %a{"data-toggle" => "panel-expand", :href => "#"} Toggle expand
+          %li
+            %a{"data-toggle" => "panel-collapse", :href => "#"} Toggle collapse
+          %li.divider
+          %li
+            %a{"data-toggle" => "panel-close", :href => "#"} Close
+      / /.btn-group
+    %h3.panel-title Transaction List
+  / /.panel-heading
+  .panel-body
+    .table-responsive
+      %table#datatables2.datatables.table.table-bordered.table-striped
+        %thead
+          %tr
+            %th Type
+            %th Date & Time
+            %th BTC Amount
+            %th EUR Amount
+            %th BTC Price
+            %th Fee
+        %tbody
+        %tfoot
+          %tr
+            %th Type
+            %th Date & Time
+            %th BTC Amount
+            %th EUR Amount
+            %th BTC Price
+            %th Fee
+    / /.table-responsive
+  / /.panel-body
+/ /.panel
