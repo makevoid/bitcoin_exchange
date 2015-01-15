@@ -40,11 +40,7 @@
     %section.content-wrapper
       .content-header
         %h1.content-title
-          Content Title
-          %span.content-subtitle Content subtitle goes here...
-      .content-actions
-
-      .content
-
+          = yield_content(:pagetitle)
       = yield
+
     = partial :"templates/_footer"
