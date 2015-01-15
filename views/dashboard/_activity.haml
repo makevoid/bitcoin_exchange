@@ -1,0 +1,71 @@
+/ Activity
+.activity-wrapper
+  .activity-list
+    .activity-status
+      .pull-right.text-muted
+        %strong Update
+        %small 2 hours ago
+      %a.activity-icon.bg-belpet{:href => "#", :rel => "tooltip", :title => "read changelog"}
+        %i.fa.fa-refresh
+      / /.activity-icon
+      .activity-description
+        %strong
+          %a{:href => "#"} Bent
+        just update his profile
+      / /.activity-description
+    / /.activity-status
+    .activity-comments
+      .media
+        %p
+          %strong
+            %a{:href => "#"} Igor Dias
+          %small.text-muted 1 hours ago
+        %a.kit-avatar.kit-avatar-32.pull-left{:href => "#"}
+          %img{:alt => "user", :src => "assets/uifaces15.jpg"}/
+        .media-body
+          Tortor tristique, vestibulum ipsum. Pellentesque aliquet mauris, nunc pellentesque. Nascetur dis sollicitudin, mattis phasellus scelerisque. Hac vivamus, hac sapien semper, dapibus sed at. Nonummy neque, mattis massa malesuada. Suspendisse accumsan aptent.
+      / /.media as comment-item
+      .media
+        %p
+          %strong
+            %a{:href => "#"} Marcel Illés
+          %small.text-muted 2 hours ago
+        %a.kit-avatar.kit-avatar-32.pull-left{:href => "#"}
+          %img{:alt => "user", :src => "assets/uifaces14.jpg"}/
+        .media-body
+          Ligula sed consectetuer, quisque urna. Vel eu, vehicula aliquam, nostra ultricies. Ligula at. Blandit mauris dolor, auctor non, in felis. Nec feugiat eu, id ridiculus aenean, cursus lacus sapien. Nibh dolor tincidunt.
+      / /.media as comment-item
+      .media
+        %p
+          %strong
+            %a{:href => "#"} Adam Jensen
+          %small.text-muted 2 hours ago
+        %a.kit-avatar.kit-avatar-32.pull-left{:href => "#"}
+          %img{:alt => "user", :src => "assets/uifaces19.jpg"}/
+        .media-body
+          Rutrum id amet, sem sem quis, dictum donec ante. Sem wisi lectus. Malesuada sapien. In aliquam lorem. Nibh quis, fermentum porta.
+      / /.media as comment-item
+    / /.activity-comments
+    .activity-form
+      %form{:action => "#", :role => "form"}
+        .form-group
+          .input-group.input-group-in
+            /
+              <div class="input-group-addon input-group-textarea">
+              <img class="img-circle activity-avatar" src="assets//profile.jpg" alt="user">
+              </div>
+            %textarea.form-control.no-resize.autogrow{:placeholder => "Add a comment..."}
+            .input-group-btn.input-group-textarea
+              %label.btn.btn-default
+                %i.fa.fa-paperclip
+                %input.hide{:multiple => "multiple", :type => "file"}/
+              %button.btn.btn-default{:type => "submit"} Submit
+          / /input-group-in
+        / /.form-group
+      / /form
+    / /.activity-form
+  / /.activity-list
+/ /.activity-wrapper
+.text-center
+  %button.btn.btn-sm.btn-default{:type => "button"} Load more...
+/ /.tab-pane #activity
