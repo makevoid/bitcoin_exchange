@@ -1,0 +1,37 @@
+.project-wrapper
+  %h3 Account Balance
+  .row
+    .col-md-6
+      .pricing-table.border-ascon
+        .pricing-header
+          %h3 EURO
+          %h4.text-ascon
+            %i.fa.fa-euro.fa-2 &nbsp;#{cur_user_balance.account_value.f_eur}
+        .pricing-footer.bg-ascon
+          %p Balance in open orders: € #{Order.balance_eur(current_user).f_eur}
+          %p Balance available to trade € #{current_user.balance.eur_available.f_eur}
+
+          .row
+            .col-md-4
+            .col-md-4
+              %a.btn.btn-nofill.btn-silc{:href => "/withdrawals"} New withdrawal
+              %a.btn.btn-nofill.btn-silc{:href => "/deposits"} New deposit
+            .col-md-4
+
+    .col-md-6
+      .pricing-table.border-belpet
+        .pricing-header
+          %h3 BITCOIN
+          %h4.text-belpet
+            %i.fa.fa-btc.fa-2 &nbsp;#{cur_user_balance.btc.to_dz}
+        / /.pricing-header
+        .pricing-footer.bg-belpet
+          %p Balance in open orders: € #{Order.balance_btc current_user}
+          %p Balance available to trade € #{current_user.balance.btc_available}
+
+          .row
+            .col-md-4
+            .col-md-4
+              %a.btn.btn-nofill.btn-silc{:href => "/withdrawals"} New withdrawal
+              %a.btn.btn-nofill.btn-silc{:href => "/deposits"} New deposit
+            .col-md-4
