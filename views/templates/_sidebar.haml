@@ -1,46 +1,45 @@
 %aside.sidebar{"data-control" => "wrapkit-sidebar"}
   .sidebar-actions
-    #sidebar-actions-bar.sidebar-actions-pane.active
-      %ul.sidebar-actions-bar
-        %li
-          %a{"data-toggle" => "sidebar-size", :href => "#", :title => "Toggle Sidebar Size"}
-            %i.fa.fa-bars
+    %ul.sidebar-actions-bar
+      %li
+        %a{"data-toggle" => "sidebar-size", :href => "#", :title => "Toggle Sidebar Size"}
+          %i.fa.fa-bars
 
-    %nav.sidebar-nav
-      %ul.nav
-        %li.nav-item.active
-          %a{:href => "/"}
-            %i.nav-item-icon.fa.fa-home
-            %span.nav-item-text Dashboard
-        %li.nav-item
-          %a{:href => "/market"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-bar-chart-o
-            %span.nav-item-text Markets
+  %nav.sidebar-nav
+    %ul.nav
+      %li.nav-item.active
+        %a{:href => "/"}
+          %i.nav-item-icon.fa.fa-home
+          %span.nav-item-text Dashboard
+      %li.nav-item
+        %a{:href => "/market"}
+          %span.caret
+          %i.nav-item-icon.fa.fa-bar-chart-o
+          %span.nav-item-text Markets
 
-        %li.nav-item
-          %a{:href => "/orders"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-exchange
-            %span.nav-item-text Orders
+      %li.nav-item
+        %a{:href => "/orders"}
+          %span.caret
+          %i.nav-item-icon.fa.fa-exchange
+          %span.nav-item-text Orders
 
-        %li.nav-item
-          %a{:href => "/orders_new"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-money
-            %span.nav-item-text Buy/Sell
+      %li.nav-item
+        %a{:href => "/orders_new"}
+          %span.caret
+          %i.nav-item-icon.fa.fa-money
+          %span.nav-item-text Buy/Sell
 
-        %li.nav-item
-          %a{:href => "/deposits"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-arrow-circle-o-down
-            %span.nav-item-text Deposits
+      %li.nav-item
+        %a{:href => "/deposits"}
+          %span.caret
+          %i.nav-item-icon.fa.fa-arrow-circle-o-down
+          %span.nav-item-text Deposits
 
-        %li.nav-item
-          %a{:href => "/withdrawals"}
-            %span.caret
-            %i.nav-item-icon.fa.fa-arrow-circle-o-up
-            %span.nav-item-text Withdrawals
+      %li.nav-item
+        %a{:href => "/withdrawals"}
+          %span.caret
+          %i.nav-item-icon.fa.fa-arrow-circle-o-up
+          %span.nav-item-text Withdrawals
 
     / /.nav
   / /.sidebar-nav
