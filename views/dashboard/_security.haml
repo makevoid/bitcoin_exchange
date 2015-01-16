@@ -1,0 +1,186 @@
+-content_for :header do
+  = stylesheet_tag 'wizard'
+  = stylesheet_tag 'select2'
+  = javascript_tag 'jquery.bootstrap.wizard'
+  = javascript_tag 'form-wizard-demo'
+  = javascript_tag 'select2'
+
+
+.panel.panel-default
+  .panel-body
+    #rootwizard.wizard
+      %ul
+        %li
+          %a{"data-toggle" => "tab", :href => "#wizard1"}
+            %span.number 1
+            %span.desc Account Setup
+        %li
+          %a{"data-toggle" => "tab", :href => "#wizard2"}
+            %span.number 2
+            %span.desc AML Light Authentication
+        %li
+          %a{"data-toggle" => "tab", :href => "#wizard3"}
+            %span.number 3
+            %span.desc AML Regular Authentication
+        %li
+          %a{"data-toggle" => "tab", :href => "#wizard4"}
+            %span.number 4
+            %span.desc Confirmation
+      / /wizard-nav
+      .progress.progress-striped
+        .progress-bar
+      / /.progressbar
+      %form.form-horizontal{:action => "#", :role => "form"}
+        .tab-content
+          #wizard1.tab-pane
+            %h3.lead Provide your account details
+            .form-group
+              %label.col-md-3.control-label{:for => "username"}
+                User name
+                %span.text-danger *
+              .col-md-5
+                .input-group.input-group-in
+                  %input#username.form-control{:name => "username"}/
+                  %span.input-group-addon
+                    %i.fa.fa-user.text-muted
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "passwd"}
+                Password
+                %span.text-danger *
+              .col-md-5
+                .input-group.input-group-in
+                  %input#passwd.form-control{:name => "passwd", :type => "password"}/
+                  %span.input-group-addon
+                    %i.fa.fa-asterisk.text-muted
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "confirm_passwd"}
+                Confirm Password
+                %span.text-danger *
+              .col-md-5
+                .input-group.input-group-in
+                  %input#confirm_passwd.form-control{:equalto => "#passwd", :name => "confirm_passwd", :type => "password"}/
+                  %span.input-group-addon
+                    %i.fa.fa-asterisk.text-muted
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "email"}
+                Email
+                %span.text-danger *
+              .col-md-5
+                .input-group.input-group-in
+                  %input#email.form-control{:name => "email", :type => "email"}/
+                  %span.input-group-addon
+                    %i.fa.fa-envelope.text-muted
+            / /form-group
+          / /.tab-pane
+          #wizard2.tab-pane
+            %h3.lead Provide your profile details for AML Light Authentication
+            .form-group
+              %label.col-md-3.control-label{:for => "fullname"}
+                Fullname
+                %span.text-danger *
+              .col-md-5
+                %input#fullname.form-control{:name => "fullname"}/
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "phoneNumber"}
+                Phone Number
+                %span.text-danger *
+              .col-md-5
+                %input#phoneNumber.form-control{:name => "phoneNumber", :type => "number"}/
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "gender"}
+                Gender
+                %span.text-danger *
+              .col-md-5
+                .nice-radio.nice-radio-inline
+                  %input#genderMale{:checked => "checked", :name => "gender", :type => "radio", :value => "Male"}/
+                  %label{:for => "genderMale"} Male
+                .nice-radio.nice-radio-inline
+                  %input#genderFemale{:name => "gender", :type => "radio", :value => "Female"}/
+                  %label{:for => "genderFemale"} Female
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "address"}
+                Address
+                %span.text-danger *
+              .col-md-5
+                %input#address.form-control{:name => "address"}/
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "country"}
+                Country
+                %span.text-danger *
+              .col-md-5
+                %input#country{:name => "country", :style => "width:100%", :type => "hidden"}/
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "briefNotes"} Brief Notes
+              .col-md-5
+                %textarea#briefNotes.autogrow.form-control{:name => "briefNotes", :rows => "3"}
+            / /form-group
+          / /.tab-pane
+          #wizard3.tab-pane
+            %h3.lead Provide this additional infos to get the AML Regular Authentication
+            .form-group
+              %label.col-md-3.control-label{:for => "cardName"}
+                Occupation
+                %span.text-danger *
+              .col-md-5
+                %input#cardName.form-control{:name => "cardName"}/
+            / /form-group
+            .form-group
+              %label.col-md-3.control-label{:for => "cardNumber"}
+                Income Range
+                %span.text-danger *
+              .col-md-5
+                .row
+                  .col-md-12
+                    .form-group
+                      %input#niceRadio1{:checked => "checked", :name => "niceRadio", :type => "radio"}/
+                      %label{:for => "niceRadio1"} 0-18K€
+                      %input#niceRadio2{:name => "niceRadio", :type => "radio"}/
+                      %label{:for => "niceRadio2"} 18-30K€
+                      %input#niceRadio3{:name => "niceRadio", :type => "radio"}/
+                      %label{:for => "niceRadio3"} 30-50K€
+                      %input#niceRadio4{:name => "niceRadio", :type => "radio"}/
+                      %label{:for => "niceRadio4"} 50+K€
+            / /form-group
+            .form-group
+              %label.col-sm-3.control-label{:for => "fileinput_widget"} ID Card (Front AND Back) OR Passport (IDENTITY_PROOF)
+              .col-sm-5
+                .fileinput.fileinput-new{"data-provides" => "fileinput"}
+                  %input{:name => "fileinput_widget", :type => "hidden", :value => ""}/
+                  .input-group
+                    .form-control.uneditable-input.span3{"data-trigger" => "fileinput"}
+                      %i.glyphicon.glyphicon-file.fileinput-exists
+                      %span.fileinput-filename
+
+          / /.tab-pane
+          #wizard4.tab-pane
+            %h3.lead Make sure you entered the correct data!
+            %h4.page-header.lead Account
+            %h4.page-header.lead AML Light Authentication
+            %h4.page-header.lead AML Regular Authentication
+          / /.tab-pane
+          .wizard-actions
+            .form-group
+              .col-md-5.col-md-offset-3
+                %button.btn.btn-silc.wizard-prev{:type => "button"}
+                  %i.fa.fa-arrow-circle-o-left
+                  Back
+                %button.btn.btn-primary.wizard-next{:type => "button"}
+                  Continue
+                  %i.fa.fa-arrow-circle-o-right
+                %button.btn.btn-primary.finish{:type => "submit"} Submit
+              / /.cols
+            / /form-group
+          / /.wizard-actions
+        / /.tab-content
+      / /form
+    / /#rootwizard
+  / /.panel-body
+/ /.panel

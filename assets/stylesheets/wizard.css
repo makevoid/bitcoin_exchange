@@ -1,0 +1,117 @@
+/* line 1, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.wizard {
+  position: relative;
+}
+
+/* line 6, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.wizard > .nav,
+.wizard > .navbar,
+.wizard > .progress {
+  margin-bottom: 20px;
+}
+
+/* line 9, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.wizard .wizard-actions {
+  margin-top: 20px;
+}
+
+/* line 15, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard > li > a {
+  text-align: left;
+}
+
+/* line 20, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard > li > a,
+.nav.nav-wizard > li > a:hover,
+.nav.nav-wizard > li > a:focus {
+  background-color: transparent;
+}
+
+/* line 27, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard > .active > a,
+.nav.nav-wizard > .active > a:hover,
+.nav.nav-wizard > .active > a:focus {
+  background-color: transparent;
+  color: #3e5771;
+}
+
+/* line 32, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard .number {
+  display: inline-block;
+  margin-right: 12px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  line-height: 48px;
+  background-color: #ecf0f1;
+  font-size: 18px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* line 44, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard .desc {
+  display: inline-block;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+/* line 51, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard li.active .number {
+  background-color: #20638f;
+  color: #fff;
+}
+
+/* line 55, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard li.active .desc {
+  color: #3e5771;
+}
+
+/* line 61, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard li.done .number {
+  background-color: #138a72;
+  color: #fff;
+}
+
+/* line 65, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard li.done .desc {
+  color: #229955;
+}
+
+/* line 71, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard li.error > a {
+  cursor: not-allowed;
+}
+
+/* line 74, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard li.error .number {
+  background-color: #ab3326;
+  color: #fff;
+}
+
+/* line 78, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.nav.nav-wizard li.error .desc {
+  color: #d14233;
+}
+
+/* line 85, ../../app/styles/scss/dependencies/_wizard.scss */
+
+.wrapkit-content-rtl .nav.nav-wizard .number {
+  margin-right: 0;
+  margin-left: 12px;
+}
