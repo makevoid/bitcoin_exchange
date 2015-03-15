@@ -45,10 +45,11 @@ end
 # require 'pp'
 require "#{path}/sandbox/wallet"
 
+
 def initialize_wallet
   puts "Wallet:"
-puts slice( Wallet.getinfo, "balance", "version", "blocks", "connection", "testnet", "difficulty" ).to_yaml
-puts
+  puts slice( Wallet.getinfo, "balance", "version", "blocks", "connection", "testnet", "difficulty" ).to_yaml
+  puts
 end
 
 def open_wallet
@@ -67,7 +68,9 @@ def open_wallet
   server=1
   "
     # raise e
-    exit
+
+    # TODO: TEMPORARELY AVOIDING EXIT, SETUP BITCOIND PROPERLY AND RE-ENABLE this line!!!!
+    # exit
   end
   puts
 end
@@ -119,6 +122,7 @@ LOGGERS[:orders] = Logger.new STDOUT
 # models and libs
 
 require "#{path}/lib/ticker"
+require "#{path}/lib/bitstamp_book"
 require_all "models"
 
 # bitstamp extension
