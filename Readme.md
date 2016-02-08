@@ -1,4 +1,34 @@
-# Bitcoin Exchange
+##### This is an old proof-of-concept
+
+# See: Newer projects
+
+### Bitcoin Related
+
+### BlockchainPen
+
+## http://github.com/makevoid/blockchain-pen - http://blockchainpen.com
+
+### Paperbank - paper wallet generator:
+
+## http://github.com/makevoid/paperbank - http://paperbank.it
+
+## http://github.com/makevoid/paperbank_pocket - http://pocket.paperbank.it
+## http://github.com/makevoid/blockchain_explorer
+## http://github.com/720kb/BitNFC - http://bitnfc.org
+
+
+### Ethereum Related
+
+## http://github.com/applieblockchain/bapp
+
+
+
+
+---
+
+Original Readme:
+
+#### Bitcoin Exchange
 
 ### powered by Ruby, Redis and Sinatra
 
