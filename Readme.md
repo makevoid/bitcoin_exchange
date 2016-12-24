@@ -19,7 +19,7 @@
 
 ### Ethereum Related
 
-## http://github.com/applieblockchain/bapp
+## http://github.com/appliedblockchain/bapp
 
 
 
