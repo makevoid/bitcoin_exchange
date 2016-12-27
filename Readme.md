@@ -1,5 +1,7 @@
 ##### This is an old proof-of-concept
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6062890e7200413ab22b5db6b06f76ce)](https://www.codacy.com/app/makevoid/bitcoin_exchange?utm_source=github.com&utm_medium=referral&utm_content=makevoid/bitcoin_exchange&utm_campaign=badger)
+
 # See: Newer projects
 
 ### Bitcoin Related
