@@ -50,6 +50,7 @@ in the future consider implementing a redis based queue system with minimal over
 
 - redis (launched on default port)
 - bitcoind
+- libcurl (`sudo apt-get install libcurl4-openssl-dev`)
 
 ### development
 
