@@ -97,9 +97,9 @@ R = Redis.new options
 password = File.read( File.expand_path "~/.password" ).strip if app_env == :production
 
 test_db = "_test" if app_env == :test
-pippo = "bitexchange:asd@" if app_env == :development && `whoami`.strip == "ispuk"
-prod = "root:#{password}@"  if app_env == :production
-DataMapper.setup :default, "mysql://#{pippo}#{prod}localhost/bitcoin_exchange#{test_db}"
+password = "foo"
+user_pass = "root:#{password}@"
+DataMapper.setup :default, "mysql://#{user_pass}localhost/bitcoin_exchange#{test_db}"
 
 
 require 'bigdecimal'

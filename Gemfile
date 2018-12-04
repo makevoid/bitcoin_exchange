@@ -57,3 +57,5 @@ end
 # orderbook & API: https://github.com/kenichi/angelo
 #
 # satoshi-unit: https://github.com/snitko/satoshi-unit
+
+gem "puma"

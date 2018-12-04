@@ -33,7 +33,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.6)
+    addressable (2.5.1)
+      public_suffix (~> 2.0, >= 2.0.2)
     bitstamp (0.3.0)
       activemodel (>= 3.1)
       activesupport (>= 3.1)
@@ -49,7 +50,7 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     curb (0.8.6)
-    data_objects (0.10.14)
+    data_objects (0.10.17)
       addressable (~> 2.1)
     diff-lcs (1.2.5)
     dm-core (1.2.1)
@@ -64,8 +65,8 @@ GEM
       do_mysql (~> 0.10.6)
     dm-validations (1.2.0)
       dm-core (~> 1.2.0)
-    do_mysql (0.10.14)
-      data_objects (= 0.10.14)
+    do_mysql (0.10.17)
+      data_objects (= 0.10.17)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -94,7 +95,7 @@ GEM
     hitimes (1.2.2)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
-    json (1.8.1)
+    json (1.8.6)
     listen (2.8.4)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -110,6 +111,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    public_suffix (2.0.5)
+    puma (3.7.0)
     rack (1.6.0)
     rack-protection (1.5.3)
       rack
@@ -145,7 +148,7 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     voidtools (0.3.1)
-    yajl-ruby (1.2.1)
+    yajl-ruby (1.3.0)
 
 PLATFORMS
   ruby
@@ -166,6 +169,7 @@ DEPENDENCIES
   haml
   hiredis
   json
+  puma
   rack-test
   redis
   rspec-core
@@ -175,3 +179,6 @@ DEPENDENCIES
   sinatra
   voidtools
   yajl-ruby
+
+BUNDLED WITH
+   1.14.6
