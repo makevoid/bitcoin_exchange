@@ -1,6 +1,6 @@
 ##### This is an old proof-of-concept
 
-# See: Newer projects
+# See: Newer projects on http://makevoid.com
 
 ### Bitcoin Related
 
