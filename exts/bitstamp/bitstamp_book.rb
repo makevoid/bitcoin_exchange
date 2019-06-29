@@ -83,14 +83,14 @@ end
 # main classes
 
 class BitstampBook # Bitstamp OrderBook
-  URL = "https://www.bitstamp.net/api/order_book/"
+  URL_OB = "https://www.bitstamp.net/api/order_book/"
 
   def self.orders
     new.orders
   end
 
   def orders
-    content  = Net::HTTP.get_response URI.parse URL
+    content  = Net::HTTP.get_response URI.parse URL_OB
     response = JSON.parse content.body
     bids = orders_to_hash response["bids"]
     asks = orders_to_hash response["asks"]
@@ -111,7 +111,7 @@ end
 
 
 class BitstampTrades
-  URL = "http://www.bitstamp.net/api/transactions/"
+  URL_TX = "http://www.bitstamp.net/api/transactions/"
 
   def self.transactions
     new.transactions
@@ -119,7 +119,7 @@ class BitstampTrades
 
   def transactions
     txs = []
-    content  = Net::HTTP.get_response URI.parse URL
+    content  = Net::HTTP.get_response URI.parse URL_TX
     response = JSON.parse content.body
     response.each do |transaction|
       tx = {}

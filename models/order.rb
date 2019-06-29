@@ -30,7 +30,7 @@ class Order
   # TODO: consider in removing this, that is used only for orderbook in Order.type_sum atm
   attr_writer :amount
 
-  def initialize(id: id, user_id: user_id, type: type, amount: amount, price: price, time: time)
+  def initialize(id:, user_id:, type:, amount:, price:, time:)
     @id       = id.to_i
     @time     = time.to_i
 
@@ -70,7 +70,7 @@ class Order
     465
   end
 
-  def self.create_simple(user_id: user_id, type: type, amount: amount)
+  def self.create_simple(user_id:, type:, amount:)
     price = if type == :buy
       simple_price_buy
     else
@@ -80,7 +80,7 @@ class Order
     create(user_id: user_id, type: type, amount: amount, price: price)
   end
 
-  def self.create(user_id: user_id, type: type, amount: amount, price: price)
+  def self.create(user_id:, type:, amount:, price:)
     puts "create: user_id: #{user_id}, type: #{type}, amount: #{amount}, price: #{price}"
 
     # TODO: refactor!!! this is getting big!
