@@ -5,6 +5,12 @@ APP = "bitcoin_exchange"
 require "bundler/setup"
 Bundler.require :default
 
+# patch redis for compat with v3
+class Redis
+  alias :"[]"  :get
+  alias :"[]=" :set
+end
+
 
 require "#{path}/lib/mixins/utils"
 extend Utils
@@ -58,16 +64,16 @@ def open_wallet
   rescue Errno::ECONNREFUSED => e
     puts "ERROR launching the app"
     puts
-    puts "Please open Bitcoin-QT or a compatible bitcoind/bitcoin-core client listening on port 3333
+    puts "Please open Bitcoin-QT or a compatible bitcoind/bitcoin-core client listening on port 8332
 
   you can use this sample ~/.bitcoin/bitcoin.conf and change auth parameters:
 
   rpcuser=changeme
   rpcpassword=CHANGE_ME1111
-  rpcport=3333
+  rpcport=8332
   server=1
   "
-    # raise e
+    raise e
 
     # TODO: TEMPORARELY AVOIDING EXIT, SETUP BITCOIND PROPERLY AND RE-ENABLE this line!!!!
     # exit
@@ -97,10 +103,9 @@ R = Redis.new options
 password = File.read( File.expand_path "~/.password" ).strip if app_env == :production
 
 test_db = "_test" if app_env == :test
-password = "foo"
+password = "antanisblinda"
 user_pass = "root:#{password}@"
 DataMapper.setup :default, "mysql://#{user_pass}localhost/bitcoin_exchange#{test_db}"
-
 
 require 'bigdecimal'
 require "#{path}/lib/monkeypatches/numeric"

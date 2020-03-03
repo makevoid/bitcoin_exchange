@@ -19,7 +19,7 @@ bitcoin_conf = File.read File.expand_path("~/.bitcoin/bitcoin.conf")
 USER = bitcoin_conf.split("\n")[0].split("=")[1].strip
 PASS = bitcoin_conf.split("\n")[1].split("=")[1].strip
 
-PORT = 3333
+PORT = 8332
 
 require 'bitcoin-client'
 
@@ -61,7 +61,7 @@ class Wallet
   end
 
   def self.getinfo
-    client.getinfo
+    client.api.request 'getnetworkinfo'
   end
 
   # returns the balance of one account

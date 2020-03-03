@@ -12,6 +12,8 @@ gem "voidtools"
 gem "haml"
 gem "sass"
 
+gem "rake"
+
 gem "redis"
 gem "hiredis" # pipelining
 

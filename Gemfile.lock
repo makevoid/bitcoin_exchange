@@ -129,6 +129,7 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rake (13.0.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -192,6 +193,7 @@ DEPENDENCIES
   json
   puma
   rack-test
+  rake
   redis
   rspec-core
   rspec-expectations
