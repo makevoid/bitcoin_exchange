@@ -15,10 +15,7 @@ end
 require "#{path}/lib/mixins/utils"
 extend Utils
 
-
 require "#{path}/lib/monkeypatches/markedup"
-
-
 
 def app_env
   (ENV["RACK_ENV"] && ENV["RACK_ENV"].to_sym) || :development
@@ -31,12 +28,6 @@ class App
     APP_ENV
   end
 end
-
-
-# balance
-
-# TODO: remember that other than wallet, even Balance (user balance, models/balance) have to be safeguarded
-
 
 # wallet connections
 
