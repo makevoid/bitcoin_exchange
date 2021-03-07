@@ -1,5 +1,12 @@
 GIT
-  remote: git://github.com/guard/guard-coffeescript.git
+  remote: git@github.com:makevoid/bitcoin-client
+  revision: c9e0be12979cd923c67af6e36722d9e798a92265
+  specs:
+    bitcoin-client (0.0.4)
+      rest-client
+
+GIT
+  remote: https://github.com/guard/guard-coffeescript.git
   revision: d413510eff32e529f5f684700c9e1d00128cda2b
   specs:
     guard-coffeescript (2.0.1)
@@ -8,18 +15,11 @@ GIT
       guard-compat (~> 1.1)
 
 GIT
-  remote: git://github.com/makevoid/guard-concat.git
+  remote: https://github.com/makevoid/guard-concat.git
   revision: 7193fac560f2adda12fb1f8860b80c53a2fbb68d
   specs:
     guard-concat (0.8.1)
       guard (~> 2.0)
-
-GIT
-  remote: git@github.com:makevoid/bitcoin-client
-  revision: c9e0be12979cd923c67af6e36722d9e798a92265
-  specs:
-    bitcoin-client (0.0.4)
-      rest-client
 
 GEM
   remote: http://rubygems.org/
@@ -200,4 +200,4 @@ DEPENDENCIES
   yajl-ruby
 
 BUNDLED WITH
-   1.17.1
+   2.2.3
